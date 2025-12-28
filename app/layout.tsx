@@ -1,11 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import "./globals.css";
+import "./mobile.css";
 import { Header } from "@/components/navigation/header";
 import { Footer } from "@/components/navigation/footer";
 import { MobileCtaBar } from "@/components/navigation/mobile-cta-bar";
 import { LocalBusinessSchema, PhysicianSchema, MedicalBusinessSchema } from "@/components/seo/schema";
 import { Providers } from "@/components/providers";
+import { siteConfig } from "@/lib/config/site";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -29,10 +31,10 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://healinque.com"),
+  metadataBase: new URL(siteConfig.urls.baseUrl),
   title: {
-    default: "Healinque | Premier Medical Spa & Longevity Center in Poway, CA",
-    template: "%s | Healinque",
+    default: siteConfig.seo.title,
+    template: `%s | ${siteConfig.name}`,
   },
   description:
     "Physician-performed aesthetic treatments and longevity medicine in Poway, CA. Led by Dr. Azi Shirazi with 20+ years experience. Botox, fillers, Morpheus8, weight loss, hormone therapy & more.",
@@ -67,13 +69,13 @@ export const metadata: Metadata = {
     telephone: false,
   },
   alternates: {
-    canonical: "https://healinque.com",
+    canonical: siteConfig.urls.baseUrl,
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://healinque.com",
-    siteName: "Healinque - Aesthetic Medicine & Longevity Center",
+    url: siteConfig.urls.baseUrl,
+    siteName: `${siteConfig.name} - ${siteConfig.tagline}`,
     title: "Healinque | Premier Medical Spa & Longevity Center in Poway, CA",
     description:
       "Look younger, feel younger, live longer. Physician-performed aesthetic treatments and longevity medicine. Led by Dr. Azi Shirazi with 20+ years experience.",

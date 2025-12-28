@@ -1,9 +1,10 @@
 import { MetadataRoute } from "next";
 import { treatments } from "@/lib/data/treatments";
 import { concerns } from "@/lib/data/concerns";
+import { siteConfig } from "@/lib/config/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://healinque.com";
+  const baseUrl = siteConfig.urls.baseUrl;
 
   // Core pages
   const corePages = [

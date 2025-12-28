@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+import { siteConfig } from "@/lib/config/site";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -9,7 +10,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/admin/", "/account/"],
       },
     ],
-    sitemap: "https://healinque.com/sitemap.xml",
-    host: "https://healinque.com",
+    sitemap: `${siteConfig.urls.baseUrl}/sitemap.xml`,
+    host: siteConfig.urls.baseUrl,
   };
 }

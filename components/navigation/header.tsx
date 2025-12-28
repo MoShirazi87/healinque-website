@@ -8,6 +8,7 @@ import { Menu, X, ChevronDown, Phone, ShoppingBag, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { siteConfig, getPhoneLink } from "@/lib/config/site";
+import { MobileMenu } from "./mobile-menu";
 
 const navigation = {
   treatments: {
@@ -15,7 +16,7 @@ const navigation = {
     categories: [
       {
         name: "Aesthetic Medicine",
-        href: "/treatments/aesthetics",
+        href: "/treatments/category/aesthetics",
         items: [
           { name: "Botox & Dysport", href: "/treatments/botox-dysport" },
           { name: "Dermal Fillers", href: "/treatments/dermal-fillers" },
@@ -25,7 +26,7 @@ const navigation = {
       },
       {
         name: "Regenerative",
-        href: "/treatments/regenerative",
+        href: "/treatments/category/regenerative",
         items: [
           { name: "PRF/PRP Therapy", href: "/treatments/prp-therapy" },
           { name: "Exosome Therapy", href: "/treatments/exosome-therapy" },
@@ -35,7 +36,7 @@ const navigation = {
       },
       {
         name: "Skin Rejuvenation",
-        href: "/treatments/skin-rejuvenation",
+        href: "/treatments/category/skin-rejuvenation",
         items: [
           { name: "Morpheus8", href: "/treatments/morpheus8" },
           { name: "Chemical Peels", href: "/treatments/chemical-peels" },
@@ -44,7 +45,7 @@ const navigation = {
       },
       {
         name: "Wellness & Longevity",
-        href: "/treatments/wellness",
+        href: "/treatments/category/wellness",
         items: [
           { name: "GLP-1 Weight Loss", href: "/treatments/glp1-weight-loss" },
           { name: "Hormone Therapy (BHRT)", href: "/treatments/hormone-therapy" },
@@ -93,9 +94,9 @@ const navigation = {
       {
         name: "Services & Packages",
         items: [
-          { name: "Memberships", href: "/shop/memberships" },
-          { name: "Treatment Packages", href: "/shop/packages" },
-          { name: "Gift Cards", href: "/shop/gift-cards" },
+          { name: "Memberships", href: "/memberships" },
+          { name: "Treatment Packages", href: "/shop/collections/packages" },
+          { name: "Gift Cards", href: "/shop/collections/gift-cards" },
         ],
       },
     ],
@@ -457,140 +458,11 @@ export function Header() {
           </div>
         </nav>
 
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden bg-white border-t overflow-hidden"
-            >
-              <div className="container-healinque py-6 space-y-6 max-h-[70vh] overflow-y-auto">
-                <div className="space-y-4">
-                  <Link
-                    href="/treatments"
-                    className="block text-lg font-serif font-semibold text-navy-deep"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Our Treatments
-                  </Link>
-                  <div className="pl-4 space-y-2">
-                    {navigation.treatments.categories.map((category) => (
-                      <Link
-                        key={category.name}
-                        href={category.href}
-                        className="block text-sm text-taupe hover:text-gold"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {category.name}
-                      </Link>
-                    ))}
-                  </div>
-                  
-                  <Link
-                    href="/concerns"
-                    className="block text-lg font-serif font-semibold text-navy-deep"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Your Concerns
-                  </Link>
-                  
-                  <Link
-                    href="/about"
-                    className="block text-lg font-serif font-semibold text-navy-deep"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    About
-                  </Link>
-                  
-                  <Link
-                    href="/about/dr-azi-shirazi"
-                    className="block text-lg font-serif font-semibold text-navy-deep"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Dr. Azi Shirazi
-                  </Link>
-                  
-                  <Link
-                    href="/shop"
-                    className="block text-lg font-serif font-semibold text-navy-deep"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Shop
-                  </Link>
-                  <div className="pl-4 space-y-2">
-                    <Link
-                      href="/shop/collections/skincare"
-                      className="block text-sm text-taupe hover:text-gold"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Skincare
-                    </Link>
-                    <Link
-                      href="/shop/collections/supplements"
-                      className="block text-sm text-taupe hover:text-gold"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Supplements
-                    </Link>
-                    <Link
-                      href="/shop/memberships"
-                      className="block text-sm text-taupe hover:text-gold"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Memberships
-                    </Link>
-                    <Link
-                      href="/shop/gift-cards"
-                      className="block text-sm text-taupe hover:text-gold"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Gift Cards
-                    </Link>
-                  </div>
-                  
-                  <Link
-                    href="/memberships"
-                    className="block text-lg font-serif font-semibold text-navy-deep"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Memberships
-                  </Link>
-                  
-                  <Link
-                    href="/contact"
-                    className="block text-lg font-serif font-semibold text-navy-deep"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Contact
-                  </Link>
-                </div>
-                
-                <div className="pt-4 border-t space-y-3">
-                  <Link
-                    href="/account"
-                    className="flex items-center justify-center gap-2 w-full py-2 text-navy-deep font-medium hover:text-gold transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <User className="h-4 w-4" />
-                    My Account
-                  </Link>
-                  <a
-                    href={getPhoneLink()}
-                    className="flex items-center justify-center gap-2 w-full py-3 text-navy-deep font-medium"
-                  >
-                    <Phone className="h-4 w-4" />
-                    {siteConfig.phone}
-                  </a>
-                  <Link href="/book" onClick={() => setMobileMenuOpen(false)}>
-                    <Button className="w-full" size="lg">Book Your Consultation</Button>
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Mobile Menu - Full-screen with drill-down navigation */}
+        <MobileMenu 
+          isOpen={mobileMenuOpen} 
+          onClose={() => setMobileMenuOpen(false)} 
+        />
       </header>
     </>
   );
