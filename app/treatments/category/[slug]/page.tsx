@@ -72,12 +72,12 @@ export default function CategoryPage({ params }: CategoryPageProps) {
     notFound();
   }
 
-  const categoryTreatments = getTreatmentsByCategory(params.slug).map((t) => ({
+  const categoryTreatments = getTreatmentsByCategory(params.slug as any).map((t) => ({
     title: t.name,
-    description: t.shortDescription,
+    description: t.tagline,
     image: t.image,
     href: `/treatments/${t.slug}`,
-    price: t.pricing.startingAt,
+    price: t.pricing.starting ? `$${t.pricing.starting}` : t.pricing.range,
   }));
 
   const faqs = categoryFaqs[params.slug] || [];
@@ -85,12 +85,11 @@ export default function CategoryPage({ params }: CategoryPageProps) {
   return (
     <>
       <Hero
+        variant="page"
         title={category.name}
         subtitle="Treatment Category"
         description={category.description}
-        primaryCta={{ text: "Book Consultation", href: "/book" }}
-        backgroundImage={category.image}
-        height="medium"
+        image={category.image}
         overlay="gradient"
       />
 

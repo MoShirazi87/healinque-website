@@ -92,12 +92,11 @@ export default function HealinqueMethodPage() {
   return (
     <>
       <Hero
+        variant="page"
         title="The Healinque Method"
         subtitle="Our Approach"
         description="A thoughtful, physician-led approach to aesthetic treatment that puts your wellbeing at the center of everything we do."
-        backgroundImage="/images/method-hero.jpg"
-        height="medium"
-        alignment="center"
+        image="/images/method-hero.jpg"
         overlay="dark"
       />
 

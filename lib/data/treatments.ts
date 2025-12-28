@@ -873,3 +873,11 @@ export function getPopularTreatments(): Treatment[] {
 export function getNewTreatments(): Treatment[] {
   return treatments.filter((t) => t.isNew);
 }
+
+export function getAllCategorySlugs(): string[] {
+  return Object.keys(treatmentCategories);
+}
+
+export function getCategoryBySlug(slug: string): { name: string; description: string; image: string } | undefined {
+  return treatmentCategories[slug as TreatmentCategory];
+}
