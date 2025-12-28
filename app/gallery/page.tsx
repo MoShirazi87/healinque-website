@@ -38,12 +38,11 @@ export default function GalleryPage() {
   return (
     <>
       <Hero
+        variant="page"
         title="Before & After Gallery"
         subtitle="Real Results"
         description="See the natural, beautiful results our patients have achieved with Dr. Azi's expert care."
-        backgroundImage="/images/gallery-hero.jpg"
-        height="medium"
-        alignment="center"
+        image="/images/gallery-hero.jpg"
         overlay="dark"
       />
 

@@ -36,12 +36,11 @@ export default async function ShopPage() {
   return (
     <>
       <Hero
+        variant="page"
         title="Shop Healinque"
         subtitle="Medical-Grade Products"
         description="Physician-curated skincare, supplements, and wellness products to enhance your treatment results at home."
-        backgroundImage="/images/shop-hero.jpg"
-        height="medium"
-        alignment="center"
+        image="/images/shop-hero.jpg"
         overlay="dark"
       />
 

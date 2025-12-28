@@ -100,12 +100,11 @@ export default function MembershipsPage() {
   return (
     <>
       <Hero
+        variant="page"
         title="Healinque Membership"
         subtitle="Join the Family"
         description="Unlock exclusive benefits, VIP perks, and significant savings on the treatments and products you love."
-        backgroundImage="/images/membership-hero.jpg"
-        height="medium"
-        alignment="center"
+        image="/images/membership-hero.jpg"
         overlay="dark"
       />
 

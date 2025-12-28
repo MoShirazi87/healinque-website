@@ -48,12 +48,11 @@ export default function CollectionPage({ params }: PageProps) {
   return (
     <>
       <Hero
+        variant="page"
         title={collection.title}
         subtitle="Shop Healinque"
         description={collection.description}
-        backgroundImage={collection.image?.url || "/images/shop-hero.jpg"}
-        height="medium"
-        alignment="center"
+        image={collection.image?.url || "/images/shop-hero.jpg"}
         overlay="dark"
       />
 

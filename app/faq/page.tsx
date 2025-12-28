@@ -114,12 +114,11 @@ export default function FAQPage() {
   return (
     <>
       <Hero
+        variant="page"
         title="Frequently Asked Questions"
         subtitle="Help Center"
         description="Find answers to common questions about our treatments, appointments, and policies."
-        backgroundImage="/images/faq-hero.jpg"
-        height="small"
-        alignment="center"
+        image="/images/faq-hero.jpg"
         overlay="dark"
       />
 
