@@ -1,0 +1,278 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Safe area for mobile devices with notches/home indicators */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+@layer base {
+  :root {
+    /* Healinque Brand Colors */
+    --navy-deep: 216 54% 10%;
+    --gold: 43 48% 59%;
+    --taupe: 30 24% 44%;
+    --cream: 36 26% 96%;
+    
+    /* shadcn/ui tokens mapped to Healinque */
+    --background: 0 0% 100%;
+    --foreground: 216 54% 10%;
+    --card: 36 26% 96%;
+    --card-foreground: 216 54% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 216 54% 10%;
+    --primary: 43 48% 59%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 36 26% 96%;
+    --secondary-foreground: 216 54% 10%;
+    --muted: 36 26% 96%;
+    --muted-foreground: 30 24% 44%;
+    --accent: 43 48% 59%;
+    --accent-foreground: 0 0% 100%;
+    --border: 30 24% 85%;
+    --input: 30 24% 85%;
+    --ring: 43 48% 59%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .container-healinque {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  
+  .container-narrow {
+    @apply mx-auto max-w-4xl px-4 sm:px-6 lg:px-8;
+  }
+  
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-gold text-white font-medium rounded-md transition-all duration-300 hover:bg-gold-dark hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2;
+  }
+  
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-navy-deep text-navy-deep font-medium rounded-md transition-all duration-300 hover:bg-navy-deep hover:text-white focus:outline-none focus:ring-2 focus:ring-navy-deep focus:ring-offset-2;
+  }
+  
+  .btn-outline-gold {
+    @apply inline-flex items-center justify-center px-6 py-3 border-2 border-gold text-gold font-medium rounded-md transition-all duration-300 hover:bg-gold hover:text-white focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2;
+  }
+  
+  .btn-white {
+    @apply inline-flex items-center justify-center px-6 py-3 bg-white text-navy-deep font-medium rounded-md transition-all duration-300 hover:bg-cream focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2;
+  }
+  
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+  
+  .section-padding-sm {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Announcement bar */
+  .announcement-bar {
+    @apply bg-navy-deep text-white py-2.5 text-center text-sm font-medium;
+  }
+  
+  /* Card styles */
+  .card-elevated {
+    @apply bg-white rounded-xl shadow-card hover:shadow-elegant transition-shadow duration-300;
+  }
+  
+  .card-treatment {
+    @apply bg-white rounded-xl overflow-hidden shadow-soft hover:shadow-elegant transition-all duration-300 hover:-translate-y-1;
+  }
+  
+  /* Input styles */
+  .input-elegant {
+    @apply w-full px-4 py-3 border border-cream-dark rounded-lg bg-white text-navy-deep placeholder:text-taupe/60 focus:outline-none focus:ring-2 focus:ring-gold/50 focus:border-gold transition-all;
+  }
+  
+  /* Badge styles */
+  .badge-gold {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gold/10 text-gold;
+  }
+  
+  .badge-navy {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-navy-deep/10 text-navy-deep;
+  }
+  
+  /* Section headers */
+  .section-subtitle {
+    @apply text-gold font-medium tracking-wide uppercase text-sm mb-3;
+  }
+  
+  .section-title {
+    @apply text-display font-serif text-navy-deep;
+  }
+  
+  /* Decorative elements */
+  .gold-underline {
+    @apply relative inline-block;
+  }
+  
+  .gold-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-gold;
+  }
+  
+  /* Gradient overlays */
+  .overlay-gradient-dark {
+    @apply bg-gradient-to-r from-navy-deep/80 via-navy-deep/50 to-transparent;
+  }
+  
+  .overlay-gradient-bottom {
+    @apply bg-gradient-to-t from-navy-deep/70 to-transparent;
+  }
+}
+
+/* Curved footer background */
+.footer-curve {
+  clip-path: ellipse(150% 100% at 50% 100%);
+}
+
+/* Curved section top */
+.section-curve-top {
+  clip-path: ellipse(150% 100% at 50% 0%);
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8f6f3;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c9a962;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b8954d;
+}
+
+/* Animated underline on hover */
+.hover-underline-gold {
+  position: relative;
+}
+
+.hover-underline-gold::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: #c9a962;
+  transition: width 0.3s ease;
+}
+
+.hover-underline-gold:hover::after {
+  width: 100%;
+}
+
+/* Press logo marquee */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: inline-flex;
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-content:hover {
+  animation-play-state: paused;
+}
+
+/* Before/After slider styles */
+.before-after-slider {
+  position: relative;
+  overflow: hidden;
+  touch-action: pan-y pinch-zoom;
+}
+
+.before-after-slider .before-image,
+.before-after-slider .after-image {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+}
+
+/* Decorative pattern overlay */
+.pattern-dots {
+  background-image: radial-gradient(circle, #c9a962 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.pattern-lines {
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(201, 169, 98, 0.05) 10px,
+    rgba(201, 169, 98, 0.05) 20px
+  );
+}
+
+/* Stagger animation delays for children */
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+
+/* Image aspect ratios */
+.aspect-treatment {
+  aspect-ratio: 4/3;
+}
+
+.aspect-hero {
+  aspect-ratio: 16/9;
+}
+
+.aspect-portrait {
+  aspect-ratio: 3/4;
+}
+
+/* Form focus states */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  @apply outline-none ring-2 ring-gold/50 border-gold;
+}
+
+/* Selection color */
+::selection {
+  background-color: rgba(201, 169, 98, 0.2);
+  color: #0a1628;
+}

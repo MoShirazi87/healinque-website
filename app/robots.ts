@@ -1,0 +1,15 @@
+import { MetadataRoute } from "next";
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: [
+      {
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/api/", "/admin/", "/account/"],
+      },
+    ],
+    sitemap: "https://healinque.com/sitemap.xml",
+    host: "https://healinque.com",
+  };
+}
