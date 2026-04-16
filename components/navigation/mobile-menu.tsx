@@ -2,69 +2,96 @@
 
 import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  X, 
-  ChevronRight, 
-  ChevronLeft, 
-  Phone, 
-  ShoppingBag, 
-  User,
-  Heart,
-  Calendar
-} from "lucide-react";
+import { X, ChevronRight, ChevronLeft, Phone, Calendar } from "lucide-react";
 import { siteConfig, getPhoneLink } from "@/lib/config/site";
-import { treatments, treatmentCategories, TreatmentCategory } from "@/lib/data/treatments";
-import { concerns } from "@/lib/data/concerns";
 
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-type MenuLevel = "main" | "treatments" | "treatments-category" | "concerns" | "about" | "shop";
+type MenuLevel = "main" | "treatments" | "concerns";
 
-interface NavigationState {
-  level: MenuLevel;
-  categorySlug?: string;
-}
+/* Mirrors the desktop mega menu — full list of individual treatments */
+const treatmentGroups = [
+  {
+    heading: "Aesthetic Treatments",
+    items: [
+      { name: "Botox & Dysport", href: "/treatments/botox-dysport" },
+      { name: "Daxxify", href: "/treatments/daxxify" },
+      { name: "Dermal Fillers", href: "/treatments/dermal-fillers" },
+      { name: "PDO Threads", href: "/treatments/pdo-thread-lift" },
+      { name: "Morpheus8", href: "/treatments/morpheus8" },
+      { name: "Kybella", href: "/treatments/kybella" },
+    ],
+  },
+  {
+    heading: "Skin Rejuvenation",
+    items: [
+      { name: "Laser Resurfacing", href: "/treatments/laser-resurfacing" },
+      { name: "Microneedling", href: "/treatments/microneedling" },
+      { name: "Chemical Peels", href: "/treatments/chemical-peels" },
+      { name: "Medical-Grade Skincare", href: "/treatments/medical-grade-skincare" },
+      { name: "IPL Photo Facial", href: "/treatments/ipl-photo-facial" },
+    ],
+  },
+  {
+    heading: "Regenerative Medicine",
+    items: [
+      { name: "PRF Therapy", href: "/treatments/prf-therapy" },
+      { name: "Regenerative Consultation", href: "/treatments/regenerative-consultation" },
+      { name: "IV Therapy", href: "/treatments/iv-therapy" },
+      { name: "GLP-1 Weight Loss", href: "/treatments/glp1-weight-loss", comingSoon: true },
+    ],
+  },
+  {
+    heading: "Men's Clinic",
+    items: [
+      { name: "Hair Restoration", href: "/treatments/hair-restoration" },
+      { name: "Discreet Aesthetics", href: "/treatments/discreet-aesthetics" },
+      { name: "Hormone Optimization", href: "/treatments/hormone-optimization", comingSoon: true },
+      { name: "Men's Clinic Home", href: "/mens-clinic" },
+    ],
+  },
+];
 
-// Full navigation data matching desktop
-const aboutItems = [
-  { name: "About Healinque", href: "/about" },
-  { name: "Dr. Azi Shirazi", href: "/about/dr-azi-shirazi" },
-  { name: "The Healinque Method", href: "/about/healinque-method" },
-  { name: "Before & After Gallery", href: "/gallery" },
-  { name: "Patient Reviews", href: "/reviews" },
+const concernCategories = [
+  { name: "Fine Lines & Wrinkles", href: "/concerns/fine-lines-wrinkles" },
+  { name: "Acne Scarring", href: "/concerns/acne-scarring" },
+  { name: "Dark Circles & Under-Eye", href: "/concerns/dark-circles-under-eye" },
+  { name: "Hyperpigmentation & Melasma", href: "/concerns/hyperpigmentation-melasma" },
+  { name: "Skin Laxity & Sagging", href: "/concerns/skin-laxity-sagging" },
+  { name: "Hair Thinning", href: "/concerns/hair-thinning" },
+];
+
+const primaryNav = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Men's Clinic", href: "/mens-clinic" },
+  { name: "Memberships", href: "/memberships" },
+  { name: "Packages", href: "/packages" },
+  { name: "Financing", href: "/financing" },
+];
+
+const secondaryNav = [
+  { name: "Gallery", href: "/gallery" },
+  { name: "Reviews", href: "/reviews" },
+  { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/contact" },
   { name: "FAQ", href: "/faq" },
 ];
 
-const shopItems = [
-  { name: "All Products", href: "/shop" },
-  { name: "Skincare by Healinque", href: "/shop/collections/skincare" },
-  { name: "Supplements", href: "/shop/collections/supplements" },
-  { name: "Dr. Azi's Picks", href: "/shop/collections/dr-azi-picks" },
-  { name: "Memberships", href: "/memberships" },
-  { name: "Treatment Packages", href: "/shop/collections/packages" },
-  { name: "Gift Cards", href: "/shop/collections/gift-cards" },
-];
-
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
-  const [navState, setNavState] = React.useState<NavigationState>({ level: "main" });
+  const [menuLevel, setMenuLevel] = React.useState<MenuLevel>("main");
 
-  // Reset to main menu when closed
   React.useEffect(() => {
     if (!isOpen) {
-      // Small delay to allow animation to complete
-      const timer = setTimeout(() => {
-        setNavState({ level: "main" });
-      }, 300);
+      const timer = setTimeout(() => setMenuLevel("main"), 300);
       return () => clearTimeout(timer);
     }
   }, [isOpen]);
 
-  // Prevent body scroll when menu is open
   React.useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -76,26 +103,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     };
   }, [isOpen]);
 
-  const handleNavigate = (level: MenuLevel, categorySlug?: string) => {
-    setNavState({ level, categorySlug });
-  };
-
-  const handleBack = () => {
-    if (navState.level === "treatments-category") {
-      setNavState({ level: "treatments" });
-    } else {
-      setNavState({ level: "main" });
-    }
-  };
-
-  const handleLinkClick = () => {
-    onClose();
-  };
-
-  // Get treatments for a category
-  const getTreatmentsForCategory = (categorySlug: string) => {
-    return treatments.filter(t => t.category === categorySlug);
-  };
+  const handleLinkClick = () => onClose();
 
   return (
     <AnimatePresence>
@@ -107,410 +115,240 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-navy-deep/50 backdrop-blur-sm z-40 lg:hidden"
+            className="fixed inset-0 bg-black/60 backdrop-blur-md z-40 lg:hidden"
             onClick={onClose}
           />
 
-          {/* Menu Container */}
+          {/* Drawer */}
           <motion.div
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed top-0 right-0 bottom-0 w-full max-w-md bg-white z-50 lg:hidden flex flex-col overflow-hidden"
+            transition={{ type: "spring", damping: 28, stiffness: 320 }}
+            className="mobile-menu-container fixed top-0 right-0 bottom-0 w-full sm:max-w-md bg-[#0a1628] z-50 lg:hidden flex flex-col overflow-hidden shadow-2xl"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-5 py-4 border-b border-cream-dark safe-top">
-              <Link href="/" onClick={handleLinkClick}>
-                <Image
-                  src="/images/logo.svg"
-                  alt="Healinque"
-                  width={160}
-                  height={40}
-                  className="h-10 w-auto"
-                />
-              </Link>
+            <div className="flex items-center justify-between px-6 pt-[calc(env(safe-area-inset-top)+1rem)] pb-4 border-b border-white/[0.06]">
+              <div className="flex flex-col">
+                <span className="font-sans text-[10px] uppercase tracking-[0.3em] text-[#C9A227]/80">
+                  Menu
+                </span>
+                <span className="font-serif text-xl font-bold text-white tracking-wide mt-0.5">
+                  HEALINQUE
+                </span>
+              </div>
               <button
                 onClick={onClose}
-                className="p-2 -mr-2 text-navy-deep hover:text-gold transition-colors"
+                className="h-11 w-11 flex items-center justify-center rounded-full border border-white/10 text-white hover:text-[#C9A227] hover:border-[#C9A227]/40 transition-colors"
                 aria-label="Close menu"
               >
-                <X className="h-6 w-6" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Dual Login Buttons - Above the fold */}
-            <div className="px-5 py-4 bg-gradient-to-r from-cream to-cream/50 border-b border-cream-dark">
-              <p className="text-xs font-semibold uppercase tracking-wide text-taupe mb-3">
-                Quick Access
-              </p>
-              <div className="grid grid-cols-2 gap-3">
-                <Link
-                  href="/login?type=shop"
-                  onClick={handleLinkClick}
-                  className="flex flex-col items-center justify-center py-3 px-2 bg-navy-deep text-white rounded-lg transition-transform active:scale-95"
-                >
-                  <ShoppingBag className="h-5 w-5 mb-1.5" />
-                  <span className="text-sm font-medium">Shop Login</span>
-                  <span className="text-[10px] opacity-70 mt-0.5">Orders & Tracking</span>
-                </Link>
-                <Link
-                  href="/login?type=patient"
-                  onClick={handleLinkClick}
-                  className="flex flex-col items-center justify-center py-3 px-2 bg-gold text-white rounded-lg transition-transform active:scale-95"
-                >
-                  <Heart className="h-5 w-5 mb-1.5" />
-                  <span className="text-sm font-medium">Patient Portal</span>
-                  <span className="text-[10px] opacity-70 mt-0.5">Appointments</span>
-                </Link>
-              </div>
-            </div>
-
-            {/* Menu Content */}
+            {/* Content */}
             <div className="flex-1 overflow-hidden relative">
-              {/* Main Menu */}
               <AnimatePresence mode="wait">
-                {navState.level === "main" && (
+                {menuLevel === "main" && (
                   <motion.div
                     key="main"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0, x: -50 }}
-                    transition={{ duration: 0.15 }}
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -30 }}
+                    transition={{ duration: 0.2 }}
                     className="absolute inset-0 overflow-y-auto"
                   >
-                    <nav className="py-2">
-                      {/* Treatments */}
-                      <button
-                        onClick={() => handleNavigate("treatments")}
-                        className="flex items-center justify-between w-full px-5 py-4 text-left border-b border-cream/50 hover:bg-cream/30 transition-colors"
-                      >
-                        <span className="font-serif text-lg font-semibold text-navy-deep">
-                          Our Treatments
+                    <nav className="px-6 py-6 space-y-1">
+                      {/* Section label */}
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="h-px w-8 bg-[#C9A227]/60" />
+                        <span className="font-sans text-[10px] uppercase tracking-[0.25em] text-white/40">
+                          Explore
                         </span>
-                        <ChevronRight className="h-5 w-5 text-taupe" />
+                      </div>
+
+                      <button
+                        onClick={() => setMenuLevel("treatments")}
+                        className="mobile-menu-item w-full flex items-center justify-between py-4 text-white/90 border-b border-white/[0.05] hover:text-[#C9A227] transition-colors"
+                      >
+                        <span className="font-serif text-xl">Treatments</span>
+                        <ChevronRight className="w-5 h-5 text-[#C9A227]" />
                       </button>
 
-                      {/* Concerns */}
                       <button
-                        onClick={() => handleNavigate("concerns")}
-                        className="flex items-center justify-between w-full px-5 py-4 text-left border-b border-cream/50 hover:bg-cream/30 transition-colors"
+                        onClick={() => setMenuLevel("concerns")}
+                        className="mobile-menu-item w-full flex items-center justify-between py-4 text-white/90 border-b border-white/[0.05] hover:text-[#C9A227] transition-colors"
                       >
-                        <span className="font-serif text-lg font-semibold text-navy-deep">
-                          Your Concerns
-                        </span>
-                        <ChevronRight className="h-5 w-5 text-taupe" />
+                        <span className="font-serif text-xl">Concerns</span>
+                        <ChevronRight className="w-5 h-5 text-[#C9A227]" />
                       </button>
 
-                      {/* About */}
-                      <button
-                        onClick={() => handleNavigate("about")}
-                        className="flex items-center justify-between w-full px-5 py-4 text-left border-b border-cream/50 hover:bg-cream/30 transition-colors"
-                      >
-                        <span className="font-serif text-lg font-semibold text-navy-deep">
-                          About
-                        </span>
-                        <ChevronRight className="h-5 w-5 text-taupe" />
-                      </button>
+                      {primaryNav.map((link) => (
+                        <Link
+                          key={link.href}
+                          href={link.href}
+                          onClick={handleLinkClick}
+                          className="mobile-menu-item block py-4 font-serif text-xl text-white/90 border-b border-white/[0.05] hover:text-[#C9A227] transition-colors"
+                        >
+                          {link.name}
+                        </Link>
+                      ))}
 
-                      {/* Shop */}
-                      <button
-                        onClick={() => handleNavigate("shop")}
-                        className="flex items-center justify-between w-full px-5 py-4 text-left border-b border-cream/50 hover:bg-cream/30 transition-colors"
-                      >
-                        <span className="font-serif text-lg font-semibold text-navy-deep flex items-center gap-2">
-                          <ShoppingBag className="h-5 w-5" />
-                          Shop
+                      {/* Secondary */}
+                      <div className="flex items-center gap-3 pt-6 mb-3">
+                        <div className="h-px w-8 bg-[#C9A227]/60" />
+                        <span className="font-sans text-[10px] uppercase tracking-[0.25em] text-white/40">
+                          More
                         </span>
-                        <ChevronRight className="h-5 w-5 text-taupe" />
-                      </button>
+                      </div>
 
-                      {/* Direct Links */}
-                      <Link
-                        href="/memberships"
-                        onClick={handleLinkClick}
-                        className="flex items-center justify-between w-full px-5 py-4 text-left border-b border-cream/50 hover:bg-cream/30 transition-colors"
-                      >
-                        <span className="font-serif text-lg font-semibold text-navy-deep">
-                          Memberships
-                        </span>
-                        <span className="text-xs bg-gold/10 text-gold px-2 py-0.5 rounded-full font-medium">
-                          Save 20%
-                        </span>
-                      </Link>
-
-                      <Link
-                        href="/contact"
-                        onClick={handleLinkClick}
-                        className="flex items-center w-full px-5 py-4 text-left border-b border-cream/50 hover:bg-cream/30 transition-colors"
-                      >
-                        <span className="font-serif text-lg font-semibold text-navy-deep">
-                          Contact
-                        </span>
-                      </Link>
+                      <div className="grid grid-cols-2 gap-x-4">
+                        {secondaryNav.map((link) => (
+                          <Link
+                            key={link.href}
+                            href={link.href}
+                            onClick={handleLinkClick}
+                            className="py-3 text-sm font-medium text-white/60 hover:text-[#C9A227] transition-colors"
+                          >
+                            {link.name}
+                          </Link>
+                        ))}
+                      </div>
                     </nav>
                   </motion.div>
                 )}
 
-                {/* Treatments Menu */}
-                {navState.level === "treatments" && (
+                {menuLevel === "treatments" && (
                   <motion.div
                     key="treatments"
-                    initial={{ opacity: 0, x: 50 }}
+                    initial={{ opacity: 0, x: 30 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 50 }}
-                    transition={{ duration: 0.15 }}
+                    exit={{ opacity: 0, x: 30 }}
+                    transition={{ duration: 0.2 }}
                     className="absolute inset-0 overflow-y-auto"
                   >
-                    <button
-                      onClick={handleBack}
-                      className="flex items-center gap-2 w-full px-5 py-3 text-sm font-medium text-gold bg-cream/50 border-b border-cream-dark"
-                    >
-                      <ChevronLeft className="h-4 w-4" />
-                      Back to Menu
-                    </button>
-                    <div className="px-5 py-3 border-b border-cream-dark bg-cream/30">
-                      <h2 className="font-serif text-xl font-semibold text-navy-deep">
-                        Our Treatments
-                      </h2>
-                      <p className="text-xs text-taupe mt-1">
-                        All performed by Dr. Azi Shirazi
-                      </p>
-                    </div>
-                    <nav className="py-2">
-                      <Link
-                        href="/treatments"
-                        onClick={handleLinkClick}
-                        className="block px-5 py-3 text-gold font-medium hover:bg-cream/30 transition-colors border-b border-cream/50"
+                    <div className="px-6 py-6">
+                      <button
+                        onClick={() => setMenuLevel("main")}
+                        className="flex items-center gap-2 mb-6 text-xs uppercase tracking-[0.2em] text-[#C9A227] hover:text-white transition-colors"
                       >
-                        View All Treatments →
-                      </Link>
-                      {Object.entries(treatmentCategories).map(([slug, category]) => (
-                        <button
-                          key={slug}
-                          onClick={() => handleNavigate("treatments-category", slug)}
-                          className="flex items-center justify-between w-full px-5 py-4 text-left border-b border-cream/50 hover:bg-cream/30 transition-colors"
-                        >
-                          <div>
-                            <span className="font-serif text-base font-semibold text-navy-deep block">
-                              {category.name}
-                            </span>
-                            <span className="text-xs text-taupe">
-                              {getTreatmentsForCategory(slug).length} treatments
-                            </span>
+                        <ChevronLeft className="w-4 h-4" />
+                        Back
+                      </button>
+
+                      <div className="flex items-center gap-3 mb-5">
+                        <div className="h-px w-8 bg-[#C9A227]/60" />
+                        <span className="font-sans text-[10px] uppercase tracking-[0.25em] text-white/40">
+                          All Treatments
+                        </span>
+                      </div>
+
+                      <div className="space-y-7">
+                        {treatmentGroups.map((group) => (
+                          <div key={group.heading}>
+                            <p className="font-sans text-[11px] uppercase tracking-[0.22em] text-[#C9A227]/90 mb-2">
+                              {group.heading}
+                            </p>
+                            <div>
+                              {group.items.map((item) => (
+                                <Link
+                                  key={item.href}
+                                  href={item.href}
+                                  onClick={handleLinkClick}
+                                  className="flex items-center justify-between py-3 font-serif text-[17px] text-white/90 border-b border-white/[0.05] hover:text-[#C9A227] transition-colors"
+                                >
+                                  <span>{item.name}</span>
+                                  {item.comingSoon && (
+                                    <span className="ml-2 text-[9px] font-sans uppercase tracking-[0.15em] text-[#C9A227]/70">
+                                      Soon
+                                    </span>
+                                  )}
+                                </Link>
+                              ))}
+                            </div>
                           </div>
-                          <ChevronRight className="h-5 w-5 text-taupe" />
-                        </button>
-                      ))}
-                    </nav>
-                  </motion.div>
-                )}
+                        ))}
 
-                {/* Treatment Category Detail */}
-                {navState.level === "treatments-category" && navState.categorySlug && (
-                  <motion.div
-                    key="treatments-category"
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 50 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute inset-0 overflow-y-auto"
-                  >
-                    <button
-                      onClick={handleBack}
-                      className="flex items-center gap-2 w-full px-5 py-3 text-sm font-medium text-gold bg-cream/50 border-b border-cream-dark"
-                    >
-                      <ChevronLeft className="h-4 w-4" />
-                      Back to Categories
-                    </button>
-                    <div className="px-5 py-3 border-b border-cream-dark bg-cream/30">
-                      <h2 className="font-serif text-xl font-semibold text-navy-deep">
-                        {treatmentCategories[navState.categorySlug as TreatmentCategory]?.name}
-                      </h2>
-                    </div>
-                    <nav className="py-2">
-                      <Link
-                        href={`/treatments/category/${navState.categorySlug}`}
-                        onClick={handleLinkClick}
-                        className="block px-5 py-3 text-gold font-medium hover:bg-cream/30 transition-colors border-b border-cream/50"
-                      >
-                        View All in Category →
-                      </Link>
-                      {getTreatmentsForCategory(navState.categorySlug).map((treatment) => (
                         <Link
-                          key={treatment.slug}
-                          href={`/treatments/${treatment.slug}`}
+                          href="/treatments"
                           onClick={handleLinkClick}
-                          className="block px-5 py-4 border-b border-cream/50 hover:bg-cream/30 transition-colors"
+                          className="block mt-6 py-3 text-sm font-sans font-semibold uppercase tracking-[0.2em] text-[#C9A227] hover:text-white transition-colors"
                         >
-                          <span className="font-medium text-navy-deep block">
-                            {treatment.name}
-                          </span>
-                          <span className="text-xs text-taupe">
-                            {treatment.tagline}
-                          </span>
+                          View All Treatments →
                         </Link>
-                      ))}
-                    </nav>
+                      </div>
+                    </div>
                   </motion.div>
                 )}
 
-                {/* Concerns Menu */}
-                {navState.level === "concerns" && (
+                {menuLevel === "concerns" && (
                   <motion.div
                     key="concerns"
-                    initial={{ opacity: 0, x: 50 }}
+                    initial={{ opacity: 0, x: 30 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 50 }}
-                    transition={{ duration: 0.15 }}
+                    exit={{ opacity: 0, x: 30 }}
+                    transition={{ duration: 0.2 }}
                     className="absolute inset-0 overflow-y-auto"
                   >
-                    <button
-                      onClick={handleBack}
-                      className="flex items-center gap-2 w-full px-5 py-3 text-sm font-medium text-gold bg-cream/50 border-b border-cream-dark"
-                    >
-                      <ChevronLeft className="h-4 w-4" />
-                      Back to Menu
-                    </button>
-                    <div className="px-5 py-3 border-b border-cream-dark bg-cream/30">
-                      <h2 className="font-serif text-xl font-semibold text-navy-deep">
-                        Your Concerns
-                      </h2>
-                      <p className="text-xs text-taupe mt-1">
-                        What would you like to address?
-                      </p>
-                    </div>
-                    <nav className="py-2">
-                      <Link
-                        href="/concerns"
-                        onClick={handleLinkClick}
-                        className="block px-5 py-3 text-gold font-medium hover:bg-cream/30 transition-colors border-b border-cream/50"
+                    <div className="px-6 py-6">
+                      <button
+                        onClick={() => setMenuLevel("main")}
+                        className="flex items-center gap-2 mb-6 text-xs uppercase tracking-[0.2em] text-[#C9A227] hover:text-white transition-colors"
                       >
-                        View All Concerns →
-                      </Link>
-                      {concerns.map((concern) => (
-                        <Link
-                          key={concern.slug}
-                          href={`/concerns/${concern.slug}`}
-                          onClick={handleLinkClick}
-                          className="block px-5 py-4 border-b border-cream/50 hover:bg-cream/30 transition-colors"
-                        >
-                          <span className="font-medium text-navy-deep block">
+                        <ChevronLeft className="w-4 h-4" />
+                        Back
+                      </button>
+
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="h-px w-8 bg-[#C9A227]/60" />
+                        <span className="font-sans text-[10px] uppercase tracking-[0.25em] text-white/40">
+                          Concerns
+                        </span>
+                      </div>
+
+                      <div className="space-y-1">
+                        {concernCategories.map((concern) => (
+                          <Link
+                            key={concern.href}
+                            href={concern.href}
+                            onClick={handleLinkClick}
+                            className="block py-4 font-serif text-lg text-white/90 border-b border-white/[0.05] hover:text-[#C9A227] transition-colors"
+                          >
                             {concern.name}
-                          </span>
-                          <span className="text-xs text-taupe line-clamp-1">
-                            {concern.tagline}
-                          </span>
-                        </Link>
-                      ))}
-                    </nav>
-                  </motion.div>
-                )}
+                          </Link>
+                        ))}
 
-                {/* About Menu */}
-                {navState.level === "about" && (
-                  <motion.div
-                    key="about"
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 50 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute inset-0 overflow-y-auto"
-                  >
-                    <button
-                      onClick={handleBack}
-                      className="flex items-center gap-2 w-full px-5 py-3 text-sm font-medium text-gold bg-cream/50 border-b border-cream-dark"
-                    >
-                      <ChevronLeft className="h-4 w-4" />
-                      Back to Menu
-                    </button>
-                    <div className="px-5 py-3 border-b border-cream-dark bg-cream/30">
-                      <h2 className="font-serif text-xl font-semibold text-navy-deep">
-                        About Healinque
-                      </h2>
-                    </div>
-                    <nav className="py-2">
-                      {aboutItems.map((item) => (
                         <Link
-                          key={item.href}
-                          href={item.href}
+                          href="/concerns"
                           onClick={handleLinkClick}
-                          className="block px-5 py-4 font-medium text-navy-deep border-b border-cream/50 hover:bg-cream/30 transition-colors"
+                          className="block mt-6 py-3 text-sm font-sans font-semibold uppercase tracking-[0.2em] text-[#C9A227] hover:text-white transition-colors"
                         >
-                          {item.name}
+                          View All Concerns →
                         </Link>
-                      ))}
-                    </nav>
-                  </motion.div>
-                )}
-
-                {/* Shop Menu */}
-                {navState.level === "shop" && (
-                  <motion.div
-                    key="shop"
-                    initial={{ opacity: 0, x: 50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 50 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute inset-0 overflow-y-auto"
-                  >
-                    <button
-                      onClick={handleBack}
-                      className="flex items-center gap-2 w-full px-5 py-3 text-sm font-medium text-gold bg-cream/50 border-b border-cream-dark"
-                    >
-                      <ChevronLeft className="h-4 w-4" />
-                      Back to Menu
-                    </button>
-                    <div className="px-5 py-3 border-b border-cream-dark bg-cream/30">
-                      <h2 className="font-serif text-xl font-semibold text-navy-deep">
-                        Shop
-                      </h2>
-                      <p className="text-xs text-taupe mt-1">
-                        Members save up to 20% on products
-                      </p>
+                      </div>
                     </div>
-                    <nav className="py-2">
-                      {shopItems.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          onClick={handleLinkClick}
-                          className="block px-5 py-4 font-medium text-navy-deep border-b border-cream/50 hover:bg-cream/30 transition-colors"
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
-                      <Link
-                        href="/shop/cart"
-                        onClick={handleLinkClick}
-                        className="flex items-center gap-2 px-5 py-4 font-medium text-navy-deep border-b border-cream/50 hover:bg-cream/30 transition-colors"
-                      >
-                        <ShoppingBag className="h-4 w-4" />
-                        View Cart
-                      </Link>
-                    </nav>
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
 
-            {/* Bottom CTA */}
-            <div className="px-5 py-4 bg-cream/50 border-t border-cream-dark safe-bottom space-y-3">
-              <a
-                href={getPhoneLink()}
-                className="flex items-center justify-center gap-2 w-full py-3 text-navy-deep font-medium bg-white rounded-lg border border-cream-dark"
-              >
-                <Phone className="h-4 w-4" />
-                {siteConfig.phone}
-              </a>
+            {/* Footer — Call + Book */}
+            <div className="px-6 pt-4 pb-[calc(env(safe-area-inset-bottom)+1rem)] bg-gradient-to-t from-black/40 to-transparent border-t border-white/[0.06] space-y-3">
               <Link
                 href="/book"
                 onClick={handleLinkClick}
-                className="flex items-center justify-center gap-2 w-full py-3.5 text-white font-semibold bg-gold rounded-lg transition-colors hover:bg-gold-dark"
+                className="mobile-menu-cta-book flex items-center justify-center gap-2 w-full py-4 bg-gradient-to-r from-[#C9A227] to-[#DEB84A] text-[#0a1628] rounded-lg font-semibold text-base shadow-lg hover:shadow-xl transition-all"
               >
-                <Calendar className="h-4 w-4" />
-                Book Your Consultation
+                <Calendar className="w-5 h-5" />
+                Book Consultation
               </Link>
+              <a
+                href={getPhoneLink()}
+                className="flex items-center justify-center gap-2 w-full py-3.5 border border-white/15 text-white/90 rounded-lg font-medium text-sm hover:border-[#C9A227]/40 hover:text-[#C9A227] transition-colors"
+              >
+                <Phone className="w-4 h-4" />
+                {siteConfig.phone}
+              </a>
             </div>
           </motion.div>
         </>
@@ -518,4 +356,3 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     </AnimatePresence>
   );
 }
-

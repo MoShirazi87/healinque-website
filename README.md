@@ -1,6 +1,6 @@
 # Healinque Wellness Clinic Website
 
-Premium medical aesthetics and longevity medicine website for Healinque Wellness Clinic in Poway, California.
+Premium medical aesthetics and longevity medicine website for Healinque Wellness & Longevity Center in San Diego, California.
 
 ## Tech Stack
 

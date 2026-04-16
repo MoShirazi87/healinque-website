@@ -6,12 +6,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  getProductByHandle, 
+import {
+  getProductByHandle,
   type ShopifyProduct,
   mockProducts
 } from "@/lib/shopify/client";
 import { formatPrice } from "@/lib/utils";
+import { sanitizeHtml } from "@/lib/sanitize";
 import { 
   Minus, 
   Plus, 
@@ -52,8 +53,8 @@ export default function ProductPage({ params }: ProductPageProps) {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-pulse text-taupe">Loading...</div>
+      <div className="min-h-screen flex items-center justify-center bg-navy-deep">
+        <div className="animate-pulse text-white/60">Loading...</div>
       </div>
     );
   }
@@ -72,11 +73,11 @@ export default function ProductPage({ params }: ProductPageProps) {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-16 bg-white">
+    <div className="min-h-screen pt-24 pb-16 bg-navy-deep">
       <div className="container-healinque">
         {/* Breadcrumb */}
         <nav className="text-sm mb-8">
-          <ol className="flex items-center gap-2 text-taupe">
+          <ol className="flex items-center gap-2 text-white/60">
             <li>
               <Link href="/shop" className="hover:text-gold">Shop</Link>
             </li>
@@ -87,20 +88,21 @@ export default function ProductPage({ params }: ProductPageProps) {
               </Link>
             </li>
             <li>/</li>
-            <li className="text-navy-deep">{product.title}</li>
+            <li className="text-white">{product.title}</li>
           </ol>
         </nav>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Images */}
           <div>
-            <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 bg-cream">
+            <div className="relative aspect-square rounded-2xl overflow-hidden mb-4 bg-white/5">
               {images[selectedImage] && (
                 <Image
                   src={images[selectedImage].url}
                   alt={images[selectedImage].altText || product.title}
                   fill
                   className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               )}
             </div>
@@ -119,6 +121,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                       alt={image.altText || `${product.title} ${index + 1}`}
                       fill
                       className="object-cover"
+                      sizes="80px"
                     />
                   </button>
                 ))}
@@ -131,12 +134,12 @@ export default function ProductPage({ params }: ProductPageProps) {
             <p className="text-gold font-medium uppercase text-sm mb-2">
               {product.vendor}
             </p>
-            <h1 className="text-display-sm font-serif text-navy-deep mb-4">
+            <h1 className="text-display-sm font-serif text-white mb-4">
               {product.title}
             </h1>
 
             <div className="flex items-center gap-4 mb-6">
-              <span className="text-2xl font-semibold text-navy-deep">
+              <span className="text-2xl font-semibold text-white">
                 {formatPrice(parseFloat(currentVariant?.price.amount || "0"))}
               </span>
               {product.tags.includes("Best Seller") && (
@@ -144,15 +147,15 @@ export default function ProductPage({ params }: ProductPageProps) {
               )}
             </div>
 
-            <div 
-              className="text-taupe mb-8"
-              dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+            <div
+              className="text-white/60 mb-8"
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(product.descriptionHtml) }}
             />
 
             {/* Variants */}
             {product.variants.edges.length > 1 && (
               <div className="mb-6">
-                <p className="font-medium text-navy-deep mb-3">Size</p>
+                <p className="font-medium text-white mb-3">Size</p>
                 <div className="flex flex-wrap gap-2">
                   {product.variants.edges.map((edge, index) => (
                     <button
@@ -161,8 +164,8 @@ export default function ProductPage({ params }: ProductPageProps) {
                       disabled={!edge.node.availableForSale}
                       className={`px-4 py-2 rounded-lg border transition-colors ${
                         selectedVariant === index
-                          ? "border-gold bg-gold/10 text-navy-deep"
-                          : "border-cream-dark hover:border-gold"
+                          ? "border-gold bg-gold/10 text-white"
+                          : "border-white/10 hover:border-gold"
                       } ${!edge.node.availableForSale ? "opacity-50 cursor-not-allowed" : ""}`}
                     >
                       {edge.node.title}
@@ -174,18 +177,18 @@ export default function ProductPage({ params }: ProductPageProps) {
 
             {/* Quantity */}
             <div className="mb-6">
-              <p className="font-medium text-navy-deep mb-3">Quantity</p>
+              <p className="font-medium text-white mb-3">Quantity</p>
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                  className="w-10 h-10 rounded-lg border border-cream-dark flex items-center justify-center hover:border-gold transition-colors"
+                  className="w-10 h-10 rounded-lg border border-white/10 flex items-center justify-center hover:border-gold transition-colors"
                 >
                   <Minus className="h-4 w-4" />
                 </button>
-                <span className="w-12 text-center font-medium">{quantity}</span>
+                <span className="w-12 text-center font-medium text-white">{quantity}</span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
-                  className="w-10 h-10 rounded-lg border border-cream-dark flex items-center justify-center hover:border-gold transition-colors"
+                  className="w-10 h-10 rounded-lg border border-white/10 flex items-center justify-center hover:border-gold transition-colors"
                 >
                   <Plus className="h-4 w-4" />
                 </button>
@@ -218,16 +221,16 @@ export default function ProductPage({ params }: ProductPageProps) {
             </div>
 
             {/* Benefits */}
-            <div className="space-y-3 py-6 border-t border-b border-cream-dark">
-              <div className="flex items-center gap-3 text-sm text-taupe">
+            <div className="space-y-3 py-6 border-t border-b border-white/5">
+              <div className="flex items-center gap-3 text-sm text-white/60">
                 <Truck className="h-5 w-5 text-gold" />
                 <span>Free shipping on orders over $75</span>
               </div>
-              <div className="flex items-center gap-3 text-sm text-taupe">
+              <div className="flex items-center gap-3 text-sm text-white/60">
                 <Shield className="h-5 w-5 text-gold" />
                 <span>Physician-curated, medical-grade products</span>
               </div>
-              <div className="flex items-center gap-3 text-sm text-taupe">
+              <div className="flex items-center gap-3 text-sm text-white/60">
                 <RotateCcw className="h-5 w-5 text-gold" />
                 <span>30-day returns for unopened products</span>
               </div>
@@ -235,22 +238,22 @@ export default function ProductPage({ params }: ProductPageProps) {
 
             {/* Product Details */}
             <div className="mt-8">
-              <h3 className="font-serif text-lg text-navy-deep mb-3">
+              <h3 className="font-serif text-lg text-white mb-3">
                 Product Details
               </h3>
               <dl className="space-y-2 text-sm">
                 <div className="flex">
-                  <dt className="w-32 text-taupe">Brand</dt>
-                  <dd className="text-navy-deep">{product.vendor}</dd>
+                  <dt className="w-32 text-white/60">Brand</dt>
+                  <dd className="text-white">{product.vendor}</dd>
                 </div>
                 <div className="flex">
-                  <dt className="w-32 text-taupe">Category</dt>
-                  <dd className="text-navy-deep">{product.productType}</dd>
+                  <dt className="w-32 text-white/60">Category</dt>
+                  <dd className="text-white">{product.productType}</dd>
                 </div>
                 {product.tags.length > 0 && (
                   <div className="flex">
-                    <dt className="w-32 text-taupe">Tags</dt>
-                    <dd className="text-navy-deep">{product.tags.join(", ")}</dd>
+                    <dt className="w-32 text-white/60">Tags</dt>
+                    <dd className="text-white">{product.tags.join(", ")}</dd>
                   </div>
                 )}
               </dl>

@@ -1,10 +1,11 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { Hero } from "@/components/sections/hero";
+import { PageHero as Hero } from "@/components/sections/hero";
 import { getProducts, mockCollections } from "@/lib/shopify/client";
 import { formatPrice } from "@/lib/utils";
 import { ArrowRight, Shield, Truck, Award } from "lucide-react";
+import { pexelsUrl, pageImages } from "@/lib/data/images";
 
 export const metadata: Metadata = {
   title: "Shop | Medical-Grade Skincare & Supplements",
@@ -40,7 +41,7 @@ export default async function ShopPage() {
         title="Shop Healinque"
         subtitle="Medical-Grade Products"
         description="Physician-curated skincare, supplements, and wellness products to enhance your treatment results at home."
-        image="/images/shop-hero.jpg"
+        image={pexelsUrl(pageImages.shopHero.primary, 1920)}
         overlay="dark"
       />
 
@@ -62,13 +63,13 @@ export default async function ShopPage() {
       </section>
 
       {/* Shop by Category */}
-      <section className="section-padding bg-white">
+      <section className="section-padding bg-navy-deep">
         <div className="container-healinque">
           <div className="text-center mb-12">
             <p className="text-gold font-medium tracking-wide uppercase text-sm mb-3">
               Browse
             </p>
-            <h2 className="text-display font-serif text-navy-deep">
+            <h2 className="text-display font-serif text-white">
               Shop by Category
             </h2>
           </div>
@@ -96,41 +97,46 @@ export default async function ShopPage() {
                     </h3>
                   </div>
                 </div>
-                <p className="text-taupe text-sm mb-2">{collection.description}</p>
+                <p className="text-white/60 text-sm mb-2">{collection.description}</p>
                 <span className="inline-flex items-center text-sm text-gold group-hover:translate-x-1 transition-transform">
                   Shop {collection.title} <ArrowRight className="ml-1 h-4 w-4" />
                 </span>
               </Link>
             ))}
 
-            {/* Gift Cards */}
-            <Link href="/shop/gift-cards" className="group block">
+            {/* Gift Cards - Coming Soon */}
+            <div className="group block">
               <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center">
-                <div className="text-center text-white">
-                  <p className="text-5xl mb-2">🎁</p>
-                  <h3 className="text-xl font-serif font-semibold">Gift Cards</h3>
+                <div className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm">
+                  <div className="text-center">
+                    <p className="text-5xl mb-2">🎁</p>
+                    <h3 className="text-xl font-serif font-semibold text-white mb-3">Gift Cards</h3>
+                    <span className="inline-block px-3 py-1 rounded-full bg-white/20 text-white text-xs font-semibold uppercase tracking-wider">
+                      Coming Soon
+                    </span>
+                  </div>
                 </div>
               </div>
-              <p className="text-taupe text-sm mb-2">
+              <p className="text-white/60 text-sm mb-2">
                 Give the gift of beauty and wellness
               </p>
-              <span className="inline-flex items-center text-sm text-gold group-hover:translate-x-1 transition-transform">
-                Shop Gift Cards <ArrowRight className="ml-1 h-4 w-4" />
+              <span className="inline-flex items-center text-sm text-white/40">
+                Shop Gift Cards
               </span>
-            </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Featured Products */}
-      <section className="section-padding bg-cream">
+      <section className="section-padding bg-surface-card/50">
         <div className="container-healinque">
           <div className="flex items-center justify-between mb-8">
             <div>
               <p className="text-gold font-medium tracking-wide uppercase text-sm mb-2">
                 Best Sellers
               </p>
-              <h2 className="text-display-sm font-serif text-navy-deep">
+              <h2 className="text-display-sm font-serif text-white">
                 Featured Products
               </h2>
             </div>
@@ -149,7 +155,7 @@ export default async function ShopPage() {
                 href={`/shop/products/${product.handle}`}
                 className="group block"
               >
-                <div className="relative aspect-square rounded-xl overflow-hidden mb-3 bg-white">
+                <div className="relative aspect-square rounded-xl overflow-hidden mb-3 bg-white/5">
                   {product.featuredImage && (
                     <Image
                       src={product.featuredImage.url}
@@ -159,8 +165,8 @@ export default async function ShopPage() {
                     />
                   )}
                 </div>
-                <p className="text-xs text-taupe uppercase mb-1">{product.vendor}</p>
-                <h3 className="font-medium text-navy-deep group-hover:text-gold transition-colors line-clamp-2">
+                <p className="text-xs text-white/60 uppercase mb-1">{product.vendor}</p>
+                <h3 className="font-medium text-white group-hover:text-gold transition-colors line-clamp-2">
                   {product.title}
                 </h3>
                 <p className="text-gold font-medium mt-1">

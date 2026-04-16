@@ -1,8 +1,9 @@
-export { Hero } from "./hero";
+export { PageHero, HomeHero } from "./hero";
 export { TreatmentCard, TreatmentGrid } from "./treatment-card";
 export { Testimonials } from "./testimonials";
-export { FAQSection } from "./faq";
+export { FAQSection } from "./faq-section";
 export { CTASection } from "./cta";
+export { CTABanner } from "./cta-banner";
 export { BeforeAfterGallery } from "./before-after";
 export { Stats } from "./stats";
 export { DoctorIntro } from "./doctor-intro";
@@ -10,4 +11,13 @@ export { Features } from "./features";
 export { ProcessSteps } from "./process-steps";
 export { WhyChooseUs } from "./why-choose-us";
 export { CoreValues } from "./core-values";
-
+export { ServicesGrid } from "./services-grid";
+export { AboutPhilosophy } from "./about-philosophy";
+export { ConcernCards } from "./concern-cards";
+export { ConsultationForm } from "./consultation-form";
+export { Differentiators } from "./differentiators";
+export { DrAziIntro } from "./dr-azi-intro";
+export { FeaturedTreatments } from "./featured-treatments";
+export { LocationShowcase } from "./location-showcase";
+export { PressLogos } from "./press-logos";
+export { TrustBadges } from "./trust-badges";

@@ -19,6 +19,7 @@ export function DrAziIntro({ variant = "full" }: DrAziIntroProps) {
                 alt="Dr. Azi Shirazi"
                 fill
                 className="object-cover"
+                sizes="192px"
               />
             </div>
             <div>
@@ -26,8 +27,8 @@ export function DrAziIntro({ variant = "full" }: DrAziIntroProps) {
                 Meet Dr. Azadeh Shirazi
               </h3>
               <p className="text-taupe mb-4">
-                Board Certified Internal Medicine physician with 20+ years of emergency medicine 
-                experience. Dr. Azi combines aesthetic artistry with medical precision for 
+                Physician-led care with advanced aesthetic training at UC San Diego.
+                Dr. Azi combines aesthetic artistry with medical precision for
                 results that are beautiful, safe, and natural.
               </p>
               <Link href="/about/dr-azi-shirazi">
@@ -54,11 +55,7 @@ export function DrAziIntro({ variant = "full" }: DrAziIntroProps) {
               Dr. Azadeh &ldquo;Azi&rdquo; Shirazi, MD
             </h2>
             <p className="text-cream/80 leading-relaxed mb-6">
-              Board Certified in Internal Medicine with over 20 years of experience in urgent 
-              and emergency medicine, Dr. Shirazi brings a unique perspective to aesthetic 
-              medicine. Having treated countless complications from cosmetic procedures gone 
-              wrong, she understands the importance of proper technique, safety protocols, 
-              and knowing when to say no.
+              Physician with 20+ years of clinical experience in internal medicine and advanced aesthetic training at UC San Diego and with leading physician injectors in the United States and Europe. Dr. Shirazi&apos;s comprehensive medical background ensures every treatment is performed with precision, safety, and an understanding of skin health at the deepest level.
             </p>
             <blockquote className="border-l-4 border-gold pl-6 my-8">
               <p className="font-serif text-xl text-cream italic mb-2">
@@ -69,10 +66,10 @@ export function DrAziIntro({ variant = "full" }: DrAziIntroProps) {
             </blockquote>
             <ul className="space-y-3 mb-8">
               {[
-                "Board Certified Internal Medicine",
-                "20+ Years Emergency Medicine Experience",
+                "MD, Internal Medicine — UCSD-Trained",
+                "20+ Years Clinical Experience",
+                "Advanced Aesthetic Training with Leading Physician Injectors",
                 "Top 100 Physicians San Diego 2023",
-                "Guardian Angel Award Recipient",
                 "Fluent in English & Farsi",
               ].map((item) => (
                 <li key={item} className="flex items-center gap-3 text-sm text-cream/80">
@@ -91,7 +88,7 @@ export function DrAziIntro({ variant = "full" }: DrAziIntroProps) {
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden max-w-md mx-auto">
               <Image
                 src="/images/dr-azi-shirazi.jpg"
-                alt="Dr. Azi Shirazi, Board Certified Physician"
+                alt="Dr. Azi Shirazi, MD — Physician-Led Aesthetic Care"
                 fill
                 className="object-cover"
               />

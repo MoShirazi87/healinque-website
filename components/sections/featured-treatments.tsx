@@ -5,54 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const featuredTreatments = [
-  {
-    name: "Botox & Dysport",
-    category: "Aesthetics",
-    description: "Smooth lines and prevent new wrinkles with precision-placed neuromodulators.",
-    image: "https://images.pexels.com/photos/3985360/pexels-photo-3985360.jpeg?auto=compress&cs=tinysrgb&w=600",
-    href: "/treatments/botox-dysport",
-    tag: "Most Popular",
-  },
-  {
-    name: "Dermal Fillers",
-    category: "Aesthetics",
-    description: "Restore volume and sculpt facial contours with hyaluronic acid fillers.",
-    image: "https://images.pexels.com/photos/3985356/pexels-photo-3985356.jpeg?auto=compress&cs=tinysrgb&w=600",
-    href: "/treatments/dermal-fillers",
-  },
-  {
-    name: "Morpheus8",
-    category: "Skin Rejuvenation",
-    description: "Revolutionary RF microneedling that tightens skin and stimulates collagen.",
-    image: "https://images.pexels.com/photos/5069612/pexels-photo-5069612.jpeg?auto=compress&cs=tinysrgb&w=600",
-    href: "/treatments/morpheus8",
-    tag: "Featured",
-  },
-  {
-    name: "GLP-1 Weight Loss",
-    category: "Wellness",
-    description: "Medical weight loss with Semaglutide & Tirzepatide under physician care.",
-    image: "https://images.pexels.com/photos/4498294/pexels-photo-4498294.jpeg?auto=compress&cs=tinysrgb&w=600",
-    href: "/treatments/glp1-weight-loss",
-    tag: "New",
-  },
-  {
-    name: "PRF/PRP Therapy",
-    category: "Regenerative",
-    description: "Harness your body's own growth factors for natural regeneration.",
-    image: "https://images.pexels.com/photos/5069600/pexels-photo-5069600.jpeg?auto=compress&cs=tinysrgb&w=600",
-    href: "/treatments/prp-therapy",
-  },
-  {
-    name: "Hormone Therapy",
-    category: "Longevity",
-    description: "Bioidentical hormone optimization for vitality and wellness.",
-    image: "https://images.pexels.com/photos/4498362/pexels-photo-4498362.jpeg?auto=compress&cs=tinysrgb&w=600",
-    href: "/treatments/hormone-therapy",
-  },
-];
+import { treatments } from "@/lib/data/treatments";
 
 interface FeaturedTreatmentsProps {
   title?: string;
@@ -65,7 +18,25 @@ export function FeaturedTreatments({
   subtitle = "Explore Our Services",
   limit = 6,
 }: FeaturedTreatmentsProps) {
-  const displayTreatments = featuredTreatments.slice(0, limit);
+  // Filter featured treatments from data and map to display format
+  const featuredTreatments = treatments
+    .filter((t) => t.featured || t.popular || t.isNew)
+    .slice(0, limit)
+    .map((t) => {
+      // Pick randomly from alts if available
+      const allImages = t.imageAlts ? [t.image, ...t.imageAlts] : [t.image];
+      const imageUrl = allImages[Math.floor(Math.random() * allImages.length)];
+      return {
+        name: t.name,
+        category: t.category,
+        description: t.description,
+        image: imageUrl,
+        href: `/treatments/${t.slug}`,
+        tag: t.popular ? "Most Popular" : t.isNew ? "New" : undefined,
+      };
+    });
+
+  const displayTreatments = featuredTreatments;
 
   return (
     <section className="section-padding bg-white">
@@ -99,6 +70,7 @@ export function FeaturedTreatments({
                       alt={treatment.name}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                     {treatment.tag && (
                       <span className="absolute top-4 left-4 badge-gold">

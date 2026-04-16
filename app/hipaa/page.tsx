@@ -8,28 +8,28 @@ export const metadata: Metadata = {
 
 export default function HIPAAPage() {
   return (
-    <div className="min-h-screen pt-24 pb-16 bg-white">
+    <div className="min-h-screen pt-24 pb-16 bg-navy-deep">
       <div className="container-healinque">
         <div className="max-w-3xl mx-auto">
-          <h1 className="text-display font-serif text-navy-deep mb-8">
+          <h1 className="text-display font-serif text-white mb-8">
             Notice of Privacy Practices
           </h1>
-          <p className="text-lg text-navy-deep mb-2">
+          <p className="text-lg text-white mb-2">
             Your Information. Your Rights. Our Responsibilities.
           </p>
-          <p className="text-taupe mb-8">
-            Effective Date: December 2025
+          <p className="text-white/60 mb-8">
+            Effective Date: April 2026
           </p>
 
-          <div className="bg-cream rounded-xl p-6 mb-8">
-            <p className="text-navy-deep font-medium">
-              This notice describes how medical information about you may be used and disclosed 
+          <div className="bg-surface-card border border-white/10 rounded-xl p-6 mb-8">
+            <p className="text-white font-medium">
+              This notice describes how medical information about you may be used and disclosed
               and how you can get access to this information. Please review it carefully.
             </p>
           </div>
 
-          <div className="prose prose-lg max-w-none text-taupe">
-            <h2 className="text-xl font-serif text-navy-deep mt-8 mb-4">
+          <div className="prose prose-lg prose-invert max-w-none text-white/60">
+            <h2 className="text-xl font-serif text-white mt-8 mb-4">
               Your Rights
             </h2>
             <p>When it comes to your health information, you have certain rights:</p>
@@ -44,7 +44,7 @@ export default function HIPAAPage() {
               <li><strong>File a complaint if you feel your rights are violated.</strong> You can file a complaint with us or the U.S. Department of Health and Human Services Office for Civil Rights.</li>
             </ul>
 
-            <h2 className="text-xl font-serif text-navy-deep mt-8 mb-4">
+            <h2 className="text-xl font-serif text-white mt-8 mb-4">
               Your Choices
             </h2>
             <p>For certain health information, you can tell us your choices about what we share:</p>
@@ -54,7 +54,7 @@ export default function HIPAAPage() {
               <li>Fundraising efforts</li>
             </ul>
 
-            <h2 className="text-xl font-serif text-navy-deep mt-8 mb-4">
+            <h2 className="text-xl font-serif text-white mt-8 mb-4">
               Our Uses and Disclosures
             </h2>
             <p>We may use and share your information as we:</p>
@@ -64,7 +64,7 @@ export default function HIPAAPage() {
               <li><strong>Bill for your services.</strong> We can use and share your health information to bill and get payment from health plans or other entities.</li>
             </ul>
 
-            <h2 className="text-xl font-serif text-navy-deep mt-8 mb-4">
+            <h2 className="text-xl font-serif text-white mt-8 mb-4">
               How else can we use or share your health information?
             </h2>
             <p>We are allowed or required to share your information in other ways:</p>
@@ -78,7 +78,7 @@ export default function HIPAAPage() {
               <li>Respond to lawsuits and legal actions</li>
             </ul>
 
-            <h2 className="text-xl font-serif text-navy-deep mt-8 mb-4">
+            <h2 className="text-xl font-serif text-white mt-8 mb-4">
               Our Responsibilities
             </h2>
             <ul className="list-disc pl-6 mt-2">
@@ -88,7 +88,7 @@ export default function HIPAAPage() {
               <li>We will not use or share your information other than as described here unless you tell us we can in writing. If you tell us we can, you may change your mind at any time by letting us know in writing.</li>
             </ul>
 
-            <h2 className="text-xl font-serif text-navy-deep mt-8 mb-4">
+            <h2 className="text-xl font-serif text-white mt-8 mb-4">
               Changes to the Terms of This Notice
             </h2>
             <p>
@@ -97,7 +97,7 @@ export default function HIPAAPage() {
               on our website.
             </p>
 
-            <h2 className="text-xl font-serif text-navy-deep mt-8 mb-4">
+            <h2 className="text-xl font-serif text-white mt-8 mb-4">
               Contact Information
             </h2>
             <p>

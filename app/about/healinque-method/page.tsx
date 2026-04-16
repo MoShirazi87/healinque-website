@@ -1,221 +1,387 @@
-import { Metadata } from "next";
-import Image from "next/image";
-import { Hero } from "@/components/sections/hero";
-import { CTASection } from "@/components/sections/cta";
-import { FAQSection } from "@/components/sections/faq";
-import { CheckCircle } from "lucide-react";
+"use client";
 
-export const metadata: Metadata = {
-  title: "The Healinque Method | Our Approach",
-  description: "Discover our unique 4-step approach to aesthetic treatment: Discover, Design, Deliver, Delight. Personalized care for natural, lasting results.",
-};
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { PageHero as Hero } from "@/components/sections/hero";
+import { Button } from "@/components/ui/button";
+import { pexelsUrl, pageImages } from "@/lib/data/images";
 
 const steps = [
   {
     number: "01",
-    title: "Discover",
-    subtitle: "Comprehensive Consultation",
-    description: "Your journey begins with an in-depth consultation where we truly get to know you. This isn't a quick assessment—it's a thorough exploration of your goals, concerns, and health history.",
-    details: [
-      "Complete health and medical history review",
-      "Facial anatomy and skin analysis",
-      "Discussion of your aesthetic goals and expectations",
-      "Depression and anxiety screening (unique to Healinque)",
-      "Lifestyle factors assessment",
-    ],
-    image: "/images/method/discover.jpg",
+    title: "Assess",
+    description:
+      "I start every consultation with a clinical assessment, not a sales menu. I review your medical history, examine your facial anatomy, and listen to what actually matters to you. In 90 minutes, we build a complete picture—not just surface concerns, but the underlying factors driving aging. This is foundational to good results.",
   },
   {
     number: "02",
-    title: "Design",
-    subtitle: "Personalized Treatment Plan",
-    description: "Based on our discovery session, Dr. Azi creates a customized treatment plan tailored specifically to your unique anatomy, goals, and lifestyle.",
-    details: [
-      "Prioritized treatment recommendations",
-      "Timeline and staging for optimal results",
-      "Detailed explanation of each procedure",
-      "Transparent pricing and financing options",
-      "Alternative approaches when applicable",
-    ],
-    image: "/images/method/design.jpg",
+    title: "Plan",
+    description: `Based on that assessment, I create a personalized treatment plan. It's layered and conservative—we start with what will make the most difference, leave room to refine, and plan for maintenance. I believe in enhancement, not transformation. You'll look like the best version of you, not like someone else.`,
   },
   {
     number: "03",
     title: "Deliver",
-    subtitle: "Expert Treatment",
-    description: "Experience the difference of physician-performed procedures using premium products and the latest techniques in our state-of-the-art facility.",
-    details: [
-      "Comfortable, private treatment rooms",
-      "Premium products from top manufacturers",
-      "Advanced techniques for natural results",
-      "Continuous comfort monitoring",
-      "Detailed aftercare instructions",
-    ],
-    image: "/images/method/deliver.jpg",
-  },
-  {
-    number: "04",
-    title: "Delight",
-    subtitle: "Ongoing Care & Refinement",
-    description: "Your results don't end when you leave our clinic. We're committed to your long-term satisfaction with follow-up care and maintenance planning.",
-    details: [
-      "Complimentary follow-up appointments",
-      "Touch-up treatments as needed",
-      "Long-term maintenance planning",
-      "Loyalty rewards and special offers",
-      "24/7 support for any concerns",
-    ],
-    image: "/images/method/delight.jpg",
+    description: `I personally perform every treatment. We use premium products and advanced techniques with careful attention to comfort and precision. But the work doesn't end after the needle. I provide detailed aftercare, schedule follow-ups, and adjust over time. Lasting results come from consistency and thoughtfulness.`,
   },
 ];
 
-const faqs = [
+const whyMatters = [
   {
-    question: "How long is the initial consultation?",
-    answer: "Plan for 45-60 minutes for your first visit. This gives us ample time to understand your goals, review your health history, and develop a personalized treatment plan. We never rush this important step.",
+    title: `You won't be sold something you don't need.`,
+    description: `I assess first, recommend second. If a treatment won't move the needle for your goals, I'll tell you that. Conservative medicine is good medicine.`,
   },
   {
-    question: "Is the consultation fee applied to treatment?",
-    answer: "Yes! Your consultation fee is fully credited toward any treatment you choose to proceed with. If you decide to move forward the same day, the consultation is essentially complimentary.",
+    title: "Your plan fits your budget and pace.",
+    description: `Layered plans give you control. Start here, refine next quarter, maintain long-term. You're never locked into a package or pressured into more than feels right.`,
   },
   {
-    question: "Why do you screen for depression and anxiety?",
-    answer: "Research shows that mental health significantly impacts how patients feel about their aesthetic results. By screening for depression and anxiety, we can ensure you're in the right mindset to appreciate your results and refer you to appropriate resources if needed.",
-  },
-  {
-    question: "How are treatment plans customized?",
-    answer: "Every face is unique, and so is every treatment plan. Dr. Azi considers your facial anatomy, skin type, age, lifestyle, budget, and aesthetic goals to create a plan that's specifically tailored to you—not a one-size-fits-all approach.",
+    title: "Results that actually look natural.",
+    description: `Subtle, staged outcomes almost always age better and last longer than the 'wow' initial result. I'd rather people notice you look great than that you had work done.`,
   },
 ];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
 
 export default function HealinqueMethodPage() {
   return (
-    <>
+    <main className="overflow-hidden">
+      {/* Hero - Dark */}
       <Hero
         variant="page"
         title="The Healinque Method"
         subtitle="Our Approach"
-        description="A thoughtful, physician-led approach to aesthetic treatment that puts your wellbeing at the center of everything we do."
-        image="/images/method-hero.jpg"
+        description="A thoughtful, physician-led approach to aesthetic treatment focused on natural results and your overall wellbeing."
+        image={pexelsUrl(pageImages.aboutApproach.primary, 1920)}
         overlay="dark"
       />
 
-      {/* Introduction */}
-      <section className="section-padding bg-white">
+      {/* Intro - Cream */}
+      <motion.section
+        className="section-padding bg-cream text-navy-deep"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="container-healinque">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-gold font-medium tracking-wide uppercase text-sm mb-3">
-              Our Philosophy
-            </p>
-            <h2 className="text-display font-serif text-navy-deep mb-8">
-              More Than a Treatment—A Transformation
-            </h2>
-            <p className="text-lg text-taupe">
-              The Healinque Method is our proprietary 4-step framework that ensures every patient 
-              receives thoughtful, personalized care from consultation through long-term maintenance. 
-              Unlike quick-service clinics, we take the time to truly understand you and create 
-              results that last.
-            </p>
+          <div className="max-w-3xl mx-auto">
+            {/* Section Label */}
+            <div className="flex items-center gap-4 mb-8">
+              <motion.div
+                className="h-0.5 w-8 bg-[#C9A227]"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              />
+              <span className="text-xs font-sans font-semibold uppercase tracking-[0.15em] text-navy-deep/60">
+                Our Philosophy
+              </span>
+            </div>
+
+            {/* Heading with Gold Accent */}
+            <motion.h2
+              className="font-serif text-5xl mb-6 text-navy-deep leading-tight"
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              The <span className="text-[#C9A227] italic">Healinque</span> Method
+            </motion.h2>
+
+            {/* Description */}
+            <motion.p
+              className="text-lg text-navy-deep/80 leading-relaxed font-sans"
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              Aesthetics is medicine. Every patient gets a clinical assessment, a personalized plan, and personally performed treatments. I lead with conservative, layered approaches that prioritize long-term tissue health and natural-looking results over short-term maximalism.
+            </motion.p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Steps */}
-      {steps.map((step, index) => (
-        <section
-          key={step.number}
-          className={`section-padding ${index % 2 === 0 ? "bg-cream" : "bg-white"}`}
-        >
-          <div className="container-healinque">
-            <div className={`grid lg:grid-cols-2 gap-12 lg:gap-20 items-center ${
-              index % 2 === 1 ? "lg:flex-row-reverse" : ""
-            }`}>
-              {/* Content */}
-              <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                <span className="text-6xl font-serif font-bold text-gold/20">
-                  {step.number}
-                </span>
-                <h2 className="text-display font-serif text-navy-deep -mt-8 mb-2">
-                  {step.title}
-                </h2>
-                <p className="text-gold font-medium mb-6">{step.subtitle}</p>
-                <p className="text-taupe mb-8">{step.description}</p>
-                <ul className="space-y-3">
-                  {step.details.map((detail) => (
-                    <li key={detail} className="flex items-start gap-3">
-                      <CheckCircle className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" />
-                      <span className="text-navy-deep">{detail}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+      {/* Steps - Dark */}
+      <motion.section
+        className="section-padding bg-[#0a1628] text-white"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="container-healinque">
+          {/* Section Label */}
+          <div className="flex items-center gap-4 mb-12">
+            <motion.div
+              className="h-0.5 w-8 bg-[#C9A227]"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            />
+            <span className="text-xs font-sans font-semibold uppercase tracking-[0.15em] text-white/60">
+              Three Steps
+            </span>
+          </div>
 
-              {/* Image */}
-              <div className={index % 2 === 1 ? "lg:order-1" : ""}>
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
-                  <Image
-                    src={step.image}
-                    alt={step.title}
-                    fill
-                    className="object-cover"
-                  />
+          {/* Steps Grid */}
+          <motion.div
+            className="space-y-16"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {steps.map((step, idx) => (
+              <motion.div
+                key={step.number}
+                variants={itemVariants}
+                className="relative"
+              >
+                {/* Step Number - Large Gold */}
+                <div className="flex gap-8 lg:gap-12 items-start">
+                  <motion.div
+                    className="flex-shrink-0"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                  >
+                    <span className="font-serif text-7xl lg:text-8xl font-bold text-[#C9A227]/20 block leading-none">
+                      {step.number}
+                    </span>
+                  </motion.div>
+
+                  {/* Step Content */}
+                  <div className="flex-grow pt-4">
+                    <motion.h3
+                      className="font-serif text-3xl lg:text-4xl text-[#C9A227] mb-4"
+                      variants={itemVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.2 }}
+                    >
+                      {step.title}
+                    </motion.h3>
+
+                    <motion.p
+                      className="text-base lg:text-lg text-white/80 leading-relaxed font-sans"
+                      variants={itemVariants}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      {step.description}
+                    </motion.p>
+
+                    {/* Gold Underline */}
+                    <motion.div
+                      className="mt-6 h-0.5 bg-[#C9A227] origin-left w-12"
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.4 }}
+                    />
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      ))}
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </motion.section>
 
-      {/* Why This Matters */}
-      <section className="section-padding bg-navy-deep">
+      {/* Why This Matters - Cream */}
+      <motion.section
+        className="section-padding bg-cream text-navy-deep"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
         <div className="container-healinque">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-gold font-medium tracking-wide uppercase text-sm mb-3">
-              Why It Matters
-            </p>
-            <h2 className="text-display font-serif text-white mb-8">
-              The Difference Is in the Details
-            </h2>
-            <div className="grid md:grid-cols-3 gap-8 text-left mt-12">
-              <div className="bg-white/10 rounded-xl p-6">
-                <h3 className="font-serif text-xl text-gold mb-3">Higher Satisfaction</h3>
-                <p className="text-cream/80">
-                  Patients who go through our comprehensive consultation process report 
-                  significantly higher satisfaction with their results.
-                </p>
-              </div>
-              <div className="bg-white/10 rounded-xl p-6">
-                <h3 className="font-serif text-xl text-gold mb-3">Fewer Complications</h3>
-                <p className="text-cream/80">
-                  By thoroughly reviewing health history and expectations, we minimize 
-                  risks and avoid unsuitable treatments.
-                </p>
-              </div>
-              <div className="bg-white/10 rounded-xl p-6">
-                <h3 className="font-serif text-xl text-gold mb-3">Lasting Results</h3>
-                <p className="text-cream/80">
-                  Our long-term approach means we plan for maintenance from day one, 
-                  ensuring your investment pays off for years.
-                </p>
-              </div>
+          {/* Section Label */}
+          <div className="flex items-center gap-4 mb-12">
+            <motion.div
+              className="h-0.5 w-8 bg-[#C9A227]"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            />
+            <span className="text-xs font-sans font-semibold uppercase tracking-[0.15em] text-navy-deep/60">
+              The Impact
+            </span>
+          </div>
+
+          {/* Heading */}
+          <motion.h2
+            className="font-serif text-4xl lg:text-5xl mb-12 text-navy-deep leading-tight max-w-2xl"
+            variants={itemVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            Why This <span className="text-[#C9A227] italic">Approach</span> Matters
+          </motion.h2>
+
+          {/* Cards Grid */}
+          <motion.div
+            className="grid md:grid-cols-3 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            {whyMatters.map((item, idx) => (
+              <motion.div
+                key={item.title}
+                variants={itemVariants}
+                className="bg-white border border-taupe/10 rounded-xl p-8 hover:shadow-lg transition-shadow duration-300"
+              >
+                <motion.h3
+                  className="font-serif text-2xl text-navy-deep mb-4"
+                  variants={itemVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + idx * 0.1 }}
+                >
+                  {item.title}
+                </motion.h3>
+
+                <motion.p
+                  className="text-navy-deep/75 leading-relaxed font-sans"
+                  variants={itemVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 + idx * 0.1 }}
+                >
+                  {item.description}
+                </motion.p>
+
+                {/* Gold Underline - animated */}
+                <motion.div
+                  className="mt-6 h-0.5 bg-[#C9A227] origin-left"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.4 + idx * 0.08 }}
+                />
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </motion.section>
+
+      {/* CTA - Dark */}
+      <motion.section
+        className="section-padding bg-[#0a1628] text-white relative overflow-hidden"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        {/* Subtle background accent */}
+        <motion.div
+          className="absolute top-0 right-0 w-96 h-96 bg-[#C9A227]/5 rounded-full blur-3xl"
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+          }}
+        />
+
+        <div className="container-healinque relative z-10">
+          <div className="max-w-2xl mx-auto text-center">
+            {/* Section Label */}
+            <div className="flex items-center gap-4 mb-8 justify-center">
+              <motion.div
+                className="h-0.5 w-8 bg-[#C9A227]"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              />
+              <span className="text-xs font-sans font-semibold uppercase tracking-[0.15em] text-white/60">
+                Ready?
+              </span>
+              <motion.div
+                className="h-0.5 w-8 bg-[#C9A227]"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              />
             </div>
+
+            {/* Heading */}
+            <motion.h2
+              className="font-serif text-4xl lg:text-5xl mb-6 text-white leading-tight"
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              Experience the <span className="text-[#C9A227] italic">Difference</span>
+            </motion.h2>
+
+            {/* Description */}
+            <motion.p
+              className="text-lg text-white/80 mb-10 font-sans"
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+            >
+              Book a 90-minute consultation. We&apos;ll assess, discuss, and design a plan that works for you. Results may vary. Individual results are not guaranteed.
+            </motion.p>
+
+            {/* CTA Button */}
+            <motion.div
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <Link href="/book">
+                <Button className="bg-[#C9A227] hover:bg-[#B8941D] text-[#0a1628] px-8 py-3 font-sans font-semibold">
+                  Schedule Your Consultation <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </motion.div>
           </div>
         </div>
-      </section>
-
-      <FAQSection
-        title="About the Healinque Method"
-        subtitle="Common Questions"
-        faqs={faqs}
-      />
-
-      <CTASection
-        title="Experience the Healinque Method"
-        description="Ready to discover what thoughtful, personalized aesthetic care feels like? Schedule your consultation today."
-        primaryCta={{ text: "Begin Your Journey", href: "/book" }}
-        variant="default"
-      />
-    </>
+      </motion.section>
+    </main>
   );
 }
-

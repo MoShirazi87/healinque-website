@@ -1,259 +1,376 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState } from "react";
-import { MapPin, Phone, Mail, Clock, Instagram, Facebook, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { siteConfig, getPhoneLink, getEmailLink } from "@/lib/config/site";
+import { motion } from "framer-motion";
+import {
+  MapPin,
+  Mail,
+  Clock,
+  Phone,
+  Instagram,
+  ArrowRight,
+  Send,
+} from "lucide-react";
+import { siteConfig, getEmailLink } from "@/lib/config/site";
 
 const footerLinks = {
   treatments: [
     { name: "Botox & Dysport", href: "/treatments/botox-dysport" },
     { name: "Dermal Fillers", href: "/treatments/dermal-fillers" },
-    { name: "Morpheus8", href: "/treatments/morpheus8" },
-    { name: "GLP-1 Weight Loss", href: "/treatments/glp1-weight-loss" },
-    { name: "PRF/PRP Therapy", href: "/treatments/prp-therapy" },
-    { name: "View All Treatments", href: "/treatments" },
+    { name: "Microneedling", href: "/treatments/microneedling" },
+    { name: "PRF Therapy", href: "/treatments/prf-therapy" },
+    { name: "Chemical Peels", href: "/treatments/chemical-peels" },
+    { name: "PDO Thread Lift", href: "/treatments/pdo-thread-lift" },
   ],
-  concerns: [
-    { name: "Fine Lines & Wrinkles", href: "/concerns/wrinkles-fine-lines" },
-    { name: "Volume Loss", href: "/concerns/volume-loss" },
-    { name: "Weight Management", href: "/concerns/weight-management" },
-    { name: "Hormone Imbalance", href: "/concerns/hormone-imbalance" },
-    { name: "Low Energy", href: "/concerns/low-energy" },
+  clinic: [
+    { name: "About Us", href: "/about" },
+    { name: "Dr. Azadeh Shirazi", href: "/about/dr-azi-shirazi" },
+    { name: "Reviews", href: "/reviews" },
+    { name: "Gallery", href: "/gallery" },
+    { name: "Blog", href: "/blog" },
+    { name: "FAQ", href: "/faq" },
   ],
-  about: [
-    { name: "About Healinque", href: "/about" },
-    { name: "Dr. Azi Shirazi", href: "/about/dr-azi-shirazi" },
-    { name: "The Healinque Method", href: "/about/healinque-method" },
-    { name: "Patient Reviews", href: "/reviews" },
-    { name: "Before & After", href: "/gallery" },
-    { name: "Contact Us", href: "/contact" },
-  ],
-  resources: [
-    { name: "FAQs", href: "/faq" },
-    { name: "Financing Options", href: "/financing" },
+  patients: [
+    { name: "Book Consultation", href: "/book" },
     { name: "Memberships", href: "/memberships" },
+    { name: "Men\u2019s Clinic", href: "/mens-clinic" },
+    { name: "IV Therapy", href: "/treatments/iv-therapy" },
+    { name: "Contact", href: "/contact" },
     { name: "Patient Portal", href: "/account" },
-    { name: "Medical Forms", href: "/forms" },
   ],
+  legal: [
+    { name: "Privacy Policy", href: "/privacy" },
+    { name: "Terms of Service", href: "/terms" },
+    { name: "HIPAA Notice", href: "/hipaa" },
+    { name: "Do Not Sell My Info", href: "/privacy#ccpa-rights" },
+  ],
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.1, duration: 0.5, ease: "easeOut" },
+  }),
 };
 
 export function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle newsletter subscription
+    if (!email) return;
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: 'Newsletter Subscriber',
+          email,
+          formType: 'newsletter',
+        }),
+      });
+    } catch {
+      // Fail silently for newsletter — still show success UI
+    }
     setSubscribed(true);
     setEmail("");
+    setTimeout(() => setSubscribed(false), 4000);
   };
 
   return (
-    <footer className="bg-navy-deep text-white relative overflow-hidden">
-      {/* Curved Top */}
-      <div className="absolute top-0 left-0 right-0 h-20 bg-cream footer-curve -translate-y-1/2" />
+    <footer className="relative bg-[#060e1a] text-white overflow-hidden">
+      {/* Decorative top gradient */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-[#C9A227]/40 to-transparent" />
 
-      {/* Newsletter Section */}
-      <div className="container-healinque pt-24 pb-12">
-        <div className="max-w-xl mx-auto text-center mb-16">
-          <h3 className="font-serif text-2xl text-white mb-3">
-            Stay Connected
-          </h3>
-          <p className="text-cream/70 mb-6 text-sm">
-            Get exclusive offers, treatment tips, and wellness insights delivered to your inbox.
-          </p>
-          {subscribed ? (
-            <p className="text-gold font-medium">Thank you for subscribing!</p>
-          ) : (
-            <form onSubmit={handleSubscribe} className="flex gap-3 max-w-md mx-auto">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-                className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-cream/50 focus:outline-none focus:border-gold transition-colors"
-              />
-              <Button type="submit" className="bg-gold hover:bg-gold-dark">
-                <ArrowRight className="h-5 w-5" />
-              </Button>
-            </form>
-          )}
-        </div>
+      {/* Subtle background texture */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+        backgroundSize: "48px 48px",
+      }} />
 
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 mb-16">
-          {/* Brand Column */}
-          <div className="lg:col-span-2">
-            <Image
-              src="/images/logo-white.svg"
-              alt="Healinque - Aesthetic Medicine & Longevity Center"
-              width={200}
-              height={55}
-              className="h-14 w-auto mb-6"
-            />
-            <p className="text-cream/70 mb-6 max-w-sm text-sm leading-relaxed">
-              Where natural beauty meets evidence-based longevity medicine. 
-              Physician-performed aesthetic treatments in Poway, California.
-            </p>
-            <div className="space-y-3 text-sm text-cream/70">
-              <div className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" />
-                <a 
-                  href={siteConfig.address.googleMapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-gold transition-colors"
-                >
-                  {siteConfig.address.street}, {siteConfig.address.suite}<br />
-                  {siteConfig.address.city}, {siteConfig.address.state} {siteConfig.address.zip}
-                </a>
-              </div>
-              <div className="flex items-center gap-3">
-                <Phone className="h-5 w-5 text-gold flex-shrink-0" />
-                <a href={getPhoneLink()} className="hover:text-gold transition-colors">
-                  {siteConfig.phone}
-                </a>
-              </div>
-              <div className="flex items-center gap-3">
-                <Mail className="h-5 w-5 text-gold flex-shrink-0" />
-                <a href={getEmailLink()} className="hover:text-gold transition-colors">
-                  {siteConfig.email}
-                </a>
-              </div>
-              <div className="flex items-start gap-3">
-                <Clock className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" />
-                <span>
-                  {siteConfig.hours.display.map((line, i) => (
-                    <span key={i}>{line}{i < siteConfig.hours.display.length - 1 && <br />}</span>
-                  ))}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Treatments */}
-          <div>
-            <h4 className="font-serif text-lg font-semibold text-gold mb-4">Treatments</h4>
-            <ul className="space-y-2.5">
-              {footerLinks.treatments.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-cream/70 hover:text-gold transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Concerns */}
-          <div>
-            <h4 className="font-serif text-lg font-semibold text-gold mb-4">Concerns</h4>
-            <ul className="space-y-2.5">
-              {footerLinks.concerns.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-cream/70 hover:text-gold transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* About */}
-          <div>
-            <h4 className="font-serif text-lg font-semibold text-gold mb-4">About</h4>
-            <ul className="space-y-2.5">
-              {footerLinks.about.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-cream/70 hover:text-gold transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources */}
-          <div>
-            <h4 className="font-serif text-lg font-semibold text-gold mb-4">Resources</h4>
-            <ul className="space-y-2.5 mb-6">
-              {footerLinks.resources.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-cream/70 hover:text-gold transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            
-            {/* Social Links */}
-            <h4 className="font-serif text-sm font-semibold text-gold mb-3">Follow Dr. Azi</h4>
-            <div className="flex gap-4">
-              {siteConfig.social.instagram && (
-                <a
-                  href={siteConfig.social.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-cream/70 hover:text-gold transition-colors"
-                  aria-label="Instagram"
-                >
-                  <Instagram className="h-5 w-5" />
-                </a>
-              )}
-              {siteConfig.social.facebook && (
-                <a
-                  href={siteConfig.social.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-cream/70 hover:text-gold transition-colors"
-                  aria-label="Facebook"
-                >
-                  <Facebook className="h-5 w-5" />
-                </a>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/10">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-sm text-cream/50 text-center md:text-left">
-              <p>© {new Date().getFullYear()} Healinque Wellness Clinic. All rights reserved.</p>
-              <p className="mt-1">
-                Dr. Azadeh Shirazi, MD • Board Certified Internal Medicine
+      {/* Newsletter Banner */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="relative border-b border-white/5"
+      >
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div className="text-center lg:text-left">
+              <h2 className="font-serif text-2xl md:text-3xl text-white mb-2">
+                Join the <span className="italic text-[#C9A227]">Inner Circle</span>
+              </h2>
+              <p className="text-white/50 text-sm max-w-md">
+                Notes from Dr. Shirazi on aesthetics and longevity. No spam — unsubscribe anytime.
               </p>
             </div>
-            <div className="flex flex-wrap justify-center gap-6 text-sm text-cream/50">
-              <Link href="/privacy" className="hover:text-gold transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="hover:text-gold transition-colors">
-                Terms of Service
-              </Link>
-              <Link href="/hipaa" className="hover:text-gold transition-colors">
-                HIPAA Notice
-              </Link>
-              <Link href="/accessibility" className="hover:text-gold transition-colors">
-                Accessibility
-              </Link>
+            <div className="w-full lg:w-auto">
+              {subscribed ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="flex items-center gap-2 text-[#C9A227] font-medium"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  Welcome to the inner circle!
+                </motion.div>
+              ) : (
+                <form
+                  onSubmit={handleSubscribe}
+                  className="flex gap-2 max-w-sm w-full"
+                >
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Your email address"
+                    required
+                    className="flex-1 px-5 py-3 bg-white/5 border border-white/10 rounded-full text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#C9A227]/50 focus:ring-1 focus:ring-[#C9A227]/20 transition-all"
+                  />
+                  <button
+                    type="submit"
+                    className="flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#C9A227] to-[#DEB84A] text-[#0a1628] hover:shadow-lg hover:shadow-[#C9A227]/20 transition-all duration-300"
+                    aria-label="Subscribe"
+                  >
+                    <Send className="w-4 h-4" />
+                  </button>
+                </form>
+              )}
             </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Main Footer Grid */}
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8">
+
+          {/* Brand Column */}
+          <motion.div
+            custom={0}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="lg:col-span-4"
+          >
+            {/* Logo */}
+            <div className="mb-6">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/healinque-logo-header-clean.png"
+                alt="Healinque — Wellness & Longevity Center"
+                width={540}
+                height={201}
+                className="h-14 w-auto opacity-90"
+              />
+            </div>
+
+            <p className="text-white/40 text-sm leading-relaxed mb-8 max-w-xs">
+              Physician-led aesthetic medicine and longevity care.
+              Where science meets artistry for naturally beautiful results.
+            </p>
+
+            {/* Contact Details */}
+            <div className="space-y-4">
+              <a
+                href={siteConfig.address.googleMapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-3 group"
+              >
+                <div className="w-10 h-10 rounded-full bg-[#C9A227]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#C9A227]/20 transition-colors">
+                  <MapPin className="w-3.5 h-3.5 text-[#C9A227]" />
+                </div>
+                <span className="text-white/40 text-sm group-hover:text-white/60 transition-colors leading-snug pt-1">
+                  {siteConfig.address.street}<br />
+                  {siteConfig.address.city}, {siteConfig.address.state} {siteConfig.address.zip}
+                </span>
+              </a>
+              <a href={`tel:${siteConfig.phone}`} className="flex items-center gap-3 group">
+                <div className="w-10 h-10 rounded-full bg-[#C9A227]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#C9A227]/20 transition-colors">
+                  <Phone className="w-3.5 h-3.5 text-[#C9A227]" />
+                </div>
+                <span className="text-white/40 text-sm group-hover:text-white/60 transition-colors">
+                  {siteConfig.phone} <span className="text-white/30">· call or text</span>
+                </span>
+              </a>
+              <a href={getEmailLink()} className="flex items-center gap-3 group">
+                <div className="w-10 h-10 rounded-full bg-[#C9A227]/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#C9A227]/20 transition-colors">
+                  <Mail className="w-3.5 h-3.5 text-[#C9A227]" />
+                </div>
+                <span className="text-white/40 text-sm group-hover:text-white/60 transition-colors">
+                  {siteConfig.email}
+                </span>
+              </a>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#C9A227]/10 flex items-center justify-center flex-shrink-0">
+                  <Clock className="w-3.5 h-3.5 text-[#C9A227]" />
+                </div>
+                <div className="text-white/40 text-sm leading-snug pt-1">
+                  {siteConfig.hours.display.slice(0, 2).map((line: string, i: number) => (
+                    <span key={i}>{line}{i < 1 && <br />}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Treatments Column */}
+          <motion.div
+            custom={1}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="lg:col-span-2"
+          >
+            <h4 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60 mb-6">
+              Treatments
+            </h4>
+            <ul className="space-y-3">
+              {footerLinks.treatments.map((link) => (
+                <li key={link.name} className="py-1.5">
+                  <Link
+                    href={link.href}
+                    className="text-white/40 hover:text-[#C9A227] text-sm transition-colors duration-200"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+              <li className="pt-1">
+                <Link
+                  href="/treatments"
+                  className="inline-flex items-center gap-1 text-[#C9A227]/70 hover:text-[#C9A227] text-xs font-medium transition-colors"
+                >
+                  All Treatments <ArrowRight className="w-3 h-3" />
+                </Link>
+              </li>
+            </ul>
+          </motion.div>
+
+          {/* Clinic Column */}
+          <motion.div
+            custom={2}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="lg:col-span-2"
+          >
+            <h4 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60 mb-6">
+              Our Clinic
+            </h4>
+            <ul className="space-y-3">
+              {footerLinks.clinic.map((link) => (
+                <li key={link.name} className="py-1.5">
+                  <Link
+                    href={link.href}
+                    className="text-white/40 hover:text-[#C9A227] text-sm transition-colors duration-200"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Patients Column */}
+          <motion.div
+            custom={3}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="lg:col-span-2"
+          >
+            <h4 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60 mb-6">
+              For Patients
+            </h4>
+            <ul className="space-y-3">
+              {footerLinks.patients.map((link) => (
+                <li key={link.name} className="py-1.5">
+                  <Link
+                    href={link.href}
+                    className="text-white/40 hover:text-[#C9A227] text-sm transition-colors duration-200"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </motion.div>
+
+          {/* Social Column */}
+          <motion.div
+            custom={4}
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="lg:col-span-2"
+          >
+            <h4 className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/60 mb-6">
+              Connect
+            </h4>
+            {siteConfig.social.instagram && (
+              <a
+                href={siteConfig.social.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 group mb-4"
+              >
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#C9A227]/20 to-[#C9A227]/5 flex items-center justify-center group-hover:from-[#C9A227]/30 group-hover:to-[#C9A227]/10 transition-all">
+                  <Instagram className="w-4 h-4 text-[#C9A227]" />
+                </div>
+                <div>
+                  <span className="text-white/50 text-sm group-hover:text-white/70 transition-colors block">
+                    @ThrivewithDr.Azi
+                  </span>
+                </div>
+              </a>
+            )}
+
+            <div className="mt-6 p-4 rounded-xl bg-white/[0.02] border border-white/5">
+              <p className="text-white/30 text-xs leading-relaxed">
+                Results may vary. All treatments are performed by or under the supervision of Dr. Azadeh Shirazi, MD.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="relative border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-white/25 text-xs">
+            &copy; {new Date().getFullYear()} Healinque Wellness & Longevity Center. All rights reserved.
+          </p>
+          <p className="text-white/30 text-xs font-medium">
+            Results may vary. All treatments performed or directly supervised by Dr. Azi Shirazi, MD.
+          </p>
+          <div className="flex items-center gap-4">
+            {footerLinks.legal.map((link, i) => (
+              <span key={link.name} className="flex items-center gap-4">
+                <Link
+                  href={link.href}
+                  className="text-white/25 hover:text-[#C9A227] text-xs transition-colors"
+                >
+                  {link.name}
+                </Link>
+                {i < footerLinks.legal.length - 1 && (
+                  <span className="text-white/10">·</span>
+                )}
+              </span>
+            ))}
           </div>
         </div>
       </div>

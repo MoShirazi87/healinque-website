@@ -62,12 +62,12 @@ export default function CartPage() {
 
   if (cartItems.length === 0) {
     return (
-      <div className="min-h-screen pt-24 pb-16 bg-cream">
+      <div className="min-h-screen pt-24 pb-16 bg-navy-deep">
         <div className="container-healinque">
           <div className="max-w-md mx-auto text-center py-16">
-            <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6">
+            <div className="w-24 h-24 bg-surface-card rounded-full flex items-center justify-center mx-auto mb-6">
               <svg
-                className="w-12 h-12 text-cream-dark"
+                className="w-12 h-12 text-white/40"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -80,10 +80,10 @@ export default function CartPage() {
                 />
               </svg>
             </div>
-            <h1 className="text-display-sm font-serif text-navy-deep mb-4">
+            <h1 className="text-display-sm font-serif text-white mb-4">
               Your Cart is Empty
             </h1>
-            <p className="text-taupe mb-8">
+            <p className="text-white/60 mb-8">
               Discover our physician-curated skincare and wellness products.
             </p>
             <Link href="/shop">
@@ -96,17 +96,17 @@ export default function CartPage() {
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-16 bg-cream">
+    <div className="min-h-screen pt-24 pb-16 bg-navy-deep">
       <div className="container-healinque">
         <Link
           href="/shop"
-          className="inline-flex items-center text-taupe hover:text-gold mb-8"
+          className="inline-flex items-center text-white/60 hover:text-gold mb-8"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Continue Shopping
         </Link>
 
-        <h1 className="text-display-sm font-serif text-navy-deep mb-8">
+        <h1 className="text-display-sm font-serif text-white mb-8">
           Shopping Cart ({cartItems.length})
         </h1>
 
@@ -116,10 +116,10 @@ export default function CartPage() {
             {cartItems.map((item) => (
               <div
                 key={item.id}
-                className="bg-white rounded-xl p-4 flex gap-4"
+                className="bg-surface-card rounded-xl p-4 flex gap-4"
               >
                 <Link href={`/shop/products/${item.handle}`}>
-                  <div className="relative w-24 h-24 rounded-lg overflow-hidden bg-cream flex-shrink-0">
+                  <div className="relative w-24 h-24 rounded-lg overflow-hidden bg-white/5 flex-shrink-0">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -133,13 +133,13 @@ export default function CartPage() {
                   <div className="flex justify-between">
                     <div>
                       <Link href={`/shop/products/${item.handle}`}>
-                        <h3 className="font-medium text-navy-deep hover:text-gold transition-colors">
+                        <h3 className="font-medium text-white hover:text-gold transition-colors">
                           {item.title}
                         </h3>
                       </Link>
-                      <p className="text-sm text-taupe">{item.variant}</p>
+                      <p className="text-sm text-white/60">{item.variant}</p>
                     </div>
-                    <p className="font-medium text-navy-deep">
+                    <p className="font-medium text-white">
                       {formatPrice(item.price * item.quantity)}
                     </p>
                   </div>
@@ -148,21 +148,21 @@ export default function CartPage() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => updateQuantity(item.id, -1)}
-                        className="w-8 h-8 rounded border border-cream-dark flex items-center justify-center hover:border-gold transition-colors"
+                        className="w-8 h-8 rounded border border-white/10 flex items-center justify-center hover:border-gold transition-colors text-white/60"
                       >
                         <Minus className="h-3 w-3" />
                       </button>
-                      <span className="w-8 text-center">{item.quantity}</span>
+                      <span className="w-8 text-center text-white">{item.quantity}</span>
                       <button
                         onClick={() => updateQuantity(item.id, 1)}
-                        className="w-8 h-8 rounded border border-cream-dark flex items-center justify-center hover:border-gold transition-colors"
+                        className="w-8 h-8 rounded border border-white/10 flex items-center justify-center hover:border-gold transition-colors text-white/60"
                       >
                         <Plus className="h-3 w-3" />
                       </button>
                     </div>
                     <button
                       onClick={() => removeItem(item.id)}
-                      className="text-taupe hover:text-red-500 transition-colors"
+                      className="text-white/60 hover:text-red-500 transition-colors"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
@@ -174,19 +174,19 @@ export default function CartPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl p-6 sticky top-24">
-              <h2 className="font-serif text-xl text-navy-deep mb-6">
+            <div className="bg-surface-card rounded-xl p-6 sticky top-24">
+              <h2 className="font-serif text-xl text-white mb-6">
                 Order Summary
               </h2>
 
-              <div className="space-y-3 pb-4 border-b border-cream-dark">
+              <div className="space-y-3 pb-4 border-b border-white/10">
                 <div className="flex justify-between text-sm">
-                  <span className="text-taupe">Subtotal</span>
-                  <span className="text-navy-deep">{formatPrice(subtotal)}</span>
+                  <span className="text-white/60">Subtotal</span>
+                  <span className="text-white">{formatPrice(subtotal)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-taupe">Shipping</span>
-                  <span className="text-navy-deep">
+                  <span className="text-white/60">Shipping</span>
+                  <span className="text-white">
                     {shipping === 0 ? "FREE" : formatPrice(shipping)}
                   </span>
                 </div>
@@ -198,20 +198,21 @@ export default function CartPage() {
               </div>
 
               {/* Promo Code */}
-              <div className="py-4 border-b border-cream-dark">
+              <div className="py-4 border-b border-white/10">
                 <div className="flex gap-2">
                   <Input
                     placeholder="Promo code"
                     value={promoCode}
                     onChange={(e) => setPromoCode(e.target.value)}
+                    className="bg-navy-deep border-white/10 text-white placeholder:text-white/40"
                   />
                   <Button variant="outline">Apply</Button>
                 </div>
               </div>
 
-              <div className="flex justify-between py-4 border-b border-cream-dark">
-                <span className="font-medium text-navy-deep">Total</span>
-                <span className="font-bold text-xl text-navy-deep">
+              <div className="flex justify-between py-4 border-b border-white/10">
+                <span className="font-medium text-white">Total</span>
+                <span className="font-bold text-xl text-white">
                   {formatPrice(total)}
                 </span>
               </div>
@@ -221,12 +222,12 @@ export default function CartPage() {
                 Proceed to Checkout
               </Button>
 
-              <p className="text-xs text-center text-taupe mt-4">
+              <p className="text-xs text-center text-white/60 mt-4">
                 Secure checkout powered by Shopify
               </p>
 
               {/* Trust Badges */}
-              <div className="flex justify-center gap-4 mt-6 pt-4 border-t border-cream-dark">
+              <div className="flex justify-center gap-4 mt-6 pt-4 border-t border-white/10">
                 <Image
                   src="/images/payment/visa.svg"
                   alt="Visa"

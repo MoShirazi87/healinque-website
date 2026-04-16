@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Hero } from "@/components/sections/hero";
+import { PageHero as Hero } from "@/components/sections/hero";
 import { mockCollections, mockProducts } from "@/lib/shopify/client";
 import { formatPrice } from "@/lib/utils";
 import { ArrowRight, ArrowLeft, Star, Check } from "lucide-react";
@@ -57,30 +57,30 @@ export default function CollectionPage({ params }: PageProps) {
       />
 
       {/* Breadcrumb */}
-      <section className="py-4 bg-cream border-b border-cream-dark">
+      <section className="py-4 bg-surface-card border-b border-white/5">
         <div className="container-healinque">
           <nav className="flex items-center gap-2 text-sm">
-            <Link href="/shop" className="text-taupe hover:text-gold transition-colors">
+            <Link href="/shop" className="text-white/60 hover:text-gold transition-colors">
               Shop
             </Link>
-            <span className="text-taupe">/</span>
-            <span className="text-navy-deep font-medium">{collection.title}</span>
+            <span className="text-white/60">/</span>
+            <span className="text-white font-medium">{collection.title}</span>
           </nav>
         </div>
       </section>
 
       {/* Membership Grid - Special Layout */}
       {isMembership && (
-        <section className="section-padding bg-white">
+        <section className="section-padding bg-navy-deep">
           <div className="container-healinque">
             <div className="text-center mb-12">
               <p className="text-gold font-medium tracking-wide uppercase text-sm mb-3">
                 Join the Healinque Family
               </p>
-              <h2 className="text-display font-serif text-navy-deep mb-4">
+              <h2 className="text-display font-serif text-white mb-4">
                 Choose Your Membership
               </h2>
-              <p className="text-taupe max-w-2xl mx-auto">
+              <p className="text-white/60 max-w-2xl mx-auto">
                 Unlock exclusive savings on all products and treatments. Members save on every visit
                 and enjoy VIP perks throughout the year.
               </p>
@@ -95,7 +95,7 @@ export default function CollectionPage({ params }: PageProps) {
                     className={`relative rounded-2xl border-2 p-6 ${
                       isPopular
                         ? "border-gold bg-gold/5 shadow-lg"
-                        : "border-cream-dark bg-white"
+                        : "border-white/10 bg-surface-card"
                     }`}
                   >
                     {isPopular && (
@@ -106,18 +106,18 @@ export default function CollectionPage({ params }: PageProps) {
                       </div>
                     )}
                     <div className="text-center mb-6">
-                      <h3 className="text-xl font-serif font-semibold text-navy-deep mb-2">
+                      <h3 className="text-xl font-serif font-semibold text-white mb-2">
                         {product.title.replace(" Membership", "")}
                       </h3>
                       <div className="flex items-baseline justify-center gap-1">
                         <span className="text-3xl font-bold text-gold">
                           {formatPrice(parseFloat(product.priceRange.minVariantPrice.amount))}
                         </span>
-                        <span className="text-taupe">/month</span>
+                        <span className="text-white/60">/month</span>
                       </div>
                     </div>
                     <div
-                      className="text-sm text-taupe mb-6 prose prose-sm prose-li:marker:text-gold"
+                      className="text-sm text-white/60 mb-6 prose prose-sm prose-invert prose-li:marker:text-gold"
                       dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
                     />
                     <Link href={`/shop/products/${product.handle}`}>
@@ -134,7 +134,7 @@ export default function CollectionPage({ params }: PageProps) {
             </div>
 
             <div className="mt-12 text-center">
-              <p className="text-taupe text-sm mb-4">
+              <p className="text-white/60 text-sm mb-4">
                 All memberships include a 30-day satisfaction guarantee. Cancel anytime.
               </p>
               <Link href="/memberships" className="text-gold hover:text-gold-dark transition-colors">
@@ -147,16 +147,16 @@ export default function CollectionPage({ params }: PageProps) {
 
       {/* Packages Grid - Special Layout */}
       {isPackages && (
-        <section className="section-padding bg-white">
+        <section className="section-padding bg-navy-deep">
           <div className="container-healinque">
             <div className="text-center mb-12">
               <p className="text-gold font-medium tracking-wide uppercase text-sm mb-3">
                 Save with Bundles
               </p>
-              <h2 className="text-display font-serif text-navy-deep mb-4">
+              <h2 className="text-display font-serif text-white mb-4">
                 Treatment Packages
               </h2>
-              <p className="text-taupe max-w-2xl mx-auto">
+              <p className="text-white/60 max-w-2xl mx-auto">
                 Prepay for your favorite treatments and save. Perfect for maintaining your results
                 with bundled savings that never expire.
               </p>
@@ -167,7 +167,7 @@ export default function CollectionPage({ params }: PageProps) {
                 <Link
                   key={product.id}
                   href={`/shop/products/${product.handle}`}
-                  className="group block bg-cream rounded-2xl overflow-hidden hover:shadow-lg transition-shadow"
+                  className="group block bg-surface-card rounded-2xl overflow-hidden hover:shadow-lg transition-shadow"
                 >
                   <div className="relative aspect-video">
                     {product.featuredImage && (
@@ -188,10 +188,10 @@ export default function CollectionPage({ params }: PageProps) {
                     </div>
                   </div>
                   <div className="p-6">
-                    <h3 className="text-lg font-serif font-semibold text-navy-deep mb-2 group-hover:text-gold transition-colors">
+                    <h3 className="text-lg font-serif font-semibold text-white mb-2 group-hover:text-gold transition-colors">
                       {product.title}
                     </h3>
-                    <p className="text-sm text-taupe mb-4 line-clamp-2">
+                    <p className="text-sm text-white/60 mb-4 line-clamp-2">
                       {product.description}
                     </p>
                     <div className="flex items-center justify-between">
@@ -215,11 +215,11 @@ export default function CollectionPage({ params }: PageProps) {
 
       {/* Regular Products Grid */}
       {!isMembership && !isPackages && (
-        <section className="section-padding bg-white">
+        <section className="section-padding bg-navy-deep">
           <div className="container-healinque">
             {products.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-taupe">No products found in this collection.</p>
+                <p className="text-white/60">No products found in this collection.</p>
                 <Link href="/shop" className="text-gold hover:text-gold-dark mt-4 inline-block">
                   ← Back to Shop
                 </Link>
@@ -232,7 +232,7 @@ export default function CollectionPage({ params }: PageProps) {
                     href={`/shop/products/${product.handle}`}
                     className="group block"
                   >
-                    <div className="relative aspect-square rounded-xl overflow-hidden mb-3 bg-cream">
+                    <div className="relative aspect-square rounded-xl overflow-hidden mb-3 bg-white/5">
                       {product.featuredImage && (
                         <Image
                           src={product.featuredImage.url}
@@ -242,8 +242,8 @@ export default function CollectionPage({ params }: PageProps) {
                         />
                       )}
                     </div>
-                    <p className="text-xs text-taupe uppercase mb-1">{product.vendor}</p>
-                    <h3 className="font-medium text-navy-deep group-hover:text-gold transition-colors line-clamp-2">
+                    <p className="text-xs text-white/60 uppercase mb-1">{product.vendor}</p>
+                    <h3 className="font-medium text-white group-hover:text-gold transition-colors line-clamp-2">
                       {product.title}
                     </h3>
                     <p className="text-gold font-medium mt-1">
@@ -258,7 +258,7 @@ export default function CollectionPage({ params }: PageProps) {
       )}
 
       {/* Back to Shop */}
-      <section className="py-8 bg-cream">
+      <section className="py-8 bg-surface-card">
         <div className="container-healinque">
           <Link
             href="/shop"

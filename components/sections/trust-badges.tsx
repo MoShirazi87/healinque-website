@@ -1,72 +1,84 @@
-import { Star, Shield, Award, CheckCircle } from "lucide-react";
+"use client";
 
-interface TrustBadgesProps {
-  variant?: "horizontal" | "compact";
+import { motion } from "framer-motion";
+import { Star, Award, Zap, Users } from "lucide-react";
+
+interface Badge {
+  icon: React.ReactNode;
+  label: string;
 }
 
-export function TrustBadges({ variant = "horizontal" }: TrustBadgesProps) {
-  const badges = [
-    {
-      icon: Star,
-      value: "4.9",
-      label: "Google Rating",
-      sublabel: "150+ Reviews",
-    },
-    {
-      icon: Shield,
-      value: "20+",
-      label: "Years Experience",
-      sublabel: "Board Certified",
-    },
-    {
-      icon: Award,
-      value: "Top 100",
-      label: "Physicians",
-      sublabel: "San Diego 2023",
-    },
-    {
-      icon: CheckCircle,
-      value: "10,000+",
-      label: "Treatments",
-      sublabel: "Performed",
-    },
-  ];
+const badges: Badge[] = [
+  {
+    icon: <Star className="w-6 h-6" />,
+    label: "4.9 Google Rating",
+  },
+  {
+    icon: <Award className="w-6 h-6" />,
+    label: "20+ Years Experience",
+  },
+  {
+    icon: <Zap className="w-6 h-6" />,
+    label: "UCSD-Trained Physician",
+  },
+  {
+    icon: <Users className="w-6 h-6" />,
+    label: "Thousands of Treatments Performed",
+  },
+];
 
-  if (variant === "compact") {
-    return (
-      <div className="flex flex-wrap justify-center gap-6 py-4">
-        {badges.map((badge) => (
-          <div key={badge.label} className="flex items-center gap-2">
-            <badge.icon className="h-5 w-5 text-gold" />
-            <div>
-              <span className="font-semibold text-navy-deep">{badge.value}</span>
-              <span className="text-sm text-taupe ml-1">{badge.label}</span>
-            </div>
-          </div>
-        ))}
-      </div>
-    );
-  }
+export function TrustBadges() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6 },
+    },
+  };
 
   return (
-    <section className="bg-white border-y border-cream-dark py-8">
-      <div className="container-healinque">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {badges.map((badge) => (
-            <div key={badge.label} className="text-center">
-              <div className="w-12 h-12 mx-auto mb-3 bg-cream rounded-full flex items-center justify-center">
-                <badge.icon className="h-6 w-6 text-gold" />
+    <section className="relative py-16 md:py-20 bg-[#0a1628] overflow-hidden">
+      <div className="container-healinque relative z-10">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 lg:gap-16"
+        >
+          {badges.map((badge, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              className="flex flex-col items-center text-center md:text-left gap-3"
+            >
+              <div className="text-[#C9A227]">
+                {badge.icon}
               </div>
-              <div className="font-serif text-2xl font-bold text-navy-deep mb-1">
-                {badge.value}
-              </div>
-              <div className="text-sm font-medium text-navy-deep">{badge.label}</div>
-              <div className="text-xs text-taupe">{badge.sublabel}</div>
-            </div>
+              <p className="text-base md:text-lg font-medium text-white/90 max-w-xs">
+                {badge.label}
+              </p>
+              
+              {/* Vertical divider for desktop (except last) */}
+              {index < badges.length - 1 && (
+                <div className="hidden md:block absolute right-0 w-px h-12 bg-gradient-to-b from-transparent via-[#C9A227]/30 to-transparent" />
+              )}
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 }
-

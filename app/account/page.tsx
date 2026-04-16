@@ -80,15 +80,15 @@ export default async function AccountPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-cream pt-24 pb-16">
+    <div className="min-h-screen bg-navy-deep pt-24 pb-16">
       <div className="container-healinque">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
           <div>
-            <h1 className="text-display-sm font-serif text-navy-deep">
+            <h1 className="text-display-sm font-serif text-white">
               Welcome back, {userName}!
             </h1>
-            <p className="text-taupe mt-1">
+            <p className="text-white/60 mt-1">
               Manage your appointments, orders, and account settings
             </p>
           </div>
@@ -101,30 +101,30 @@ export default async function AccountPage() {
         </div>
 
         {/* Connection Status */}
-        <div className="bg-white rounded-lg p-4 mb-8 flex flex-wrap gap-4">
+        <div className="bg-surface-card border border-white/10 rounded-lg p-4 mb-8 flex flex-wrap gap-4">
           <div className="flex items-center gap-2">
             {session.healthie.isAuthenticated ? (
-              <CheckCircle className="h-5 w-5 text-green-500" />
+              <CheckCircle className="h-5 w-5 text-green-400" />
             ) : (
-              <AlertCircle className="h-5 w-5 text-amber-500" />
+              <AlertCircle className="h-5 w-5 text-amber-400" />
             )}
-            <span className="text-sm">
+            <span className="text-sm text-white">
               <span className="font-medium">Patient Portal:</span>{" "}
               {session.healthie.isAuthenticated ? "Connected" : "Not connected"}
             </span>
           </div>
           <div className="flex items-center gap-2">
             {session.shopify.isAuthenticated ? (
-              <CheckCircle className="h-5 w-5 text-green-500" />
+              <CheckCircle className="h-5 w-5 text-green-400" />
             ) : (
-              <AlertCircle className="h-5 w-5 text-amber-500" />
+              <AlertCircle className="h-5 w-5 text-amber-400" />
             )}
-            <span className="text-sm">
+            <span className="text-sm text-white">
               <span className="font-medium">Shop:</span>{" "}
               {session.shopify.isAuthenticated ? "Connected" : "Not connected"}
             </span>
           </div>
-          <div className="text-sm text-taupe ml-auto">
+          <div className="text-sm text-white/60 ml-auto">
             Logged in as: <span className="font-medium">{session.email}</span>
           </div>
         </div>
@@ -133,13 +133,13 @@ export default async function AccountPage() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {quickLinks.map((link) => (
             <Link key={link.title} href={link.href}>
-              <Card className="h-full hover:shadow-md transition-shadow cursor-pointer">
+              <Card className="h-full hover:bg-surface-elevated transition-colors cursor-pointer bg-surface-card border border-white/10">
                 <CardContent className="p-4">
-                  <div className={`w-10 h-10 rounded-lg ${link.color} flex items-center justify-center mb-3`}>
+                  <div className={`w-10 h-10 rounded-lg ${link.color === "bg-gold/10 text-gold" ? "bg-gold/20 text-gold" : link.color === "bg-blue-50 text-blue-600" ? "bg-blue-500/10 text-blue-400" : link.color === "bg-green-50 text-green-600" ? "bg-green-500/10 text-green-400" : "bg-purple-500/10 text-purple-400"} flex items-center justify-center mb-3`}>
                     <link.icon className="h-5 w-5" />
                   </div>
-                  <h3 className="font-medium text-navy-deep">{link.title}</h3>
-                  <p className="text-sm text-taupe">{link.description}</p>
+                  <h3 className="font-medium text-white">{link.title}</h3>
+                  <p className="text-sm text-white/60">{link.description}</p>
                 </CardContent>
               </Card>
             </Link>
@@ -167,7 +167,7 @@ export default async function AccountPage() {
                 {!session.healthie.isAuthenticated ? (
                   <div className="text-center py-8">
                     <AlertCircle className="h-12 w-12 text-amber-400 mx-auto mb-4" />
-                    <p className="text-taupe mb-4">Connect to patient portal to view appointments</p>
+                    <p className="text-white/60 mb-4">Connect to patient portal to view appointments</p>
                     <Link href="/login">
                       <Button variant="outline">Connect Portal</Button>
                     </Link>
@@ -177,20 +177,20 @@ export default async function AccountPage() {
                     {upcomingAppointments.map((apt) => (
                       <div
                         key={apt.id}
-                        className="flex items-center justify-between p-4 bg-cream rounded-lg"
+                        className="flex items-center justify-between p-4 bg-surface-elevated border border-white/5 rounded-lg"
                       >
                         <div className="flex items-center gap-4">
                           <div className="w-12 h-12 rounded-lg bg-gold/20 flex items-center justify-center">
                             <Calendar className="h-6 w-6 text-gold" />
                           </div>
                           <div>
-                            <h4 className="font-medium text-navy-deep">
+                            <h4 className="font-medium text-white">
                               {apt.appointment_type.name}
                             </h4>
-                            <p className="text-sm text-taupe">
+                            <p className="text-sm text-white/60">
                               {apt.date} at {apt.start_time}
                             </p>
-                            <p className="text-sm text-taupe">
+                            <p className="text-sm text-white/60">
                               with {apt.provider.full_name}
                             </p>
                           </div>
@@ -203,8 +203,8 @@ export default async function AccountPage() {
                   </div>
                 ) : (
                   <div className="text-center py-8">
-                    <Calendar className="h-12 w-12 text-cream-dark mx-auto mb-4" />
-                    <p className="text-taupe mb-4">No upcoming appointments</p>
+                    <Calendar className="h-12 w-12 text-white/30 mx-auto mb-4" />
+                    <p className="text-white/60 mb-4">No upcoming appointments</p>
                     <Link href="/book">
                       <Button>Book Your Next Treatment</Button>
                     </Link>
@@ -231,7 +231,7 @@ export default async function AccountPage() {
                 {!session.shopify.isAuthenticated ? (
                   <div className="text-center py-8">
                     <AlertCircle className="h-12 w-12 text-amber-400 mx-auto mb-4" />
-                    <p className="text-taupe mb-4">Connect to shop to view orders</p>
+                    <p className="text-white/60 mb-4">Connect to shop to view orders</p>
                     <Link href="/login">
                       <Button variant="outline">Connect Shop</Button>
                     </Link>
@@ -241,24 +241,24 @@ export default async function AccountPage() {
                     {shopifyOrders.slice(0, 5).map((order) => (
                       <div
                         key={order.id}
-                        className="flex items-center justify-between p-4 bg-cream rounded-lg"
+                        className="flex items-center justify-between p-4 bg-surface-elevated border border-white/5 rounded-lg"
                       >
                         <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 rounded-lg bg-green-100 flex items-center justify-center">
+                          <div className="w-12 h-12 rounded-lg bg-green-500/10 flex items-center justify-center">
                             {order.fulfillmentStatus === "FULFILLED" ? (
-                              <CheckCircle className="h-6 w-6 text-green-600" />
+                              <CheckCircle className="h-6 w-6 text-green-400" />
                             ) : (
-                              <Truck className="h-6 w-6 text-amber-600" />
+                              <Truck className="h-6 w-6 text-amber-400" />
                             )}
                           </div>
                           <div>
-                            <h4 className="font-medium text-navy-deep">
+                            <h4 className="font-medium text-white">
                               Order #{order.orderNumber}
                             </h4>
-                            <p className="text-sm text-taupe">
+                            <p className="text-sm text-white/60">
                               {new Date(order.processedAt).toLocaleDateString()} • ${order.totalPrice}
                             </p>
-                            <p className="text-sm text-taupe">
+                            <p className="text-sm text-white/60">
                               {order.lineItems.map(i => i.title).join(", ").slice(0, 50)}
                               {order.lineItems.map(i => i.title).join(", ").length > 50 ? "..." : ""}
                             </p>
@@ -266,9 +266,9 @@ export default async function AccountPage() {
                         </div>
                         <div className="text-right">
                           <span className={`inline-block px-2 py-1 text-xs rounded-full ${
-                            order.fulfillmentStatus === "FULFILLED" 
-                              ? "bg-green-100 text-green-700" 
-                              : "bg-amber-100 text-amber-700"
+                            order.fulfillmentStatus === "FULFILLED"
+                              ? "bg-green-500/20 text-green-300"
+                              : "bg-amber-500/20 text-amber-300"
                           }`}>
                             {order.fulfillmentStatus === "FULFILLED" ? "Delivered" : "In Transit"}
                           </span>
@@ -286,8 +286,8 @@ export default async function AccountPage() {
                   </div>
                 ) : (
                   <div className="text-center py-8">
-                    <ShoppingBag className="h-12 w-12 text-cream-dark mx-auto mb-4" />
-                    <p className="text-taupe mb-4">No orders yet</p>
+                    <ShoppingBag className="h-12 w-12 text-white/30 mx-auto mb-4" />
+                    <p className="text-white/60 mb-4">No orders yet</p>
                     <Link href="/shop">
                       <Button>Start Shopping</Button>
                     </Link>
@@ -311,15 +311,15 @@ export default async function AccountPage() {
                     {pastAppointments.map((apt) => (
                       <div
                         key={apt.id}
-                        className="flex items-center justify-between py-3 border-b border-cream-dark last:border-0"
+                        className="flex items-center justify-between py-3 border-b border-white/10 last:border-0"
                       >
                         <div className="flex items-center gap-3">
-                          <Clock className="h-5 w-5 text-taupe" />
+                          <Clock className="h-5 w-5 text-white/60" />
                           <div>
-                            <p className="font-medium text-navy-deep">
+                            <p className="font-medium text-white">
                               {apt.appointment_type.name}
                             </p>
-                            <p className="text-sm text-taupe">{apt.date}</p>
+                            <p className="text-sm text-white/60">{apt.date}</p>
                           </div>
                         </div>
                         <Button variant="ghost" size="sm">
@@ -344,7 +344,7 @@ export default async function AccountPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-taupe mb-4">
+                <p className="text-white/60 mb-4">
                   Join our membership program for exclusive benefits and savings.
                 </p>
                 <Link href="/memberships">
@@ -363,21 +363,21 @@ export default async function AccountPage() {
               </CardHeader>
               <CardContent className="space-y-3">
                 <div>
-                  <p className="text-sm text-taupe">Email</p>
-                  <p className="font-medium text-navy-deep">{session.email}</p>
+                  <p className="text-sm text-white/60">Email</p>
+                  <p className="font-medium text-white">{session.email}</p>
                 </div>
                 {session.healthie.patient && (
                   <>
                     <div>
-                      <p className="text-sm text-taupe">Name</p>
-                      <p className="font-medium text-navy-deep">
+                      <p className="text-sm text-white/60">Name</p>
+                      <p className="font-medium text-white">
                         {session.healthie.patient.first_name} {session.healthie.patient.last_name}
                       </p>
                     </div>
                     {session.healthie.patient.phone_number && (
                       <div>
-                        <p className="text-sm text-taupe">Phone</p>
-                        <p className="font-medium text-navy-deep">
+                        <p className="text-sm text-white/60">Phone</p>
+                        <p className="font-medium text-white">
                           {session.healthie.patient.phone_number}
                         </p>
                       </div>
@@ -393,16 +393,16 @@ export default async function AccountPage() {
             </Card>
 
             {/* Quick Contact */}
-            <Card className="bg-navy-deep text-white">
+            <Card className="bg-navy-deep border border-white/10 text-white">
               <CardContent className="p-6">
                 <h3 className="font-serif text-xl text-gold mb-2">
                   Need Assistance?
                 </h3>
-                <p className="text-cream/80 text-sm mb-4">
+                <p className="text-white/70 text-sm mb-4">
                   Our team is here to help with any questions about your treatments or account.
                 </p>
                 <a href="tel:+18583377999">
-                  <Button className="w-full bg-gold hover:bg-gold-dark text-white">
+                  <Button className="w-full bg-gold hover:bg-gold-dark text-navy-deep">
                     Call (858) 337-7999
                   </Button>
                 </a>

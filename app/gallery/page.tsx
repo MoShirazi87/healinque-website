@@ -1,102 +1,166 @@
 import { Metadata } from "next";
-import { Hero } from "@/components/sections/hero";
-import { BeforeAfterGallery } from "@/components/sections/before-after";
-import { CTASection } from "@/components/sections/cta";
+import Link from "next/link";
+import { PageHero as Hero } from "@/components/sections/hero";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Instagram } from "lucide-react";
+import { siteConfig } from "@/lib/config/site";
+import { pexelsUrl, pageImages } from "@/lib/data/images";
 
 export const metadata: Metadata = {
-  title: "Before & After Gallery",
-  description: "View real patient results from our aesthetic treatments. See before and after photos of Botox, fillers, lasers, and more at Healinque.",
+  title: "Before & After Gallery | Healinque Poway",
+  description:
+    "View real patient results from our aesthetic treatments at Healinque. See before and after photos of Botox, fillers, microneedling, and more.",
 };
 
-// Note: In production, replace with actual before/after photos from the clinic
-// For now, using placeholder gallery images
-const galleryItems = [
-  {
-    id: "1",
-    beforeImage: "/images/gallery/gallery-1.jpg",
-    afterImage: "/images/gallery/gallery-2.jpg",
-    treatment: "Full Face Rejuvenation",
-    description: "Botox + Cheek & Lip Filler",
-  },
-  {
-    id: "2",
-    beforeImage: "/images/gallery/gallery-3.jpg",
-    afterImage: "/images/gallery/gallery-4.jpg",
-    treatment: "Lip Enhancement",
-    description: "Natural volume with Juvederm",
-  },
-  {
-    id: "3",
-    beforeImage: "/images/gallery/gallery-5.jpg",
-    afterImage: "/images/gallery/gallery-6.jpg",
-    treatment: "Botox Forehead & Glabella",
-    description: "Smoothed forehead lines and frown lines",
-  },
+const treatmentCategories = [
+  { id: 1, name: "Botox & Dysport", tagline: "Softer lines, refreshed expression" },
+  { id: 2, name: "Dermal Fillers", tagline: "Restored volume, balanced features" },
+  { id: 3, name: "Microneedling", tagline: "Smoother texture, even tone" },
+  { id: 4, name: "Chemical Peels", tagline: "Brighter, clearer, renewed skin" },
 ];
 
 export default function GalleryPage() {
   return (
-    <>
+    <main className="bg-[#0a1628]">
       <Hero
         variant="page"
         title="Before & After Gallery"
         subtitle="Real Results"
         description="See the natural, beautiful results our patients have achieved with Dr. Azi's expert care."
-        image="/images/gallery-hero.jpg"
+        image={pexelsUrl(pageImages.galleryHero.primary, 1920)}
         overlay="dark"
       />
 
-      {/* Disclaimer */}
-      <section className="py-6 bg-cream">
+      {/* Intro + Why Gallery Matters — CREAM */}
+      <section className="relative py-20 bg-cream">
         <div className="container-healinque">
-          <p className="text-sm text-taupe text-center max-w-3xl mx-auto">
-            Individual results may vary. All photos are of actual patients who have given 
-            consent for their images to be used. Photos are unretouched except for lighting 
-            adjustments. Results depend on individual factors including age, skin type, and 
-            treatment adherence.
-          </p>
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="h-px w-12 bg-[#C9A227]" />
+              <p className="font-sans text-xs uppercase tracking-[0.2em] text-navy-deep/50">
+                Real Patients, Real Consent
+              </p>
+              <div className="h-px w-12 bg-[#C9A227]" />
+            </div>
+            <h2 className="font-serif text-4xl lg:text-5xl text-navy-deep mb-6 leading-tight">
+              Before &amp; After—{" "}
+              <span className="text-[#C9A227] italic">With Full Transparency</span>
+            </h2>
+            <p className="text-navy-deep/70 text-lg leading-relaxed mb-8">
+              Every photo in our gallery represents an actual Healinque patient who has given explicit consent to share their image. We don&apos;t use filters, we don&apos;t enhance, and we disclose timelines honestly. This is how I think aesthetic medicine should work.
+            </p>
+
+            <div className="bg-white border border-taupe/20 rounded-xl p-6 text-navy-deep/70 text-sm leading-relaxed">
+              <p className="mb-3"><strong>Why this matters:</strong></p>
+              <ul className="text-left space-y-2 text-navy-deep/60">
+                <li>• Every photo shows unretouched results</li>
+                <li>• Patient consent documented and verified</li>
+                <li>• Treatment timelines and costs disclosed</li>
+                <li>• No before-and-after from other providers</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
-      <BeforeAfterGallery
-        title="Patient Transformations"
-        subtitle="Drag to Compare"
-        items={galleryItems}
-      />
-
-      {/* Additional Results */}
-      <section className="section-padding bg-cream">
+      {/* Coming Soon — DARK */}
+      <section className="relative py-24 bg-[#0a1628]">
         <div className="container-healinque">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-display-sm font-serif text-navy-deep mb-6">
-              Want to See More Results?
-            </h2>
-            <p className="text-taupe mb-8">
-              Follow us on Instagram for daily before and afters, treatment tips, 
-              and behind-the-scenes at Healinque. Dr. Azi shares her expertise and 
-              showcases real patient transformations.
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9A227]/10 border border-[#C9A227]/30 text-[#C9A227] text-xs font-medium mb-6 uppercase tracking-[0.2em]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#C9A227] animate-pulse" />
+                Gallery in Progress
+              </div>
+              <h2 className="font-serif text-4xl lg:text-5xl text-white mb-6 leading-tight">
+                Real Patient Photos,{" "}
+                <span className="text-[#C9A227] italic">Coming Soon</span>
+              </h2>
+              <p className="text-white/60 text-lg max-w-2xl mx-auto leading-relaxed mb-6">
+                We&apos;re gathering patient photos with full written consent. Every image will be unretouched, with treatment and timeline details disclosed.
+              </p>
+              <p className="text-white/50 text-sm max-w-2xl mx-auto italic">
+                For now, see results on our Instagram or ask during your consultation to view the before-and-after portfolio we show in-clinic.
+              </p>
+            </div>
+
+            {/* Category cards */}
+            <div className="grid md:grid-cols-2 gap-6 mb-16">
+              {treatmentCategories.map((category) => (
+                <div
+                  key={category.id}
+                  className="group relative bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-xl p-8 hover:border-[#C9A227]/30 transition-all duration-500"
+                >
+                  <div className="flex items-center gap-4 mb-3">
+                    <div className="h-px w-8 bg-[#C9A227]" />
+                    <p className="font-sans text-[10px] uppercase tracking-[0.2em] text-[#C9A227]/70">
+                      Preview
+                    </p>
+                  </div>
+                  <h3 className="font-serif text-2xl text-white mb-2">{category.name}</h3>
+                  <p className="text-white/60 text-sm leading-relaxed mb-4">
+                    {category.tagline}
+                  </p>
+                  <p className="text-white/30 text-xs italic">Photos coming soon</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Instagram CTA — CREAM */}
+      <section className="relative py-24 bg-cream">
+        <div className="container-healinque">
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="font-sans text-xs uppercase tracking-[0.2em] text-navy-deep/50 mb-4">
+              Latest Results
+            </p>
+            <h3 className="font-serif text-4xl lg:text-5xl text-navy-deep mb-6 leading-tight">
+              Follow Along on{" "}
+              <span className="text-[#C9A227] italic">Instagram</span>
+            </h3>
+            <p className="text-navy-deep/70 text-lg leading-relaxed mb-10">
+              Dr. Azi shares real patient transformations, treatment insights, and behind-the-scenes
+              looks at Healinque. See new before &amp; after results first.
             </p>
             <a
-              href="https://instagram.com/healinque"
+              href={siteConfig.social.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-[#C9A227] hover:bg-[#b8921f] text-[#0a1628] rounded-lg font-sans font-semibold shadow-xl hover:shadow-2xl transition-all duration-300"
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-              Follow @healinque
+              <Instagram className="h-5 w-5" />
+              Follow {siteConfig.doctor.instagramHandle}
             </a>
           </div>
         </div>
       </section>
 
-      <CTASection
-        title="Ready for Your Transformation?"
-        description="Schedule a consultation to discuss how we can help you achieve similar results."
-        primaryCta={{ text: "Book Consultation", href: "/book" }}
-      />
-    </>
+      {/* Book Consultation CTA — DARK */}
+      <section className="relative py-24 bg-[#0a1628] border-t border-white/5">
+        <div className="container-healinque text-center">
+          <p className="font-sans text-xs uppercase tracking-[0.2em] text-white/50 mb-4">
+            Begin Your Journey
+          </p>
+          <h2 className="font-serif text-4xl lg:text-5xl text-white mb-6">
+            Ready for Your{" "}
+            <span className="text-[#C9A227] italic">Transformation</span>?
+          </h2>
+          <p className="text-white/70 text-lg mb-10 max-w-2xl mx-auto leading-relaxed">
+            Schedule a consultation with Dr. Azi Shirazi to discuss your aesthetic goals and discover
+            how we can help you achieve natural, beautiful results.
+          </p>
+          <Link href="/book">
+            <Button
+              size="lg"
+              className="bg-[#C9A227] hover:bg-[#b8921f] text-[#0a1628] px-10 py-6 font-sans font-semibold rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+            >
+              Book Your Consultation <ArrowRight className="ml-3 h-5 w-5" />
+            </Button>
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }
-

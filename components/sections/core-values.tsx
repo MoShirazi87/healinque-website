@@ -31,8 +31,8 @@ const coreValues = [
   },
   {
     icon: Leaf,
-    title: "Emotional Wellness",
-    description: "Unique in our field, we integrate mental health screening into every aesthetic consultation.",
+    title: "Whole-Person Thinking",
+    description: "We address how you feel alongside how you look. Aesthetic goals within the context of overall health and longevity.",
   },
 ];
 

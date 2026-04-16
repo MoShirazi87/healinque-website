@@ -55,6 +55,7 @@ function BeforeAfterSlider({ beforeImage, afterImage, treatment }: BeforeAfterIt
         alt={`After ${treatment}`}
         fill
         className="object-cover"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
 
       {/* Before Image (clipped) */}
@@ -67,6 +68,7 @@ function BeforeAfterSlider({ beforeImage, afterImage, treatment }: BeforeAfterIt
           alt={`Before ${treatment}`}
           fill
           className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
 

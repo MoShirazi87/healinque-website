@@ -1,309 +1,344 @@
-import { Metadata } from "next";
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Award, GraduationCap, Heart, Shield, Globe, Stethoscope } from "lucide-react";
-import { Hero } from "@/components/sections/hero";
-import { Testimonials } from "@/components/sections/testimonials";
-import { ConsultationForm } from "@/components/sections/consultation-form";
+import { ArrowRight, Check } from "lucide-react";
+import { motion } from "framer-motion";
+import { PageHero as Hero } from "@/components/sections/hero";
 import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/lib/config/site";
+import { pexelsUrl, pageImages } from "@/lib/data/images";
 
-export const metadata: Metadata = {
-  title: "Dr. Azi Shirazi | Board Certified Physician | Healinque",
-  description:
-    "Meet Dr. Azadeh 'Azi' Shirazi, Board Certified in Internal Medicine with 20+ years of emergency medicine experience. Physician-performed aesthetic treatments in Poway, CA.",
-  openGraph: {
-    title: "Dr. Azi Shirazi | Board Certified Physician",
-    description:
-      "Board Certified Internal Medicine with 20+ years experience. Natural aesthetic results with medical precision.",
-    images: ["/images/dr-azi-shirazi.jpg"],
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
   },
 };
 
 const credentials = [
   {
-    icon: GraduationCap,
-    title: "Education",
-    items: [
-      "Doctor of Medicine (MD)",
-      "Internal Medicine Residency",
-      "Advanced Aesthetic Training",
-    ],
+    title: "MD, Internal Medicine",
+    detail: "University of California, San Diego (UCSD)",
   },
   {
-    icon: Shield,
-    title: "Board Certifications",
-    items: [
-      "American Board of Internal Medicine",
-      "Advanced Cardiac Life Support (ACLS)",
-      "Pediatric Advanced Life Support (PALS)",
-    ],
+    title: "Internal Medicine Residency",
+    detail: "UC San Diego Medical Center",
   },
   {
-    icon: Award,
-    title: "Awards & Recognition",
-    items: [
-      "Top 100 Physicians San Diego 2023",
-      "Guardian Angel Award Recipient",
-      "Patient Choice Award",
-    ],
+    title: "Chair, Urgent Care Department",
+    detail: "2022–2025 | Sharp Healthcare",
   },
   {
-    icon: Globe,
-    title: "Languages",
-    items: ["English (Native)", "Farsi/Persian (Native)"],
-  },
-];
-
-const philosophy = [
-  {
-    title: "The Inside-Out Approach",
-    description:
-      "True beauty radiates from within. Before addressing external concerns, I look at what's happening inside—hormones, nutrition, inflammation, cellular health. When we optimize the internal environment, external results are more natural and lasting.",
+    title: "Advanced Aesthetic Training",
+    detail: "Leading physician injectors in the United States and Europe",
   },
   {
-    title: "Safety as a Foundation",
-    description:
-      "My 20 years in emergency medicine taught me something invaluable: how things can go wrong. I've treated countless complications from aesthetic procedures performed by inexperienced providers. That experience informs every treatment decision I make.",
+    title: "20+ Years Clinical Experience",
+    detail: "Internal medicine physician | 10+ years aesthetic medicine",
   },
   {
-    title: "Conservative Enhancement",
-    description:
-      "I believe in enhancement, not transformation. My goal is for people to notice that you look refreshed and vibrant—not that you've had work done. I'm not afraid to say 'less is more' or 'you don't need that yet.'",
-  },
-  {
-    title: "Physician-Performed Care",
-    description:
-      "Unlike many medical spas that delegate to nurses or aestheticians, I personally perform all injectable treatments. Your face deserves physician-level expertise and the attention that comes with true continuity of care.",
+    title: "Personally Performs Every Treatment",
+    detail: "No delegation. Direct care from consultation through results.",
   },
 ];
 
 export default function DrAziShiraziPage() {
   return (
-    <main>
+    <main className="bg-[#0a1628]">
       <Hero
         variant="page"
         subtitle="Meet Your Physician"
-        title="Dr. Azadeh 'Azi' Shirazi, MD"
-        description="Board Certified Internal Medicine • 20+ Years Emergency Medicine • Aesthetic Medicine Specialist"
-        image="https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=1920"
+        title="Dr. Azadeh Shirazi, MD"
+        description="MD, Internal Medicine | 20+ Years Clinical Experience | 10+ Years in Aesthetic Medicine | Personally Performs Every Treatment"
+        image={pexelsUrl(pageImages.drAziHero.primary, 1920)}
       />
 
-      {/* Main Bio Section */}
-      <section className="section-padding bg-white">
+      {/* Story Section — CREAM */}
+      <section className="relative py-24 bg-cream">
         <div className="container-healinque">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
+          <motion.div
+            className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={containerVariants}
+          >
             {/* Image Column */}
-            <div className="space-y-6">
-              <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-elegant">
+            <motion.div variants={itemVariants} className="relative">
+              <div className="absolute -inset-4 bg-gradient-to-br from-[#C9A227]/20 to-transparent opacity-40 rounded-2xl blur-3xl" />
+              <div className="relative aspect-[3/4] rounded-xl overflow-hidden border border-taupe/10 shadow-2xl">
                 <Image
                   src="/images/dr-azi-shirazi.jpg"
-                  alt="Dr. Azi Shirazi, Board Certified Physician"
+                  alt="Dr. Azi Shirazi, MD Internal Medicine"
                   fill
                   className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   priority
                 />
               </div>
-              <div className="bg-cream rounded-xl p-6">
-                <h3 className="font-serif text-lg font-semibold text-navy-deep mb-3">
-                  Book with Dr. Azi
-                </h3>
-                <p className="text-sm text-taupe mb-4">
-                  Ready to experience physician-performed aesthetic care? Schedule your 
-                  complimentary consultation today.
-                </p>
-                <Link href="/book">
-                  <Button className="w-full">
-                    Book Consultation <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </div>
-            </div>
+
+              {/* Accent Badge */}
+              <motion.div
+                className="absolute -bottom-6 -right-6 bg-[#C9A227] text-[#0a1628] rounded-full w-28 h-28 lg:w-32 lg:h-32 flex items-center justify-center text-center shadow-xl"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ type: "spring", delay: 0.4 }}
+              >
+                <div>
+                  <p className="font-serif text-lg lg:text-xl font-bold">MD</p>
+                  <p className="text-xs font-sans font-medium">Internal</p>
+                  <p className="text-xs font-sans font-medium">Medicine</p>
+                </div>
+              </motion.div>
+            </motion.div>
 
             {/* Content Column */}
-            <div>
-              <p className="section-subtitle">About Dr. Azi</p>
-              <h2 className="section-title mb-6">
-                Where Emergency Medicine Expertise Meets Aesthetic Artistry
+            <motion.div variants={itemVariants} className="relative z-10">
+              <div className="mb-8 flex items-center gap-4">
+                <div className="h-px w-12 bg-[#C9A227]" />
+                <p className="font-sans text-xs uppercase tracking-[0.2em] text-navy-deep/50">
+                  Her Story
+                </p>
+              </div>
+
+              <h2 className="font-serif text-4xl lg:text-5xl mb-8 text-navy-deep leading-tight">
+                My <span className="text-[#C9A227] italic">Approach</span> to Aesthetics
               </h2>
-              
-              <div className="prose prose-taupe max-w-none space-y-4 text-taupe leading-relaxed">
-                <p>
-                  Dr. Azadeh &ldquo;Azi&rdquo; Shirazi is a Board Certified Internal Medicine physician 
-                  with over two decades of experience in urgent and emergency medicine. Her journey 
-                  to aesthetic medicine was shaped by an unexpected perspective: treating the 
-                  complications that occur when cosmetic procedures go wrong.
-                </p>
-                
-                <p>
-                  &ldquo;During my years in the emergency room, I saw what happens when aesthetics 
-                  are performed without proper medical oversight,&rdquo; Dr. Shirazi explains. 
-                  &ldquo;Vascular occlusions, infections, necrosis—I treated them all. That experience 
-                  gave me a profound respect for facial anatomy and the importance of proper 
-                  technique. It also showed me how much patients deserve: physician-level expertise, 
-                  safety protocols, and personalized care.&rdquo;
-                </p>
 
-                <p>
-                  Motivated by the desire to provide aesthetic care the way it should be done, 
-                  Dr. Shirazi founded Healinque with a unique philosophy: combining her emergency 
-                  medicine expertise with aesthetic artistry to deliver results that are beautiful, 
-                  safe, and natural.
+              <div className="space-y-5 text-navy-deep/70 leading-relaxed">
+                <p className="text-lg">
+                  {siteConfig.doctor.story}
                 </p>
-
-                <h3 className="font-serif text-xl font-semibold text-navy-deep pt-4">
-                  A Different Kind of Aesthetic Provider
-                </h3>
-                
-                <p>
-                  What sets Dr. Shirazi apart is her comprehensive approach to patient care. Unlike 
-                  many aesthetic providers who focus only on the surface, she looks at the whole 
-                  picture. As a Board Certified Internal Medicine physician, she can identify 
-                  underlying factors that affect how you look and feel—from hormone imbalances to 
-                  nutritional deficiencies to chronic inflammation.
+                <p className="text-lg">
+                  I completed my MD at UC San Diego and my internal medicine residency there as well. After spending two decades in internal medicine—including serving as Chair of our Urgent Care Department—I pursued advanced aesthetic training with leading physician injectors in the United States and Europe. This background gives me a unique perspective: I see patients holistically. I don&apos;t separate aesthetic goals from overall health and longevity.
                 </p>
-
-                <p>
-                  &ldquo;Beauty is health made visible,&rdquo; she says. &ldquo;When we optimize 
-                  what&apos;s happening inside the body, it radiates outward. That&apos;s why I offer 
-                  both aesthetic treatments and longevity medicine—they work together for results 
-                  that are truly transformative.&rdquo;
-                </p>
-
-                <h3 className="font-serif text-xl font-semibold text-navy-deep pt-4">
-                  The Guardian Angel of Urgent Care
-                </h3>
-                
-                <p>
-                  Dr. Shirazi&apos;s dedication to patient care has been recognized with the 
-                  prestigious Guardian Angel Award, given to healthcare providers who go above 
-                  and beyond for their patients. She has also been named one of the Top 100 
-                  Physicians in San Diego.
-                </p>
-
-                <p>
-                  Fluent in both English and Farsi, Dr. Shirazi serves a diverse patient community 
-                  and takes pride in making every patient feel comfortable and understood.
+                <p className="text-lg">
+                  Every treatment at Healinque is personally tested by me before it enters our practice. I don&apos;t overfill. I don&apos;t chase trends. I treat the face medically—with the same clinical precision I brought to internal medicine, applied to aesthetic outcomes that look natural and last.
                 </p>
               </div>
 
               {/* Philosophy Quote */}
-              <blockquote className="border-l-4 border-gold pl-6 my-8">
-                <p className="font-serif text-xl text-navy-deep italic mb-2">
-                  &ldquo;I don&apos;t believe in changing who you are. I believe in helping you 
-                  look like the most rested, refreshed, vibrant version of yourself. That&apos;s 
-                  the art—enhancement that enhances without erasing.&rdquo;
-                </p>
-                <cite className="text-gold text-sm not-italic">— Dr. Azi Shirazi</cite>
-              </blockquote>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Credentials */}
-      <section className="section-padding bg-cream">
-        <div className="container-healinque">
-          <div className="text-center mb-12">
-            <p className="section-subtitle">Qualifications</p>
-            <h2 className="section-title">Credentials & Training</h2>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {credentials.map((cred) => (
-              <div key={cred.title} className="bg-white rounded-xl p-6">
-                <div className="w-12 h-12 rounded-full bg-gold/10 flex items-center justify-center mb-4">
-                  <cred.icon className="h-6 w-6 text-gold" />
-                </div>
-                <h3 className="font-serif text-lg font-semibold text-navy-deep mb-3">
-                  {cred.title}
-                </h3>
-                <ul className="space-y-2">
-                  {cred.items.map((item) => (
-                    <li key={item} className="text-sm text-taupe flex items-start gap-2">
-                      <span className="w-1.5 h-1.5 bg-gold rounded-full mt-2 flex-shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Philosophy */}
-      <section className="section-padding bg-navy-deep text-white">
-        <div className="container-healinque">
-          <div className="text-center mb-12">
-            <p className="text-gold font-medium tracking-wide uppercase text-sm mb-3">
-              Treatment Philosophy
-            </p>
-            <h2 className="font-serif text-display text-white">
-              The Healinque Approach
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            {philosophy.map((item, index) => (
-              <div key={item.title} className="bg-white/5 backdrop-blur rounded-xl p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center text-gold font-semibold text-sm">
-                    {index + 1}
-                  </span>
-                  <h3 className="font-serif text-lg font-semibold text-gold">
-                    {item.title}
-                  </h3>
-                </div>
-                <p className="text-cream/80 text-sm leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Specialties */}
-      <section className="section-padding bg-white">
-        <div className="container-healinque">
-          <div className="text-center mb-12">
-            <p className="section-subtitle">Expertise</p>
-            <h2 className="section-title">Dr. Azi&apos;s Specialties</h2>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { title: "Neuromodulators", desc: "Botox, Dysport, Xeomin, Daxxify" },
-              { title: "Dermal Fillers", desc: "Juvederm, Restylane, RHA Collection" },
-              { title: "PDO Threads", desc: "Non-surgical face & neck lifting" },
-              { title: "Regenerative Medicine", desc: "PRF, PRP, Exosomes, PDRN" },
-              { title: "Morpheus8", desc: "RF microneedling for skin tightening" },
-              { title: "Hormone Optimization", desc: "BHRT for men and women" },
-              { title: "Medical Weight Loss", desc: "Semaglutide, Tirzepatide protocols" },
-              { title: "IV Therapy", desc: "NAD+, vitamins, and wellness drips" },
-              { title: "Peptide Therapy", desc: "Advanced longevity protocols" },
-            ].map((specialty) => (
-              <div
-                key={specialty.title}
-                className="flex items-start gap-3 p-4 rounded-lg border border-cream-dark hover:border-gold transition-colors"
+              <motion.blockquote
+                className="border-l-4 border-[#C9A227] pl-6 my-10"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <Stethoscope className="h-5 w-5 text-gold flex-shrink-0 mt-0.5" />
-                <div>
-                  <h3 className="font-medium text-navy-deep">{specialty.title}</h3>
-                  <p className="text-sm text-taupe">{specialty.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+                <p className="font-serif text-xl text-[#C9A227] italic leading-relaxed">
+                  &ldquo;{siteConfig.doctor.philosophy}&rdquo;
+                </p>
+              </motion.blockquote>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <Testimonials variant="featured" />
+      {/* Credentials — DARK */}
+      <section className="relative py-24 bg-[#0a1628]">
+        <div className="container-healinque">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={containerVariants}
+          >
+            <div className="text-center mb-16">
+              <motion.div variants={itemVariants}>
+                <p className="font-sans text-xs uppercase tracking-[0.2em] text-white/50 mb-4">
+                  Background & Recognition
+                </p>
+                <h2 className="font-serif text-4xl lg:text-5xl text-white">
+                  Education & <span className="text-[#C9A227] italic">Achievement</span>
+                </h2>
+              </motion.div>
+            </div>
 
-      {/* CTA */}
-      <ConsultationForm
-        variant="split"
-        title="Schedule with Dr. Azi"
-        subtitle="Book Your Consultation"
-      />
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {credentials.map((cred, idx) => (
+                <motion.div key={idx} variants={itemVariants}>
+                  <div className="group relative h-full">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#C9A227]/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <div className="relative bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-xl p-6 h-full hover:border-[#C9A227]/30 transition-all duration-500">
+                      <Check className="w-5 h-5 text-[#C9A227] mb-3" />
+                      <h3 className="font-serif text-lg text-white mb-2">
+                        {cred.title}
+                      </h3>
+                      <p className="text-white/50 text-sm">{cred.detail}</p>
+
+                      <motion.div
+                        className="mt-4 h-0.5 bg-[#C9A227] origin-left"
+                        initial={{ scaleX: 0 }}
+                        whileInView={{ scaleX: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.4 + idx * 0.08 }}
+                      />
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Awards & Recognition — CREAM */}
+      <section className="relative py-24 bg-cream">
+        <div className="container-healinque">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={containerVariants}
+          >
+            <div className="max-w-3xl mx-auto">
+              <motion.div variants={itemVariants} className="mb-12">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="h-px w-12 bg-[#C9A227]" />
+                  <p className="font-sans text-xs uppercase tracking-[0.2em] text-navy-deep/50">
+                    Awards & Recognition
+                  </p>
+                </div>
+                <h2 className="font-serif text-4xl lg:text-5xl text-navy-deep">
+                  Recognized <span className="text-[#C9A227] italic">Excellence</span>
+                </h2>
+              </motion.div>
+
+              <div className="space-y-4">
+                {siteConfig.doctor.recognition.map((item: string, index: number) => (
+                  <motion.div
+                    key={index}
+                    variants={itemVariants}
+                    className="flex items-start gap-4 p-5 bg-white border border-taupe/10 rounded-lg hover:border-[#C9A227]/30 transition-colors"
+                  >
+                    <span className="w-8 h-8 rounded-full bg-[#C9A227]/10 flex items-center justify-center flex-shrink-0">
+                      <span className="text-[#C9A227] font-serif font-bold text-sm">{index + 1}</span>
+                    </span>
+                    <p className="text-navy-deep/80 leading-relaxed">{item}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Philosophy Section — DARK */}
+      <section className="relative py-24 bg-[#0a1628]">
+        <div className="container-healinque">
+          <motion.div
+            className="max-w-4xl mx-auto text-center"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={containerVariants}
+          >
+            <motion.div variants={itemVariants}>
+              <p className="font-sans text-xs uppercase tracking-[0.2em] text-white/50 mb-4">
+                Guiding Principles
+              </p>
+              <h2 className="font-serif text-4xl lg:text-5xl text-white mb-8">
+                A Philosophy of <span className="text-[#C9A227] italic">Care</span>
+              </h2>
+            </motion.div>
+
+            <motion.p
+              variants={itemVariants}
+              className="text-white/70 text-lg leading-relaxed mb-12"
+            >
+              My practice is guided by four core principles: treat the face medically, lead with conservative layered plans, personally test every treatment, and always prioritize long-term tissue health over short-term cosmetic wins.
+            </motion.p>
+
+            <motion.div
+              variants={itemVariants}
+              className="grid sm:grid-cols-3 gap-8"
+            >
+              {[
+                { label: "Medically Trained", desc: "I bring internal medicine precision to aesthetic outcomes—clinical assessment first, treatment plan second." },
+                { label: "Conservative & Layered", desc: "I'd rather under-treat and add than over-treat and undo. Subtle, staged plans almost always look more natural." },
+                { label: "Personally Tested", desc: "Every treatment I recommend, I've tested myself. If I wouldn't choose it for my own face, we don't offer it." },
+              ].map((item, idx) => (
+                <div key={idx} className="text-center">
+                  <div className="w-16 h-16 rounded-full bg-[#C9A227]/10 flex items-center justify-center mx-auto mb-4">
+                    <span className="text-[#C9A227] font-serif text-2xl font-bold">◆</span>
+                  </div>
+                  <h3 className="font-serif text-xl text-white mb-2">{item.label}</h3>
+                  <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA Section — DARK with gold accent */}
+      <section className="relative py-24 bg-[#0a1628] border-t border-white/5">
+        <div className="container-healinque">
+          <motion.div
+            className="max-w-3xl mx-auto text-center"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={containerVariants}
+          >
+            <motion.div variants={itemVariants}>
+              <h2 className="font-serif text-4xl lg:text-5xl text-white mb-6">
+                Schedule Your <span className="text-[#C9A227] italic">Consultation</span>
+              </h2>
+              <p className="text-white/70 text-lg mb-12">
+                Every patient consultation is 90 minutes with me. We discuss your goals, review your anatomy, and design a personalized plan. Results may vary. Individual results are not guaranteed.
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center"
+              variants={containerVariants}
+            >
+              <motion.div variants={itemVariants}>
+                <Link href="/book">
+                  <Button className="bg-[#C9A227] hover:bg-[#b8921f] text-[#0a1628] px-10 py-6 font-sans font-semibold rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300">
+                    Schedule Consultation <ArrowRight className="ml-3 h-5 w-5" />
+                  </Button>
+                </Link>
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <Link href="/treatments">
+                  <Button
+                    variant="outline"
+                    className="border-[#C9A227] text-[#C9A227] hover:bg-[#C9A227]/10 px-10 py-6 font-sans font-semibold rounded-lg transition-all duration-300"
+                  >
+                    Explore Treatments
+                  </Button>
+                </Link>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      <div className="h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+      {/* Disclaimer */}
+      <section className="py-12 bg-[#0a1628] text-center">
+        <div className="container-healinque">
+          <p className="text-white/50 text-xs leading-relaxed max-w-3xl mx-auto font-sans">
+            Results may vary. Individual results are not guaranteed. Treatment recommendations are determined during your consultation with Dr. Shirazi. All treatments at Healinque are performed or directly supervised by Dr. Azi Shirazi, MD.
+          </p>
+        </div>
+      </section>
     </main>
   );
 }

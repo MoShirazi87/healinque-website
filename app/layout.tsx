@@ -7,6 +7,11 @@ import { Footer } from "@/components/navigation/footer";
 import { MobileCtaBar } from "@/components/navigation/mobile-cta-bar";
 import { LocalBusinessSchema, PhysicianSchema, MedicalBusinessSchema } from "@/components/seo/schema";
 import { Providers } from "@/components/providers";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { ScrollTint } from "@/components/ui/scroll-tint";
+import { AutoReveal } from "@/components/ui/auto-reveal";
+import { FlipOnTap } from "@/components/ui/flip-on-tap";
+import { InteractionEngine } from "@/components/ui/interaction-engine";
 import { siteConfig } from "@/lib/config/site";
 
 const cormorant = Cormorant_Garamond({
@@ -37,31 +42,10 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description:
-    "Physician-performed aesthetic treatments and longevity medicine in Poway, CA. Led by Dr. Azi Shirazi with 20+ years experience. Botox, fillers, Morpheus8, weight loss, hormone therapy & more.",
-  keywords: [
-    "medical spa poway",
-    "medical spa san diego",
-    "botox poway",
-    "botox san diego",
-    "dermal fillers poway",
-    "dermal fillers san diego",
-    "morpheus8 poway",
-    "morpheus8 san diego",
-    "weight loss clinic poway",
-    "semaglutide san diego",
-    "tirzepatide san diego",
-    "hormone therapy poway",
-    "bhrt san diego",
-    "prp therapy poway",
-    "aesthetic medicine poway",
-    "longevity medicine san diego",
-    "dr azi shirazi",
-    "healinque",
-    "anti aging poway",
-    "med spa near me",
-  ],
+    "Physician-led aesthetics, regenerative medicine & longevity care in Poway, CA. Led by Dr. Azadeh Shirazi, MD with 20+ years experience. Botox, fillers, PRP, hair restoration & more.",
+  keywords: siteConfig.seo.keywords,
   authors: [{ name: "Dr. Azadeh Shirazi, MD" }],
-  creator: "Healinque Wellness Clinic",
+  creator: "Healinque Wellness & Longevity Center",
   publisher: "Healinque",
   formatDetection: {
     email: false,
@@ -75,13 +59,12 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: siteConfig.urls.baseUrl,
-    siteName: `${siteConfig.name} - ${siteConfig.tagline}`,
-    title: "Healinque | Premier Medical Spa & Longevity Center in Poway, CA",
-    description:
-      "Look younger, feel younger, live longer. Physician-performed aesthetic treatments and longevity medicine. Led by Dr. Azi Shirazi with 20+ years experience.",
+    siteName: siteConfig.name,
+    title: siteConfig.seo.title,
+    description: siteConfig.seo.description,
     images: [
       {
-        url: "/images/og-home.jpg",
+        url: "/images/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Healinque - Aesthetic Medicine & Longevity Center",
@@ -93,7 +76,7 @@ export const metadata: Metadata = {
     title: "Healinque | Medical Spa & Longevity Center in Poway, CA",
     description:
       "Physician-performed aesthetic treatments and longevity medicine. Dr. Azi Shirazi, 20+ years experience.",
-    images: ["/images/og-home.jpg"],
+    images: ["/images/og-image.jpg"],
   },
   robots: {
     index: true,
@@ -107,7 +90,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "your-google-verification-code",
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || "",
   },
   category: "Medical Spa",
 };
@@ -120,9 +103,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorant.variable} ${montserrat.variable}`}>
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/images/favicon-32.png" sizes="32x32" type="image/png" />
+        <link rel="icon" href="/images/favicon-512.png" sizes="512x512" type="image/png" />
+        <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         <LocalBusinessSchema />
         <PhysicianSchema />
@@ -130,8 +113,13 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col">
         <Providers>
+          <ScrollProgress />
+          <ScrollTint />
+          <AutoReveal />
+          <FlipOnTap />
+          <InteractionEngine />
           <Header />
-          <main className="flex-1 pb-16 lg:pb-0">{children}</main>
+          <main className="flex-1">{children}</main>
           <Footer />
           <MobileCtaBar />
         </Providers>

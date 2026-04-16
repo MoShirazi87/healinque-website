@@ -9,7 +9,7 @@ export function LocalBusinessSchema() {
     alternateName: siteConfig.name,
     description: siteConfig.seo.description,
     url: siteConfig.urls.baseUrl,
-    telephone: siteConfig.phoneRaw,
+    telephone: "+1" + siteConfig.phoneRaw,
     email: siteConfig.email,
     address: {
       "@type": "PostalAddress",
@@ -34,15 +34,45 @@ export function LocalBusinessSchema() {
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        opens: "09:00",
+        dayOfWeek: "Monday",
+        opens: "10:00",
+        closes: "12:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Monday",
+        opens: "13:00",
+        closes: "18:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Wednesday",
+        opens: "10:00",
+        closes: "12:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Wednesday",
+        opens: "13:00",
+        closes: "18:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Friday",
+        opens: "10:00",
+        closes: "12:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Friday",
+        opens: "13:00",
         closes: "18:00",
       },
       {
         "@type": "OpeningHoursSpecification",
         dayOfWeek: "Saturday",
-        opens: "09:00",
-        closes: "14:00",
+        opens: "10:00",
+        closes: "13:00",
       },
     ],
     sameAs: [
@@ -75,8 +105,8 @@ export function LocalBusinessSchema() {
           "@type": "OfferCatalog",
           name: "Regenerative Medicine",
           itemListElement: [
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "PRF/PRP Therapy" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Exosome Therapy" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "PRF Therapy" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Regenerative Consultation" } },
             { "@type": "Offer", itemOffered: { "@type": "Service", name: "Microneedling" } },
           ],
         },
@@ -118,10 +148,10 @@ export function PhysicianSchema() {
     "@id": `${siteConfig.urls.baseUrl}/about/dr-azi-shirazi#physician`,
     name: siteConfig.doctor.name,
     alternateName: siteConfig.doctor.shortName,
-    description: `${siteConfig.doctor.credentials} with ${siteConfig.doctor.experience}, specializing in aesthetic medicine and longevity.`,
+    description: `${siteConfig.doctor.credentials} with ${siteConfig.doctor.experienceYears} years in medicine, specializing in aesthetic medicine and longevity.`,
     url: `${siteConfig.urls.baseUrl}/about/dr-azi-shirazi`,
     image: `${siteConfig.urls.baseUrl}${siteConfig.doctor.image}`,
-    telephone: siteConfig.phoneRaw,
+    telephone: "+1" + siteConfig.phoneRaw,
     email: siteConfig.email,
     worksFor: {
       "@type": "LocalBusiness",
@@ -130,20 +160,13 @@ export function PhysicianSchema() {
     medicalSpecialty: [
       "Internal Medicine",
       "Aesthetic Medicine",
-      "Anti-Aging Medicine",
-    ],
-    memberOf: [
-      {
-        "@type": "MedicalOrganization",
-        name: "American Board of Internal Medicine",
-      },
+      "Longevity Medicine",
     ],
     award: ["Top 100 Physicians San Diego 2023", "Guardian Angel Award"],
     knowsLanguage: ["en", "fa"],
-    alumniOf: {
-      "@type": "EducationalOrganization",
-      name: "Medical School",
-    },
+    alumniOf: [
+      { "@type": "EducationalOrganization", name: "University of California, San Diego (UCSD)" },
+    ],
   };
 
   return (
@@ -162,7 +185,7 @@ export function MedicalBusinessSchema() {
     name: `${siteConfig.name} - ${siteConfig.tagline}`,
     description: siteConfig.seo.description,
     url: siteConfig.urls.baseUrl,
-    telephone: siteConfig.phoneRaw,
+    telephone: "+1" + siteConfig.phoneRaw,
     address: {
       "@type": "PostalAddress",
       streetAddress: `${siteConfig.address.street}, ${siteConfig.address.suite}`,
@@ -172,10 +195,10 @@ export function MedicalBusinessSchema() {
       addressCountry: "US",
     },
     medicalSpecialty: [
-      "Aesthetic Medicine",
-      "Anti-Aging Medicine",
-      "Regenerative Medicine",
       "Internal Medicine",
+      "Aesthetic Medicine",
+      "Longevity Medicine",
+      "Regenerative Medicine",
     ],
     availableService: [
       {

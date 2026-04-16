@@ -6,7 +6,7 @@ import { Shield, Sparkles, Heart, Award } from "lucide-react";
 const features = [
   {
     icon: Shield,
-    title: "Board-Certified Physician",
+    title: "Physician-Led Care",
     description: "Dr. Azi personally performs or supervises every treatment with medical precision.",
   },
   {
@@ -17,7 +17,7 @@ const features = [
   {
     icon: Heart,
     title: "Holistic Approach",
-    description: "Aesthetics meets internal medicine for complete mind-body wellness.",
+    description: "Dermatologic expertise meets wellness for complete mind-body health.",
   },
   {
     icon: Award,

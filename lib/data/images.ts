@@ -1,120 +1,200 @@
 /**
- * Curated Pexels Image Collection for Healinque
- * 
- * These images have been carefully selected for:
- * - Professional medical spa/aesthetic medicine settings
+ * Healinque V2 — Premium Curated Image Collection
+ *
+ * Visual Direction: Luxury Aesthetic Medicine
+ * - Warm, golden lighting (NO cold clinical blues)
+ * - Beauty, confidence, glowing skin
+ * - Premium spa/clinic environments
  * - Diverse, natural-looking models
- * - Clean, modern aesthetics
- * - Wellness and longevity themes
- * 
- * Usage: Images are referenced via Pexels CDN URLs.
- * For production, consider downloading and hosting locally for better performance.
+ * - Editorial quality — not cheesy stock
+ *
+ * All images sourced from Pexels (free, no attribution required)
+ * CRITICAL: Every Pexels ID is unique — NO DUPLICATES in this file
+ *
+ * Image Rotation System:
+ * - Each slot has a `primary` image and optional `alts` array
+ * - Use `pickImage()` for random selection on page load
+ * - Use `getPageImage()` for auto-width URL building
+ * - Use `pexelsUrl()` for direct ID→URL conversion
  */
 
-export const images = {
-  // Hero Backgrounds
-  hero: {
-    home: "https://images.pexels.com/photos/5069432/pexels-photo-5069432.jpeg?auto=compress&cs=tinysrgb&w=1920",
-    treatments: "https://images.pexels.com/photos/3985331/pexels-photo-3985331.jpeg?auto=compress&cs=tinysrgb&w=1920",
-    about: "https://images.pexels.com/photos/3735747/pexels-photo-3735747.jpeg?auto=compress&cs=tinysrgb&w=1920",
-    drAzi: "https://images.pexels.com/photos/5407206/pexels-photo-5407206.jpeg?auto=compress&cs=tinysrgb&w=1920",
-    concerns: "https://images.pexels.com/photos/5069432/pexels-photo-5069432.jpeg?auto=compress&cs=tinysrgb&w=1920",
-    reviews: "https://images.pexels.com/photos/5069432/pexels-photo-5069432.jpeg?auto=compress&cs=tinysrgb&w=1920",
-  },
+/* ─── Utilities ─── */
 
-  // Treatment Category Images
-  treatmentCategories: {
-    aesthetics: "https://images.pexels.com/photos/3985360/pexels-photo-3985360.jpeg?auto=compress&cs=tinysrgb&w=600",
-    regenerative: "https://images.pexels.com/photos/5069600/pexels-photo-5069600.jpeg?auto=compress&cs=tinysrgb&w=600",
-    skinRejuvenation: "https://images.pexels.com/photos/5069612/pexels-photo-5069612.jpeg?auto=compress&cs=tinysrgb&w=600",
-    weightLoss: "https://images.pexels.com/photos/4498294/pexels-photo-4498294.jpeg?auto=compress&cs=tinysrgb&w=600",
-    longevity: "https://images.pexels.com/photos/4498362/pexels-photo-4498362.jpeg?auto=compress&cs=tinysrgb&w=600",
-  },
+/**
+ * Picks a random image from primary + alts array.
+ * Call on client side for rotation on page reload.
+ */
+export function pickImage(primary: string, alts?: string[]): string {
+  if (!alts || alts.length === 0) return primary;
+  const all = [primary, ...alts];
+  return all[Math.floor(Math.random() * all.length)];
+}
 
-  // Individual Treatment Images
-  treatments: {
-    botox: "https://images.pexels.com/photos/3985360/pexels-photo-3985360.jpeg?auto=compress&cs=tinysrgb&w=800",
-    fillers: "https://images.pexels.com/photos/3985356/pexels-photo-3985356.jpeg?auto=compress&cs=tinysrgb&w=800",
-    threads: "https://images.pexels.com/photos/5069438/pexels-photo-5069438.jpeg?auto=compress&cs=tinysrgb&w=800",
-    kybella: "https://images.pexels.com/photos/5069614/pexels-photo-5069614.jpeg?auto=compress&cs=tinysrgb&w=800",
-    prp: "https://images.pexels.com/photos/5069600/pexels-photo-5069600.jpeg?auto=compress&cs=tinysrgb&w=800",
-    exosome: "https://images.pexels.com/photos/5069432/pexels-photo-5069432.jpeg?auto=compress&cs=tinysrgb&w=800",
-    pdrn: "https://images.pexels.com/photos/5069606/pexels-photo-5069606.jpeg?auto=compress&cs=tinysrgb&w=800",
-    microneedling: "https://images.pexels.com/photos/5069620/pexels-photo-5069620.jpeg?auto=compress&cs=tinysrgb&w=800",
-    morpheus8: "https://images.pexels.com/photos/5069612/pexels-photo-5069612.jpeg?auto=compress&cs=tinysrgb&w=800",
-    chemicalPeels: "https://images.pexels.com/photos/3985311/pexels-photo-3985311.jpeg?auto=compress&cs=tinysrgb&w=800",
-    hydrafacial: "https://images.pexels.com/photos/3985331/pexels-photo-3985331.jpeg?auto=compress&cs=tinysrgb&w=800",
-    weightLoss: "https://images.pexels.com/photos/4498294/pexels-photo-4498294.jpeg?auto=compress&cs=tinysrgb&w=800",
-    hormones: "https://images.pexels.com/photos/4498362/pexels-photo-4498362.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ivTherapy: "https://images.pexels.com/photos/5069408/pexels-photo-5069408.jpeg?auto=compress&cs=tinysrgb&w=800",
-    peptides: "https://images.pexels.com/photos/4226140/pexels-photo-4226140.jpeg?auto=compress&cs=tinysrgb&w=800",
-  },
+/**
+ * Build a full Pexels image URL from ID and width
+ */
+export function pexelsUrl(id: string, width: number = 800): string {
+  return `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${width}`;
+}
 
-  // Clinic/Location Images
-  clinic: {
-    exterior: "https://images.pexels.com/photos/3735747/pexels-photo-3735747.jpeg?auto=compress&cs=tinysrgb&w=800",
-    interior: "https://images.pexels.com/photos/3735782/pexels-photo-3735782.jpeg?auto=compress&cs=tinysrgb&w=800",
-    treatmentRoom: "https://images.pexels.com/photos/5069432/pexels-photo-5069432.jpeg?auto=compress&cs=tinysrgb&w=800",
-    waiting: "https://images.pexels.com/photos/3735747/pexels-photo-3735747.jpeg?auto=compress&cs=tinysrgb&w=800",
-  },
+/* ─── Type ─── */
+interface ImageSlot {
+  primary: string;
+  alts: string[];
+}
 
-  // Testimonial/Patient Portraits (diverse, professional-looking)
+/* ─── Page-Level Image Library ─── */
+export const pageImages = {
+
+  // ────────────────────────────────────────────────
+  // HOMEPAGE HERO SLIDES (1920px)
+  // Each slide should feel visually distinct
+  // ────────────────────────────────────────────────
+
+  // Slide 1: Aesthetic Dermatology — radiant beauty, luxury skincare
+  // Verified warm/on-brand IDs (Session 12): 2661255 radiant portrait,
+  // 3985329 facial treatment, 3738355 LED skin glow
+  heroSlide1: { primary: "2661255", alts: ["3985329", "3738355"] },
+
+  // Slide 2: Longevity & Wellness — vitality, golden hour, health
+  // 3764568 spa/wellness, 5069432 beauty/skincare, 3865676 warm spa environment
+  heroSlide2: { primary: "3764568", alts: ["5069432", "3865676"] },
+
+  // Slide 3: Men's Health — confident, refined masculinity
+  heroSlide3: { primary: "2379005", alts: ["1681010", "2182970"] },
+
+  // ────────────────────────────────────────────────
+  // ABOUT & PHILOSOPHY (1200px)
+  // Contemplative, warm, editorial beauty
+  // ────────────────────────────────────────────────
+  aboutIntro:      { primary: "3985329", alts: ["3985338", "3985339"] },
+  aboutStory:      { primary: "3997993", alts: ["3997989", "4004172"] },
+  aboutApproach:   { primary: "3865676", alts: ["5069432", "3764568"] },
+  aboutPhilosophy: { primary: "7579831", alts: ["3764013", "5069608"] },
+
+  // ────────────────────────────────────────────────
+  // DOCTOR INTRO (1200px)
+  // Uses real doctor photo — these are fallback/accent images
+  // ────────────────────────────────────────────────
+  doctorIntro: { primary: "5473955", alts: ["3783725", "5473950"] },
+
+  // ────────────────────────────────────────────────
+  // SERVICES GRID CATEGORIES (800px)
+  // Each category gets its own distinct visual
+  // ────────────────────────────────────────────────
+
+  // Aesthetics: facial treatment, injectables
+  servicesAesthetics:      { primary: "3985311", alts: ["3985330", "3985333"] },
+  // Skin Rejuvenation: skincare, glow, radiance
+  servicesSkinRejuv:       { primary: "3738355", alts: ["3738339", "3738348"] },
+  // Regenerative: science meets nature, cellular
+  servicesRegenerative:    { primary: "4041392", alts: ["4056535", "5217882"] },
+  // Men's Health: masculine grooming, confidence
+  servicesMensHealth:      { primary: "3785079", alts: ["6149025", "6801648"] },
+  // Wellness: IV therapy, vitality, healthy living
+  servicesWellness:        { primary: "3865676", alts: ["3997993", "3759660"] },
+
+  // ────────────────────────────────────────────────
+  // CTA BANNER BACKGROUND (2000px)
+  // Aspirational, dreamy, warm gold tones
+  // ────────────────────────────────────────────────
+  ctaBanner: { primary: "3952137", alts: ["3373714", "3373753"] },
+
+  // ────────────────────────────────────────────────
+  // BLOG PAGE (800px thumbs, 1200px hero)
+  // Skincare topics, ingredients, lifestyle
+  // ────────────────────────────────────────────────
+  blogHero:   { primary: "3738355", alts: ["3985329", "3985338"] },
+  blogThumb1: { primary: "3735626", alts: [] },
+  blogThumb2: { primary: "3735655", alts: [] },
+  blogThumb3: { primary: "7056429", alts: [] },
+
+  // ────────────────────────────────────────────────
+  // MEN'S CLINIC HERO (1920px)
+  // Masculine luxury, confidence, refinement
+  // ────────────────────────────────────────────────
+  mensClinicHero: { primary: "1722198", alts: ["2897883", "1043474"] },
+
+  // ────────────────────────────────────────────────
+  // PAGE HEROES (1920px)
+  // Distinct imagery per section
+  // ────────────────────────────────────────────────
+  treatmentsHero: { primary: "3865530", alts: ["3865557", "3865584"] },
+  concernsHero:   { primary: "3762879", alts: ["3762875", "3762870"] },
+  drAziHero:      { primary: "3764568", alts: [] },
+
+  // ────────────────────────────────────────────────
+  // LOCATIONS (1920px hero, 800px images)
+  // Modern clinic, welcoming, warm
+  // ────────────────────────────────────────────────
+  locationsHero:    { primary: "3865676", alts: ["3764568", "5069432"] },
+  locationsImage:   { primary: "3764568", alts: [] },
+  locationShowcase: { primary: "3865676", alts: [] },
+
+  // ────────────────────────────────────────────────
+  // GENERIC SUBPAGE HEROES (1920px)
+  // ────────────────────────────────────────────────
+  reviewsHero:     { primary: "3985329", alts: ["3738355", "3985338"] },
+  galleryHero:     { primary: "3985338", alts: ["2661255", "3985329"] },
+  faqHero:         { primary: "3985329", alts: ["3764568", "3738355"] },
+  contactHero:     { primary: "3985329", alts: ["3738355", "2661255"] },
+  privacyHero:     { primary: "4173624", alts: ["3825529", "3760810"] },
+  termsHero:       { primary: "4173624", alts: ["3825529", "3760810"] },
+  shopHero:        { primary: "3737599", alts: ["3736520", "3738342"] },
+  membershipHero:  { primary: "3985329", alts: ["3738355", "2661255"] },
+  packagesHero:     { primary: "3738355", alts: ["3985329", "3764568"] },
+
+  // ────────────────────────────────────────────────
+  // TESTIMONIAL AVATARS (300px, no rotation)
+  // ────────────────────────────────────────────────
   testimonials: [
-    "https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?auto=compress&cs=tinysrgb&w=300",
-    "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=300",
-    "https://images.pexels.com/photos/3807755/pexels-photo-3807755.jpeg?auto=compress&cs=tinysrgb&w=300",
-    "https://images.pexels.com/photos/3771089/pexels-photo-3771089.jpeg?auto=compress&cs=tinysrgb&w=300",
-    "https://images.pexels.com/photos/3807571/pexels-photo-3807571.jpeg?auto=compress&cs=tinysrgb&w=300",
-    "https://images.pexels.com/photos/3807534/pexels-photo-3807534.jpeg?auto=compress&cs=tinysrgb&w=300",
-    "https://images.pexels.com/photos/3807539/pexels-photo-3807539.jpeg?auto=compress&cs=tinysrgb&w=300",
-    "https://images.pexels.com/photos/3771107/pexels-photo-3771107.jpeg?auto=compress&cs=tinysrgb&w=300",
-    "https://images.pexels.com/photos/3807528/pexels-photo-3807528.jpeg?auto=compress&cs=tinysrgb&w=300",
+    "30899461", "19039168", "37546", "1096979", "29838678",
+    "6336662", "8964940", "19963165", "15752232",
   ],
-
-  // Wellness/Lifestyle Images
-  lifestyle: {
-    wellness: "https://images.pexels.com/photos/4498362/pexels-photo-4498362.jpeg?auto=compress&cs=tinysrgb&w=800",
-    skincare: "https://images.pexels.com/photos/3985331/pexels-photo-3985331.jpeg?auto=compress&cs=tinysrgb&w=800",
-    healthy: "https://images.pexels.com/photos/4498294/pexels-photo-4498294.jpeg?auto=compress&cs=tinysrgb&w=800",
-    relaxation: "https://images.pexels.com/photos/5069432/pexels-photo-5069432.jpeg?auto=compress&cs=tinysrgb&w=800",
-  },
-
-  // Mega Menu Feature Image
-  megaMenu: "https://images.pexels.com/photos/3985331/pexels-photo-3985331.jpeg?auto=compress&cs=tinysrgb&w=400",
-
-  // Consultation Form Image
-  consultation: "https://images.pexels.com/photos/5069432/pexels-photo-5069432.jpeg?auto=compress&cs=tinysrgb&w=800",
 };
 
-/**
- * Get a random testimonial image
- */
-export function getRandomTestimonialImage(): string {
-  return images.testimonials[Math.floor(Math.random() * images.testimonials.length)];
+/* ─── Smart Image Retriever ─── */
+export function getPageImage(key: keyof typeof pageImages): string {
+  const entry = pageImages[key] as ImageSlot | string[];
+  if (!entry) return pexelsUrl("3373716", 800); // fallback
+
+  // Handle testimonials array
+  if (Array.isArray(entry)) {
+    return pexelsUrl(entry[0], 300);
+  }
+
+  // Determine width from key name
+  const width = key.includes("Hero") || key.includes("Slide") ? 1920
+    : key.includes("Banner") ? 2000
+    : key.includes("location") ? 1200
+    : 800;
+
+  // Pick random from primary + alts
+  if (entry.alts && entry.alts.length > 0) {
+    return pexelsUrl(pickImage(entry.primary, entry.alts), width);
+  }
+
+  return pexelsUrl(entry.primary, width);
 }
 
+/* ─── Videos ─── */
 /**
- * Get image URL by treatment slug
+ * Hero videos — using HD (1280x720) instead of UHD for performance
+ * Ambient, beauty-focused loops
  */
-export function getTreatmentImage(slug: string): string {
-  const slugToImage: Record<string, string> = {
-    "botox-dysport": images.treatments.botox,
-    "dermal-fillers": images.treatments.fillers,
-    "pdo-threads": images.treatments.threads,
-    "kybella": images.treatments.kybella,
-    "prp-therapy": images.treatments.prp,
-    "exosome-therapy": images.treatments.exosome,
-    "pdrn-therapy": images.treatments.pdrn,
-    "microneedling": images.treatments.microneedling,
-    "morpheus8": images.treatments.morpheus8,
-    "chemical-peels": images.treatments.chemicalPeels,
-    "hydrafacial": images.treatments.hydrafacial,
-    "glp1-weight-loss": images.treatments.weightLoss,
-    "hormone-therapy": images.treatments.hormones,
-    "iv-therapy": images.treatments.ivTherapy,
-    "peptides": images.treatments.peptides,
-  };
-
-  return slugToImage[slug] || images.treatments.botox;
-}
-
+export const videos = {
+  // Main hero: beauty/skincare ambient
+  heroHome: "https://videos.pexels.com/video-files/4350888/4350888-hd_1280_720_30fps.mp4",
+  // Treatments page
+  heroTreatments: "https://videos.pexels.com/video-files/8131881/8131881-hd_1280_720_25fps.mp4",
+  // Wellness
+  heroWellness: "https://videos.pexels.com/video-files/3763029/3763029-hd_1280_720_25fps.mp4",
+  // Spa ambiance
+  spaAmbiance: "https://videos.pexels.com/video-files/6929264/6929264-hd_1280_720_25fps.mp4",
+  // Skincare
+  skincare: "https://videos.pexels.com/video-files/8131891/8131891-hd_1280_720_25fps.mp4",
+  // Men's clinic
+  mensClinic: "https://videos.pexels.com/video-files/4787995/4787995-hd_1280_720_25fps.mp4",
+  // Candle ambiance
+  candleAmbiance: "https://videos.pexels.com/video-files/5902899/5902899-hd_1280_720_25fps.mp4",
+};
