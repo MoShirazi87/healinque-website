@@ -1,3 +1,5 @@
+import { pexelsUrl } from "@/lib/data/images";
+
 export interface Treatment {
   id: string;
   slug: string;
@@ -31,10 +33,8 @@ export interface Treatment {
 
 export type TreatmentCategory =
   | "aesthetics"
-  | "regenerative"
   | "skin-rejuvenation"
-  | "mens-health"
-  | "wellness";
+  | "hair-restoration";
 
 export const treatmentCategories: Record<
   TreatmentCategory,
@@ -43,60 +43,56 @@ export const treatmentCategories: Record<
   aesthetics: {
     name: "Aesthetic Treatments",
     description:
-      "Enhance your natural beauty with physician-led injectable and skin treatments",
-    image: "https://images.pexels.com/photos/7446671/pexels-photo-7446671.jpeg?auto=compress&cs=tinysrgb&w=800",
-  },
-  regenerative: {
-    name: "Regenerative Medicine",
-    description:
-      "Advanced regenerative protocols to restore function and vitality",
-    image: "https://images.pexels.com/photos/6787217/pexels-photo-6787217.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "Physician-led injectable and skin treatments for natural, lasting results",
+    // Session 20: practitioner-servicing-client (v3 A bucket anchor)
+    image: pexelsUrl("7582568"),
   },
   "skin-rejuvenation": {
     name: "Skin Rejuvenation",
     description:
-      "Restore your skin's natural radiance with medical-grade treatments",
-    image: "https://images.pexels.com/photos/5473955/pexels-photo-5473955.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "Medical-grade treatments to restore your skin's radiance and texture",
+    // Session 20: skincare close-up (v2 #2 bucket anchor)
+    image: pexelsUrl("3985325"),
   },
-  "mens-health": {
-    name: "Men's Health",
+  "hair-restoration": {
+    name: "Hair Restoration",
     description:
-      "Dedicated treatments for male patients in a comfortable, discreet setting",
-    image: "https://images.pexels.com/photos/8967786/pexels-photo-8967786.jpeg?auto=compress&cs=tinysrgb&w=800",
-  },
-  wellness: {
-    name: "Wellness & Longevity",
-    description:
-      "Optimize your health, energy, and vitality for the long run",
-    image: "https://images.pexels.com/photos/3764568/pexels-photo-3764568.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "Advanced growth factor protocols for progressive hair density improvement",
+    // Session 20: practitioner servicing — no hair-specific ID in approved pool
+    image: pexelsUrl("5069494"),
   },
 };
 
 export const treatments: Treatment[] = [
+  // ──────────────────────────────────────────────────────────────
   // AESTHETIC TREATMENTS
+  // ──────────────────────────────────────────────────────────────
   {
     id: "botox-dysport",
     slug: "botox-dysport",
-    name: "Botox & Dysport",
+    name: "Botox & Neuromodulators",
+    shortName: "Botox",
     category: "aesthetics",
     tagline: "Precision Neuromodulation for Natural Expression",
     description:
-      "I use Botox and Dysport to smooth dynamic wrinkles—the lines created by facial movement—while preserving your ability to emote. The key is precise dosing and placement. Too much product and you look frozen. Done well, you look like yourself, refreshed. Most patients see results within a week, with full effect at two weeks.",
+      "At Healinque, I use Botox, Dysport, and other FDA-approved neuromodulators to smooth dynamic wrinkles — the lines created by repeated facial movement — while preserving your ability to express yourself naturally. My team and I take a conservative, anatomy-driven approach: precise dosing and strategic placement mean you look refreshed, never frozen. I evaluate each patient's unique muscle patterns, skin thickness, and aesthetic goals before recommending a treatment plan. Most patients see initial softening within 3 to 7 days, with the full effect settling in at 10 to 14 days. Results typically last 3 to 4 months, and consistent treatment over time can actually train the muscles to relax, meaning some patients find they need less product as they go. I also offer Daxxify consultations for patients interested in longer-lasting neuromodulator options as they become available. Treatments are performed by me or one of the nurse practitioners or physician assistants I've personally trained.",
     benefits: [
       "Smooth forehead lines, frown lines, and crow's feet",
-      "Preserve natural facial expressions",
+      "Preserve natural facial expressions with conservative dosing",
       "Prevent deeper wrinkles from forming over time",
-      "Quick in-office treatment with zero downtime",
-      "Results typically last 3–4 months",
+      "Quick in-office treatment — most visits under 30 minutes",
+      "Zero downtime; return to normal activities immediately",
+      "Results last 3 to 4 months with consistent maintenance",
     ],
     idealFor: [
-      "Dynamic expression lines (not volume loss)",
-      "Preventative treatment for younger patients",
-      "Those seeking subtle, natural-looking results",
-      "Anyone uncomfortable with frozen or overdone appearance",
+      "Dynamic expression lines (forehead, glabella, crow's feet)",
+      "Preventative treatment for patients in their late 20s and 30s",
+      "Those seeking subtle, natural-looking results — not a frozen look",
+      "Masseter reduction for jawline slimming or TMJ relief (off-label)",
+      "Lip flip for subtle upper lip enhancement without filler",
     ],
     procedure: {
-      duration: "15-30 minutes",
+      duration: "15–30 minutes",
       downtime: "None",
       results: "First results at 3–7 days; full effect at 10–14 days",
       sessions: "Every 3–4 months for maintenance",
@@ -109,1669 +105,405 @@ export const treatments: Treatment[] = [
       {
         question: "Will I look frozen?",
         answer:
-          "No. Dr. Shirazi uses precise dosing and placement to smooth wrinkles while preserving your natural expressions and ability to emote.",
+          "No. My approach is built around preserving natural movement. I use precise dosing and strategic placement to smooth wrinkles while keeping your expressions intact. I would rather under-treat and bring you back for a touch-up than over-treat. The goal is always 'refreshed,' never 'done.'",
       },
       {
         question: "How long do results last?",
         answer:
-          "Results typically last 3-4 months. Regular treatments help maintain results and can even prevent wrinkles from forming as deeply.",
+          "Results typically last 3 to 4 months. With consistent treatment over time, many patients find their muscles begin to relax more readily, which can extend the interval between appointments. I recommend scheduling your next visit before the product fully wears off for the smoothest, most continuous results.",
       },
       {
         question: "Is there any downtime?",
         answer:
-          "You can return to normal activities immediately. We recommend avoiding strenuous exercise for 24 hours and not lying flat for 4 hours after treatment.",
-      },
-      {
-        question: "When will I see results?",
-        answer:
-          "You'll begin to see results within 3-7 days, with full results visible at 2 weeks as the Botox fully integrates.",
-      },
-      {
-        question: "What's the difference between Botox, Dysport, and Daxxify?",
-        answer:
-          "All three are FDA-approved neuromodulators. Botox is the most established, lasting 3–4 months. Dysport spreads slightly wider, making it good for larger areas like the forehead. Daxxify is the newest option and lasts significantly longer — about 6–9 months for many patients. Dr. Shirazi recommends the product best suited to your anatomy and goals.",
+          "There is no downtime. You can return to work and normal activities immediately after treatment. I recommend avoiding strenuous exercise for 24 hours, not lying flat for 4 hours, and avoiding rubbing or massaging the treated areas for the first day. Some patients experience minor redness or pinpoint bruising at the injection sites, which resolves within a day or two.",
       },
       {
         question: "What about off-label uses like masseter Botox or lip flip?",
         answer:
-          "While Botox is FDA-approved for frown lines, crow's feet, and forehead wrinkles, many uses (masseter treatment for TMJ, lip flip, chin dimpling) are off-label. Dr. Shirazi uses off-label applications thoughtfully based on anatomy and goals, and you'll discuss the distinction during consultation. Off-label doesn't mean unsafe—it means the indication isn't formally FDA-cleared, but there is clinical support and physician experience.",
+          "While Botox is FDA-approved for frown lines, crow's feet, and forehead wrinkles, many of its most popular uses are technically off-label. Masseter treatment for jawline slimming or TMJ-related tension, the lip flip for subtle upper lip enhancement, and chin dimpling correction are all well-established in clinical practice. Off-label does not mean unsafe — it means the specific indication has not gone through the formal FDA approval process, though there is substantial clinical evidence and physician experience supporting these uses. I discuss these distinctions openly during your consultation.",
       },
       {
-        question: "Who is NOT a candidate for Botox?",
+        question: "Who is NOT a candidate for Botox or Dysport?",
         answer:
-          "Botox is not recommended if you have neuromuscular disorders, are allergic to botulinum toxin, are pregnant or breastfeeding, or are taking certain medications (like some blood thinners or antibiotics that interact). Dr. Shirazi reviews your medical history to ensure safety.",
+          "Neuromodulators are not recommended for patients with neuromuscular disorders (such as myasthenia gravis or ALS), known allergy to botulinum toxin, active infection at the injection site, or who are pregnant or breastfeeding. Certain medications, including some antibiotics and blood thinners, may also interact. I review your complete medical history during consultation to ensure safety before proceeding with any treatment.",
+      },
+      {
+        question: "What is the difference between Botox and Dysport?",
+        answer:
+          "Both are FDA-approved botulinum toxin type A neuromodulators that work by temporarily relaxing targeted muscles. Dysport has a slightly broader diffusion pattern, which can be advantageous for large areas like the forehead, and some patients notice results a day or two sooner. Botox tends to stay more precisely where it is placed, which is ideal for smaller, targeted areas. I recommend the product best suited to your anatomy and treatment goals. I also offer Daxxify consultations for patients interested in the newer, longer-lasting neuromodulator option.",
+      },
+      {
+        question: "Do men need more Botox than women?",
+        answer:
+          "Yes, in most cases. Men typically have larger, stronger facial muscles — particularly in the forehead and glabella — and generally require 20 to 30 percent more units than women to achieve the same degree of relaxation. I account for this during your initial assessment and provide transparent pricing based on the number of units recommended for your anatomy.",
       },
     ],
-    image: "https://images.pexels.com/photos/7581590/pexels-photo-7581590.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/4586713/pexels-photo-4586713.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/4586741/pexels-photo-4586741.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
+    // Session 20: practitioner injecting (v3 A) + Keep-pile beauty alts
+    image: pexelsUrl("7582568"),
+    imageAlts: [pexelsUrl("4586713"), pexelsUrl("4586741"), pexelsUrl("7581577")],
     featured: true,
     popular: true,
   },
-  {
-    id: "dysport",
-    slug: "dysport",
-    name: "Dysport",
-    category: "aesthetics",
-    tagline: "Extended Coverage Neuromodulation",
-    description:
-      "Dysport is another FDA-approved neuromodulator that works similarly to Botox, but spreads slightly wider. I typically recommend it for larger areas like the forehead. Some patients also prefer it because results appear slightly faster—usually within 3–5 days instead of a full week. Like Botox, the goal is always a refreshed, natural appearance.",
-    benefits: [
-      "Similar smoothing to Botox with slightly broader spread",
-      "Excellent for large treatment areas (forehead, temples)",
-      "Faster initial results (3–5 days vs. 7 days)",
-      "Fully effective at 2 weeks, lasts 3–4 months",
-      "Preserves natural facial movement",
-    ],
-    idealFor: [
-      "Large forehead areas needing coverage",
-      "Those who prefer faster onset of results",
-      "Patients switching from or alternating with Botox",
-      "Anyone seeking broader muscle relaxation",
-    ],
-    procedure: {
-      duration: "15-30 minutes",
-      downtime: "None",
-      results: "First results at 3–5 days; full effect at 10–14 days",
-      sessions: "Every 3–4 months for maintenance",
-    },
-    pricing: {
-      starting: 4.5,
-      note: "$4.50/unit · Most patients spend $150–$400 per session for Dysport",
-    },
-    faqs: [
-      {
-        question: "How is Dysport different from Botox?",
-        answer:
-          "Both are neuromodulators, but Dysport has a slightly broader spread pattern, making it ideal for larger areas like the forehead.",
-      },
-      {
-        question: "Do results feel different?",
-        answer:
-          "The results are similar, though the timeline to peak effect is slightly faster with Dysport, usually within 3-5 days.",
-      },
-      {
-        question: "Can I switch between Botox and Dysport?",
-        answer:
-          "Yes, you can alternate or choose based on your preference. Dr. Shirazi will discuss which is best for your unique anatomy.",
-      },
-      {
-        question: "What areas does Dysport work best for?",
-        answer:
-          "Dysport is excellent for the forehead, glabella (frown lines), and other larger treatment areas.",
-      },
-      {
-        question: "Who is NOT a candidate for Dysport?",
-        answer:
-          "Dysport is not recommended if you have neuromuscular disorders, are allergic to botulinum toxin, are pregnant or breastfeeding, or are taking certain medications. Dr. Shirazi reviews your full history to ensure safety.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/3985338/pexels-photo-3985338.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/3985339/pexels-photo-3985339.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/2661255/pexels-photo-2661255.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-    popular: true,
-  },
+
   {
     id: "dermal-fillers",
     slug: "dermal-fillers",
     name: "Dermal Fillers",
+    shortName: "Fillers",
     category: "aesthetics",
-    tagline: "Volume Restoration for Subtle Enhancement",
+    tagline: "Restore Volume, Refine Contour, Preserve Natural Beauty",
     description:
-      "As we age, we don't just get wrinkles—we lose volume. Fillers restore that volume in a way that looks natural and supports your bone structure. I use hyaluronic acid fillers because they're reversible, customizable, and safe. My approach is conservative: start with what you need, not with what's possible. Overfilled looks worse than slightly under-filled. Results are immediate but final results appear at two weeks after swelling settles. Safety at Healinque: Every filler treatment begins with a thorough vascular anatomy assessment. I keep hyaluronidase (the dissolving enzyme that reverses HA fillers) on-site and follow strict emergency protocols for the rare event of vascular occlusion. This is what physician-led care means—not just artistry, but the medical training to recognize and manage complications.",
+      "Dermal fillers restore lost volume, soften deep folds, and refine facial contours without surgery. At Healinque, I take a conservative, layered approach — building results gradually over one or more sessions rather than overfilling in a single visit. I evaluate your facial structure, skin quality, and proportions to create a customized treatment plan that respects your natural anatomy. I use hyaluronic acid (HA) fillers for most applications because they are reversible: if you are unhappy with the result or experience a complication, I can dissolve the product with hyaluronidase, which I keep on-site at all times. My team is trained in detailed vascular anatomy assessment, and I follow established safety protocols including aspiration technique and emergency preparedness for vascular occlusion. Common treatment areas include lips, cheeks, jawline, chin, under-eyes (tear troughs), nasolabial folds, and marionette lines. Treatments are performed by me or one of the nurse practitioners or physician assistants I've personally trained. I do not chase trends — I chase balance.",
     benefits: [
-      "Restore facial volume lost to aging",
-      "Smooth nasolabial folds and marionette lines",
-      "Enhance cheekbones and jawline definition",
-      "Reversible with hyaluronidase if needed",
-      "Results last 6–18 months depending on area",
-      "No surgery, no downtime",
+      "Restore volume lost to aging in cheeks, temples, and mid-face",
+      "Enhance and define lips with natural-looking results",
+      "Soften nasolabial folds and marionette lines",
+      "Sculpt and define the jawline and chin",
+      "Improve under-eye hollows (tear troughs)",
+      "Immediate visible results with minimal downtime",
+      "HA fillers are fully reversible with hyaluronidase",
     ],
     idealFor: [
-      "Hollow cheeks or temples",
-      "Under-eye hollows and dark circles",
-      "Deep parentheses and nasolabial folds",
-      "Those seeking facial contouring without surgery",
+      "Volume loss in the mid-face, temples, or cheeks",
+      "Lip enhancement or lip border definition",
+      "Jawline contouring and chin projection",
+      "Under-eye hollowing or dark circles with a structural component",
+      "Nasolabial folds and marionette lines",
+      "Patients who want reversible, adjustable results",
     ],
     procedure: {
-      duration: "30-60 minutes",
-      downtime: "Mild swelling/bruising 1-3 days; ice helps",
-      results: "Immediate, full results at 2 weeks",
-      sessions: "Typically 1 treatment; touch-ups every 6-18 months",
+      duration: "30–60 minutes",
+      downtime: "Mild swelling for 2–5 days; bruising possible",
+      results: "Immediate; final result at 2 weeks once swelling resolves",
+      sessions: "Touch-up at 2–4 weeks if needed; maintenance every 6–18 months depending on product and area",
     },
     pricing: {
       starting: 500,
-      note: "Starting at $500 per syringe · Final pricing determined at consultation",
+      note: "Starting at $500/syringe · Most patients require 1–3 syringes depending on area and goals",
     },
     faqs: [
       {
-        question: "Which filler is right for me?",
+        question: "How do you ensure natural-looking results?",
         answer:
-          "Dr. Shirazi recommends the best filler based on your treatment area and goals. Thicker fillers work for cheeks and jawline, while softer fillers are ideal for lips and under-eyes.",
+          "My philosophy is 'less is more.' I use a layered approach — placing conservative amounts of filler and building gradually over one or more sessions. This prevents the overfilled, puffy look that gives fillers a bad reputation. I evaluate your facial proportions, bone structure, and skin quality before recommending a plan. I would rather have you come back for a small touch-up than leave with too much product on day one.",
       },
       {
-        question: "Are fillers reversible?",
+        question: "How long do fillers last?",
         answer:
-          "HA fillers can often be dissolved with hyaluronidase if needed.",
+          "Duration depends on the product and treatment area. Lip fillers typically last 6 to 12 months. Cheek and jawline fillers made with thicker HA formulations last 12 to 18 months. Tear trough filler can last 12 months or longer in many patients. I discuss the expected longevity of each product during your consultation so you can plan accordingly.",
       },
       {
-        question: "How long do results last?",
+        question: "What are the warning signs of vascular occlusion?",
         answer:
-          "Results typically last 6-18 months depending on the filler type and treatment area. Lips metabolize faster than cheeks.",
+          "Vascular occlusion is a rare but serious complication that occurs when filler is inadvertently injected into or compresses a blood vessel. Warning signs include severe or disproportionate pain at the injection site, blanching (whitening) of the skin, dusky or bluish discoloration, and in the case of periorbital injections, any changes to vision. If you experience any of these symptoms, contact my office immediately. I keep hyaluronidase on-site and my team is trained in emergency vascular occlusion protocols.",
       },
       {
-        question: "Will I look overfilled?",
+        question: "Can I get fillers if I am pregnant or breastfeeding?",
         answer:
-          "Dr. Shirazi takes a conservative approach, starting with appropriate amounts and building gradually. The goal is natural enhancement, not obvious augmentation.",
+          "No. I do not perform filler treatments on patients who are pregnant or breastfeeding. There is insufficient safety data in this population, and I err on the side of caution. I'm happy to schedule your treatment once you are no longer pregnant or nursing.",
       },
       {
-        question: "What is vascular occlusion and what are the warning signs?",
+        question: "How do you prevent filler migration?",
         answer:
-          "Vascular occlusion occurs when filler enters or compresses a blood vessel — it's the most serious filler complication, though rare. Warning signs include: sudden severe pain (not just typical soreness), blanching or paleness of skin immediately after injection, vision changes if fillers are near the eye, or rapid skin color changes. If you experience any of these during or after treatment, inform Dr. Shirazi immediately—this is reversible if caught quickly with hyaluronidase. This is why physician-placed fillers matter.",
+          "Filler migration is often the result of overfilling, using the wrong product for the area, or poor injection technique. I mitigate this risk by using conservative volumes, selecting the appropriate filler viscosity for each treatment zone, injecting at the correct tissue depth, and avoiding areas of excessive movement with products not designed for that region. My layered approach — building over multiple sessions — also reduces the risk significantly.",
       },
       {
-        question: "Are biostimulators like Sculptra reversible?",
+        question: "What is the difference between HA fillers and biostimulators like Sculptra or Radiesse?",
         answer:
-          "Only hyaluronic acid (HA) fillers are reversible with hyaluronidase. Biostimulators like Sculptra and Radiesse work by stimulating your own collagen and cannot be dissolved. This is one reason I prefer HA fillers for most patients—the reversibility option.",
+          "Hyaluronic acid (HA) fillers provide immediate volume and are fully reversible — I can dissolve them with hyaluronidase if needed. Biostimulators like Sculptra (poly-L-lactic acid) and Radiesse (calcium hydroxylapatite) work by stimulating your body's own collagen production over time, providing gradual results that develop over weeks to months. The key distinction: biostimulators cannot be dissolved. I discuss the pros and cons of each approach during consultation and recommend the option best suited to your goals.",
       },
       {
-        question: "Can I get fillers if I'm pregnant or breastfeeding?",
+        question: "How do you manage pain during the procedure?",
         answer:
-          "Safety data on fillers during pregnancy and breastfeeding is limited. We typically recommend waiting until after pregnancy and breastfeeding to proceed with elective cosmetic fillers. If you're planning pregnancy or nursing, discuss timing with Dr. Shirazi.",
-      },
-      {
-        question: "Do fillers migrate?",
-        answer:
-          "HA fillers can shift slightly over time with facial movement and gravity, but true migration is rare when placed correctly. I use proper technique, appropriate placement depth, and conservative dosing to prevent unwanted movement. This is another reason precise placement by a physician is important.",
+          "Most modern HA fillers contain lidocaine premixed into the product, which numbs the area as it is injected. For sensitive areas like the lips, I also apply a topical numbing cream 15 to 20 minutes before treatment. Most patients describe the sensation as mild pressure with brief, manageable discomfort. I check in with you throughout the procedure and can pause at any time.",
       },
     ],
-    image: "https://images.pexels.com/photos/2661255/pexels-photo-2661255.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/9775166/pexels-photo-9775166.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/9038626/pexels-photo-9038626.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
+    // Session 20: practitioner-servicing (v3 A bucket) + Keep editorial alt
+    image: pexelsUrl("7581577"),
+    imageAlts: [pexelsUrl("9157201"), pexelsUrl("5069494"), pexelsUrl("3985311")],
     featured: true,
-    popular: true,
-  },
-  {
-    id: "lip-filler",
-    slug: "lip-filler",
-    name: "Lip Filler",
-    category: "aesthetics",
-    tagline: "Fuller Lips That Still Look Natural",
-    description:
-      "Beautiful lip enhancement is about proportion and subtlety. I don't aim for big or pouty—I aim for lips that look like a better version of yours. Adding definition to the border, restoring lost volume, and creating balance. Lips lose definition and plumpness with age, and a small amount of filler can make a big difference. Swelling is normal for a few days.",
-    benefits: [
-      "Fuller, more defined lips that enhance your features",
-      "Improved lip border and shape definition",
-      "Natural-looking volume without obvious augmentation",
-      "Balanced proportions between upper and lower lip",
-      "Results last 6–9 months",
-      "Can be adjusted at follow-up visits",
-    ],
-    idealFor: [
-      "Naturally thin lips wanting more fullness",
-      "Loss of lip definition with aging",
-      "Asymmetrical lips",
-      "Those seeking subtle, natural-looking enhancement",
-    ],
-    procedure: {
-      duration: "30-45 minutes",
-      downtime: "Swelling and tenderness 1-3 days; ice recommended",
-      results: "Immediate, settling over 1-2 weeks for final appearance",
-      sessions: "Typically 1 treatment; touch-ups every 6-9 months",
-    },
-    pricing: {
-      starting: 500,
-      note: "Starting at $500 per syringe · Final pricing determined at consultation",
-    },
-    faqs: [
-      {
-        question: "Will my lips look too big?",
-        answer:
-          "Dr. Shirazi specializes in natural-looking lip enhancement. She starts conservatively and can always add more at a follow-up appointment.",
-      },
-      {
-        question: "Is the procedure painful?",
-        answer:
-          "We apply topical numbing before injecting, and the filler itself contains lidocaine for comfort. Most patients describe the sensation as mild pressure.",
-      },
-      {
-        question: "Can I get my lips adjusted?",
-        answer:
-          "Absolutely. If you want to adjust the shape or volume at any time, you can return for a touch-up or adjustment.",
-      },
-      {
-        question: "How soon can I wear lipstick?",
-        answer:
-          "Wait 24 hours after treatment to allow initial swelling to subside, then you can wear your favorite lipstick as normal.",
-      },
-      {
-        question: "Who is NOT a candidate for lip fillers?",
-        answer:
-          "You should avoid lip fillers if you are pregnant or breastfeeding, have a history of cold sores or herpes (filler can trigger an outbreak), are on blood thinners, or have a bleeding disorder. Dr. Shirazi screens for these during consultation.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/2661255/pexels-photo-2661255.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/8989963/pexels-photo-8989963.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/6543299/pexels-photo-6543299.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
     popular: true,
   },
 
+  // ──────────────────────────────────────────────────────────────
   // SKIN REJUVENATION
-  {
-    id: "microneedling",
-    slug: "microneedling",
-    name: "Microneedling",
-    category: "skin-rejuvenation",
-    tagline: "Trigger Your Skin's Natural Collagen Response",
-    description:
-      "Microneedling works by creating controlled micro-injuries that trigger your body's natural healing response. Your skin responds by producing new collagen and elastin. It's simple, safe, and works for almost every skin type including darker skin. I typically recommend a series of three treatments spaced four weeks apart. Results appear gradually over 4-6 weeks as collagen remodels.",
-    benefits: [
-      "Stimulates natural collagen and elastin production",
-      "Improves skin texture, tone, and radiance",
-      "Minimizes acne scarring and pore size",
-      "Reduces fine lines and sun damage",
-      "Safe for all skin types and ethnicities",
-      "Minimal downtime, rapid recovery",
-    ],
-    idealFor: [
-      "Acne scarring and uneven texture",
-      "Fine lines and wrinkles",
-      "Large pores and enlarged pore appearance",
-      "Dull, tired-looking skin needing refreshment",
-    ],
-    procedure: {
-      duration: "60 minutes",
-      downtime: "Mild redness 1-3 days; can apply makeup after 24 hours",
-      results: "Progressive improvement over 4-6 weeks",
-      sessions: "Series of 3 treatments spaced 4 weeks apart recommended",
-    },
-    pricing: {
-      starting: 500,
-      note: "Starting at $500 per session · Series of 3: $1,200",
-    },
-    faqs: [
-      {
-        question: "Is microneedling painful?",
-        answer:
-          "We apply numbing cream before treatment, so you'll feel mild pressure rather than pain. Expect mild soreness for a day or two after.",
-      },
-      {
-        question: "When will I see results?",
-        answer:
-          "You may notice slight improvement immediately, but the best results appear over 4-6 weeks as collagen remodels.",
-      },
-      {
-        question: "Can microneedling be combined with other treatments?",
-        answer:
-          "Yes, microneedling works well with serums, PRP, and other treatments. Dr. Shirazi will recommend the best combination for your goals.",
-      },
-      {
-        question: "Is it safe for all skin types?",
-        answer:
-          "Microneedling is safe for all skin types and ethnicities. It's actually one of the safest rejuvenation treatments for darker skin tones.",
-      },
-      {
-        question: "Who should NOT get microneedling?",
-        answer:
-          "Avoid microneedling if you are pregnant, have active skin infections (like herpes or bacterial acne), are on isotretinoin (Accutane—wait 6-12 months after finishing), or have very severe active inflammatory acne. Recent chemical peels or laser treatments may also warrant waiting before microneedling.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/4586728/pexels-photo-4586728.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/5240446/pexels-photo-5240446.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/3785803/pexels-photo-3785803.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-    featured: true,
-  },
-  {
-    id: "prp-facial",
-    slug: "prp-facial",
-    name: "PRP Facial",
-    category: "skin-rejuvenation",
-    tagline: "Amplify Collagen with Your Own Growth Factors",
-    description:
-      "PRP combines microneedling with your own platelet-rich plasma—a concentrate of growth factors from your blood. We draw a small amount, spin it to concentrate the healing platelets, and apply it during microneedling. The platelets penetrate through the micro-channels and amplify collagen production beyond what microneedling alone achieves. Results are natural because they're coming from your own body.",
-    benefits: [
-      "Uses your own platelet-rich plasma—100% autologous",
-      "Amplifies collagen and elastin production",
-      "Improves skin texture, tone, and radiance dramatically",
-      "Reduces acne scarring and fine lines",
-      "Safe for all skin types and ethnicities",
-      "Progressive improvement over 4-8 weeks",
-      "Results continue improving with series",
-    ],
-    idealFor: [
-      "Natural skin rejuvenation without synthetic products",
-      "Patients with aging, dull, or textured skin",
-      "Significant acne scarring or uneven tone",
-      "Anyone seeking optimal collagen remodeling",
-      "Patients who prefer their body's own healing factors",
-    ],
-    procedure: {
-      duration: "60-75 minutes",
-      downtime: "Redness and mild swelling 1-3 days",
-      results: "Progressive over 4-8 weeks; optimal at 8-12 weeks",
-      sessions: "Series of 3-4 treatments spaced 4-6 weeks apart",
-    },
-    pricing: {
-      starting: 750,
-      note: "Starting at $750 per session · Series of 3: $2,000",
-    },
-    faqs: [
-      {
-        question: "Is the PRP Facial the same as the Vampire Facial?",
-        answer:
-          "Yes, the PRP Facial is commonly known as the Vampire Facial. It combines your own platelet-rich plasma with microneedling for natural skin rejuvenation.",
-      },
-      {
-        question: "How many sessions do I need?",
-        answer:
-          "Most patients benefit from 3-4 sessions spaced 4-6 weeks apart for optimal results. Maintenance treatments every 6-12 months sustain the glow.",
-      },
-      {
-        question: "Is it safe since it uses my own blood?",
-        answer:
-          "PRP has a favorable safety profile because it's derived from your own blood, which keeps allergic reaction risk low. That said, it's still an injection-based procedure — risks include bruising, redness, swelling, and rarely infection. We maintain strict sterile protocols to minimize risk.",
-      },
-      {
-        question: "When will I see results?",
-        answer:
-          "Initial glow appears within days. Collagen remodeling produces progressive improvement over 4-8 weeks, with optimal results after a series.",
-      },
-      {
-        question: "Who is NOT a candidate for PRP Facial?",
-        answer:
-          "Avoid PRP if you are pregnant, have active skin infections, are on blood thinners (Coumadin, heparin, warfarin), have a bleeding disorder, or have low platelet counts. Active inflammatory acne or recent isotretinoin use also warrants waiting. Dr. Shirazi reviews your health history carefully.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/3738355/pexels-photo-3738355.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/3738348/pexels-photo-3738348.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/3985311/pexels-photo-3985311.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-    popular: true,
-  },
+  // ──────────────────────────────────────────────────────────────
   {
     id: "chemical-peels",
     slug: "chemical-peels",
     name: "Chemical Peels",
+    shortName: "Peels",
     category: "skin-rejuvenation",
-    tagline: "Remove Damaged Layers to Reveal Fresh Skin",
+    // Session 22: Client-provided copy. Tightened, first-person, outcome-forward.
+    tagline: "Targeted Resurfacing for Clarity and Healthy Turnover",
     description:
-      "Chemical peels use carefully formulated acids to remove damaged outer layers of skin. Depending on depth, they can address sun damage, pigmentation, fine lines, and texture. I customize the strength based on your skin type and concerns. Light peels cause subtle flaking and minimal downtime. Deeper peels cause more obvious peeling but better results for serious concerns. All peels stimulate collagen remodeling underneath.",
+      "Targeted resurfacing treatments designed to improve clarity, tone, and congestion while supporting healthy skin turnover. I select peel strength and formulation based on your skin type, concerns, and tolerance — with particular care in patients with deeper skin tones, where the wrong peel can worsen pigmentation. A peel can stand alone, or sit inside a broader regenerative plan.",
     benefits: [
-      "Fades sun damage, age spots, and hyperpigmentation",
-      "Improves skin texture and tone",
-      "Reduces fine lines and wrinkles",
-      "Stimulates collagen production",
-      "Customizable depth for your skin and goals",
-      "Results visible at 1-2 weeks",
+      "Improve clarity, tone, and post-acne pigmentation",
+      "Smooth rough or congested texture",
+      "Support healthy cellular turnover",
+      "Soften early fine lines and dullness",
+      "Enhance the absorption of your home skincare",
     ],
     idealFor: [
-      "Sun damage and age spots",
-      "Melasma and hyperpigmentation",
-      "Dull, uneven skin tone",
-      "Fine lines and surface texture",
+      "Acne and post-acne pigmentation",
+      "Uneven tone",
+      "Dull or congested skin",
     ],
     procedure: {
-      duration: "30-45 minutes",
-      downtime: "1-7 days depending on peel depth",
-      results: "Visible at 1-2 weeks; improvements over 6 weeks",
-      sessions: "Series of 3-6 peels typically recommended",
+      duration: "30–45 minutes",
+      downtime: "Peeling/flaking for 2–5 days (varies by peel strength)",
+      results: "Visible brightness within 5–7 days; continued improvement over 2–3 weeks",
+      sessions: "Series of 3–6, spaced every 4–6 weeks; maintenance every 2–3 months",
     },
     pricing: {
       starting: 300,
-      note: "Starting at $300 per peel · Series pricing available",
+      note: "Starting at $300 · Pricing varies by peel type and depth",
     },
     faqs: [
       {
-        question: "Will my skin visibly peel?",
+        question: "How is a medical-grade peel different from a spa peel?",
         answer:
-          "Light peels may cause subtle flaking, while deeper peels cause noticeable peeling. Dr. Shirazi will explain what to expect based on your peel type.",
+          "Medical-grade peels use higher concentrations of active ingredients (such as trichloroacetic acid, glycolic acid, or salicylic acid) and penetrate deeper into the skin than the gentle enzyme or fruit-acid peels typically used in spas. They are supervised by a physician and can address concerns that spa-grade peels simply cannot reach — including moderate hyperpigmentation, acne scarring, and deeper textural irregularities. The tradeoff is that medical-grade peels may involve more downtime, but the results are significantly more impactful.",
       },
       {
-        question: "Which peel is right for me?",
+        question: "Will a chemical peel help with my melasma?",
         answer:
-          "It depends on your skin type, concerns, and downtime tolerance. Dr. Shirazi customizes the treatment to match your needs.",
+          "Chemical peels can be an effective component of a melasma management plan, but melasma requires a careful, conservative approach. I typically use superficial to medium-depth peels in combination with targeted topical regimens and strict sun protection. Aggressive peeling — especially in darker skin tones — can trigger a rebound flare of pigmentation. I evaluate your melasma type, skin tone, and history before recommending a peel protocol. Melasma is a chronic condition that I manage rather than cure, and I set realistic expectations accordingly.",
       },
       {
-        question: "Can I wear makeup during peeling?",
+        question: "How much downtime should I expect?",
         answer:
-          "After healing (usually 2-3 days), yes you can wear makeup. Avoid makeup during active peeling to let the skin breathe.",
+          "Downtime depends on the depth of the peel. Superficial peels (sometimes called lunchtime peels) may cause mild redness and light flaking for 1 to 3 days — most patients can return to work the same day with mineral sunscreen. Medium-depth peels involve more noticeable peeling and redness for 5 to 7 days. I provide detailed aftercare instructions including which products to use and which to avoid during the healing window.",
       },
       {
-        question: "Are results permanent?",
+        question: "How many peels will I need?",
         answer:
-          "The results are excellent, but sun exposure and aging continue. Maintenance peels every 6 months help sustain the benefits.",
+          "For most concerns, I recommend a series of 3 to 6 peels spaced 4 to 6 weeks apart for optimal results. A single peel will produce visible improvement, but the cumulative effect of a series is significantly more impactful. After completing your initial series, maintenance peels every 2 to 3 months help sustain results. I create a treatment timeline during your consultation based on your specific goals.",
       },
       {
         question: "Who should NOT get a chemical peel?",
         answer:
-          "Avoid chemical peels if you are pregnant, have active skin infections or cold sores, are on isotretinoin (Accutane—wait 6-12 months), have very sensitive or reactive skin, or have had recent laser or resurfacing treatments. Darker skin tones require careful peel selection to minimize risk of post-inflammatory hyperpigmentation. Dr. Shirazi customizes accordingly.",
+          "Chemical peels are not appropriate for patients with active cold sores or herpes simplex in the treatment area (I may prescribe antiviral prophylaxis), active skin infections, recent isotretinoin use (within the past 6 months for deeper peels), open wounds or sunburned skin, or patients who are pregnant or breastfeeding. Patients with a history of keloid scarring should also discuss this with me directly. I review all contraindications during your initial assessment.",
       },
     ],
-    image: "https://images.pexels.com/photos/6948180/pexels-photo-6948180.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/8140902/pexels-photo-8140902.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/3861592/pexels-photo-3861592.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-  },
-  {
-    id: "laser-resurfacing",
-    slug: "laser-resurfacing",
-    name: "Laser Resurfacing",
-    category: "skin-rejuvenation",
-    tagline: "Dramatic Skin Transformation with Fractional Laser",
-    description:
-      "Fractional laser resurfacing is the most aggressive skin rejuvenation treatment I offer. It uses laser energy to create thousands of tiny treatment zones that trigger deep collagen remodeling. This approach is excellent for significant scarring, severe sun damage, and dramatic texture issues. Recovery takes 5-7 days of visible peeling, but results are substantial and continue improving for 3-6 months.",
-    benefits: [
-      "Dramatically improves skin texture and smoothness",
-      "Minimizes acne scars and pitted scarring",
-      "Fades sun damage and hyperpigmentation",
-      "Reduces fine lines and wrinkles",
-      "Stimulates robust collagen remodeling",
-      "Evens skin tone and reduces discoloration",
-      "Results continue improving for months",
-    ],
-    idealFor: [
-      "Significant sun damage or photoaging",
-      "Acne scarring or pitted texture",
-      "Deep wrinkles and texture concerns",
-      "Hyperpigmentation and uneven tone",
-      "Patients willing to invest recovery time",
-    ],
-    procedure: {
-      duration: "30-60 minutes",
-      downtime: "5-7 days visible peeling; full healing 2-4 weeks",
-      results: "Progressive over 2-6 months",
-      sessions: "1-3 treatments depending on concerns",
-    },
-    pricing: {
-      starting: 1200,
-      note: "Starting at $1,200 · Final pricing determined at consultation",
-    },
-    faqs: [
-      {
-        question: "How long is the recovery?",
-        answer:
-          "Expect 5-7 days of redness and peeling. Most patients return to work within a week. Full healing takes 2-4 weeks depending on treatment intensity.",
-      },
-      {
-        question: "How many treatments do I need?",
-        answer:
-          "Many patients see significant improvement after one session. A series of 2-3 treatments may be recommended for deeper concerns like acne scarring.",
-      },
-      {
-        question: "Is laser resurfacing painful?",
-        answer:
-          "With topical numbing, most patients describe the sensation as warm tingling. Comfort measures are prioritized throughout the procedure.",
-      },
-      {
-        question: "When do results appear?",
-        answer:
-          "Once initial redness fades (1-2 weeks), you will notice smoother, fresher skin. Collagen remodeling continues improving results for 2-6 months.",
-      },
-      {
-        question: "Who should NOT get laser resurfacing?",
-        answer:
-          "Avoid laser resurfacing if you are pregnant, have active skin infections, are on isotretinoin (Accutane—wait 6-12 months after finishing), or have a severe keloid tendency. Recent chemical peels or intense resurfacing also warrant waiting 4-6 weeks. Darker skin tones carry higher risk of pigmentation changes—Dr. Shirazi uses customized settings and discusses expectations.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/30359546/pexels-photo-30359546.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/5912194/pexels-photo-5912194.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/7607777/pexels-photo-7607777.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
+    // Session 20: professional skincare close-up (v2 #2 skincare bucket)
+    image: pexelsUrl("3985325"),
+    imageAlts: [pexelsUrl("3985331"), pexelsUrl("6948184"), pexelsUrl("6543355")],
     featured: true,
   },
 
-  // REGENERATIVE MEDICINE
   {
-    id: "prp-therapy",
-    slug: "prp-therapy",
-    name: "PRP Therapy",
-    category: "regenerative",
-    tagline: "Harness Your Blood's Growth Factors",
+    id: "microneedling",
+    slug: "microneedling",
+    // Session 22: Renamed per client (Microneedling + Exosomes). Copy tightened, first-person.
+    name: "Microneedling + Exosomes",
+    shortName: "Microneedling",
+    category: "skin-rejuvenation",
+    tagline: "Regenerative Collagen Induction with Exosome Support",
     description:
-      "PRP therapy uses platelet-rich plasma derived from your own blood. We draw a small amount, spin it to concentrate the platelets and their growth factors, then inject it into areas needing rejuvenation. It works for skin quality, under-eye improvement, and even hair thinning. Results are typically gradual over 4-6 weeks. This is a natural, autologous approach—your body's own healing factors doing the work.",
+      "A regenerative treatment that pairs controlled collagen induction with exosome support to enhance healing, refine texture, and accelerate skin renewal. I use a medical-grade device to create precise micro-channels in the skin, then layer in exosomes or growth factor concentrates that are absorbed deeply through those channels. The result is a smoother, more even canvas over the weeks and months that follow. Best as a series, paced to your skin's recovery.",
     benefits: [
-      "100% autologous—made from your own blood",
-      "Contains natural growth factors and healing proteins",
-      "Stimulates collagen and elastin production",
-      "Improves skin quality, tone, and radiance",
-      "Enhances results of other treatments",
-      "Can address under-eye hollows and dark circles",
-      "Safe with minimal allergic reaction risk",
+      "Smooth acne scarring and refine rough texture",
+      "Minimize the appearance of enlarged pores",
+      "Stimulate natural collagen and elastin over time",
+      "Improve overall skin tone and radiance",
+      "Enhance absorption of clinical-grade actives",
     ],
     idealFor: [
-      "Facial rejuvenation and overall skin quality",
-      "Under-eye hollows and dark circle improvement",
-      "Post-procedure healing and optimization",
-      "Those preferring natural, autologous treatments",
-      "Early-stage hair thinning",
+      "Acne scarring",
+      "Skin texture refinement",
+      "Enlarged pores",
+      "Overall skin rejuvenation",
     ],
     procedure: {
-      duration: "60 minutes",
-      downtime: "Mild redness and swelling 1-2 days",
-      results: "Progressive improvement over 4-6 weeks",
-      sessions: "Series of 3 treatments spaced 4 weeks apart recommended",
+      duration: "60–90 minutes (including numbing)",
+      downtime: "24–72 hours of redness, mild swelling, or sensitivity",
+      results: "Initial glow within 7–10 days; collagen remodeling improves for 4–12 weeks",
+      sessions: "Series of 3 treatments, spaced 4–6 weeks apart",
     },
     pricing: {
-      starting: 750,
-      note: "Starting at $750 per session · Series of 3: $2,000",
+      starting: 500,
+      range: "$500 single treatment · $1,200 for a 3-pack",
+      note: "PRP or advanced skin booster add-ons priced at consultation",
     },
     faqs: [
       {
-        question: "What's the difference between PRP and PRF?",
+        question: "How is your microneedling different from what I can do at home?",
         answer:
-          "PRF is the next generation—it has higher platelet concentration and releases growth factors over a longer period for enhanced results.",
+          "At-home dermarollers typically use 0.25mm needles and cannot penetrate deeply enough to trigger meaningful collagen induction. My medical-grade devices use adjustable needle depths up to 2.5mm, creating controlled micro-injuries at the precise depth needed for your specific concern — whether that is superficial texture improvement or deeper acne scar remodeling. I also infuse clinical-grade growth factors or PRP through the open channels, which is not possible with home devices. The results are dramatically different.",
       },
       {
-        question: "Is it really my own blood?",
+        question: "What can I expect during and after treatment?",
         answer:
-          "Yes! We draw a small amount of blood, concentrate the platelets and growth factors, and use it immediately for your treatment.",
+          "I apply a topical numbing cream for 20 to 30 minutes before treatment, so most patients describe the sensation as mild vibration with occasional prickling. After treatment, your skin will look and feel like a moderate sunburn — red, warm, and slightly tight. This resolves within 24 to 72 hours for most patients. You may experience mild flaking for 3 to 5 days as the skin turns over. I provide a post-treatment kit with gentle cleanser, hydrating serum, and mineral sunscreen to support healing.",
       },
       {
-        question: "Are there any risks?",
+        question: "How many sessions will I need?",
         answer:
-          "Since we use your own blood, there's no risk of allergic reaction. Mild bruising or swelling is possible but typically resolves within days.",
+          "I recommend a series of 3 treatments spaced 4 to 6 weeks apart for most patients. For deeper acne scarring, 4 to 6 sessions may be needed for optimal improvement. After completing your initial series, maintenance sessions every 3 to 6 months help sustain collagen production. I assess your progress at each visit and adjust the protocol as needed.",
       },
       {
-        question: "Can PRP help with hair loss?",
+        question: "Can microneedling help with acne scars?",
         answer:
-          "Yes. PRP growth factors can stimulate dormant hair follicles and extend the growth phase. It's most effective for early-stage hair thinning.",
+          "Yes — microneedling is one of the most effective treatments for acne scarring, particularly rolling and boxcar scars. The controlled micro-injuries break up fibrous scar tissue and stimulate new collagen to fill in depressed areas. Most patients see 40 to 70 percent improvement in scar appearance over a series of 3 to 6 treatments. Icepick scars are deeper and narrower, and may require a combination approach (microneedling plus TCA CROSS or subcision). I evaluate your scar types during consultation and set realistic expectations.",
       },
       {
-        question: "Who is NOT a candidate for PRP Therapy?",
+        question: "Who is NOT a candidate for microneedling?",
         answer:
-          "Avoid PRP if you are pregnant, on blood thinners (Coumadin, warfarin, heparin), have a bleeding disorder, or have low platelet counts. Very low hemoglobin or platelet dysfunction also warrant avoiding this treatment. Dr. Shirazi reviews your lab work and medications.",
+          "Microneedling is not recommended for patients with active acne (pustular or cystic), active cold sores or skin infections in the treatment area, patients currently taking isotretinoin or who have taken it within the past 6 months, patients with bleeding disorders or on blood thinners, those who are pregnant or breastfeeding, or patients with a history of keloid scarring. Rosacea patients may be candidates with a modified protocol — I assess this on a case-by-case basis.",
       },
     ],
-    image: "https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/3985329/pexels-photo-3985329.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/3738355/pexels-photo-3738355.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-    featured: true,
-  },
-  {
-    id: "o-shot",
-    slug: "o-shot",
-    name: "O-Shot",
-    category: "regenerative",
-    tagline: "Women's Intimate Wellness Regeneration",
-    description:
-      "The O-Shot uses PRP to rejuvenate intimate tissue and enhance sensation. It's administered in our private consultation room. The procedure is quick and discreet. Results are gradual—patients typically notice improvement in sensitivity and satisfaction over 4-8 weeks. This is regenerative medicine applied to women's health.",
-    benefits: [
-      "Uses PRP from your own blood",
-      "May enhance sensitivity and satisfaction",
-      "Improves vaginal tissue health",
-      "Natural, autologous approach",
-      "No downtime—resume normal activities immediately",
-      "Results last 12-18 months",
-    ],
-    idealFor: [
-      "Women seeking intimate wellness enhancement",
-      "Those with decreased sensitivity or satisfaction",
-      "Women experiencing age-related changes",
-      "Anyone preferring natural, non-surgical options",
-    ],
-    procedure: {
-      duration: "30-45 minutes",
-      downtime: "None; avoid strenuous exercise 48 hours",
-      results: "Progressive improvement over 4-8 weeks",
-      sessions: "Single treatment; annual maintenance recommended",
-    },
-    pricing: {
-      starting: 1500,
-      note: "Per treatment · Repeat annually for optimal benefits",
-    },
-    faqs: [
-      {
-        question: "Is this treatment discreet?",
-        answer:
-          "Absolutely. We prioritize your privacy and comfort. The procedure is performed in a private setting by Dr. Shirazi.",
-      },
-      {
-        question: "How long do results last?",
-        answer:
-          "Most patients enjoy improved results for 12-18 months. Annual treatments help maintain optimal benefits.",
-      },
-      {
-        question: "Is there downtime?",
-        answer:
-          "No downtime. You can return to normal activities immediately, though we recommend avoiding strenuous exercise and intercourse for 48 hours.",
-      },
-      {
-        question: "How is this different from other treatments?",
-        answer:
-          "The O-Shot uses your body's own growth factors to rejuvenate tissue naturally, without implants or synthetic materials.",
-      },
-      {
-        question: "Who is NOT a candidate for the O-Shot?",
-        answer:
-          "Avoid the O-Shot if you are pregnant, on blood thinners, have a bleeding disorder, or are currently menstruating (we schedule 24-48 hours after cycle ends). Pelvic infections or active inflammatory conditions also warrant waiting. Dr. Shirazi screens for these during consultation.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/3865676/pexels-photo-3865676.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/3764568/pexels-photo-3764568.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/5069432/pexels-photo-5069432.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-  },
-  {
-    id: "hair-restoration",
-    slug: "hair-restoration",
-    name: "Hair Restoration",
-    category: "regenerative",
-    tagline: "Support Hair Regrowth with Regenerative Therapy",
-    description:
-      "Hair loss is multifactorial—genetics, androgens, nutrition, inflammation all play a role. My approach combines scalp regenerative therapy (PRF) with topical support. PRF delivers growth factors to wake up dormant hair follicles and extend their growth phase. This is most effective for early to moderate thinning. It won't work for completely bald areas, and genetics matter. Results take 3-6 months because hair growth is a slow process.",
-    benefits: [
-      "Uses your own PRF—100% autologous",
-      "Stimulates dormant hair follicles",
-      "May extend hair growth phase",
-      "Supports overall scalp health",
-      "Non-surgical approach",
-      "Can be combined with topical treatments",
-      "Progressive improvement over months",
-    ],
-    idealFor: [
-      "Early to moderate hair thinning",
-      "Those preferring non-surgical restoration",
-      "Men and women wanting to maintain hair",
-      "Patients seeking regenerative approach to hair loss",
-    ],
-    procedure: {
-      duration: "45-60 minutes per session",
-      downtime: "None; minimal scalp discomfort",
-      results: "Progressive hair regrowth over 3-6 months",
-      sessions: "6 sessions recommended; spaced 1-2 months apart initially",
-    },
-    pricing: {
-      starting: 850,
-      note: "Starting at $850 per session · 6-session series: $4,500",
-    },
-    faqs: [
-      {
-        question: "How does PRF therapy work for hair?",
-        answer:
-          "PRF delivers growth factors that wake up dormant hair follicles and extend their growth phase, stimulating new hair production using your own blood components.",
-      },
-      {
-        question: "Will this work for me?",
-        answer:
-          "PRF therapy is most effective for early to moderate hair thinning. During your consultation, Dr. Shirazi can assess your hair loss and discuss realistic expectations.",
-      },
-      {
-        question: "When will I see results?",
-        answer:
-          "Hair growth is a gradual process. Most patients begin seeing new hair growth at 3-4 months, with optimal results at 6 months.",
-      },
-      {
-        question: "Is this permanent?",
-        answer:
-          "Results can be long-lasting with maintenance treatments. Hair typically requires ongoing support to maintain regrowth.",
-      },
-      {
-        question: "Who is NOT a candidate for hair restoration?",
-        answer:
-          "Avoid this treatment if you are on blood thinners, have a bleeding disorder, are pregnant, or have an active scalp infection. Very low platelet counts also warrant avoiding PRF. This therapy works best for early to moderate thinning—if you're completely bald, results will be limited. Dr. Shirazi assesses your candidacy.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/3764568/pexels-photo-3764568.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/5069432/pexels-photo-5069432.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/3764013/pexels-photo-3764013.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
+    // Session 20: practitioner performing device treatment (v3 A) + skincare alts
+    image: pexelsUrl("7446671"),
+    imageAlts: [pexelsUrl("5069494"), pexelsUrl("9157201"), pexelsUrl("7321494")],
     featured: true,
     popular: true,
   },
 
-  // MEN'S HEALTH
+  // Session 22: New entry per client request — a dedicated detail page for the signature
+  // multi-modality regenerative plan. Category = skin-rejuvenation (closest umbrella; plans span
+  // skin + scalp so neither single category fully fits, but "skin-rejuvenation" is the lead bucket).
   {
-    id: "p-shot",
-    slug: "p-shot",
-    name: "P-Shot",
-    category: "mens-health",
-    tagline: "Regenerative Approach to Male Sexual Wellness",
+    id: "custom-regenerative-plans",
+    slug: "custom-regenerative-plans",
+    name: "Custom Regenerative Plans",
+    shortName: "Regenerative Plans",
+    category: "skin-rejuvenation",
+    tagline: "Layered Skin + Scalp Regeneration, Paced to You",
     description:
-      "The P-Shot (Priapus Shot) uses PRP to support male sexual function and sensation. It's a discreet, office-based procedure done in a private setting. Here's my honest take: research is emerging but not conclusive. Some men report improvement in sensation or function over 4-8 weeks; others notice minimal change. This is investigational therapy, not a proven ED treatment. If you have significant erectile dysfunction, a urology evaluation may be appropriate first.",
+      "Strategically layered skin and scalp regeneration, paced over time. I build your plan around the treatments that make the most biological sense for your goals — microneedling, exosomes, peels, and scalp protocols — sequenced to respect the skin and scalp's natural healing cycles. This isn't a stacked package of services. It's a phased strategy, reviewed and adjusted as your skin responds.",
     benefits: [
-      "Uses PRP from your own blood",
-      "Minimally invasive, office-based procedure",
-      "No downtime or medications involved",
-      "Completely discreet and confidential",
-      "Part of a broader men's wellness conversation",
-      "May support natural sexual function improvement",
+      "A single, coherent plan across skin and scalp",
+      "Treatments sequenced to compound, not compete",
+      "Paced to your healing cycles — not rushed",
+      "Adjusted as your skin and scalp respond",
+      "Conservative by default, intentional at every step",
     ],
     idealFor: [
-      "Men exploring regenerative options for sexual wellness",
-      "Those interested in non-pharmaceutical approaches",
-      "Patients who value honest, evidence-based guidance",
-      "Men with realistic expectations",
+      "Patients wanting a long-term regenerative strategy",
+      "Combined skin + scalp concerns",
+      "Those who've felt their care was scattered or reactive",
+      "Goals that span months, not a single visit",
     ],
     procedure: {
-      duration: "30-45 minutes",
-      downtime: "None; can resume activities immediately",
-      results: "Progressive improvement over 4-8 weeks if present",
-      sessions: "Single treatment; annual repeat considered",
+      duration: "Plan visits vary; each treatment session scheduled individually",
+      downtime: "Varies by session — typically 24–72 hours at most",
+      results: "Progressive change across months; reviewed at each visit",
+      sessions: "Phased over 3–12 months; cadence set at consultation",
     },
     pricing: {
-      starting: 1700,
-      note: "Per treatment · This is investigational therapy",
+      note: "Plan and pricing are built at consultation, around the treatments included",
     },
     faqs: [
       {
-        question: "Is the P-Shot FDA-approved for ED?",
+        question: "How is this different from just booking individual treatments?",
         answer:
-          "No. PRP for sexual wellness is off-label and investigational. The American Urological Association classifies PRP for ED as experimental. Dr. Shirazi will walk you through the current evidence and realistic expectations.",
+          "Individual treatments are booked reactively — you come in, you're treated, you schedule the next one. A Custom Regenerative Plan is built proactively, end to end. I map out the sequence of treatments over the next 6 to 12 months so each one builds on the last and nothing competes with the skin's healing cycle. You still come in for each appointment, but the strategy is set.",
       },
       {
-        question: "What results can I expect?",
+        question: "What treatments are typically included?",
         answer:
-          "Results vary. Some men report improved sensation over several months; others notice minimal change. This is not a guaranteed ED solution. Honest expectation-setting is part of our consultation.",
+          "It depends on your goals and what your skin or scalp actually needs. Plans most often combine some mix of microneedling with exosomes, chemical peels at varied depths, and scalp-focused regenerative protocols. Botox or filler can sit alongside a regenerative plan, but they are layered in separately rather than treated as part of the regeneration itself.",
       },
       {
-        question: "Should I see a urologist first?",
+        question: "How long does a plan typically run?",
         answer:
-          "If you have significant erectile dysfunction, a urology evaluation may be appropriate. ED can have underlying vascular, hormonal, or neurological causes that deserve proper diagnosis.",
+          "Most plans run 3 to 12 months. Skin-focused plans often land in the 3 to 6 month range; scalp plans and combined skin-plus-scalp plans typically run closer to 9 to 12 months because hair responds more slowly. I review your progress at each visit and adjust pacing if your skin is responding faster or slower than expected.",
+      },
+      {
+        question: "Can I change the plan mid-way?",
+        answer:
+          "Yes. A plan is a working document. If your skin is responding better than expected, I can lighten the cadence or shift focus. If a concern emerges that wasn't in the original plan, I can fold it in. The goal is a plan that evolves with you — not one you're locked into.",
+      },
+      {
+        question: "How is pricing structured?",
+        answer:
+          "Pricing is built around the treatments in your plan, reviewed transparently at consultation. I don't use opaque 'package' pricing designed to obscure cost — you'll see the breakdown per treatment, with any combined-visit or series discounts applied where appropriate.",
       },
     ],
-    image: "https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
+    // Session 22: v2 #2 skincare bucket (editorial skincare alt set) — plans span skin + scalp, so
+    // using skin-forward primary with a scalp-relevant alt in the rotation.
+    image: pexelsUrl("3985325"),
+    imageAlts: [pexelsUrl("5069494"), pexelsUrl("7446671"), pexelsUrl("3985331")],
+    featured: true,
   },
 
-  // WELLNESS & LONGEVITY
+  // ──────────────────────────────────────────────────────────────
+  // HAIR RESTORATION
+  // ──────────────────────────────────────────────────────────────
   {
-    id: "iv-therapy",
-    slug: "iv-therapy",
-    name: "IV Therapy",
-    category: "wellness",
-    tagline: "Direct Nutrient Delivery When Oral Isn't Enough",
+    id: "scalp-microneedling",
+    slug: "scalp-microneedling",
+    // Session 22: Renamed per client (Hair Restoration Treatments). Slug preserved to avoid link breakage.
+    name: "Hair Restoration Treatments",
+    shortName: "Hair Restoration",
+    category: "hair-restoration",
+    tagline: "Scalp-Focused Regeneration for Stronger, Healthier Growth",
     description:
-      "IV therapy delivers vitamins, minerals, and hydration directly into your bloodstream. It's useful for documented deficiencies, dehydration, or post-athletic recovery when oral supplementation isn't working. I'm honest: healthy people with good nutrition and digestion probably don't need it. But for someone with malabsorption, recent illness, or specific deficiency markers, it can be powerful.",
+      "Scalp-focused regenerative treatments designed to support healthier, stronger, and more resilient hair growth over time. I pair precision scalp micro-channeling with growth factor or exosome infusions — delivering regenerative signal directly to the follicle. This is a long game: shedding patterns shift first, then density follows. I structure packages and maintenance cadence around that timeline so expectations and results stay aligned.",
     benefits: [
-      "Bypasses digestive system for direct IV delivery",
-      "Addresses documented nutrient deficiencies",
-      "Supports recovery from illness or dehydration",
-      "Useful after intense athletic exertion",
-      "Customized formulations based on your needs",
-      "Administered in comfortable medical setting",
+      "Support early-stage thinning before it progresses",
+      "Strengthen and reactivate weakening follicles",
+      "Improve overall scalp health and resilience",
+      "Non-surgical, minimally invasive protocol",
+      "Works alongside oral or topical treatments",
     ],
     idealFor: [
-      "Documented lab-confirmed nutrient deficiencies",
-      "Recovery from illness or significant dehydration",
-      "Post-athletic performance recovery",
-      "Those with documented malabsorption",
+      "Early-stage hair thinning",
+      "Scalp health optimization",
+      "Hair density support",
+      "Post-stress shedding",
     ],
     procedure: {
-      duration: "30-60 minutes depending on protocol",
-      downtime: "None; mild vein irritation possible",
-      results: "Immediate to gradual over hours or days",
-      sessions: "As-needed or periodic maintenance based on need",
+      duration: "60–75 minutes (including numbing and regenerative infusion)",
+      downtime: "Minimal — possible mild redness or tenderness for 24–48 hours",
+      results: "Early changes in shedding within 4–8 weeks; visible density improvement in 3–6 months",
+      sessions: "Series of 3 or 6, spaced 4–6 weeks apart; maintenance every 3–4 months",
     },
     pricing: {
-      starting: 150,
-      note: "Starting at $150 · Customized protocols vary",
+      starting: 850,
+      range: "$850 single treatment · $4,500 for a 6-pack",
+      note: "Complimentary consultation to assess candidacy and create a personalized treatment plan",
     },
     faqs: [
       {
-        question: "Is IV therapy safe?",
+        question: "Am I a good candidate for scalp microneedling?",
         answer:
-          "When administered by a physician in a medical setting, IV therapy is safe. Dr. Shirazi ensures proper hygiene and appropriate formulations.",
+          "The best candidates are patients with early-to-moderate androgenetic hair thinning — meaning the follicles are miniaturizing but not yet fully dormant. If you are noticing thinning at the crown, temples, or a widening part line, and the thinning has been gradual over months to years, you are likely a good candidate. I evaluate your hair loss pattern, scalp health, and medical history during a complimentary consultation. Patients with advanced, long-standing baldness where the follicles are no longer viable may not see meaningful benefit, and I will be honest about that during your assessment.",
       },
       {
-        question: "Do I need to be deficient to benefit?",
+        question: "How soon will I see results?",
         answer:
-          "IV therapy works best when addressing a specific need — deficiency, dehydration, or recovery. For healthy individuals with good nutrition, benefits are less clear.",
-      },
-      {
-        question: "How often should I get IV therapy?",
-        answer:
-          "This depends on your needs. Dr. Shirazi will recommend a schedule based on your health goals and lab work.",
-      },
-      {
-        question: "What formulations do you offer?",
-        answer:
-          "We offer customized IV protocols including nutrient cocktails, hydration therapy, and recovery formulations. Dr. Shirazi discusses the best option for you.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/3865676/pexels-photo-3865676.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/3997993/pexels-photo-3997993.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/3759660/pexels-photo-3759660.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-  },
-  {
-    id: "hormone-optimization",
-    slug: "hormone-optimization",
-    name: "Hormone Optimization",
-    category: "wellness",
-    tagline: "Balance for Vibrant Health",
-    description:
-      "Precision hormone management for women and men. Optimize estrogen, progesterone, thyroid, and adrenal function for vitality and wellness.",
-    comingSoon: true,
-    benefits: [
-      "Comprehensive lab testing and evaluation",
-      "Evidence-based hormone assessment",
-      "FDA-approved treatment options",
-      "Physician-supervised ongoing monitoring",
-      "Individualized treatment protocols",
-      "Integration with other Healinque services",
-    ],
-    idealFor: [
-      "Women experiencing perimenopause or menopause",
-      "Men with documented low testosterone",
-      "Fatigue and low energy levels",
-      "Those wanting evidence-based hormone management",
-    ],
-    procedure: {
-      duration: "Initial consultation 45-60 minutes",
-      downtime: "None",
-      results: "Gradual improvement over 2-4 weeks",
-      sessions: "Ongoing management and follow-ups",
-    },
-    pricing: {
-      starting: 200,
-      note: "starting price (coming soon)",
-    },
-    faqs: [
-      {
-        question: "What labs do you order?",
-        answer:
-          "Lab testing depends on your symptoms and goals, typically including hormone levels, thyroid function, and metabolic markers. Dr. Shirazi reviews your specific needs.",
-      },
-      {
-        question: "Are bioidentical hormones better?",
-        answer:
-          "Bioidentical hormones are molecularly identical to your body's own hormones. FDA-approved bioidentical options exist for many patients.",
-      },
-      {
-        question: "What about compounded hormones?",
-        answer:
-          "We distinguish between FDA-approved bioidentical hormones and compounded preparations. Dr. Shirazi discusses the evidence and regulatory status of each option.",
-      },
-      {
-        question: "How long until I feel better?",
-        answer:
-          "Many patients notice improvements in energy and mood within 1-2 weeks. Optimal results typically appear within 4-6 weeks as hormone levels stabilize.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/7592460/pexels-photo-7592460.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/6975475/pexels-photo-6975475.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/5714341/pexels-photo-5714341.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-  },
-  {
-    id: "glp1-weight-loss",
-    slug: "glp1-weight-loss",
-    name: "GLP-1 Weight Loss",
-    category: "wellness",
-    tagline: "Metabolic Transformation Program",
-    description:
-      "Advanced GLP-1 protocols combined with nutrition and lifestyle optimization for sustainable, transformative weight loss results. Not all patients are candidates—I screen for contraindications including personal or family history of medullary thyroid carcinoma, MEN-2 syndrome, or active pregnancy. GLP-1s are powerful tools, but they work best as part of a comprehensive medical weight management plan with ongoing support.",
-    comingSoon: true,
-    benefits: [
-      "FDA-approved medications with proven efficacy",
-      "Comprehensive lab work and health evaluation",
-      "Nutrition guidance and lifestyle coaching",
-      "Physician-supervised throughout treatment",
-      "Authorized pharmacy supply chains",
-      "Regular monitoring and dose adjustments",
-    ],
-    idealFor: [
-      "Those with BMI qualifying for GLP-1 therapy",
-      "People with weight-related health conditions",
-      "Those seeking medical supervision and support",
-      "Patients committed to lifestyle changes",
-    ],
-    procedure: {
-      duration: "Monthly check-ins and ongoing support",
-      downtime: "None",
-      results: "Gradual weight loss over weeks to months",
-      sessions: "Ongoing program with regular monitoring",
-    },
-    pricing: {
-      starting: 500,
-      note: "starting price (coming soon)",
-    },
-    faqs: [
-      {
-        question: "How much weight can I expect to lose?",
-        answer:
-          "Clinical studies show average weight loss of 15-20% of body weight. Results vary based on individual factors and commitment to lifestyle changes.",
-      },
-      {
-        question: "Do you prescribe compounded GLP-1s?",
-        answer:
-          "No. The FDA resolved the semaglutide shortage in early 2025 and enforcement discretion for compounded versions has ended. We prescribe FDA-approved brand-name medications through authorized pharmacies.",
-      },
-      {
-        question: "What are the side effects?",
-        answer:
-          "Common side effects include mild nausea, which typically improves over time. Dr. Shirazi starts with conservative doses and increases gradually.",
-      },
-      {
-        question: "Why work with a physician?",
-        answer:
-          "Medical supervision ensures safety, proper dosing adjustments, health monitoring, and integrated care. This is safer than obtaining medications without professional oversight.",
-      },
-      {
-        question: "Who is NOT a candidate for GLP-1?",
-        answer:
-          "You should not use GLP-1s if you have a personal or family history of medullary thyroid carcinoma, MEN-2 syndrome, or if you are pregnant. People with a history of pancreatitis or gallbladder disease need special evaluation. Dr. Shirazi screens carefully during consultation.",
-      },
-      {
-        question: "What about side effects?",
-        answer:
-          "Nausea is common, especially early in treatment, but usually improves with dose titration. Rare but serious side effects include pancreatitis, gallbladder issues, and gallstones. I monitor for these and adjust your plan accordingly.",
-      },
-      {
-        question: "What happens when I stop GLP-1?",
-        answer:
-          "This is honest: rebound weight gain is common. Most patients regain approximately two-thirds of lost weight within a year if they stop without ongoing lifestyle support. This is why I emphasize that GLP-1 is a tool—not a magic cure. The goal is to use it while building sustainable habits so you can maintain results long-term. Many patients benefit from ongoing maintenance dosing or transition to a maintenance program.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/5069432/pexels-photo-5069432.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/3985338/pexels-photo-3985338.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/3985339/pexels-photo-3985339.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-  },
-  {
-    id: "regenerative-consultation",
-    slug: "regenerative-consultation",
-    name: "Regenerative Consultation",
-    category: "regenerative",
-    tagline: "Evidence-Based Regenerative Guidance",
-    description:
-      "Honest, physician-led evaluation of regenerative medicine options — focused on therapies with established safety profiles like PRP and PRF.",
-    benefits: [
-      "Honest, evidence-based evaluation of regenerative options",
-      "Focus on therapies with established safety profiles (PRP, PRF)",
-      "Transparent discussion of FDA approval status",
-      "Physician-led assessment — not a sales pitch",
-      "Personalized recommendations based on your health and goals",
-      "Coordination with other Healinque treatments",
-    ],
-    idealFor: [
-      "Patients curious about regenerative medicine",
-      "Those with joint, skin, or hair concerns exploring non-surgical options",
-      "Anyone wanting a physician's honest perspective on regenerative treatments",
-      "Patients who value transparency about evidence and risks",
-    ],
-    procedure: {
-      duration: "60 minutes",
-      downtime: "None",
-      results: "Customized treatment recommendations",
-      sessions: "Initial consultation (treatment follows if appropriate)",
-    },
-    pricing: {
-      starting: 100,
-      note: "consultation credited toward treatment",
-    },
-    faqs: [
-      {
-        question: "Do you offer stem cell therapy?",
-        answer:
-          "Very few stem cell products are FDA-approved, and none for anti-aging or skin rejuvenation in a med spa setting. We focus on regenerative therapies with stronger regulatory footing, like PRP and PRF.",
-      },
-      {
-        question: "What about exosome therapy?",
-        answer:
-          "There are currently no FDA-approved exosome products for cosmetic or regenerative use. We do not administer injectable exosomes. We may use topical growth factor serums as a complement to microneedling.",
-      },
-      {
-        question: "What's the difference between PRP and PRF?",
-        answer:
-          "Both use your own blood. PRP concentrates platelets with an anticoagulant. PRF is processed without additives, creating a fibrin matrix that releases growth factors more slowly over 10–14 days.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/6787202/pexels-photo-6787202.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/7088531/pexels-photo-7088531.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/3985299/pexels-photo-3985299.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-  },
-  {
-    id: "prf-therapy",
-    slug: "prf-therapy",
-    name: "PRF Therapy",
-    category: "regenerative",
-    tagline: "Pure Fibrin Matrix from Your Own Blood",
-    description:
-      "PRF (Platelet-Rich Fibrin) is the next evolution of PRP. We draw blood, spin it without additives, and create a fibrin clot that naturally releases growth factors over 10-14 days. This slow release amplifies collagen remodeling. Many practitioners prefer PRF for skin and under-eye because the sustained growth factor release is superior to PRP's immediate release. It's 100% autologous—nothing synthetic.",
-    benefits: [
-      "100% autologous—made from your own blood",
-      "No synthetic additives or anticoagulants",
-      "Gradual growth factor release over 10-14 days",
-      "Enhanced collagen production and tissue quality",
-      "Works beautifully under eyes with proper technique",
-      "Complements microneedling, lasers, and injections",
-      "Progressive results over 4-6 weeks",
-    ],
-    idealFor: [
-      "Natural skin rejuvenation without synthetics",
-      "Under-eye hollows and dark circles",
-      "Enhancing microneedling and laser results",
-      "Hair thinning with autologous preference",
-      "Patients wanting extended growth factor support",
-    ],
-    procedure: {
-      duration: "60 minutes",
-      downtime: "Mild redness and swelling 1-2 days",
-      results: "Progressive improvement over 4-6 weeks",
-      sessions: "Series of 3-4 treatments spaced 4-6 weeks apart",
-    },
-    pricing: {
-      starting: 750,
-      note: "Starting at $750 per session · Series of 3-4 available",
-    },
-    faqs: [
-      {
-        question: "How is PRF different from PRP?",
-        answer:
-          "Both come from your blood. PRF is processed without additives at a lower speed, creating a fibrin clot that releases growth factors more slowly — over about 10–14 days. Some practitioners prefer PRF for skin and under-eye applications.",
-      },
-      {
-        question: "Can PRF help with dark circles?",
-        answer:
-          "PRF is a key component of our under-eye rejuvenation protocol. It can improve skin quality and reduce the appearance of under-eye darkness caused by thin skin and poor circulation. Results vary — Dr. Shirazi evaluates your specific situation.",
-      },
-      {
-        question: "How many treatments do I need?",
-        answer:
-          "Most patients benefit from 3–4 treatments spaced 4–6 weeks apart. Results build with each session. Maintenance every 6–12 months sustains improvement.",
-      },
-      {
-        question: "Who is NOT a candidate for PRF?",
-        answer:
-          "Avoid PRF if you are on blood thinners, have a bleeding disorder, or have low platelet counts. Pregnancy, active skin infections, and very low hemoglobin also warrant avoiding treatment. Dr. Shirazi reviews your blood work and medications.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/4056535/pexels-photo-4056535.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/5217882/pexels-photo-5217882.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-  },
-  {
-    id: "peptide-therapy",
-    slug: "peptide-therapy",
-    name: "Peptide Therapy",
-    category: "wellness",
-    tagline: "Molecular-Level Optimization",
-    description:
-      "Physician-supervised peptide protocols limited to FDA-approved medications and clinically supported compounds. Honest guidance on what works.",
-    benefits: [
-      "Access to FDA-approved peptide medications",
-      "Transparent about evidence vs. marketing",
-      "No prohibited Category 2 peptides prescribed",
-      "Individualized protocols based on lab work",
-      "Regular monitoring for safety and efficacy",
-      "Integrates with other Healinque services",
-    ],
-    idealFor: [
-      "Patients interested in peptide therapy",
-      "Those with specific health goals supported by peptide therapy",
-      "Anyone wanting evidence-based peptide protocols",
-      "Patients who value physician oversight",
-    ],
-    procedure: {
-      duration: "Initial consultation 45-60 minutes",
-      downtime: "None",
-      results: "Gradual improvement over 4-12 weeks",
-      sessions: "Ongoing monitoring and adjustments",
-    },
-    pricing: {
-      starting: 300,
-      note: "starting price",
-    },
-    faqs: [
-      {
-        question: "What happened to BPC-157?",
-        answer:
-          "Between 2023 and 2024, the FDA moved 17–19 peptides to its Category 2 list — including BPC-157, TB-500, and AOD-9604. These are no longer permitted for compounding. We follow current FDA guidance.",
-      },
-      {
-        question: "Which peptides do you offer?",
-        answer:
-          "We focus on FDA-approved peptide medications. GLP-1 agonists for weight management are the most common. Dr. Shirazi discusses which options may be relevant during your consultation.",
-      },
-      {
-        question: "Are peptides safe?",
-        answer:
-          "FDA-approved peptide medications have been through rigorous safety testing. Unregulated peptides sold online carry real risks — FDA testing found up to 40% contained dosage errors. Physician oversight matters.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/5069432/pexels-photo-5069432.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/3865676/pexels-photo-3865676.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/3764568/pexels-photo-3764568.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-  },
-  {
-    id: "pdo-thread-lift",
-    slug: "pdo-thread-lift",
-    name: "PDO Thread Lift",
-    category: "aesthetics",
-    tagline: "Lift and Tighten Without Surgical Recovery",
-    description:
-      "PDO threads are biocompatible sutures placed under the skin to lift sagging tissue and stimulate collagen. The lift is immediate; collagen remodeling continues over 6-8 weeks for enhanced tightness. Threads dissolve over 4-6 months but the collagen they triggered lasts longer. This is non-surgical but still a procedure—realistic about swelling and recovery is important.",
-    benefits: [
-      "Immediate lifting of sagging tissue",
-      "Stimulates natural collagen production",
-      "Non-surgical with faster recovery than facelift",
-      "Biocompatible, absorbable PDO sutures",
-      "Results improve over 6-8 weeks",
-      "Effects last 12-18 months",
-      "Can be combined with injectables or laser",
-    ],
-    idealFor: [
-      "Mild to moderate facial laxity",
-      "Sagging cheeks or jawline",
-      "Brow lift without surgery",
-      "Those seeking non-surgical lifting",
-    ],
-    procedure: {
-      duration: "45-90 minutes",
-      downtime: "3-7 days swelling and tenderness; ice helps",
-      results: "Immediate; optimal results at 6-8 weeks",
-      sessions: "Single treatment; repeat every 12-18 months",
-    },
-    pricing: {
-      starting: 800,
-      note: "Starting at $800 · Final pricing determined at consultation",
-    },
-    faqs: [
-      {
-        question: "Is a thread lift as good as a facelift?",
-        answer:
-          "No. Thread lifts address mild to moderate laxity with subtler results. For significant sagging, a surgical consultation may be more appropriate. Threads work best for patients who want visible but modest improvement without surgical recovery.",
-      },
-      {
-        question: "Is there pain?",
-        answer:
-          "We use numbing to make the procedure comfortable. Some patients feel gentle pulling or pressure. Mild soreness is normal for a few days after.",
-      },
-      {
-        question: "When can I resume normal activities?",
-        answer:
-          "Most patients return to normal activities within 3-7 days. Avoid strenuous exercise and facial manipulation for 1-2 weeks.",
-      },
-      {
-        question: "Will the threads be visible?",
-        answer:
-          "No. The threads are placed beneath the skin and dissolve over time. They're not visible and don't feel like foreign objects.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/2661255/pexels-photo-2661255.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/3985339/pexels-photo-3985339.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/3985338/pexels-photo-3985338.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-  },
-  {
-    id: "kybella",
-    slug: "kybella",
-    name: "Kybella",
-    category: "aesthetics",
-    tagline: "Permanent Reduction of Submental Fat",
-    description:
-      "Kybella is deoxycholic acid—a naturally occurring substance that destroys fat cells. Injected under the chin, it permanently reduces submental fullness. The swelling is significant (the 'bullfrog effect'), but it settles in 3-10 days. Most people need 2-4 treatments spaced four weeks apart. Once destroyed, those fat cells don't return—though new ones can form with weight gain.",
-    benefits: [
-      "Permanently destroys submental fat cells",
-      "Non-invasive, in-office procedure",
-      "FDA-approved and well-studied",
-      "Results improve progressively over sessions",
-      "Alternative to liposuction or surgical neck lift",
-      "Restores clear jaw and neckline definition",
-      "Results are permanent",
-    ],
-    idealFor: [
-      "Double chin or submental fullness",
-      "Those seeking non-surgical alternatives",
-      "People wanting permanent fat reduction",
-      "Improving jawline and neck definition",
-    ],
-    procedure: {
-      duration: "15-20 minutes",
-      downtime: "3-10 days significant swelling; plan accordingly",
-      results: "Progressive improvement over sessions",
-      sessions: "Series of 2-6 treatments spaced 4 weeks apart",
-    },
-    pricing: {
-      starting: 600,
-      note: "Starting at $600 per session · Final pricing varies",
-    },
-    faqs: [
-      {
-        question: "What are the serious risks?",
-        answer:
-          "Kybella's FDA labeling includes marginal mandibular nerve injury (uneven smile or difficulty swallowing), injection-site alopecia, and skin ulceration. These are uncommon but important to understand. Dr. Shirazi uses precise anatomical mapping to minimize risk.",
-      },
-      {
-        question: "How much swelling should I expect?",
-        answer:
-          "Swelling is significant (the 'bullfrog effect') and typically peaks at 24-48 hours, lasting 3-10 days. We provide detailed pre- and post-care instructions to manage swelling.",
+          "Hair restoration is a slow, progressive process. Most patients notice early signs of improvement — reduced shedding, finer baby hairs, improved scalp coverage — at 3 to 6 months. Optimal density gains typically develop at 9 to 12 months as treated follicles cycle through a full growth phase. I photograph your scalp at baseline and at regular intervals so you can track progress objectively. Patience and consistency with the treatment schedule are essential.",
       },
       {
         question: "How many treatments will I need?",
         answer:
-          "Most patients need 2-4 treatments spaced 4 weeks apart. Your needs depend on how much fat needs treatment.",
+          "I recommend a minimum of 3 treatments for mild thinning and 6 treatments for moderate thinning, spaced 4 to 6 weeks apart. After completing your initial series, maintenance treatments every 3 to 4 months help sustain and build on your results. Hair thinning is progressive by nature, so ongoing maintenance is important to preserve density gains over time. I structure my pricing in packages to make consistent treatment more accessible.",
       },
       {
-        question: "Are results permanent?",
+        question: "Is the treatment painful?",
         answer:
-          "Yes. Once the fat cells are destroyed, they don't return. However, weight gain can create new fat cells.",
+          "I apply a topical numbing solution to the scalp for 20 to 30 minutes before treatment. Most patients describe the sensation as mild prickling or vibration — not painful, but noticeable. The scalp may feel tender and warm for 24 to 48 hours afterward, similar to a mild sunburn. Over-the-counter pain relief is rarely needed. I adjust needle depth and speed based on your comfort level throughout the procedure.",
+      },
+      {
+        question: "Can I combine this with other hair loss treatments?",
+        answer:
+          "Yes, and I often recommend it. Scalp microneedling with growth factors works synergistically with oral finasteride (for men), topical minoxidil, and nutritional optimization. The micro-channels created during treatment actually enhance the absorption of topical treatments applied at home. During your consultation, I review your current regimen and may recommend complementary approaches to maximize results. I take a comprehensive, multi-modal approach to hair restoration rather than relying on any single treatment.",
       },
     ],
-    image: "https://images.pexels.com/photos/3985329/pexels-photo-3985329.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/3985338/pexels-photo-3985338.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/3985339/pexels-photo-3985339.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-  },
-  {
-    id: "testosterone-optimization",
-    slug: "testosterone-optimization",
-    name: "Testosterone Optimization",
-    category: "mens-health",
-    tagline: "Evidence-Based Hormone Management for Men",
-    description:
-      "Low testosterone affects energy, strength, sexual function, and mood. I evaluate comprehensively—not just testosterone level, but also FSH, LH, estradiol, prolactin. If treatment is appropriate, options include injections, gels, or patches. This requires ongoing monitoring—regular labs, vitals, screening. It's not 'quick fix' medicine—it's genuine hormone management.",
-    benefits: [
-      "Comprehensive hormone evaluation and lab testing",
-      "Personalized treatment protocols",
-      "Improved energy, strength, and vitality",
-      "Enhanced sexual function and desire",
-      "Physician-supervised ongoing monitoring",
-      "Evidence-based, not marketing-driven approach",
-      "Regular safety and efficacy monitoring",
-    ],
-    idealFor: [
-      "Men with documented low testosterone",
-      "Those experiencing fatigue and low energy",
-      "Men with sexual dysfunction",
-      "Patients seeking legitimate medical supervision",
-    ],
-    procedure: {
-      duration: "Initial consultation 45-60 minutes",
-      downtime: "None",
-      results: "Gradual improvement over 2-4 weeks",
-      sessions: "Ongoing management with regular monitoring",
-    },
-    pricing: {
-      starting: 300,
-      note: "Starting price; varies with treatment method",
-    },
-    faqs: [
-      {
-        question: "How is low testosterone diagnosed?",
-        answer:
-          "Through comprehensive blood work including total and free testosterone levels. Dr. Shirazi evaluates symptoms alongside lab results to determine if treatment is appropriate.",
-      },
-      {
-        question: "What treatment options are available?",
-        answer:
-          "Options include testosterone replacement therapy through injections, gels, or patches, depending on your preference and medical profile. Dr. Shirazi discusses all options during consultation.",
-      },
-      {
-        question: "Is testosterone therapy safe?",
-        answer:
-          "When properly monitored by a physician with appropriate lab work and screening, testosterone replacement therapy can be safe. We discuss risks and benefits thoroughly.",
-      },
-      {
-        question: "Who is NOT a candidate for testosterone therapy?",
-        answer:
-          "Men with a history of prostate cancer, breast cancer, or untreated sleep apnea should NOT use testosterone replacement. Men with polycythemia, uncontrolled high blood pressure, or severe heart disease also need to avoid it. Comprehensive screening ensures safety before starting therapy.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/18935826/pexels-photo-18935826.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/27926640/pexels-photo-27926640.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/17782869/pexels-photo-17782869.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-    popular: true,
-  },
-  // NEW NEUROMODULATORS
-  {
-    id: "daxxify",
-    slug: "daxxify",
-    name: "Daxxify",
-    category: "aesthetics",
-    tagline: "Extended-Duration Neuromodulation (6-9 Months)",
-    description:
-      "Daxxify is the newest FDA-approved neuromodulator. It lasts significantly longer than Botox—6 to 9 months for many patients, versus 3 to 4 months. That means fewer office visits per year. The results look identical to Botox: smooth, natural, expressive. The difference is longevity. For busy professionals or anyone tired of quarterly treatments, Daxxify is worth considering.",
-    benefits: [
-      "Lasts 6-9 months vs. 3-4 months for Botox",
-      "Fewer treatments per year (about 2 instead of 4)",
-      "Same smooth, natural results as Botox",
-      "FDA-approved with strong clinical data",
-      "Excellent for preventative treatment",
-      "Ideal for busy, active patients",
-    ],
-    idealFor: [
-      "Patients seeking extended results between treatments",
-      "Those with busy schedules",
-      "Preventative treatment for younger patients",
-      "Anyone wanting maximum duration from neuromodulation",
-    ],
-    procedure: {
-      duration: "15-30 minutes",
-      downtime: "None",
-      results: "Onset at 3-5 days; full effect at 10-14 days",
-      sessions: "Every 6-9 months for maintenance",
-    },
-    pricing: {
-      starting: 350,
-      note: "Starting price; per-unit pricing determined at consultation",
-    },
-    faqs: [
-      {
-        question: "Why does Daxxify last longer?",
-        answer:
-          "Daxxify uses a different peptide technology that results in more stable and longer-lasting paralysis of facial muscles compared to traditional neuromodulators. Clinical studies show extended duration of 6-9 months for most patients.",
-      },
-      {
-        question: "How much longer does Daxxify last compared to Botox?",
-        answer:
-          "Botox and Dysport typically last 3-4 months. Daxxify lasts 6-9 months for many patients — nearly double the duration. This means fewer treatment appointments per year.",
-      },
-      {
-        question: "Is Daxxify as natural-looking as Botox?",
-        answer:
-          "Yes. Daxxify produces the same smooth, natural-looking results as Botox and Dysport. The difference is in longevity, not the aesthetic outcome.",
-      },
-      {
-        question: "Is there any downtime?",
-        answer:
-          "No downtime with Daxxify, just like Botox. You can return to normal activities immediately. We recommend avoiding strenuous exercise for 24 hours.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/3762871/pexels-photo-3762871.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/8989963/pexels-photo-8989963.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/6543299/pexels-photo-6543299.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-    isNew: true,
-    popular: true,
-  },
-  // SKIN REJUVENATION
-  {
-    id: "morpheus8",
-    slug: "morpheus8",
-    name: "Morpheus8",
-    category: "skin-rejuvenation",
-    tagline: "Radiofrequency Microneedling for Lifting Without Surgery",
-    description:
-      "Morpheus8 combines radiofrequency energy with microneedling to create deep collagen remodeling. The radiofrequency heat penetrates below the needling depth, stimulating tight, organized collagen formation. This creates subtle lifting and tightening of loose or lax skin. It's less aggressive than surgical facelift but more powerful than regular microneedling. Results appear gradually over 8-12 weeks.",
-    benefits: [
-      "Tightens mild to moderate skin laxity",
-      "Reduces fine lines and wrinkles",
-      "Improves skin texture and tone",
-      "Stimulates robust collagen remodeling",
-      "Non-surgical with minimal downtime",
-      "Safe for all skin types and tones",
-      "Results continue improving for months",
-    ],
-    idealFor: [
-      "Mild to moderate facial laxity",
-      "Fine lines and wrinkles",
-      "Acne scarring and textured skin",
-      "Those seeking non-surgical lifting",
-      "Patients wanting natural, progressive results",
-    ],
-    procedure: {
-      duration: "45-60 minutes",
-      downtime: "3-5 days redness and swelling",
-      results: "Progressive over 8-12 weeks; results continue improving",
-      sessions: "1-3 treatments spaced 4-6 weeks apart",
-    },
-    pricing: {
-      starting: 1200,
-      note: "Starting at $1,200 · Final pricing determined at consultation",
-    },
-    faqs: [
-      {
-        question: "How is Morpheus8 different from regular microneedling?",
-        answer:
-          "Morpheus8 combines microneedling with radiofrequency energy to deliver heat to the deeper layers of skin. This dual action stimulates more robust collagen remodeling and skin tightening than microneedling alone.",
-      },
-      {
-        question: "Is there pain during treatment?",
-        answer:
-          "The treatment is performed with numbing cream and feels like controlled micro-injuries with gentle heat. Most patients tolerate it well.",
-      },
-      {
-        question: "When will I see results?",
-        answer:
-          "Initial skin appearance improves within days. Progressive collagen remodeling produces improved tightness and texture over 8-12 weeks, with results continuing to improve for several months.",
-      },
-      {
-        question: "How many sessions do I need?",
-        answer:
-          "Most patients benefit from 1-3 treatments spaced 4-6 weeks apart. Dr. Shirazi assesses your skin and recommends the ideal treatment plan during consultation.",
-      },
-      {
-        question: "Who is NOT a candidate for Morpheus8?",
-        answer:
-          "Avoid Morpheus8 if you are pregnant, have active skin infections, are on isotretinoin (Accutane—wait 6-12 months), have a severe keloid tendency, or have metallic implants in the treatment area. Darker skin tones require customized settings to minimize pigmentation changes. Dr. Shirazi discusses your candidacy.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/3985338/pexels-photo-3985338.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/3738355/pexels-photo-3738355.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/3985329/pexels-photo-3985329.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-    popular: true,
-  },
-  {
-    id: "ipl-photo-facial",
-    slug: "ipl-photo-facial",
-    name: "IPL Photo Facial",
-    category: "skin-rejuvenation",
-    tagline: "Broad-Spectrum Light for Sun Damage & Clarity",
-    description:
-      "IPL (Intense Pulsed Light) uses broad-spectrum light to treat sun damage, brown spots, redness, and broken capillaries. It's gentler than targeted lasers but covers larger areas. Living in San Diego means sun exposure—this treatment helps undo that damage and prevent further discoloration. Results are cumulative, so a series works better than single treatments.",
-    benefits: [
-      "Fades brown spots and sun damage",
-      "Reduces facial redness and rosacea",
-      "Minimizes broken capillaries",
-      "Improves overall skin tone and clarity",
-      "Gentle, broad-spectrum light (less aggressive than laser)",
-      "Minimal downtime",
-      "Results improve with series",
-    ],
-    idealFor: [
-      "Sun damage and age spots",
-      "Facial redness and early rosacea",
-      "Broken capillaries and vascular lesions",
-      "Uneven skin tone",
-      "Sun-exposed patients seeking prevention",
-    ],
-    procedure: {
-      duration: "30-45 minutes",
-      downtime: "Mild redness 1-2 days",
-      results: "Progressive over 3-6 weeks; cumulative with series",
-      sessions: "Series of 4-6 treatments spaced 3-4 weeks apart",
-    },
-    pricing: {
-      starting: 400,
-      note: "Starting at $400 per session · Series pricing available",
-    },
-    faqs: [
-      {
-        question: "Is IPL the same as laser?",
-        answer:
-          "No. IPL uses broad-spectrum light, while lasers use single-wavelength light. IPL is often gentler and covers larger areas, making it ideal for overall facial rejuvenation. Lasers target specific concerns more precisely.",
-      },
-      {
-        question: "Will I have brown spots after treatment?",
-        answer:
-          "Sometimes. Superficial brown spots may temporarily darken as they're brought to the surface and slough off over several days. This is a good sign that the treatment is working.",
-      },
-      {
-        question: "How many sessions do I need?",
-        answer:
-          "Most patients benefit from a series of 4-6 treatments spaced 3-4 weeks apart. Results are cumulative, and we recommend maintenance treatments annually.",
-      },
-      {
-        question: "Can I go in the sun after IPL?",
-        answer:
-          "You must strictly avoid sun exposure for 2 weeks after each IPL session. We provide SPF 30+ and recommend staying indoors or wearing protective clothing.",
-      },
-      {
-        question: "Who is NOT a candidate for IPL?",
-        answer:
-          "Avoid IPL if you are pregnant, have active skin infections, are on isotretinoin (Accutane—wait 6-12 months), have a keloid tendency, or have very dark skin (very high melanin increases burn risk). Recent tanning also warrants waiting. Dr. Shirazi customizes settings based on your skin type to minimize risk.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/3373716/pexels-photo-3373716.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/14655384/pexels-photo-14655384.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/34939732/pexels-photo-34939732.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-  },
-  {
-    id: "medical-grade-skincare",
-    slug: "medical-grade-skincare",
-    name: "Medical-Grade Skincare",
-    category: "skin-rejuvenation",
-    tagline: "Prescription-Strength Actives for Home Care",
-    description:
-      "Professional skincare products containing prescription-grade actives—retinoids at therapeutic concentrations, stabilized vitamin C, hydroquinone, peptides. These aren't drugstore products. I customize a regimen specific to your skin and goals. The goal is to accelerate results from in-office treatments and optimize daily skin health. This is a commitment—consistent use over 6-12 weeks shows results.",
-    benefits: [
-      "Prescription-grade concentrations of actives",
-      "Accelerates professional treatment results",
-      "Addresses pigmentation, texture, and aging",
-      "Customized regimen based on your skin",
-      "Professional-strength formulations",
-      "Improves daily skin health and radiance",
-      "Ongoing support and guidance from Dr. Shirazi",
-    ],
-    idealFor: [
-      "Patients complementing professional treatments",
-      "Those with pigmentation or textural concerns",
-      "Aging and fine-line prevention",
-      "Acne-prone or sensitive skin",
-      "Anyone serious about skincare investment",
-    ],
-    procedure: {
-      duration: "Consultation 20-30 minutes",
-      downtime: "None; potential mild irritation on first use",
-      results: "Visible results in 4-6 weeks with consistent use",
-      sessions: "Daily home use; follow-up consult every 8-12 weeks",
-    },
-    pricing: {
-      range: "$50-$200 per product",
-      note: "Professional consultation and custom regimen included",
-    },
-    faqs: [
-      {
-        question: "How is medical-grade skincare different from drugstore products?",
-        answer:
-          "Medical-grade products contain higher concentrations of active ingredients (retinoids at 0.5–1%, vitamin C at 15%+, hydroquinone at 4%) and are formulated for maximum penetration and efficacy. Drugstore products contain lower concentrations and fillers.",
-      },
-      {
-        question: "Do I need a prescription?",
-        answer:
-          "No. These are professional-grade products available through clinical partners. You don't need a prescription, but you do need a professional consultation to determine the right regimen for your skin.",
-      },
-      {
-        question: "Can I use medical-grade skincare with other treatments?",
-        answer:
-          "Yes. In fact, medical-grade skincare enhances the results of professional treatments. Dr. Shirazi customizes your regimen to complement whatever treatments you're receiving.",
-      },
-      {
-        question: "How long before I see results?",
-        answer:
-          "Most patients see visible improvement in skin tone, texture, and radiance within 4-6 weeks of consistent use. More significant changes (like fading hyperpigmentation) may take 8-12 weeks.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/6476077/pexels-photo-6476077.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/7797744/pexels-photo-7797744.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/6766261/pexels-photo-6766261.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
-  },
-  // MEN'S HEALTH
-  {
-    id: "discreet-aesthetics",
-    slug: "discreet-aesthetics",
-    name: "Discreet Aesthetics for Men",
-    category: "mens-health",
-    tagline: "Subtle Enhancement That Looks Like You, Just Better",
-    description:
-      "Men often want to look refreshed without anyone noticing they've had 'work done.' This is my specialty. Conservative Botox dosing (lighter than women to preserve masculine expressiveness), subtle jawline fillers, strategic skin tightening. We avoid overdone features. The goal is for colleagues to say 'You look rested' not 'You had something done.' This requires physician judgment and restraint.",
-    benefits: [
-      "Conservative, natural-looking results",
-      "Maintains masculine facial structure and expressiveness",
-      "Colleagues notice you look rested, not obvious treatment",
-      "Improves confidence in executive/professional settings",
-      "Customized strategically for male anatomy",
-      "Results appear gradual over weeks",
-      "Combination approach for optimal subtlety",
-    ],
-    idealFor: [
-      "Professional men wanting subtle refreshment",
-      "Executives and busy professionals",
-      "Those valuing understated, natural results",
-      "Men uncomfortable with obvious treatment",
-      "Patients wanting to maintain masculine features",
-    ],
-    procedure: {
-      duration: "30-60 minutes depending on plan",
-      downtime: "Minimal; depends on treatments selected",
-      results: "Gradual, subtle over 2-4 weeks",
-      sessions: "Customized plan typically 1-3 visits",
-    },
-    pricing: {
-      range: "$300-$2,000+",
-      note: "Depends on treatments; consultation determines plan",
-    },
-    faqs: [
-      {
-        question: "Will people notice I've had something done?",
-        answer:
-          "That's the point of discreet aesthetics. Dr. Shirazi uses conservative dosing and placement so you look refreshed and like yourself — just better. Most people won't suspect treatment; they'll just think you look rested.",
-      },
-      {
-        question: "What treatments work best for men?",
-        answer:
-          "Conservative Botox (lighter dosing to preserve expressiveness), subtle filler for jawline definition, Morpheus8 for subtle skin tightening, and skin care. We avoid overfilled lips or dramatic changes that read as obvious cosmetic work.",
-      },
-      {
-        question: "Do I have to do my whole face?",
-        answer:
-          "No. Many men start with one or two areas — like the forehead and crow's feet or jawline definition. Dr. Shirazi designs a strategic plan based on your goals.",
-      },
-      {
-        question: "How long do results last?",
-        answer:
-          "Results depend on which treatments you choose. Botox lasts 3-4 months, filler 6-12 months, and skin tightening results continue improving for several months and last 12+ months.",
-      },
-    ],
-    image: "https://images.pexels.com/photos/8350416/pexels-photo-8350416.jpeg?auto=compress&cs=tinysrgb&w=800",
-    imageAlts: [
-      "https://images.pexels.com/photos/5092528/pexels-photo-5092528.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/14687263/pexels-photo-14687263.jpeg?auto=compress&cs=tinysrgb&w=800",
-    ],
+    // Session 20: no hair-specific IDs in approved pool.
+    // Servicing (v3 A) + Keep-pile warm beauty; closest on-brand rotation.
+    image: pexelsUrl("5069494"),
+    imageAlts: [pexelsUrl("7446671"), pexelsUrl("3985329"), pexelsUrl("3985333")],
+    featured: true,
   },
 ];
+
+// ──────────────────────────────────────────────────────────────
+// Helper Functions
+// ──────────────────────────────────────────────────────────────
 
 export function getTreatmentBySlug(slug: string): Treatment | undefined {
   return treatments.find((t) => t.slug === slug);

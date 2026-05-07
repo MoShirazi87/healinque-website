@@ -10,16 +10,17 @@ import { Button } from "@/components/ui/button";
 import { pexelsUrl, pageImages } from "@/lib/data/images";
 import { siteConfig } from "@/lib/config/site";
 
+// Session 22: Values rewritten in Dr. Shirazi's first-person voice.
 const coreValues = [
   {
     title: "Natural Results",
     description:
-      "Enhancement, not transformation. We preserve your unique features while revealing the best version of you.",
+      "Enhancement, not transformation. I preserve your unique features while revealing the best version of you.",
   },
   {
     title: "Medical Integrity",
     description:
-      "Every protocol is grounded in science, safety, and 20+ years of clinical excellence. Dr. Shirazi leads every treatment.",
+      "Every protocol is grounded in science, safety, and 20+ years of clinical experience. I lead every treatment personally or through a provider I've trained.",
   },
   {
     title: "Personalized Care",
@@ -29,7 +30,7 @@ const coreValues = [
   {
     title: "Innovation",
     description:
-      "Continuously advancing our methodology with the latest evidence in regenerative medicine and aesthetic science.",
+      "Continuously advancing my methodology with the latest evidence in regenerative medicine and aesthetic science.",
   },
 ];
 
@@ -88,7 +89,7 @@ function AnimatedCounter({ target, suffix }: { target: number; suffix: string })
 }
 
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: {},
   visible: {
     opacity: 1,
     transition: {
@@ -99,11 +100,11 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { y: 15 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: "easeOut" },
+    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 
@@ -131,10 +132,11 @@ export default function AboutContent() {
           >
             {/* Story Content */}
             <motion.div variants={itemVariants} className="relative z-10">
+              {/* Session 22: Rewritten in first-person. Dr. Shirazi speaks directly. */}
               <div className="mb-8 flex items-center gap-4">
                 <div className="h-px w-12 bg-[#C9A227]"></div>
                 <p className="font-montserrat text-xs uppercase tracking-widest text-white/60">
-                  Our Heritage
+                  My Heritage
                 </p>
               </div>
 
@@ -144,10 +146,10 @@ export default function AboutContent() {
 
               <div className="space-y-6 text-white/70 leading-relaxed font-montserrat">
                 <p className="text-lg">
-                  Healinque was founded on a conviction: aesthetics is medicine. Not a salon service—a clinical discipline. Dr. Azadeh Shirazi, an internal medicine physician with 20+ years of clinical experience and 10+ years in aesthetic medicine, leads every consultation and personally performs every treatment.
+                  I founded Healinque on a conviction: aesthetics is medicine. Not a salon service — a clinical discipline. I&apos;m an internal medicine physician with 20+ years of clinical experience and 10+ years in aesthetic medicine. Treatments are performed by me or by one of the nurse practitioners or physician assistants I&apos;ve personally trained.
                 </p>
                 <p className="text-lg">
-                  Unlike conventional spas that apply templates, I investigate the deeper causes of aging. Why is your skin accelerating? What foundational interventions deliver lasting results? I combine aesthetic mastery with longevity science—treating you holistically, not cosmetically. Every treatment is personally tested by me before it enters practice.
+                  Unlike conventional spas that apply templates, I investigate the deeper causes of aging. Why is your skin accelerating? What foundational interventions deliver lasting results? I combine aesthetic mastery with longevity science — treating you holistically, not cosmetically. Every treatment is personally tested before it enters my practice.
                 </p>
                 <p className="text-lg">
                   My approach: conservative, layered planning. Medical-grade precision. Natural results that age well. You won&apos;t be sold treatments you don&apos;t need, and I&apos;ll never overfill or chase trends.
@@ -185,7 +187,7 @@ export default function AboutContent() {
                 initial={{ height: 0 }}
                 whileInView={{ height: 128 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
               ></motion.div>
             </motion.div>
           </motion.div>
@@ -214,13 +216,13 @@ export default function AboutContent() {
                 />
               </div>
 
-              {/* Accent Badge */}
+              {/* Accent Badge — Session 23: dialed from scale:0 pop to subtle scale:0.92 settle */}
               <motion.div
                 className="absolute -bottom-6 -right-6 bg-[#C9A227] text-[#0a1628] rounded-full w-32 h-32 flex items-center justify-center text-center"
-                initial={{ scale: 0 }}
+                initial={{ scale: 0.92 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ type: "spring", delay: 0.4 }}
+                transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
               >
                 <div className="font-cormorant-garamond text-center">
                   <p className="text-xl font-bold">MD</p>
@@ -274,16 +276,16 @@ export default function AboutContent() {
                 <div className="flex gap-4 items-start">
                   <Check className="w-5 h-5 text-[#C9A227] flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-montserrat font-semibold text-white">Personally Performs Every Treatment</p>
-                    <p className="text-white/60 text-sm">No delegation. Direct care from consultation forward.</p>
+                    <p className="font-montserrat font-semibold text-white">Physician-Led Care</p>
+                    <p className="text-white/60 text-sm">Every treatment performed or supervised by Dr. Shirazi and her clinical team.</p>
                   </div>
                 </div>
               </div>
 
-              {/* Philosophy Statement */}
+              {/* Philosophy Statement — Session 22: first-person. */}
               <div className="pt-8 border-t border-white/10">
                 <p className="text-white/70 font-montserrat leading-relaxed">
-                  I treat the face medically. Conservative, layered approach. Every treatment is personally tested by me. I prioritize long-term tissue health and natural-looking results over short-term maximalism.
+                  I treat the face medically. Conservative, layered approach. Every treatment is personally tested before I offer it. I prioritize long-term tissue health and natural-looking results over short-term maximalism.
                 </p>
               </div>
             </motion.div>
@@ -303,7 +305,7 @@ export default function AboutContent() {
             <div className="text-center mb-16">
               <motion.div variants={itemVariants} className="mb-6">
                 <p className="font-montserrat text-xs uppercase tracking-widest text-white/60 mb-4">
-                  Our Methodology
+                  My Methodology
                 </p>
                 <h2 className="font-cormorant-garamond text-5xl lg:text-6xl text-white">
                   The Three Pillars
@@ -393,7 +395,7 @@ export default function AboutContent() {
             <div className="text-center mb-16">
               <motion.div variants={itemVariants}>
                 <p className="font-montserrat text-xs uppercase tracking-widest text-white/60 mb-4">
-                  Our Foundation
+                  My Foundation
                 </p>
                 <h2 className="font-cormorant-garamond text-5xl lg:text-6xl text-white">
                   Core Values

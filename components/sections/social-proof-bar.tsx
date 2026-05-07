@@ -37,11 +37,11 @@ const proofPoints = [
 
 export function SocialProofBar() {
   return (
-    <section className="bg-cream border-y border-taupe/10 relative overflow-hidden" data-wipe>
+    <section className="bg-cream border-y border-taupe/10 relative overflow-hidden">
       <div className="container-healinque py-6 lg:py-8">
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 10 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className="flex flex-wrap items-center justify-center gap-8 lg:gap-14"
@@ -49,11 +49,10 @@ export function SocialProofBar() {
           {proofPoints.map((point, idx) => (
             <div
               key={idx}
-              data-magnetic=""
-              className="flex items-center gap-3 text-navy-deep cursor-default"
+              className="flex items-center gap-3 text-navy-deep"
             >
               <point.icon
-                className={`h-5 w-5 flex-shrink-0 icon-pulse ${
+                className={`h-5 w-5 flex-shrink-0 ${
                   point.filled
                     ? "fill-gold text-gold"
                     : "text-gold"

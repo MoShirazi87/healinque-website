@@ -22,14 +22,14 @@ const serviceAreas = [
   {
     name: "Poway",
     slug: "poway",
-    distance: "Our Location",
-    description: "Our clinic is located in Poway.",
+    distance: "My Location",
+    description: "My clinic is located in Poway.",
   },
   {
     name: "Rancho Bernardo",
     slug: "rancho-bernardo",
     distance: "10 min",
-    description: "Easy access to our Poway location.",
+    description: "Easy access to my Poway location.",
   },
   {
     name: "Scripps Ranch",
@@ -62,7 +62,7 @@ export default function LocationsPage() {
     <main>
       <Hero
         variant="page"
-        subtitle="Find Us"
+        subtitle="Find the Clinic"
         title="Located in Poway, Serving San Diego County"
         description="Healinque is located in Poway and serves patients from Rancho Bernardo, Scripps Ranch, Escondido, San Marcos, and Del Mar. All treatments performed by Dr. Azi Shirazi, MD."
         image={pexelsUrl(pageImages.locationsHero.primary, 1920)}
@@ -81,12 +81,12 @@ export default function LocationsPage() {
               />
             </div>
             <div>
-              <p className="section-subtitle text-gold">Our Location</p>
+              <p className="section-subtitle text-gold">My Location</p>
               <h2 className="section-title font-serif text-white mb-6">Healinque Poway</h2>
               <p className="text-white/80 leading-relaxed mb-6">
-                Our modern clinic in Poway offers a serene, private environment for your
+                My modern clinic in Poway offers a serene, private environment for your
                 aesthetic and wellness treatments. With easy parking and a welcoming
-                atmosphere, we have created a space where you can relax and focus on yourself.
+                atmosphere, I&apos;ve created a space where you can relax and focus on yourself.
               </p>
 
               <div className="space-y-4 mb-8">
@@ -161,8 +161,9 @@ export default function LocationsPage() {
                   <span className="badge-gold text-xs bg-gold/20 text-gold px-3 py-1 rounded-full">{area.distance}</span>
                 </div>
                 <p className="text-sm text-white/70 mb-4">{area.description}</p>
+                {/* Session 22: Outcome verb — travelers want to know the drive. */}
                 <span className="inline-flex items-center text-sm font-medium text-gold">
-                  Learn More <ArrowRight className="ml-1 h-4 w-4" />
+                  See the Drive <ArrowRight className="ml-1 h-4 w-4" />
                 </span>
               </Link>
             ))}

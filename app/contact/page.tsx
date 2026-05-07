@@ -34,7 +34,7 @@ const services = [
 ];
 
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: {},
   visible: {
     opacity: 1,
     transition: {
@@ -45,7 +45,7 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { y: 20 },
   visible: {
     opacity: 1,
     y: 0,
@@ -133,7 +133,7 @@ export default function ContactPage() {
       setSubmitError(
         err instanceof Error
           ? err.message
-          : 'Something went wrong. Please call us at (858) 337-7999.'
+          : 'Something went wrong. Please call (858) 337-7999.'
       );
     } finally {
       setSubmitting(false);
@@ -161,7 +161,7 @@ export default function ContactPage() {
             whileInView="visible"
             viewport={{ once: true, margin: '-100px' }}
           >
-            {/* Visit Us Card */}
+            {/* Visit My Clinic Card */}
             <motion.div
               variants={cardHoverVariants}
               initial="rest"
@@ -174,7 +174,7 @@ export default function ContactPage() {
               >
                 <MapPin className="h-7 w-7 text-white" />
               </motion.div>
-              <h3 className="font-serif text-2xl text-white mb-3">Visit Us</h3>
+              <h3 className="font-serif text-2xl text-white mb-3">Visit the Clinic</h3>
               <p className="text-white/70 leading-relaxed mb-6">
                 {contactDetails.address}
               </p>
@@ -188,7 +188,7 @@ export default function ContactPage() {
               </a>
             </motion.div>
 
-            {/* Call Us Card */}
+            {/* Call or Text Card */}
             <motion.div
               variants={cardHoverVariants}
               initial="rest"
@@ -211,11 +211,11 @@ export default function ContactPage() {
                 </a>
               </p>
               <p className="text-white/60 text-sm">
-                Call or text during business hours. We typically reply within one business day.
+                Call or text during business hours. I typically reply within one business day.
               </p>
             </motion.div>
 
-            {/* Email Us Card */}
+            {/* Email Card */}
             <motion.div
               variants={cardHoverVariants}
               initial="rest"
@@ -228,7 +228,7 @@ export default function ContactPage() {
               >
                 <Mail className="h-7 w-7 text-white" />
               </motion.div>
-              <h3 className="font-serif text-2xl text-white mb-3">Email Us</h3>
+              <h3 className="font-serif text-2xl text-white mb-3">Email</h3>
               <p className="text-white/70 mb-6">
                 <a
                   href={`mailto:${contactDetails.email}`}
@@ -238,7 +238,7 @@ export default function ContactPage() {
                 </a>
               </p>
               <p className="text-white/60 text-sm">
-                We typically respond within one business day.
+                I typically respond within one business day.
               </p>
             </motion.div>
           </motion.div>
@@ -246,7 +246,7 @@ export default function ContactPage() {
           {/* Hours Section */}
           <motion.div
             className="bg-gradient-to-r from-C9A227/10 via-transparent to-C9A227/10 border border-C9A227/20 rounded-2xl p-8 max-w-2xl mx-auto mb-16"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -260,7 +260,7 @@ export default function ContactPage() {
                 <motion.div
                   key={idx}
                   className="flex justify-between items-center pb-3 border-b border-C9A227/20 last:border-b-0"
-                  initial={{ opacity: 0, x: -10 }}
+                  initial={{ x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.4 + idx * 0.1 }}
@@ -278,15 +278,15 @@ export default function ContactPage() {
       <section className="section-padding bg-white/2 border-y border-white/5">
         <div className="container-healinque max-w-3xl">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="mb-12"
           >
-            <h2 className="font-serif text-4xl text-white mb-4">Send Us a Message</h2>
+            <h2 className="font-serif text-4xl text-white mb-4">Send Me a Message</h2>
             <p className="text-white/70">
-              If you&apos;d like to talk through what&apos;s right for you before booking, send us a note. We&apos;d recommend avoiding any medical history or personal health details here—Dr. Shirazi reviews every consultation request personally and will discuss sensitive information during your appointment.
+              If you&apos;d like to talk through what&apos;s right for you before booking, send me a note. I&apos;d recommend avoiding any medical history or personal health details here—I review every consultation request personally and will discuss sensitive information during your appointment.
             </p>
           </motion.div>
 
@@ -300,11 +300,11 @@ export default function ContactPage() {
           >
             {submitted && (
               <motion.div
-                initial={{ opacity: 0, y: -10 }}
+                initial={{ y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="mb-6 p-4 bg-C9A227/20 border border-C9A227/50 rounded-lg text-C9A227"
               >
-                Thank you! We&apos;ve received your message and will be in touch shortly.
+                Thank you! I&apos;ve received your message and will be in touch shortly.
               </motion.div>
             )}
 
@@ -401,7 +401,7 @@ export default function ContactPage() {
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="Tell us about your wellness goals..."
+                placeholder="Tell me about your wellness goals..."
                 rows={5}
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/40 focus:outline-none focus:border-C9A227 focus:ring-1 focus:ring-C9A227/50 transition-colors resize-none"
               />
@@ -413,7 +413,7 @@ export default function ContactPage() {
             {/* Error Message */}
             {submitError && (
               <motion.div
-                initial={{ opacity: 0, y: -10 }}
+                initial={{ y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-300 text-sm"
               >
@@ -440,10 +440,10 @@ export default function ContactPage() {
       <section className="relative h-96 bg-white/5 border-t border-white/5 overflow-hidden">
         <motion.div
           className="absolute inset-0 flex items-center justify-center"
-          initial={{ opacity: 0 }}
+          initial={{}}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
         >
           <iframe
             width="100%"
@@ -461,14 +461,14 @@ export default function ContactPage() {
       <section className="section-padding bg-gradient-to-b from-white/5 to-navy-deep border-t border-white/5">
         <motion.div
           className="container-healinque text-center max-w-2xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
           <h2 className="font-serif text-4xl text-white mb-4">Ready to Begin?</h2>
           <p className="text-white/70 mb-8">
-            Call our Poway clinic to discuss your wellness goals with Dr. Shirazi or schedule your consultation.
+            Call my Poway clinic to discuss your wellness goals with me or schedule your consultation.
           </p>
           <motion.a
             href={`tel:${contactDetails.phone}`}
@@ -476,7 +476,7 @@ export default function ContactPage() {
             whileTap={{ scale: 0.95 }}
             className="inline-block px-8 py-4 bg-C9A227 hover:bg-C9A227/90 text-navy-deep font-serif font-bold text-lg rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-C9A227/30"
           >
-            Call Us Today: {contactDetails.phone}
+            Call Today: {contactDetails.phone}
           </motion.a>
         </motion.div>
       </section>

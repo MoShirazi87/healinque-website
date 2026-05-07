@@ -144,7 +144,7 @@ export const siteConfig = {
       "Exclusive member offers",
     ],
     terms:
-      "Membership renews monthly. You can cancel anytime by contacting our team — no long-term commitment.",
+      "Membership renews monthly. You can cancel anytime by contacting my team — no long-term commitment.",
   },
 
   // Signature Packages

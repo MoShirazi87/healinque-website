@@ -10,6 +10,8 @@ import { ChevronRight } from "lucide-react";
  * Entry point for patients who don't know treatment names.
  * Sits on DARK background in homepage rhythm.
  * 8 concern cards in a 2x4 or 4x2 grid with editorial hover effects.
+ *
+ * Static editorial tiles — no flip behavior (removed Session 23).
  */
 
 const concerns = [
@@ -19,20 +21,23 @@ const concerns = [
     href: "/concerns/fine-lines-wrinkles",
     treatments: ["Botox", "Dysport", "Morpheus8"],
     icon: "✦",
+    image: "3985329",
   },
   {
     title: "Volume Loss & Sagging",
-    description: "If your cheeks, temples, or jawline feel deflated, we can talk about volume restoration.",
+    description: "If your cheeks, temples, or jawline feel deflated, let's talk about volume restoration.",
     href: "/concerns/volume-loss-sagging",
     treatments: ["Dermal Fillers", "PDO Threads", "PRF"],
     icon: "✦",
+    image: "3738355",
   },
   {
     title: "Dark Circles & Under-Eye",
-    description: "If the under-eye area looks hollow or tired, there are several options I like.",
+    description: "If the under-eye area looks hollow or tired, there are several options I recommend.",
     href: "/concerns/dark-circles-under-eye",
     treatments: ["Fillers", "PRF", "Laser"],
     icon: "✦",
+    image: "2661255",
   },
   {
     title: "Skin Texture & Tone",
@@ -40,6 +45,7 @@ const concerns = [
     href: "/concerns/skin-texture-tone",
     treatments: ["Chemical Peels", "Microneedling", "Laser"],
     icon: "✦",
+    image: "3985338",
   },
   {
     title: "Acne Scarring",
@@ -47,13 +53,15 @@ const concerns = [
     href: "/concerns/acne-scarring",
     treatments: ["Morpheus8", "Microneedling", "Laser"],
     icon: "✦",
+    image: "3985339",
   },
   {
     title: "Hyperpigmentation & Melasma",
-    description: "If you have dark spots or melasma, we have tools to address uneven tone.",
+    description: "If you have dark spots or melasma, I have tools to address uneven tone.",
     href: "/concerns/hyperpigmentation-melasma",
     treatments: ["IPL", "Chemical Peels", "Skincare"],
     icon: "✦",
+    image: "3822864",
   },
   {
     title: "Hair Thinning",
@@ -61,6 +69,7 @@ const concerns = [
     href: "/concerns/hair-thinning",
     treatments: ["PRP", "PRF", "Peptide Therapy"],
     icon: "✦",
+    image: "4041392",
   },
   {
     title: "Weight Management",
@@ -68,6 +77,7 @@ const concerns = [
     href: "/concerns/weight-management",
     treatments: ["Semaglutide", "Tirzepatide"],
     icon: "✦",
+    image: "3865676",
   },
 ];
 
@@ -78,12 +88,12 @@ interface ConcernCardsProps {
 
 export function ConcernCards({ title, subtitle }: ConcernCardsProps) {
   return (
-    <section className="relative py-20 md:py-32 bg-navy-deep overflow-hidden orb-bg has-particles" data-wipe>
+    <section className="relative py-20 md:py-32 bg-navy-deep overflow-hidden">
       <div className="container-healinque relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 15 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className="text-center mb-14"
@@ -98,11 +108,11 @@ export function ConcernCards({ title, subtitle }: ConcernCardsProps) {
             {title || (
               <>
                 What Brings You{" "}
-                <span className="text-gold italic heading-shimmer">In?</span>
+                <span className="text-gold italic">In?</span>
               </>
             )}
           </h2>
-          <p className="text-white/50 max-w-xl mx-auto">
+          <p className="text-base text-white/70 max-w-xl mx-auto leading-relaxed">
             Select a concern to explore treatment options.
           </p>
         </motion.div>
@@ -112,17 +122,14 @@ export function ConcernCards({ title, subtitle }: ConcernCardsProps) {
           {concerns.map((concern, index) => (
             <motion.div
               key={concern.title}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 15 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05, duration: 0.4 }}
             >
               <Link
                 href={concern.href}
-                data-interactive=""
-                data-tilt=""
-                data-ripple=""
-                className="group block p-5 rounded-xl bg-white/[0.03] border border-white/5 hover:border-gold/25 hover:bg-white/[0.06] transition-all duration-300 h-full card-interactive"
+                className="group block p-5 rounded-xl bg-white/[0.03] border border-white/5 hover:border-gold/25 hover:bg-white/[0.06] transition-colors duration-300 h-full"
               >
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="font-serif text-lg font-semibold text-white group-hover:text-gold transition-colors leading-snug">
@@ -131,7 +138,7 @@ export function ConcernCards({ title, subtitle }: ConcernCardsProps) {
                   <ChevronRight className="h-4 w-4 text-white/20 group-hover:text-gold group-hover:translate-x-0.5 transition-all flex-shrink-0 mt-1" />
                 </div>
 
-                <p className="text-sm text-white/50 mb-4 leading-relaxed">
+                <p className="text-sm text-white/70 mb-4 leading-relaxed">
                   {concern.description}
                 </p>
 
@@ -152,15 +159,15 @@ export function ConcernCards({ title, subtitle }: ConcernCardsProps) {
 
         {/* View All */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ y: 10 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
           className="text-center mt-8"
         >
           <Link
             href="/concerns"
-            className="text-sm text-white/40 hover:text-gold transition-colors underline underline-offset-4 decoration-white/15"
+            className="text-sm text-white/65 hover:text-gold transition-colors underline underline-offset-4 decoration-white/20"
           >
             View All Concerns →
           </Link>

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { PageHero as Hero } from "@/components/sections/hero";
-import { siteConfig } from "@/lib/config/site";
+import { siteConfig, getPhoneLink } from "@/lib/config/site";
 import { pexelsUrl, pageImages } from "@/lib/data/images";
 
 export const metadata: Metadata = {
@@ -210,7 +210,7 @@ export default function TermsPage() {
                     {siteConfig.name}<br />
                     {siteConfig.address.full}<br />
                     Email: <a href="mailto:legal@healinque.com" className="text-gold hover:text-gold/80 transition-colors">legal@healinque.com</a><br />
-                    Phone: <a href="tel:+18583377999" className="text-gold hover:text-gold/80 transition-colors">{siteConfig.phone}</a>
+                    Phone: <a href={getPhoneLink()} className="text-gold hover:text-gold/80 transition-colors">{siteConfig.phone}</a>
                   </p>
                 </div>
               </section>

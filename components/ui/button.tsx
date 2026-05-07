@@ -6,48 +6,43 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 /**
- * Premium button system.
+ * Button — Session 23 luxury restraint pass.
  *
- * Every variant has:
- *  - A shimmer sweep on hover (::before pseudo via `btn-sheen` class)
- *  - A tactile scale-down on press (`active:scale-[0.97]`)
- *  - A subtle 1px lift on hover (`hover:-translate-y-[1px]`)
- *  - Smooth multi-property transition
- *  - Focus-visible ring
- *  - prefers-reduced-motion guard (see .btn-sheen in globals.css)
+ * Previously carried: `btn-sheen btn-always-on`, `data-magnetic=""`, heavy
+ * dual-layer gold glow shadows, cursor-magnetic pull, shimmer sweep. All
+ * removed. What's left is a clean editorial button — color, a hair of motion
+ * on press, a focus ring. Nothing else. Variants differ only in palette;
+ * behavior is consistent across all of them.
+ *
+ * btn-gold variant still gets a subtle shimmer sweep via `btn-gold` in
+ * globals.css — kept for the primary CTA only, not universal.
  */
 const buttonVariants = cva(
   [
-    "btn-sheen btn-always-on", // shine sweep + universal gold glow signature
-    "relative inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium",
-    "transition-[transform,box-shadow,background-color,color,border-color,filter] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]",
+    "relative inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium tracking-wide",
+    "transition-[background-color,color,border-color,opacity] duration-200 ease-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-navy-deep",
     "disabled:pointer-events-none disabled:opacity-50",
-    "hover:-translate-y-[1px] active:scale-[0.97] active:translate-y-0 will-change-transform",
-    // Universal idle gold glow — every button glows at rest so site feels "on"
-    "shadow-[0_4px_18px_-6px_rgba(201,162,39,0.45),0_0_0_1px_rgba(201,162,39,0.12)]",
-    "hover:shadow-[0_12px_34px_-8px_rgba(201,162,39,0.7),0_0_44px_-10px_rgba(201,162,39,0.55),0_0_0_1px_rgba(201,162,39,0.35)]",
+    "active:opacity-90",
   ].join(" "),
   {
     variants: {
       variant: {
-        default:
-          "bg-gold text-white hover:bg-gold-dark",
-        destructive:
-          "bg-red-500 text-white hover:bg-red-600",
+        default: "bg-gold text-white hover:bg-gold-dark",
+        destructive: "bg-red-500 text-white hover:bg-red-600",
         outline:
-          "border-2 border-gold/60 bg-transparent text-navy-deep hover:bg-gold hover:text-white hover:border-gold",
+          "border border-gold/60 bg-transparent text-navy-deep hover:bg-gold hover:text-white hover:border-gold",
         "outline-gold":
           "border border-gold/60 bg-transparent text-gold hover:bg-gold/10 hover:border-gold",
         secondary:
-          "bg-cream text-navy-deep border border-gold/30 hover:bg-cream-dark",
+          "bg-cream text-navy-deep border border-taupe/20 hover:bg-cream-dark",
         ghost:
-          "text-gold/90 border border-gold/25 bg-white/[0.02] hover:bg-gold/10 hover:text-gold hover:border-gold/60",
+          "text-gold/90 border border-gold/30 bg-transparent hover:bg-gold/10 hover:text-gold hover:border-gold/60",
         "ghost-dark":
-          "text-navy-deep/90 border border-gold/25 bg-white/50 hover:bg-gold/10 hover:text-navy-deep hover:border-gold/60",
-        link: "text-gold underline-offset-4 hover:underline hover:text-gold-light !shadow-none hover:!shadow-none",
+          "text-navy-deep/90 border border-navy-deep/15 bg-transparent hover:bg-navy-deep/5 hover:border-navy-deep/30",
+        link: "text-gold underline-offset-4 hover:underline hover:text-gold-light",
         glass:
-          "bg-white/10 backdrop-blur-md border border-gold/30 text-white hover:bg-white/20 hover:border-gold/60",
+          "bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 hover:border-white/40",
       },
       size: {
         default: "h-11 px-6 py-2",
@@ -77,7 +72,6 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
-        data-magnetic=""
         {...props}
       />
     );

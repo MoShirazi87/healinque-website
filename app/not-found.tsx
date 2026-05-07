@@ -45,7 +45,7 @@ export default function NotFound() {
             href={`tel:${siteConfig.phoneRaw}`}
             className="text-gold hover:text-gold-light transition-colors"
           >
-            Call us at {siteConfig.phone}
+            Call {siteConfig.phone}
           </Link>
         </p>
       </div>

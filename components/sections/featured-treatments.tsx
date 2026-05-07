@@ -14,8 +14,8 @@ interface FeaturedTreatmentsProps {
 }
 
 export function FeaturedTreatments({
-  title = "Our Signature Treatments",
-  subtitle = "Explore Our Services",
+  title = "My Signature Treatments",
+  subtitle = "Explore the Menu",
   limit = 6,
 }: FeaturedTreatmentsProps) {
   // Filter featured treatments from data and map to display format
@@ -57,7 +57,7 @@ export function FeaturedTreatments({
           {displayTreatments.map((treatment, index) => (
             <motion.div
               key={treatment.name}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
@@ -89,7 +89,7 @@ export function FeaturedTreatments({
                       {treatment.description}
                     </p>
                     <span className="inline-flex items-center text-sm font-medium text-gold mt-4 group-hover:gap-2 transition-all">
-                      Learn More <ArrowRight className="ml-1 h-4 w-4" />
+                      See the Protocol <ArrowRight className="ml-1 h-4 w-4" />
                     </span>
                   </div>
                 </div>

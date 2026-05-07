@@ -6,12 +6,13 @@ import { Header } from "@/components/navigation/header";
 import { Footer } from "@/components/navigation/footer";
 import { MobileCtaBar } from "@/components/navigation/mobile-cta-bar";
 import { LocalBusinessSchema, PhysicianSchema, MedicalBusinessSchema } from "@/components/seo/schema";
-import { Providers } from "@/components/providers";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
-import { ScrollTint } from "@/components/ui/scroll-tint";
-import { AutoReveal } from "@/components/ui/auto-reveal";
-import { FlipOnTap } from "@/components/ui/flip-on-tap";
-import { InteractionEngine } from "@/components/ui/interaction-engine";
+// Session 23: ScrollTint, InteractionEngine, and FlipOnTap (previously code-split
+// inside DeferredEffects) were all removed. The remaining deferred effect is a
+// minimal AutoReveal that adds a `data-revealed` attribute on scroll — kept
+// non-destructive so a failed IntersectionObserver pass cannot hide content.
+import { DeferredEffects } from "@/components/ui/deferred-effects";
+import { AnalyticsProvider } from "@/components/analytics/analytics-provider";
 import { siteConfig } from "@/lib/config/site";
 
 const cormorant = Cormorant_Garamond({
@@ -112,17 +113,13 @@ export default function RootLayout({
         <MedicalBusinessSchema />
       </head>
       <body className="min-h-screen flex flex-col">
-        <Providers>
-          <ScrollProgress />
-          <ScrollTint />
-          <AutoReveal />
-          <FlipOnTap />
-          <InteractionEngine />
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <MobileCtaBar />
-        </Providers>
+        <AnalyticsProvider />
+        <ScrollProgress />
+        <DeferredEffects />
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Footer />
+        <MobileCtaBar />
       </body>
     </html>
   );

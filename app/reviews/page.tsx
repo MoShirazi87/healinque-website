@@ -139,7 +139,7 @@ const StarRating = ({ rating, size = 'md' }: { rating: number; size?: 'sm' | 'md
 };
 
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: {},
   visible: {
     opacity: 1,
     transition: {
@@ -150,7 +150,7 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { y: 20 },
   visible: {
     opacity: 1,
     y: 0,
@@ -174,7 +174,7 @@ export default function ReviewsPage() {
         variant="page"
         title="Patient Experiences"
         subtitle="Real Stories, Real Results"
-        description="Hear from our patients about their experiences with Dr. Azi Shirazi at Healinque."
+        description="Hear from my patients about their experiences with me at Healinque."
         image={pexelsUrl(pageImages.reviewsHero.primary, 1920)}
         overlay="dark"
       />
@@ -184,7 +184,7 @@ export default function ReviewsPage() {
         <div className="container-healinque">
           <motion.div
             className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
@@ -196,7 +196,7 @@ export default function ReviewsPage() {
             >
               <motion.div
                 className="flex justify-center gap-1 mb-4"
-                initial={{ opacity: 0, scale: 0.8 }}
+                initial={{ scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
@@ -205,7 +205,7 @@ export default function ReviewsPage() {
               </motion.div>
               <motion.div
                 className="font-serif text-5xl font-bold bg-gradient-to-r from-C9A227 to-C9A227/80 bg-clip-text text-transparent mb-2"
-                initial={{ opacity: 0 }}
+                initial={{}}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -219,7 +219,7 @@ export default function ReviewsPage() {
             {/* Five Star Count */}
             <motion.div
               className="bg-white/5 border border-white/10 rounded-xl p-6 flex flex-col items-center justify-center"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -236,7 +236,7 @@ export default function ReviewsPage() {
             {/* Four-Five Star Count */}
             <motion.div
               className="bg-gradient-to-br from-C9A227/20 to-C9A227/5 border border-C9A227/30 rounded-xl p-6 flex flex-col items-center justify-center"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -262,7 +262,7 @@ export default function ReviewsPage() {
           <div className="container-healinque max-w-3xl">
             <motion.div
               className="relative bg-gradient-to-br from-C9A227/20 via-transparent to-C9A227/10 border border-C9A227/30 rounded-2xl p-12 backdrop-blur-sm"
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
@@ -270,17 +270,17 @@ export default function ReviewsPage() {
               {/* Decorative Quotes */}
               <motion.div
                 className="absolute top-4 left-6 text-9xl text-C9A227/20 font-serif leading-none"
-                initial={{ opacity: 0 }}
+                initial={{}}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: 0.5 }}
               >
                 &quot;
               </motion.div>
 
               <motion.div
                 className="relative z-10"
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
@@ -333,7 +333,7 @@ export default function ReviewsPage() {
               <div className="h-px w-12 bg-[#C9A227]" />
             </motion.div>
             <motion.p variants={itemVariants} className="text-navy-deep/70 text-base leading-relaxed">
-              <strong>These are illustrative testimonials.</strong> Real patient reviews from our clinic will replace these soon. All reviews reflect individual experiences—results vary based on age, skin type, genetics, and lifestyle. These placeholder quotes do not represent typical or guaranteed results.
+              <strong>These are illustrative testimonials.</strong> Real patient reviews from my clinic will replace these soon. All reviews reflect individual experiences—results vary based on age, skin type, genetics, and lifestyle. These placeholder quotes do not represent typical or guaranteed results.
             </motion.p>
           </motion.div>
         </div>
@@ -404,7 +404,7 @@ export default function ReviewsPage() {
 
                   {/* Treatment Badge */}
                   <motion.div
-                    initial={{ opacity: 0 }}
+                    initial={{}}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.3 }}
@@ -427,7 +427,7 @@ export default function ReviewsPage() {
         <div className="container-healinque max-w-3xl">
           <motion.div
             className="text-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
@@ -436,7 +436,7 @@ export default function ReviewsPage() {
               Video Testimonials
             </h2>
             <p className="text-white/70">
-              Coming soon: Watch our patients share their authentic transformation stories in their own words.
+              Coming soon: Watch my patients share their authentic stories in their own words.
             </p>
           </motion.div>
 
@@ -490,7 +490,7 @@ export default function ReviewsPage() {
       <section className="section-padding bg-gradient-to-b from-navy-deep to-white/5 border-t border-white/5">
         <div className="container-healinque max-w-2xl mx-auto text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
@@ -499,7 +499,7 @@ export default function ReviewsPage() {
               Ready to Share Your Experience?
             </h2>
             <p className="text-white/70 mb-8">
-              Join our growing community of patients who have transformed their appearance and confidence with Dr. Azi Shirazi.
+              Join my growing community of patients who have refined their appearance with care, restraint, and a plan that ages with them.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

@@ -1,13 +1,11 @@
-"use client";
-
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
 import { PageHero as Hero } from "@/components/sections/hero";
 import { Button } from "@/components/ui/button";
 import { BreadcrumbSchema } from "@/components/seo/schema";
 import { pexelsUrl, pageImages, videos } from "@/lib/data/images";
 import { Disclaimer } from "@/components/ui/disclaimer";
+import { siteConfig, getPhoneLink } from "@/lib/config/site";
 
 const menServices = [
   {
@@ -67,7 +65,7 @@ const whyChoosePoints = [
   },
   {
     title: "No Spa Vibes",
-    description: "We respect your time and your preferences. Private treatment rooms, direct communication, and no unnecessary fluff.",
+    description: "I respect your time and your preferences. Private treatment rooms, direct communication, and no unnecessary fluff.",
   },
   {
     title: "Physician-Led",
@@ -79,7 +77,7 @@ const whyChoosePoints = [
   },
   {
     title: "Discreet & Confidential",
-    description: "Your visit, your treatments, your business. We take privacy seriously.",
+    description: "Your visit, your treatments, your business. I take privacy seriously.",
   },
 ];
 
@@ -87,7 +85,7 @@ const menFaqs = [
   {
     question: "Is Botox common for men?",
     answer:
-      "More than you'd think. Male Botox procedures have increased over 380% in the last two decades. Our typical male patient is a professional in his 30s–50s who wants to look refreshed and competitive — not frozen. We start conservative and adjust from there.",
+      "More than you'd think. Male Botox procedures have increased over 380% in the last two decades. My typical male patient is a professional in his 30s–50s who wants to look refreshed and competitive — not frozen. I start conservative and adjust from there.",
   },
   {
     question: "Will anyone be able to tell?",
@@ -107,45 +105,20 @@ const menFaqs = [
   {
     question: "How does hair restoration work?",
     answer:
-      "We use PRP scalp injections to deliver growth factors directly to thinning areas. Clinical evidence shows PRP can improve hair density in androgenetic alopecia. Most patients need 3–4 treatments initially, then maintenance every 6–12 months. We may also recommend combining PRP with topical or oral medications for better results.",
+      "I use PRP scalp injections to deliver growth factors directly to thinning areas. Clinical evidence shows PRP can improve hair density in androgenetic alopecia. Most patients need 3–4 treatments initially, then maintenance every 6–12 months. I may also recommend combining PRP with topical or oral medications for better results.",
   },
   {
     question: "How does testosterone therapy work?",
     answer:
-      "It starts with lab work — at least two morning blood draws showing consistently low testosterone levels. If you qualify, options include injections, topical gels, or in some cases clomiphene (which preserves fertility). We monitor labs regularly to keep levels optimized and catch any side effects early.",
+      "It starts with lab work — at least two morning blood draws showing consistently low testosterone levels. If you qualify, options include injections, topical gels, or in some cases clomiphene (which preserves fertility). I monitor labs regularly to keep levels optimized and catch any side effects early.",
   },
   {
     question: "Can I come in without my partner knowing?",
     answer:
-      "Yes. Everything about your visit — from scheduling to billing to treatment — is kept confidential per HIPAA regulations. Our Friday Men's Clinic day also means a male-focused environment.",
+      "Yes. Everything about your visit — from scheduling to billing to treatment — is kept confidential per HIPAA regulations. My Friday Men's Clinic day also means a male-focused environment.",
   },
 ];
 
-// Animation variants for staggered content
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-};
-
-const cardHoverVariants = {
-  rest: { y: 0 },
-  hover: { y: -4 },
-};
 
 export default function MensClinicalPage() {
   const breadcrumbItems = [
@@ -170,12 +143,8 @@ export default function MensClinicalPage() {
       {/* Intro Section — Light (Cream) */}
       <section className="section-padding bg-cream text-navy-deep border-b border-taupe/10">
         <div className="container-healinque">
-          <motion.div
+          <div
             className="max-w-3xl mx-auto text-center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
           >
             <div className="flex justify-center mb-6">
               <div className="h-px w-12 bg-[#C9A227]" />
@@ -187,24 +156,20 @@ export default function MensClinicalPage() {
               A Different Kind of <span className="italic text-[#C9A227]">Clinic Day</span>
             </h2>
             <p className="text-lg text-navy-deep/75 leading-relaxed mb-6">
-              Friday is our dedicated Men&apos;s Clinic day. No flowery marketing. No spa music. Just a physician-led clinical setting and treatments designed around the way men actually want to be treated — efficiently, discreetly, and with zero BS.
+              Friday is my dedicated Men&apos;s Clinic day. No flowery marketing. No spa music. Just a physician-led clinical setting and treatments designed around the way men actually want to be treated — efficiently, discreetly, and with zero BS.
             </p>
             <p className="text-lg text-navy-deep/75 leading-relaxed">
               Male aesthetic patients are the fastest-growing segment in the industry, and for good reason. Looking sharp isn&apos;t vanity — it&apos;s maintenance. Dr. Shirazi understands male facial anatomy, masculine aesthetic goals, and the treatments that get results without making you look &quot;done.&quot;
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Services for Men — Dark */}
-      <section className="section-padding bg-navy-deep text-white orb-bg has-particles relative overflow-hidden" data-wipe>
+      <section className="section-padding bg-navy-deep text-white relative overflow-hidden">
         <div className="container-healinque">
-          <motion.div
+          <div
             className="mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
           >
             <div className="flex justify-center mb-6">
               <div className="h-px w-12 bg-[#C9A227]" />
@@ -215,64 +180,38 @@ export default function MensClinicalPage() {
             <h2 className="font-serif text-5xl text-center mb-4 text-white">
               Services for <span className="italic text-[#C9A227]">Men</span>
             </h2>
-          </motion.div>
+          </div>
 
-          <motion.div
+          <div
             className="grid md:grid-cols-2 gap-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
           >
             {menServices.map((service) => (
-              <motion.div
+              <div
                 key={service.title}
-                variants={itemVariants}
-                className="flip-to-image relative min-h-[280px] bg-white/[0.03] backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden hover:border-[#C9A227]/50"
+                className="bg-white/[0.03] backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden hover:border-[#C9A227]/50 transition-colors duration-300"
               >
-                <div className="flip-front relative z-10 p-8 h-full flex flex-col">
+                <div className="p-8 flex flex-col">
                   <h3 className="font-serif text-2xl text-[#C9A227] mb-3">
                     {service.title}
                   </h3>
-                  <p className="text-white/75 leading-relaxed mb-6 flex-grow">
+                  <p className="text-white/75 leading-relaxed mb-6">
                     {service.description}
                   </p>
                   <p className="text-[#C9A227] text-sm font-semibold">
                     {service.price}
                   </p>
                 </div>
-                <div className="flip-back">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={pexelsUrl(service.image, 800)}
-                    alt={service.title}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/75 to-navy-deep/20" />
-                  <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                    <h3 className="font-serif text-2xl text-white mb-2">
-                      {service.title}
-                    </h3>
-                    <p className="text-[#C9A227] text-sm font-semibold">
-                      {service.price}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Men's Packages — Light (Cream) */}
       <section className="section-padding bg-cream text-navy-deep">
         <div className="container-healinque">
-          <motion.div
+          <div
             className="mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
           >
             <div className="flex justify-center mb-6">
               <div className="h-px w-12 bg-[#C9A227]" />
@@ -283,24 +222,16 @@ export default function MensClinicalPage() {
             <h2 className="font-serif text-5xl text-center mb-4 text-navy-deep">
               Curated <span className="italic text-[#C9A227]">Packages</span>
             </h2>
-          </motion.div>
+          </div>
 
-          <motion.div
+          <div
             className="grid md:grid-cols-2 gap-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
           >
             {/* The Executive Refresh */}
-            <motion.div
-              variants={itemVariants}
-              whileHover="hover"
-              initial="rest"
+            <div
               className="group"
             >
-              <motion.div
-                variants={cardHoverVariants}
+              <div
                 className="bg-white border border-taupe/10 rounded-xl p-8 flex flex-col h-full shadow-sm hover:shadow-md transition-all duration-300"
               >
                 <div className="mb-6">
@@ -332,18 +263,14 @@ export default function MensClinicalPage() {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* The Jawline Package */}
-            <motion.div
-              variants={itemVariants}
-              whileHover="hover"
-              initial="rest"
+            <div
               className="group"
             >
-              <motion.div
-                variants={cardHoverVariants}
+              <div
                 className="bg-white border border-taupe/10 rounded-xl p-8 flex flex-col h-full shadow-sm hover:shadow-md transition-all duration-300"
               >
                 <div className="mb-6">
@@ -376,18 +303,14 @@ export default function MensClinicalPage() {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* The Power Hour */}
-            <motion.div
-              variants={itemVariants}
-              whileHover="hover"
-              initial="rest"
+            <div
               className="group"
             >
-              <motion.div
-                variants={cardHoverVariants}
+              <div
                 className="bg-white border border-taupe/10 rounded-xl p-8 flex flex-col h-full shadow-sm hover:shadow-md transition-all duration-300"
               >
                 <div className="mb-6">
@@ -419,21 +342,17 @@ export default function MensClinicalPage() {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
 
             {/* The Full Rebuild — Featured with Gold Glow */}
-            <motion.div
-              variants={itemVariants}
-              whileHover="hover"
-              initial="rest"
+            <div
               className="group relative"
             >
               {/* Gold gradient glow background */}
               <div className="absolute inset-0 bg-gradient-to-br from-[#C9A227]/20 to-transparent rounded-xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <motion.div
-                variants={cardHoverVariants}
+              <div
                 className="relative bg-white border-2 border-[#C9A227] rounded-xl p-8 flex flex-col h-full shadow-md hover:shadow-lg transition-all duration-300"
               >
                 <div className="mb-6">
@@ -470,50 +389,38 @@ export default function MensClinicalPage() {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-              </motion.div>
-            </motion.div>
-          </motion.div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Why Men Choose Healinque — Dark */}
       <section className="section-padding bg-navy-deep text-white border-y border-white/5">
         <div className="container-healinque">
-          <motion.div
+          <div
             className="mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
           >
             <div className="flex justify-center mb-6">
               <div className="h-px w-12 bg-[#C9A227]" />
             </div>
             <p className="text-xs uppercase tracking-widest text-white/60 text-center mb-6 font-medium">
-              Our Advantage
+              The Advantage
             </p>
             <h2 className="font-serif text-5xl text-center text-white">
               Why Men Choose <span className="italic text-[#C9A227]">Healinque</span>
             </h2>
-          </motion.div>
+          </div>
 
-          <motion.div
+          <div
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
           >
             {whyChoosePoints.map((point, index) => (
-              <motion.div
+              <div
                 key={point.title}
-                variants={itemVariants}
-                whileHover="hover"
-                initial="rest"
                 className="group relative"
               >
-                <motion.div
-                  variants={cardHoverVariants}
+                <div
                   className="bg-white/[0.03] backdrop-blur-sm rounded-xl p-8 border border-white/10 hover:border-[#C9A227]/30 transition-all duration-300 flex flex-col h-full relative overflow-hidden"
                 >
                   <div className="absolute -top-8 -right-8 text-6xl font-serif text-[#C9A227]/10 group-hover:text-[#C9A227]/20 transition-colors duration-300">
@@ -525,22 +432,18 @@ export default function MensClinicalPage() {
                   <p className="text-white/75 leading-relaxed text-sm relative z-10">
                     {point.description}
                   </p>
-                </motion.div>
-              </motion.div>
+                </div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* FAQ Section — Light (Cream) */}
       <section className="section-padding bg-cream text-navy-deep">
         <div className="container-healinque">
-          <motion.div
+          <div
             className="mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
           >
             <div className="flex justify-center mb-6">
               <div className="h-px w-12 bg-[#C9A227]" />
@@ -551,17 +454,13 @@ export default function MensClinicalPage() {
             <h2 className="font-serif text-5xl text-center text-navy-deep">
               Frequently Asked <span className="italic text-[#C9A227]">Questions</span>
             </h2>
-          </motion.div>
+          </div>
 
-          <motion.div
+          <div
             className="max-w-3xl mx-auto space-y-4"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
           >
             {menFaqs.map((faq, index) => (
-              <motion.div key={index} variants={itemVariants}>
+              <div key={index}>
                 <details className="group bg-white border border-taupe/10 rounded-xl shadow-sm hover:shadow-md transition-all duration-300">
                   <summary className="flex items-center justify-between cursor-pointer p-6">
                     <h3 className="font-serif text-lg text-navy-deep group-hover:text-[#C9A227] transition-colors duration-300">
@@ -575,23 +474,19 @@ export default function MensClinicalPage() {
                     {faq.answer}
                   </div>
                 </details>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Final CTA — Dark */}
-      <section className="section-padding bg-navy-deep text-white orb-bg has-particles relative overflow-hidden" data-wipe>
+      <section className="section-padding bg-navy-deep text-white relative overflow-hidden">
         <div className="container-healinque">
-          <motion.div
+          <div
             className="max-w-3xl mx-auto text-center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
           >
-            <motion.div variants={itemVariants}>
+            <div>
               <div className="flex justify-center mb-6">
                 <div className="h-px w-12 bg-[#C9A227]" />
               </div>
@@ -601,29 +496,27 @@ export default function MensClinicalPage() {
               <h2 className="font-serif text-5xl mb-6 text-white">
                 Ready to <span className="italic text-[#C9A227]">Get Started?</span>
               </h2>
-            </motion.div>
+            </div>
 
-            <motion.p
+            <p
               className="text-lg text-white/75 mb-10 leading-relaxed"
-              variants={itemVariants}
             >
-              Book your consultation. We&apos;ll assess your goals, give you honest answers, and build a plan that works.
-            </motion.p>
+              Book your consultation. I&apos;ll assess your goals, give you honest answers, and build a plan that works.
+            </p>
 
-            <motion.div
+            <div
               className="flex flex-col sm:flex-row gap-4 justify-center"
-              variants={containerVariants}
             >
-              <motion.div variants={itemVariants} className="w-full sm:w-auto">
+              <div className="w-full sm:w-auto">
                 <Link href="/book" className="block w-full sm:w-auto">
                   <Button className="w-full bg-[#C9A227] hover:bg-[#B8951F] text-navy-deep px-8 font-semibold">
                     Book Men&apos;s Clinic Appointment
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-              </motion.div>
-              <motion.div variants={itemVariants} className="w-full sm:w-auto">
-                <a href="tel:+18583377999" className="block w-full sm:w-auto">
+              </div>
+              <div className="w-full sm:w-auto">
+                <a href={getPhoneLink()} className="block w-full sm:w-auto">
                   <Button
                     variant="outline"
                     className="w-full border-[#C9A227] text-[#C9A227] hover:bg-[#C9A227]/10 px-8 font-semibold"
@@ -631,12 +524,12 @@ export default function MensClinicalPage() {
                     Call or Text (858) 337-7999
                   </Button>
                 </a>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
             <div className="mt-10 max-w-2xl mx-auto">
               <Disclaimer className="text-white/40 text-center" />
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </main>

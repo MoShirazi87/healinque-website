@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowRight, Phone } from "lucide-react";
 import { PageHero as Hero } from "@/components/sections/hero";
 import { FAQSection } from "@/components/sections/faq";
@@ -10,140 +7,96 @@ import { siteConfig, getPhoneLink } from "@/lib/config/site";
 import { pexelsUrl, pageImages } from "@/lib/data/images";
 import { FAQSchema, BreadcrumbSchema } from "@/components/seo/schema";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1, delayChildren: 0.2 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: "easeOut" },
-  },
-};
-
 const faqCategories = [
   {
-    title: "General Questions",
-    label: "Getting to Know Us",
+    title: "General & First-Time Patients",
+    label: "Getting Started",
     faqs: [
       {
-        question: "What makes Healinque different from other medical spas?",
+        question: "What is Healinque?",
         answer:
-          "Healinque is physician-led by Dr. Azi Shirazi, MD—an internal medicine specialist with 20+ years of clinical experience and 10+ years of advanced aesthetic training. Her internal medicine background means we address not just how you look, but your whole-body health. Plus, Dr. Azi personally performs or directly supervises every treatment, and she's personally tested everything we offer.",
+          "Healinque is a physician-led aesthetic and longevity practice in Poway, CA, founded by Dr. Azadeh Shirazi, MD. I combine aesthetic medicine with a whole-person perspective — treating how you look and how you feel. Treatments are performed by me or by one of the nurse practitioners or physician assistants I've personally trained.",
       },
       {
-        question: "Do I need a referral to visit Healinque?",
+        question: "What makes Healinque different from a medical spa?",
         answer:
-          "No referral is needed. You can book directly with us for any of our aesthetic or wellness services. For certain medical weight loss or hormone treatments, we may request records from your primary care physician.",
+          "Medical spas vary widely. At Healinque, every treatment plan starts with a clinical assessment — not a sales menu. I have 20+ years of clinical experience in internal medicine and 10+ years in aesthetic medicine. I don't delegate to unsupervised technicians. Every treatment is personally reviewed and overseen by me.",
       },
       {
-        question: "What are your hours and location?",
-        answer: `We're located at ${siteConfig.address.full}. Our hours are: ${siteConfig.hours.display.join("; ")}. We offer some evening appointments by special arrangement.`,
+        question: "Do I need a referral to book an appointment?",
+        answer:
+          "No referral needed. You can book directly through my website, call or text (858) 337-7999, or email AzadehMD@gmail.com. I welcome new patients and am happy to answer questions before your first visit.",
+      },
+      {
+        question: "Do I need to be a certain age to have treatments?",
+        answer:
+          "Most aesthetic treatments are appropriate for adults 18+. For patients under 21, I discuss goals carefully and may recommend conservative, skincare-first approaches. Botox and fillers are FDA-approved for adults. There's no upper age limit—many of my patients are in their 60s and 70s.",
+      },
+      {
+        question: "What should I expect during my first consultation?",
+        answer:
+          "Your first visit is a comprehensive 60–90 minute consultation. I review your medical history, examine your facial anatomy, discuss your goals, and assess your skin. I then create a personalized treatment plan—layered and conservative. There's no pressure to commit to anything on the first visit. The $100 consultation fee is credited toward any treatment you schedule.",
+      },
+      {
+        question: "Can I come in just for a consultation without committing to treatment?",
+        answer:
+          "Absolutely. Many patients come in to learn about options and leave with a plan they can think about. There's no obligation. I'd rather you feel informed and comfortable than rushed into a decision.",
+      },
+      {
+        question: "What's your cancellation policy?",
+        answer:
+          "I ask for 24-hour notice for cancellations or rescheduling. Late cancellations or no-shows may incur a fee. I understand life happens—just give me a call as soon as you know you need to change your appointment.",
+      },
+      {
+        question: "Is Healinque accepting new patients?",
+        answer:
+          "Yes, I am currently accepting new patients. Book online, call, or text (858) 337-7999. I typically schedule new consultations within 1-2 weeks.",
       },
     ],
   },
   {
     title: "Appointments & Consultations",
-    label: "Booking Your Visit",
+    label: "Scheduling & Visits",
     faqs: [
       {
-        question: "Is a consultation required before treatment?",
+        question: "How do I book an appointment?",
         answer:
-          "Yes, we require an initial consultation for new patients. This 45-60 minute appointment allows Dr. Azi to understand your goals, review your medical history, and create a personalized treatment plan. The consultation fee is $100 and is credited toward any treatment you choose.",
+          "You can book through my website at healinque.com/book, call or text (858) 337-7999, or email AzadehMD@gmail.com. I'll confirm your appointment within one business day.",
       },
       {
-        question: "Can I get treated the same day as my consultation?",
+        question: "What are your hours?",
         answer:
-          "Often yes! If Dr. Azi determines you're a good candidate and you'd like to proceed, many treatments can be performed immediately following your consultation.",
+          "Monday, Wednesday, Friday: 10:00 AM – 12:00 PM and 1:00 PM – 6:00 PM. Saturday: 10:00 AM – 1:00 PM. Tuesday, Thursday, and Sunday: Closed. Men's Clinic: Fridays (by appointment).",
       },
       {
-        question: "What is your cancellation policy?",
+        question: "Where are you located?",
         answer:
-          "We require 48 hours notice for cancellations or rescheduling. Late cancellations or no-shows may incur a $50 fee. We understand emergencies happen — call or text (858) 337-7999 as soon as possible if you need to change your appointment.",
+          "15644 Pomerado Road, Suite 103, Poway, CA 92064. I serve patients from Poway, Rancho Bernardo, Scripps Ranch, Escondido, San Marcos, and Del Mar. Most patients are within a 15-25 minute drive.",
+      },
+      {
+        question: "Is there parking available?",
+        answer:
+          "Yes, free parking is available directly in front of the suite. The building is easily accessible from Pomerado Road with no parking stress.",
+      },
+      {
+        question: "How long does a typical appointment take?",
+        answer:
+          "Initial consultations: 60-90 minutes. Botox appointments: 15-30 minutes. Filler appointments: 30-60 minutes. Microneedling: 60-90 minutes. Chemical peels: 30-45 minutes. I never rush—I'd rather take my time and get it right.",
+      },
+      {
+        question: "Can I book multiple treatments in one visit?",
+        answer:
+          "Often, yes. Botox + filler in the same session is common. Microneedling + PRP is designed as a combined treatment. Some combinations require spacing (e.g., peel + laser). I'll discuss what's safe to combine during your consultation.",
       },
       {
         question: "Do you offer virtual consultations?",
         answer:
-          "Yes! We offer telehealth consultations for follow-up appointments and certain wellness services. Initial aesthetic consultations are best done in person so Dr. Azi can properly assess your concerns.",
-      },
-    ],
-  },
-  {
-    title: "Treatments & Procedures",
-    label: "What to Expect",
-    faqs: [
-      {
-        question: "Does Dr. Azi perform all treatments?",
-        answer:
-          "Dr. Azi personally performs or directly supervises all medical treatments. For certain services like HydraFacials, our trained aestheticians may perform the treatment under Dr. Azi's protocol and supervision.",
+          "I offer virtual consultations for initial discussions about treatment options, especially for patients driving from further away. However, a hands-on assessment is required before any treatment. Virtual consults help me determine if you're a good candidate and what to plan for your in-person visit.",
       },
       {
-        question: "Are your treatments painful?",
+        question: "What should I bring to my first appointment?",
         answer:
-          "Comfort is a priority. Most injectable treatments feel like a tiny pinch and are very tolerable. We offer numbing cream for more sensitive areas. For any procedure, we'll discuss what to expect and how we manage comfort.",
-      },
-      {
-        question: "How long do results last?",
-        answer:
-          "This varies by treatment. Botox typically lasts 3-4 months, fillers 6-18 months depending on the area, and laser treatments offer progressive, long-lasting improvement. We'll discuss expected longevity during your consultation.",
-      },
-      {
-        question: "What if I'm not happy with my results?",
-        answer:
-          "Your satisfaction is our priority. We schedule complimentary follow-up appointments to assess results and make adjustments if needed. For fillers, touch-ups within 2 weeks are typically complimentary.",
-      },
-    ],
-  },
-  {
-    title: "Pricing & Payment",
-    label: "Investment & Plans",
-    faqs: [
-      {
-        question: "Do you accept insurance?",
-        answer:
-          "Most aesthetic treatments are not covered by insurance. For certain medical services like hormone testing or weight management, coverage may apply. We can provide documentation for you to submit to your insurance.",
-      },
-      {
-        question: "What payment methods do you accept?",
-        answer:
-          "We accept cash, all major credit cards, HSA/FSA cards (for qualifying services), and CareCredit/Cherry financing. Payment is due at the time of service.",
-      },
-      {
-        question: "Do you offer financing?",
-        answer:
-          "Yes! We partner with CareCredit and Cherry to offer flexible financing options, including 0% APR plans for qualified applicants. Apply online before your visit or ask our team for details.",
-      },
-      {
-        question: "Do you offer package discounts?",
-        answer:
-          "Yes, we offer prepaid packages for many treatments at a discount. We also have membership programs with ongoing savings. Ask about our current packages and membership tiers.",
-      },
-    ],
-  },
-  {
-    title: "Before & After Treatment",
-    label: "Preparation & Aftercare",
-    faqs: [
-      {
-        question: "How should I prepare for my appointment?",
-        answer:
-          "Arrive with a clean face (no makeup for facial treatments). Avoid blood thinners like aspirin, ibuprofen, fish oil, and vitamin E for 1 week before injectables to minimize bruising. We'll provide specific instructions based on your treatment.",
-      },
-      {
-        question: "What should I expect after treatment?",
-        answer:
-          "This varies by procedure. For injectables, you may have minor swelling or bruising that resolves in a few days. For laser treatments, expect some redness. We provide detailed aftercare instructions for every treatment.",
-      },
-      {
-        question: "When will I see results?",
-        answer:
-          "Botox results appear in 3-7 days, with full effect at 2 weeks. Filler results are immediate. Laser and regenerative treatments show progressive improvement over weeks to months.",
+          "Bring a valid photo ID, your current medication list (including supplements), and any relevant medical records. If you have photos of how your skin or face looked a few years ago, those can be helpful for treatment planning. Come with a clean face if possible (no makeup for skin assessments).",
       },
     ],
   },
@@ -159,12 +112,12 @@ const faqCategories = [
       {
         question: "Will I look frozen after Botox?",
         answer:
-          "No. My approach is natural-looking results — we're aiming to smooth dynamic lines while preserving your expressions. Botox is a tool; the artistry is in the dose and placement. I see patients who want barely-there softening, and others who want more dramatic results. We discuss your goals upfront so there's no surprise.",
+          "No. My approach is natural-looking results — I'm aiming to smooth dynamic lines while preserving your expressions. Botox is a tool; the artistry is in the dose and placement. I see patients who want barely-there softening, and others who want more dramatic results. I discuss your goals upfront so there's no surprise.",
       },
       {
         question: "What's the difference between Botox and Dysport?",
         answer:
-          "Both are neurotoxins that relax facial muscles, but Dysport spreads slightly more and may diffuse to adjacent muscles. Results appear faster (3-5 days vs. 3-7 for Botox) but may not last quite as long (3-4 months vs. 3-4 months—very similar). Dysport costs less per unit ($4.50 vs. $12 for Botox at Healinque), so it can be budget-friendly. Some patients prefer one over the other, and we offer both.",
+          "Both are neurotoxins that relax facial muscles, but Dysport spreads slightly more and may diffuse to adjacent muscles. Results appear faster (3-5 days vs. 3-7 for Botox) but may not last quite as long (3-4 months vs. 3-4 months—very similar). Dysport costs less per unit ($4.50 vs. $12 for Botox at Healinque), so it can be budget-friendly. Some patients prefer one over the other, and I offer both.",
       },
       {
         question: "How long do fillers last?",
@@ -174,22 +127,22 @@ const faqCategories = [
       {
         question: "Can fillers be dissolved if I don't like them?",
         answer:
-          "Yes. Hyaluronic acid fillers can be dissolved with hyaluronidase (an enzyme), usually within 24 hours. This is a safety net if you want to proceed slowly or if something doesn't feel right. Not all fillers are reversible, but we use products that are.",
+          "Yes. Hyaluronic acid fillers can be dissolved with hyaluronidase (an enzyme), usually within 24 hours. This is a safety net if you want to proceed slowly or if something doesn't feel right. Not all fillers are reversible, but I use products that are.",
       },
       {
         question: "Can I get injectables if I'm pregnant or breastfeeding?",
         answer:
-          "We recommend deferring elective injectables until after pregnancy and breastfeeding, as safety data is limited. However, if you have a specific medical concern (like TMJ pain from masseter tension), we can discuss options. Always tell us upfront if you're pregnant or nursing.",
+          "I recommend deferring elective injectables until after pregnancy and breastfeeding, as safety data is limited. However, if you have a specific medical concern (like TMJ pain from masseter tension), I can discuss options. Always tell me upfront if you're pregnant or nursing.",
       },
       {
         question: "What is masseter Botox and when might you recommend it?",
         answer:
-          "Masseter Botox relaxes the chewing muscle (masseter) in the jaw, which can reduce jawline tension and pain from TMJ disorder. It's also used cosmetically to narrow a square jawline. Note: This is an off-label use of Botox (FDA approves it for other indications), so we discuss informed consent fully. Results take 2-3 weeks and improve over a month.",
+          "Masseter Botox relaxes the chewing muscle (masseter) in the jaw, which can reduce jawline tension and pain from TMJ disorder. It's also used cosmetically to narrow a square jawline. Note: This is an off-label use of Botox (FDA approves it for other indications), so I discuss informed consent fully with every patient. Results take 2-3 weeks and improve over a month.",
       },
       {
         question: "What are signs I should call you immediately after injectables?",
         answer:
-          "Severe pain (especially around the eye or forehead), vision changes, blanching or whitening of skin, or spreading swelling hours after treatment can indicate vascular occlusion (filler in a blood vessel). This is rare but serious. Call us immediately if this happens—we have protocols to address it.",
+          "Severe pain (especially around the eye or forehead), vision changes, blanching or whitening of skin, or spreading swelling hours after treatment can indicate vascular occlusion (filler in a blood vessel). This is rare but serious. Call me immediately if this happens—I have protocols to address it.",
       },
       {
         question: "Is preventative Botox in your 20s a good idea?",
@@ -225,17 +178,17 @@ const faqCategories = [
       {
         question: "When can I use retinoids after a peel or microneedling?",
         answer:
-          "After a light peel or microneedling, wait 3-5 days before reintroducing retinoids—your skin will be sensitive. Start low (like a gentle retinol serum) rather than prescription strength. After more aggressive laser, we usually recommend waiting 1-2 weeks. I'll give you specific aftercare instructions.",
+          "After a light peel or microneedling, wait 3-5 days before reintroducing retinoids—your skin will be sensitive. Start low (like a gentle retinol serum) rather than prescription strength. After more aggressive laser, I usually recommend waiting 1-2 weeks. I'll give you specific aftercare instructions.",
       },
       {
         question: "I live in San Diego. How should I manage my skin during peel recovery?",
         answer:
-          "San Diego sun is intense, even in winter. After a peel, wear SPF 50+ daily, reapply every 2 hours, and consider a wide-brimmed hat. If you treat in fall/winter, you have more flexibility. Avoid direct sun for at least 1 week post-peel. Post-inflammatory hyperpigmentation is the biggest risk in our sunny climate.",
+          "San Diego sun is intense, even in winter. After a peel, wear SPF 50+ daily, reapply every 2 hours, and consider a wide-brimmed hat. If you treat in fall/winter, you have more flexibility. Avoid direct sun for at least 1 week post-peel. Post-inflammatory hyperpigmentation is the biggest risk in this sunny climate.",
       },
       {
         question: "What's the typical downtime for each type of skin treatment?",
         answer:
-          "Light peels: 2-3 days of mild redness and flaking. Microneedling: 24-48 hours of redness, can resume makeup day 2. Medium chemical peel: 5-7 days of significant peeling. IPL/laser: 3-10 days depending on intensity. Deeper laser resurfacing: 1-2 weeks of visible healing. We discuss downtime during your consultation so you can plan.",
+          "Light peels: 2-3 days of mild redness and flaking. Microneedling: 24-48 hours of redness, can resume makeup day 2. Medium chemical peel: 5-7 days of significant peeling. IPL/laser: 3-10 days depending on intensity. Deeper laser resurfacing: 1-2 weeks of visible healing. I discuss downtime during your consultation so you can plan.",
       },
       {
         question: "Can I combine microneedling with PRP or PRF?",
@@ -261,7 +214,7 @@ const faqCategories = [
       {
         question: "Does Healinque use compounded GLP-1, or FDA-approved products?",
         answer:
-          "We use only FDA-approved, brand-name products—semaglutide (Wegovy) and tirzepatide (Zepbound)—obtained through authorized supply chains. I don't use compounded versions because long-term safety data and sterility assurance are stronger with FDA-approved formulations. We prioritize your safety over cost.",
+          "I use only FDA-approved, brand-name products—semaglutide (Wegovy) and tirzepatide (Zepbound)—obtained through authorized supply chains. I don't use compounded versions because long-term safety data and sterility assurance are stronger with FDA-approved formulations. I prioritize your safety over cost.",
       },
       {
         question: "What are the most common side effects of GLP-1 medications?",
@@ -271,7 +224,7 @@ const faqCategories = [
       {
         question: "Are there serious risks I should know about?",
         answer:
-          "Rare but serious risks include pancreatitis (severe abdominal pain) and gallbladder issues. Medullary thyroid carcinoma history is a contraindication—we screen thoroughly. I review your full medical history and may order labs before starting. If you develop severe abdominal pain during treatment, call immediately.",
+          "Rare but serious risks include pancreatitis (severe abdominal pain) and gallbladder issues. Medullary thyroid carcinoma history is a contraindication—I screen thoroughly. I review your full medical history and may order labs before starting. If you develop severe abdominal pain during treatment, call immediately.",
       },
       {
         question: "I have a history of thyroid issues. Can I still take GLP-1?",
@@ -286,12 +239,12 @@ const faqCategories = [
       {
         question: `I've heard about "Ozempic face." Is that real?`,
         answer:
-          "Yes, it's real—rapid weight loss can cause facial volume loss and sagging skin. The good news: We can address this with fillers, microneedling, or other treatments to restore fullness and tighten skin. If you're planning GLP-1 therapy, we can discuss preventative strategies (slower titration, strategic filler placement) during your consultation. It's manageable.",
+          "Yes, it's real—rapid weight loss can cause facial volume loss and sagging skin. The good news: I can address this with fillers, microneedling, or other treatments to restore fullness and tighten skin. If you're planning GLP-1 therapy, I can discuss preventative strategies (slower titration, strategic filler placement) during your consultation. It's manageable.",
       },
       {
         question: "Who is NOT a good candidate for GLP-1 medications?",
         answer:
-          "Contraindications: Medullary thyroid carcinoma history, family history of medullary thyroid carcinoma, Multiple Endocrine Neoplasia type 2, or pancreatitis history. Caution: Severe kidney/liver disease, Type 1 diabetes (different from Type 2), gallbladder disease, pregnancy. We do a full assessment before prescribing.",
+          "Contraindications: Medullary thyroid carcinoma history, family history of medullary thyroid carcinoma, Multiple Endocrine Neoplasia type 2, or pancreatitis history. Caution: Severe kidney/liver disease, Type 1 diabetes (different from Type 2), gallbladder disease, pregnancy. I do a full assessment before prescribing.",
       },
     ],
   },
@@ -307,7 +260,7 @@ const faqCategories = [
       {
         question: "What is Men's Clinic Friday?",
         answer:
-          "Every Friday, we focus our schedule on male patients seeking aesthetic and wellness services. It's a dedicated clinic day, so you may have more flexibility in appointments. Many men appreciate having a focused, private time to discuss treatments without feeling rushed. Call or text (858) 337-7999 to schedule your Friday appointment.",
+          "Every Friday, I focus my schedule on male patients seeking aesthetic and wellness services. It's a dedicated clinic day, so you may have more flexibility in appointments. Many men appreciate having a focused, private time to discuss treatments without feeling rushed. Call or text (858) 337-7999 to schedule your Friday appointment.",
       },
       {
         question: "Will anyone know I had aesthetic work done?",
@@ -321,17 +274,17 @@ const faqCategories = [
       {
         question: "What is the P-Shot and what should I expect?",
         answer:
-          "The P-Shot is PRP (platelet-rich plasma from your own blood) injected into the penis to improve blood flow and erectile function. I'm honest: The American Urological Association classifies PRP for ED as experimental—there's promise, but long-term data is limited. Many patients report improvement in sensation and firmness, but results vary. If you have ED, you should also see a urologist. Cost: $1700 per treatment.",
+          "The P-Shot is PRP (platelet-rich plasma from your own blood) injected into the penis to improve blood flow and erectile function. I'm transparent: The American Urological Association classifies PRP for ED as experimental—there's promise, but long-term data is limited. Many patients report improvement in sensation and firmness, but results vary. If you have ED, you should also see a urologist. Cost: $1700 per treatment.",
       },
       {
         question: "What about hair restoration? How long does it take?",
         answer:
-          "Hair treatments (like low-level laser, PRP, or topical solutions) work slowly. Expect 3-6 months for visible improvement, and best results at 6-12 months. Consistency matters—you can't skip treatments. If you're losing hair rapidly, we may refer you to a dermatologist. Early intervention yields better results. Cost: $850 per session or $4500 for a package of 6.",
+          "Hair treatments (like low-level laser, PRP, or topical solutions) work slowly. Expect 3-6 months for visible improvement, and best results at 6-12 months. Consistency matters—you can't skip treatments. If you're losing hair rapidly, I may refer you to a dermatologist. Early intervention yields better results. Cost: $850 per session or $4500 for a package of 6.",
       },
       {
         question: "Do I need bloodwork before testosterone optimization?",
         answer:
-          "Absolutely. Before starting any hormone therapy, I order comprehensive labs—testosterone, free testosterone, estrogen, PSA (prostate), liver and kidney function, cholesterol. This baseline is essential for safety and monitoring. If your results show contraindications (like elevated PSA), we refer you to a specialist. Testing is part of the consultation process.",
+          "Absolutely. Before starting any hormone therapy, I order comprehensive labs—testosterone, free testosterone, estrogen, PSA (prostate), liver and kidney function, cholesterol. This baseline is essential for safety and monitoring. If your results show contraindications (like elevated PSA), I refer you to a specialist. Testing is part of the consultation process.",
       },
     ],
   },
@@ -342,22 +295,22 @@ const faqCategories = [
       {
         question: "Do you accept insurance for aesthetic treatments?",
         answer:
-          "Most elective aesthetic treatments (Botox, fillers, lasers) are not covered by insurance. However, certain services may qualify: hormonal testing, some weight loss medication consultations, or therapeutic injections for TMJ. We can provide documentation for you to submit to your insurer. Always check with your plan first.",
+          "Most elective aesthetic treatments (Botox, fillers, lasers) are not covered by insurance. However, certain services may qualify: hormonal testing, some weight loss medication consultations, or therapeutic injections for TMJ. I can provide documentation for you to submit to your insurer. Always check with your plan first.",
       },
       {
         question: "What payment methods do you accept?",
         answer:
-          "We accept cash, all major credit cards (Visa, Mastercard, American Express), HSA/FSA cards (for eligible services), and financing through CareCredit and Cherry. Payment is due at the time of service.",
+          "I accept cash, all major credit cards (Visa, Mastercard, American Express), HSA/FSA cards (for eligible services), and financing through CareCredit and Cherry. Payment is due at the time of service.",
       },
       {
         question: "Do you offer financing or payment plans?",
         answer:
-          "Yes. We partner with CareCredit and Cherry to offer flexible financing with 0% APR options for qualified applicants (terms vary). You can apply online before your visit, or our staff can help you apply in the office. Makes treatments more accessible without upfront cost.",
+          "Yes. I partner with CareCredit and Cherry to offer flexible financing with 0% APR options for qualified applicants (terms vary). You can apply online before your visit, or I can help you apply in the office. Makes treatments more accessible without upfront cost.",
       },
       {
         question: "Do you offer package or prepay discounts?",
         answer:
-          "Yes! Prepaid packages give 10–20% off depending on treatment. For example, microneedling packages of 3 are discounted vs. single sessions. We also have the Healinque Elite Membership ($199/month) with monthly IV, 10% off Botox/Dysport, 10% off peels/microneedling, priority booking, and exclusive offers.",
+          "Yes! Prepaid packages give 10–20% off depending on treatment. For example, microneedling packages of 3 are discounted vs. single sessions. I also have the Healinque Elite Membership ($199/month) with monthly IV, 10% off Botox/Dysport, 10% off peels/microneedling, priority booking, and exclusive offers.",
       },
       {
         question: "Is the Healinque Elite Membership worth it?",
@@ -367,17 +320,17 @@ const faqCategories = [
       {
         question: "Can I use my HSA or FSA for treatments?",
         answer:
-          "Yes, for qualifying services. Certain treatments (like medical weight loss consultations, hormone testing, or therapeutic injections) may qualify. Most elective aesthetics don't. When you book, mention you'd like to use HSA/FSA, and we'll confirm eligibility.",
+          "Yes, for qualifying services. Certain treatments (like medical weight loss consultations, hormone testing, or therapeutic injections) may qualify. Most elective aesthetics don't. When you book, mention you'd like to use HSA/FSA, and my team will confirm eligibility.",
       },
       {
         question: "Can I prepay for multiple treatments and save?",
         answer:
-          "Absolutely. Package deals are our way of rewarding commitment. For example, a package of 3 microneedling sessions with PRP runs $2000 total, compared to $1500 if booked separately. We offer prepay pricing on most treatments. Discuss package options during your consultation.",
+          "Absolutely. Package deals are my way of rewarding commitment. For example, a package of 3 microneedling sessions with PRP runs $2000 total, compared to $1500 if booked separately. I offer prepay pricing on most treatments. Discuss package options during your consultation.",
       },
       {
         question: "How do I cancel my Healinque Elite Membership?",
         answer:
-          "Monthly memberships can be cancelled with 30 days notice. No long-term commitment. Call or text (858) 337-7999 or email info@healinque.com, and we'll process your cancellation. If you cancel mid-month, no refund applies, but you'll retain benefits through the end of that month.",
+          "Monthly memberships can be cancelled with 30 days notice. No long-term commitment. Call or text (858) 337-7999 or email info@healinque.com, and my team will process your cancellation. If you cancel mid-month, no refund applies, but you'll retain benefits through the end of that month.",
       },
     ],
   },
@@ -388,17 +341,17 @@ const faqCategories = [
       {
         question: "How do you handle complications from treatment?",
         answer:
-          "Safety is non-negotiable. If a complication occurs—like vascular occlusion, allergic reaction, or infection—I have protocols in place. We monitor you immediately, provide emergency care if needed, and cover the cost of corrective treatment. Serious cases are escalated to a hospital. You have my direct contact for urgent concerns.",
+          "Safety is non-negotiable. If a complication occurs—like vascular occlusion, allergic reaction, or infection—I have protocols in place. I monitor you immediately, provide emergency care if needed, and cover the cost of corrective treatment. Serious cases are escalated to a hospital. You have my direct contact for urgent concerns.",
       },
       {
         question: "What should I avoid before getting injectables?",
         answer:
-          "Avoid blood thinners for 1 week before: aspirin, ibuprofen, naproxen, fish oil, vitamin E, and alcohol. These increase bruising. Continue acetaminophen (Tylenol) if needed. If you're on prescription blood thinners (warfarin, apixaban), tell me during your consultation—we may still proceed, but with careful planning.",
+          "Avoid blood thinners for 1 week before: aspirin, ibuprofen, naproxen, fish oil, vitamin E, and alcohol. These increase bruising. Continue acetaminophen (Tylenol) if needed. If you're on prescription blood thinners (warfarin, apixaban), tell me during your consultation—I may still proceed, but with careful planning.",
       },
       {
         question: "What should I expect after injectables?",
         answer:
-          "Mild swelling and redness at injection sites is normal and resolves in 24-48 hours. Minor bruising is possible. Botox results appear in 3-7 days (full effect at 2 weeks). Filler results are immediate. Avoid massaging the area for 24 hours. We provide detailed aftercare instructions at your appointment.",
+          "Mild swelling and redness at injection sites is normal and resolves in 24-48 hours. Minor bruising is possible. Botox results appear in 3-7 days (full effect at 2 weeks). Filler results are immediate. Avoid massaging the area for 24 hours. I provide detailed aftercare instructions at your appointment.",
       },
       {
         question: "When can I exercise or fly after treatment?",
@@ -413,12 +366,12 @@ const faqCategories = [
       {
         question: "What signs should make me call you immediately?",
         answer:
-          "Call immediately if you experience: severe pain (especially around eyes or forehead), vision changes, blanching or whitening of skin, spreading swelling (hours after treatment), fever, signs of infection (increased redness, warmth, pus), or difficulty breathing. These could indicate serious complications. Don't wait—we're here 24/7 for urgent issues.",
+          "Call immediately if you experience: severe pain (especially around eyes or forehead), vision changes, blanching or whitening of skin, spreading swelling (hours after treatment), fever, signs of infection (increased redness, warmth, pus), or difficulty breathing. These could indicate serious complications. Don't wait—I'm available 24/7 for urgent issues.",
       },
       {
         question: "How do I get detailed aftercare instructions?",
         answer:
-          "We provide written aftercare instructions at your appointment specific to your treatment. You'll also receive them via email. If you have questions days later, call us—we're happy to clarify. Proper aftercare is key to optimal results, so don't hesitate to reach out.",
+          "I provide written aftercare instructions at your appointment specific to your treatment. You'll also receive them via email. If you have questions days later, call me—I'm happy to clarify. Proper aftercare is key to optimal results, so don't hesitate to reach out.",
       },
     ],
   },
@@ -441,7 +394,7 @@ export default function FAQPage() {
         variant="page"
         title="Frequently Asked Questions"
         subtitle="Help Center"
-        description="Find answers to common questions about our treatments, appointments, and policies."
+        description="Find answers to common questions about my treatments, appointments, and policies."
         image={pexelsUrl(pageImages.faqHero.primary, 1920)}
         overlay="dark"
       />
@@ -449,52 +402,36 @@ export default function FAQPage() {
       {/* Intro — CREAM */}
       <section className="relative py-16 bg-cream">
         <div className="container-healinque">
-          <motion.div
-            className="max-w-3xl mx-auto text-center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
-          >
-            <motion.div variants={itemVariants} className="flex items-center justify-center gap-4 mb-6">
+          <div className="max-w-3xl mx-auto text-center">
+            <div className="flex items-center justify-center gap-4 mb-6">
               <div className="h-px w-12 bg-[#C9A227]" />
               <p className="font-sans text-xs uppercase tracking-[0.2em] text-navy-deep/50">
-                Answers & Clarity
+                Answers &amp; Clarity
               </p>
               <div className="h-px w-12 bg-[#C9A227]" />
-            </motion.div>
-            <motion.h2
-              variants={itemVariants}
-              className="font-serif text-4xl lg:text-5xl text-navy-deep mb-6 leading-tight"
-            >
+            </div>
+            <h2 className="font-serif text-4xl lg:text-5xl text-navy-deep mb-6 leading-tight">
               Your <span className="text-[#C9A227] italic">Questions</span>, Answered
-            </motion.h2>
-            <motion.p variants={itemVariants} className="text-navy-deep/70 text-lg leading-relaxed">
-              Below you&apos;ll find answers to the questions we hear most often. Jump to a category
-              or scroll through everything. If you don&apos;t see your question, reach out—we&apos;re
+            </h2>
+            <p className="text-navy-deep/70 text-lg leading-relaxed">
+              Below you&apos;ll find answers to the questions I hear most often. Jump to a category
+              or scroll through everything. If you don&apos;t see your question, reach out—I&apos;m
               happy to help.
-            </motion.p>
-          </motion.div>
+            </p>
+          </div>
 
           {/* Category Nav */}
-          <motion.nav
-            className="flex flex-wrap justify-center gap-3 mt-12"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={containerVariants}
-          >
+          <nav className="flex flex-wrap justify-center gap-3 mt-12">
             {faqCategories.map((category) => (
-              <motion.a
+              <a
                 key={category.title}
-                variants={itemVariants}
                 href={`#${category.title.toLowerCase().replace(/\s+&?\s*/g, "-")}`}
                 className="px-5 py-2.5 text-xs uppercase tracking-wider font-sans font-medium text-navy-deep/70 bg-white border border-taupe/20 rounded-full hover:border-[#C9A227] hover:text-[#C9A227] transition-all"
               >
                 {category.title}
-              </motion.a>
+              </a>
             ))}
-          </motion.nav>
+          </nav>
         </div>
       </section>
 
@@ -508,14 +445,8 @@ export default function FAQPage() {
             className={`relative py-20 scroll-mt-28 ${isDark ? "bg-[#0a1628]" : "bg-cream"}`}
           >
             <div className="container-healinque">
-              <motion.div
-                className="max-w-4xl mx-auto mb-12"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                variants={containerVariants}
-              >
-                <motion.div variants={itemVariants} className="flex items-center gap-4 mb-5">
+              <div className="max-w-4xl mx-auto mb-12">
+                <div className="flex items-center gap-4 mb-5">
                   <div className="h-px w-12 bg-[#C9A227]" />
                   <p
                     className={`font-sans text-xs uppercase tracking-[0.2em] ${
@@ -524,16 +455,15 @@ export default function FAQPage() {
                   >
                     {category.label}
                   </p>
-                </motion.div>
-                <motion.h2
-                  variants={itemVariants}
+                </div>
+                <h2
                   className={`font-serif text-3xl lg:text-5xl leading-tight ${
                     isDark ? "text-white" : "text-navy-deep"
                   }`}
                 >
                   {category.title}
-                </motion.h2>
-              </motion.div>
+                </h2>
+              </div>
 
               <div className="max-w-4xl mx-auto">
                 <FAQSection faqs={category.faqs} variant={isDark ? "dark" : "light"} />
@@ -543,52 +473,37 @@ export default function FAQPage() {
         );
       })}
 
-      {/* Still Have Questions CTA — CREAM (ends on light tone before footer) */}
+      {/* Still Have Questions CTA — CREAM */}
       <section className="relative py-24 bg-cream border-t border-taupe/10">
         <div className="container-healinque">
-          <motion.div
-            className="max-w-3xl mx-auto text-center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={containerVariants}
-          >
-            <motion.div variants={itemVariants}>
-              <p className="font-sans text-xs uppercase tracking-[0.2em] text-navy-deep/50 mb-4">
-                Still Curious?
-              </p>
-              <h2 className="font-serif text-4xl lg:text-5xl text-navy-deep mb-6">
-                We&apos;re <span className="text-[#C9A227] italic">Here</span> to Help
-              </h2>
-              <p className="text-navy-deep/70 text-lg mb-10">
-                Reach out directly and we&apos;ll get back to you within 24 hours — or call or text (858) 337-7999.
-              </p>
-            </motion.div>
+          <div className="max-w-3xl mx-auto text-center">
+            <p className="font-sans text-xs uppercase tracking-[0.2em] text-navy-deep/50 mb-4">
+              Still Curious?
+            </p>
+            <h2 className="font-serif text-4xl lg:text-5xl text-navy-deep mb-6">
+              I&apos;m <span className="text-[#C9A227] italic">Here</span> to Help
+            </h2>
+            <p className="text-navy-deep/70 text-lg mb-10">
+              Reach out directly and I&apos;ll get back to you within 24 hours — or call or text (858) 337-7999.
+            </p>
 
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-              variants={containerVariants}
-            >
-              <motion.div variants={itemVariants}>
-                <Link href="/contact">
-                  <Button className="bg-[#C9A227] hover:bg-[#b8921f] text-[#0a1628] px-10 py-6 font-sans font-semibold rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300">
-                    Contact Us <ArrowRight className="ml-3 h-5 w-5" />
-                  </Button>
-                </Link>
-              </motion.div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link href="/contact">
+                <Button className="bg-[#C9A227] hover:bg-[#b8921f] text-[#0a1628] px-10 py-6 font-sans font-semibold rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300">
+                  Get in Touch <ArrowRight className="ml-3 h-5 w-5" />
+                </Button>
+              </Link>
 
-              <motion.div variants={itemVariants}>
-                <a href={getPhoneLink()}>
-                  <Button
-                    variant="outline"
-                    className="border-[#C9A227] text-[#C9A227] hover:bg-[#C9A227]/10 px-10 py-6 font-sans font-semibold rounded-lg transition-all duration-300"
-                  >
-                    <Phone className="mr-3 h-5 w-5" /> {siteConfig.phone}
-                  </Button>
-                </a>
-              </motion.div>
-            </motion.div>
-          </motion.div>
+              <a href={getPhoneLink()}>
+                <Button
+                  variant="outline"
+                  className="border-[#C9A227] text-[#C9A227] hover:bg-[#C9A227]/10 px-10 py-6 font-sans font-semibold rounded-lg transition-all duration-300"
+                >
+                  <Phone className="mr-3 h-5 w-5" /> {siteConfig.phone}
+                </Button>
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </main>

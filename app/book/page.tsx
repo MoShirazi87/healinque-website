@@ -3,7 +3,7 @@ import Link from "next/link";
 import { MapPin, Phone, Clock, CheckCircle, Calendar, ArrowRight } from "lucide-react";
 import { PageHero as Hero } from "@/components/sections/hero";
 import { Button } from "@/components/ui/button";
-import { PabauBooking } from "@/components/ui/pabau-booking";
+import { BookingWidget } from "@/components/ui/booking-widget";
 import { siteConfig, getPhoneLink } from "@/lib/config/site";
 import { pexelsUrl, pageImages } from "@/lib/data/images";
 
@@ -168,8 +168,8 @@ export default function BookPage() {
               </p>
             </div>
 
-            {/* Pabau booking widget — renders iframe when configured, fallback otherwise */}
-            <PabauBooking
+            {/* Booking widget — Pabau when configured, Calendly as interim, contact fallback */}
+            <BookingWidget
               className="bg-white border border-[#C9A227]/20 rounded-2xl p-6 md:p-10 shadow-xl overflow-hidden"
               inline={true}
             />
@@ -217,28 +217,11 @@ export default function BookPage() {
             {journeySteps.map((step) => (
               <div
                 key={step.num}
-                className="flip-to-image group relative min-h-[280px] bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden hover:border-[#C9A227]/50"
+                className="relative bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden p-8 flex flex-col hover:border-[#C9A227]/40 transition-colors duration-300"
               >
-                {/* Front: label */}
-                <div className="flip-front relative z-10 p-8 h-full flex flex-col">
-                  <p className="font-serif text-5xl text-[#C9A227]/80 mb-4">{step.num}</p>
-                  <h3 className="font-serif text-xl text-white mb-3">{step.title}</h3>
-                  <p className="text-white/60 text-sm leading-relaxed">{step.copy}</p>
-                </div>
-                {/* Back: image with overlay */}
-                <div className="flip-back">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={pexelsUrl(step.image, 800)}
-                    alt={step.alt}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-[#0a1628]/70 to-[#0a1628]/30" />
-                  <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                    <p className="font-serif text-3xl text-[#C9A227] mb-1">{step.num}</p>
-                    <h3 className="font-serif text-2xl text-white">{step.title}</h3>
-                  </div>
-                </div>
+                <p className="font-serif text-5xl text-[#C9A227]/80 mb-4">{step.num}</p>
+                <h3 className="font-serif text-xl text-white mb-3">{step.title}</h3>
+                <p className="text-white/70 text-base leading-relaxed">{step.copy}</p>
               </div>
             ))}
           </div>
@@ -261,14 +244,14 @@ export default function BookPage() {
             <div className="bg-white border border-taupe/10 rounded-xl p-8 shadow-sm">
               <h3 className="font-serif text-xl text-navy-deep mb-4">Cancellation Policy</h3>
               <p className="text-navy-deep/70 leading-relaxed mb-4">
-                We require{" "}
+                I ask for{" "}
                 <span className="text-[#C9A227] font-semibold">48 hours notice</span> for
                 cancellations or rescheduling.
               </p>
               <p className="text-navy-deep/70 leading-relaxed">
                 Late cancellations or no-shows may be subject to a{" "}
-                <span className="text-[#C9A227] font-semibold">$50 fee</span>. We understand life
-                happens—please contact us as soon as possible if you need to change your appointment.
+                <span className="text-[#C9A227] font-semibold">$50 fee</span>. I understand life
+                happens—please reach out as soon as possible if you need to change your appointment.
               </p>
             </div>
 
@@ -292,7 +275,7 @@ export default function BookPage() {
             <div className="flex items-center justify-center gap-4 mb-5">
               <div className="h-px w-12 bg-[#C9A227]" />
               <p className="font-sans text-xs uppercase tracking-[0.2em] text-white/50">
-                Visit Us
+                Visit the Clinic
               </p>
               <div className="h-px w-12 bg-[#C9A227]" />
             </div>
@@ -348,10 +331,10 @@ export default function BookPage() {
               Questions?
             </p>
             <h2 className="font-serif text-4xl lg:text-5xl text-navy-deep mb-6">
-              We&apos;re <span className="text-[#C9A227] italic">Here</span> to Help
+              I&apos;m <span className="text-[#C9A227] italic">Here</span> to Help
             </h2>
             <p className="text-navy-deep/70 text-lg mb-10 leading-relaxed">
-              Our team is here to help. Reach out anytime with questions about treatments, pricing,
+              Reach out anytime with questions about treatments, pricing,
               or scheduling.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -363,7 +346,7 @@ export default function BookPage() {
               </Button>
               <Button asChild size="lg" variant="outline">
                 <Link href="/contact">
-                  Contact Us
+                  Get in Touch
                   <ArrowRight className="h-5 w-5 ml-2" />
                 </Link>
               </Button>

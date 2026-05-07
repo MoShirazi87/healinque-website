@@ -5,67 +5,38 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ChevronDown, Mail, Phone, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { siteConfig, getPhoneLink, getEmailLink } from "@/lib/config/site";
 import { MobileMenu } from "./mobile-menu";
 
 /* ─── Mega Menu Data ─── */
 const megaMenuColumns = [
   {
-    heading: "Aesthetic Treatments",
+    heading: "Treatments",
     items: [
-      { name: "Botox & Dysport", href: "/treatments/botox-dysport" },
-      { name: "Daxxify", href: "/treatments/daxxify" },
+      { name: "Botox & Neuromodulators", href: "/treatments/botox-dysport" },
       { name: "Dermal Fillers", href: "/treatments/dermal-fillers" },
-      { name: "PDO Threads", href: "/treatments/pdo-thread-lift" },
-      { name: "Morpheus8", href: "/treatments/morpheus8" },
-      { name: "Kybella", href: "/treatments/kybella" },
-    ],
-  },
-  {
-    heading: "Skin Rejuvenation",
-    items: [
-      { name: "Laser Resurfacing", href: "/treatments/laser-resurfacing" },
-      { name: "Microneedling", href: "/treatments/microneedling" },
       { name: "Chemical Peels", href: "/treatments/chemical-peels" },
-      { name: "Medical-Grade Skincare", href: "/treatments/medical-grade-skincare" },
-      { name: "IPL Photo Facial", href: "/treatments/ipl-photo-facial" },
+      { name: "Microneedling + Skin Boosters", href: "/treatments/microneedling" },
+      { name: "Scalp Microneedling + Growth Factor Boost", href: "/treatments/scalp-microneedling" },
+      { name: "View All Treatments \u2192", href: "/treatments" },
     ],
   },
   {
-    heading: "Regenerative Medicine",
+    heading: "About",
     items: [
-      { name: "PRF Therapy", href: "/treatments/prf-therapy" },
-      { name: "Regenerative Consultation", href: "/treatments/regenerative-consultation" },
-      { name: "IV Therapy", href: "/treatments/iv-therapy" },
-      { name: "GLP-1 Weight Loss", href: "/treatments/glp1-weight-loss", comingSoon: true },
+      { name: "Dr. Azi Shirazi", href: "/about/dr-azi-shirazi" },
+      { name: "The Healinque Method", href: "/about/healinque-method" },
+      { name: "Men\u2019s Clinic (Fridays)", href: "/mens-clinic" },
     ],
   },
   {
-    heading: "Men\u2019s Clinic",
+    heading: "Explore",
     items: [
-      { name: "Hair Restoration", href: "/treatments/hair-restoration" },
-      { name: "Discreet Aesthetics", href: "/treatments/discreet-aesthetics" },
-      { name: "Hormone Optimization", href: "/treatments/hormone-optimization", comingSoon: true },
-      { name: "Men\u2019s Clinic", href: "/mens-clinic" },
-    ],
-  },
-  {
-    heading: "Concerns",
-    items: [
-      { name: "Fine Lines & Wrinkles", href: "/concerns/fine-lines-wrinkles" },
-      { name: "Acne Scarring", href: "/concerns/acne-scarring" },
-      { name: "Dark Circles & Under-Eye", href: "/concerns/dark-circles-under-eye" },
-      { name: "Hyperpigmentation & Melasma", href: "/concerns/hyperpigmentation-melasma" },
-      { name: "Skin Laxity & Sagging", href: "/concerns/skin-laxity-sagging" },
-      { name: "Hair Thinning", href: "/concerns/hair-thinning" },
-    ],
-  },
-  {
-    heading: "Wellness & Longevity",
-    items: [
-      { name: "Peptide Therapy", href: "/treatments/peptide-therapy" },
-      { name: "Hormone Optimization", href: "/treatments/hormone-optimization", comingSoon: true },
-      { name: "GLP-1 Weight Loss", href: "/treatments/glp1-weight-loss", comingSoon: true },
-      { name: "Metabolic Health", href: "/treatments/iv-therapy" },
+      { name: "Blog", href: "/blog" },
+      { name: "Memberships", href: "/memberships" },
+      { name: "Packages", href: "/packages" },
+      { name: "Gallery", href: "/gallery" },
+      { name: "FAQ", href: "/faq" },
     ],
   },
 ];
@@ -122,15 +93,15 @@ export function Header() {
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center gap-8 h-9 text-xs tracking-wide">
             <a
-              href="tel:+18583377999"
+              href={getPhoneLink()}
               className="flex items-center gap-1.5 text-white/70 hover:text-[#C9A227] transition-colors"
             >
               <Phone className="w-3 h-3" />
-              <span>(858) 337-7999</span>
+              <span>{siteConfig.phone}</span>
             </a>
             <span className="hidden sm:inline text-white/20">|</span>
             <a
-              href="mailto:info@healinque.com"
+              href={getEmailLink()}
               className="hidden sm:flex items-center gap-1.5 text-white/70 hover:text-[#C9A227] transition-colors"
             >
               <Mail className="w-3 h-3" />
@@ -249,7 +220,7 @@ export function Header() {
           <AnimatePresence>
             {megaMenuOpen && (
               <motion.div
-                initial={{ opacity: 0, y: -8 }}
+                initial={{ y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
@@ -259,7 +230,7 @@ export function Header() {
               >
                 <div className="bg-[#0a1628]/95 backdrop-blur-xl border-t border-white/5 shadow-2xl">
                   <div className="max-w-[1440px] mx-auto px-8 xl:px-12 py-10">
-                    <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(6, minmax(0, 1fr)) minmax(200px, 1.4fr)" }}>
+                    <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(3, minmax(0, 1fr)) minmax(200px, 1.4fr)" }}>
                       {megaMenuColumns.map((column) => (
                         <div key={column.heading} className="min-w-0">
                           <h3 className="text-[#C9A227] font-serif text-xs font-semibold mb-4 tracking-[0.15em] uppercase whitespace-nowrap">
@@ -301,14 +272,14 @@ export function Header() {
                         </h3>
                         <div className="space-y-3 text-sm text-white/60 mb-6">
                           <a
-                            href="tel:+18583377999"
+                            href={getPhoneLink()}
                             className="flex items-center gap-2 hover:text-[#C9A227] transition-colors whitespace-nowrap"
                           >
                             <Phone className="w-3.5 h-3.5 text-[#C9A227]/70 flex-shrink-0" />
-                            <span>(858) 337-7999</span>
+                            <span>{siteConfig.phone}</span>
                           </a>
                           <a
-                            href="mailto:info@healinque.com"
+                            href={getEmailLink()}
                             className="flex items-center gap-2 hover:text-[#C9A227] transition-colors whitespace-nowrap"
                           >
                             <Mail className="w-3.5 h-3.5 text-[#C9A227]/70 flex-shrink-0" />
@@ -323,11 +294,11 @@ export function Header() {
                           </div>
                         </div>
                         <Link
-                          href="/treatments"
+                          href="/book"
                           onClick={() => setMegaMenuOpen(false)}
                           className="inline-flex items-center text-sm text-[#C9A227] hover:text-[#D4AF37] font-medium transition-colors group mt-2"
                         >
-                          <span>View All Treatments</span>
+                          <span>Book Consultation</span>
                           <span className="ml-1.5 group-hover:translate-x-0.5 transition-transform">&rarr;</span>
                         </Link>
                       </div>

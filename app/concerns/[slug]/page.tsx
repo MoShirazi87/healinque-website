@@ -7,8 +7,9 @@ import { getConcernBySlug, concerns } from "@/lib/data/concerns";
 import { PageHero as Hero } from "@/components/sections/hero";
 import { ConsultationForm } from "@/components/sections/consultation-form";
 import { Button } from "@/components/ui/button";
-import { BreadcrumbSchema } from "@/components/seo/schema";
+import { BreadcrumbSchema, MedicalConditionSchema } from "@/components/seo/schema";
 import { pickImage } from "@/lib/data/images";
+import { siteConfig, getPhoneLink } from "@/lib/config/site";
 
 interface ConcernPageProps {
   params: Promise<{ slug: string }>;
@@ -90,9 +91,26 @@ export default async function ConcernPage({ params }: ConcernPageProps) {
     { name: concern.name, url: `https://www.healinque.com/concerns/${resolvedParams.slug}` },
   ];
 
+  // Session 18: Build possibleTreatment array for MedicalCondition schema.
+  // Limited to treatments we actually have pages for — don't promise conditions
+  // can be treated by something the visitor can't then read about.
+  const conditionTreatments = concern.treatments
+    .filter((t) => VALID_TREATMENT_SLUGS.includes(t.slug))
+    .map((t) => ({
+      name: t.name,
+      url: `https://www.healinque.com/treatments/${t.slug}`,
+    }));
+
   return (
     <main>
       <BreadcrumbSchema items={breadcrumbItems} />
+      <MedicalConditionSchema
+        name={concern.name}
+        description={concern.description}
+        url={`https://www.healinque.com/concerns/${resolvedParams.slug}`}
+        causes={concern.causes}
+        possibleTreatments={conditionTreatments}
+      />
       <Hero
         variant="page"
         subtitle="Your Concern"
@@ -151,7 +169,7 @@ export default async function ConcernPage({ params }: ConcernPageProps) {
                 <div className="bg-white border border-taupe/10 rounded-xl p-6">
                   <p className="text-sm text-navy-deep/50 mb-2">Questions?</p>
                   <a
-                    href="tel:+18583377999"
+                    href={getPhoneLink()}
                     className="font-medium text-gold hover:text-gold/80 transition-colors"
                   >
                     (858) 337-7999
@@ -188,7 +206,7 @@ export default async function ConcernPage({ params }: ConcernPageProps) {
                       </h3>
                       <p className="text-white/70 text-sm mb-4">{treatment.description}</p>
                       <span className="inline-flex items-center text-sm font-medium text-gold group-hover:gap-2 transition-all">
-                        Learn More <ArrowRight className="ml-1 h-4 w-4" />
+                        See the Protocol <ArrowRight className="ml-1 h-4 w-4" />
                       </span>
                     </div>
                   </Link>

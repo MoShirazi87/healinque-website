@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import * as Sentry from "@sentry/nextjs";
 import Link from "next/link";
 import { AlertCircle, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,8 +13,7 @@ interface ErrorProps {
 
 export default function Error({ error, reset }: ErrorProps) {
   useEffect(() => {
-    // Log error for debugging
-    console.error("Application error:", error);
+    Sentry.captureException(error);
   }, [error]);
 
   return (

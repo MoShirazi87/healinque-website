@@ -11,75 +11,20 @@ interface MobileMenuProps {
   onClose: () => void;
 }
 
-type MenuLevel = "main" | "treatments" | "concerns";
+type MenuLevel = "main" | "treatments" | "about";
 
-/* Mirrors the desktop mega menu — full list of individual treatments */
-const treatmentGroups = [
-  {
-    heading: "Aesthetic Treatments",
-    items: [
-      { name: "Botox & Dysport", href: "/treatments/botox-dysport" },
-      { name: "Daxxify", href: "/treatments/daxxify" },
-      { name: "Dermal Fillers", href: "/treatments/dermal-fillers" },
-      { name: "PDO Threads", href: "/treatments/pdo-thread-lift" },
-      { name: "Morpheus8", href: "/treatments/morpheus8" },
-      { name: "Kybella", href: "/treatments/kybella" },
-    ],
-  },
-  {
-    heading: "Skin Rejuvenation",
-    items: [
-      { name: "Laser Resurfacing", href: "/treatments/laser-resurfacing" },
-      { name: "Microneedling", href: "/treatments/microneedling" },
-      { name: "Chemical Peels", href: "/treatments/chemical-peels" },
-      { name: "Medical-Grade Skincare", href: "/treatments/medical-grade-skincare" },
-      { name: "IPL Photo Facial", href: "/treatments/ipl-photo-facial" },
-    ],
-  },
-  {
-    heading: "Regenerative Medicine",
-    items: [
-      { name: "PRF Therapy", href: "/treatments/prf-therapy" },
-      { name: "Regenerative Consultation", href: "/treatments/regenerative-consultation" },
-      { name: "IV Therapy", href: "/treatments/iv-therapy" },
-      { name: "GLP-1 Weight Loss", href: "/treatments/glp1-weight-loss", comingSoon: true },
-    ],
-  },
-  {
-    heading: "Men's Clinic",
-    items: [
-      { name: "Hair Restoration", href: "/treatments/hair-restoration" },
-      { name: "Discreet Aesthetics", href: "/treatments/discreet-aesthetics" },
-      { name: "Hormone Optimization", href: "/treatments/hormone-optimization", comingSoon: true },
-      { name: "Men's Clinic Home", href: "/mens-clinic" },
-    ],
-  },
+/* 5 core services for v2 launch */
+const treatmentItems = [
+  { name: "Botox & Neuromodulators", href: "/treatments/botox-dysport" },
+  { name: "Dermal Fillers", href: "/treatments/dermal-fillers" },
+  { name: "Chemical Peels", href: "/treatments/chemical-peels" },
+  { name: "Microneedling + Skin Boosters", href: "/treatments/microneedling" },
+  { name: "Scalp Microneedling + Growth Factor Boost", href: "/treatments/scalp-microneedling" },
 ];
 
-const concernCategories = [
-  { name: "Fine Lines & Wrinkles", href: "/concerns/fine-lines-wrinkles" },
-  { name: "Acne Scarring", href: "/concerns/acne-scarring" },
-  { name: "Dark Circles & Under-Eye", href: "/concerns/dark-circles-under-eye" },
-  { name: "Hyperpigmentation & Melasma", href: "/concerns/hyperpigmentation-melasma" },
-  { name: "Skin Laxity & Sagging", href: "/concerns/skin-laxity-sagging" },
-  { name: "Hair Thinning", href: "/concerns/hair-thinning" },
-];
-
-const primaryNav = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Men's Clinic", href: "/mens-clinic" },
-  { name: "Memberships", href: "/memberships" },
-  { name: "Packages", href: "/packages" },
-  { name: "Financing", href: "/financing" },
-];
-
-const secondaryNav = [
-  { name: "Gallery", href: "/gallery" },
-  { name: "Reviews", href: "/reviews" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
-  { name: "FAQ", href: "/faq" },
+const aboutItems = [
+  { name: "Dr. Azi Shirazi", href: "/about/dr-azi-shirazi" },
+  { name: "The Healinque Method", href: "/about/healinque-method" },
 ];
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
@@ -103,6 +48,18 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     };
   }, [isOpen]);
 
+  // Session 19 (Track C): Escape key closes mobile menu — basic dialog behavior.
+  // Full focus-trap deferred; Escape + aria-modal covers the most common SR/kb
+  // failure modes without adding a focus-trap dependency.
+  React.useEffect(() => {
+    if (!isOpen) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [isOpen, onClose]);
+
   const handleLinkClick = () => onClose();
 
   return (
@@ -111,7 +68,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         <>
           {/* Backdrop */}
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={{}}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
@@ -125,6 +82,9 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 28, stiffness: 320 }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site navigation menu"
             className="mobile-menu-container fixed top-0 right-0 bottom-0 w-full sm:max-w-md bg-[#0a1628] z-50 lg:hidden flex flex-col overflow-hidden shadow-2xl"
           >
             {/* Header */}
@@ -152,7 +112,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 {menuLevel === "main" && (
                   <motion.div
                     key="main"
-                    initial={{ opacity: 0, x: 30 }}
+                    initial={{ x: 30 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -30 }}
                     transition={{ duration: 0.2 }}
@@ -176,44 +136,44 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                       </button>
 
                       <button
-                        onClick={() => setMenuLevel("concerns")}
+                        onClick={() => setMenuLevel("about")}
                         className="mobile-menu-item w-full flex items-center justify-between py-4 text-white/90 border-b border-white/[0.05] hover:text-[#C9A227] transition-colors"
                       >
-                        <span className="font-serif text-xl">Concerns</span>
+                        <span className="font-serif text-xl">About</span>
                         <ChevronRight className="w-5 h-5 text-[#C9A227]" />
                       </button>
 
-                      {primaryNav.map((link) => (
-                        <Link
-                          key={link.href}
-                          href={link.href}
-                          onClick={handleLinkClick}
-                          className="mobile-menu-item block py-4 font-serif text-xl text-white/90 border-b border-white/[0.05] hover:text-[#C9A227] transition-colors"
-                        >
-                          {link.name}
-                        </Link>
-                      ))}
+                      <Link
+                        href="/mens-clinic"
+                        onClick={handleLinkClick}
+                        className="mobile-menu-item block py-4 font-serif text-xl text-white/90 border-b border-white/[0.05] hover:text-[#C9A227] transition-colors"
+                      >
+                        Men&apos;s Clinic
+                      </Link>
 
-                      {/* Secondary */}
-                      <div className="flex items-center gap-3 pt-6 mb-3">
-                        <div className="h-px w-8 bg-[#C9A227]/60" />
-                        <span className="font-sans text-[10px] uppercase tracking-[0.25em] text-white/40">
-                          More
-                        </span>
-                      </div>
+                      <Link
+                        href="/blog"
+                        onClick={handleLinkClick}
+                        className="mobile-menu-item block py-4 font-serif text-xl text-white/90 border-b border-white/[0.05] hover:text-[#C9A227] transition-colors"
+                      >
+                        Blog
+                      </Link>
 
-                      <div className="grid grid-cols-2 gap-x-4">
-                        {secondaryNav.map((link) => (
-                          <Link
-                            key={link.href}
-                            href={link.href}
-                            onClick={handleLinkClick}
-                            className="py-3 text-sm font-medium text-white/60 hover:text-[#C9A227] transition-colors"
-                          >
-                            {link.name}
-                          </Link>
-                        ))}
-                      </div>
+                      <Link
+                        href="/memberships"
+                        onClick={handleLinkClick}
+                        className="mobile-menu-item block py-4 font-serif text-xl text-white/90 border-b border-white/[0.05] hover:text-[#C9A227] transition-colors"
+                      >
+                        Memberships
+                      </Link>
+
+                      <Link
+                        href="/contact"
+                        onClick={handleLinkClick}
+                        className="mobile-menu-item block py-4 font-serif text-xl text-white/90 border-b border-white/[0.05] hover:text-[#C9A227] transition-colors"
+                      >
+                        Contact
+                      </Link>
                     </nav>
                   </motion.div>
                 )}
@@ -221,7 +181,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 {menuLevel === "treatments" && (
                   <motion.div
                     key="treatments"
-                    initial={{ opacity: 0, x: 30 }}
+                    initial={{ x: 30 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 30 }}
                     transition={{ duration: 0.2 }}
@@ -230,43 +190,30 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     <div className="px-6 py-6">
                       <button
                         onClick={() => setMenuLevel("main")}
+                        aria-label="Back to main menu"
                         className="flex items-center gap-2 mb-6 text-xs uppercase tracking-[0.2em] text-[#C9A227] hover:text-white transition-colors"
                       >
-                        <ChevronLeft className="w-4 h-4" />
+                        <ChevronLeft className="w-4 h-4" aria-hidden="true" />
                         Back
                       </button>
 
                       <div className="flex items-center gap-3 mb-5">
                         <div className="h-px w-8 bg-[#C9A227]/60" />
                         <span className="font-sans text-[10px] uppercase tracking-[0.25em] text-white/40">
-                          All Treatments
+                          Treatments
                         </span>
                       </div>
 
-                      <div className="space-y-7">
-                        {treatmentGroups.map((group) => (
-                          <div key={group.heading}>
-                            <p className="font-sans text-[11px] uppercase tracking-[0.22em] text-[#C9A227]/90 mb-2">
-                              {group.heading}
-                            </p>
-                            <div>
-                              {group.items.map((item) => (
-                                <Link
-                                  key={item.href}
-                                  href={item.href}
-                                  onClick={handleLinkClick}
-                                  className="flex items-center justify-between py-3 font-serif text-[17px] text-white/90 border-b border-white/[0.05] hover:text-[#C9A227] transition-colors"
-                                >
-                                  <span>{item.name}</span>
-                                  {item.comingSoon && (
-                                    <span className="ml-2 text-[9px] font-sans uppercase tracking-[0.15em] text-[#C9A227]/70">
-                                      Soon
-                                    </span>
-                                  )}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
+                      <div>
+                        {treatmentItems.map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            onClick={handleLinkClick}
+                            className="flex items-center justify-between py-3 font-serif text-[17px] text-white/90 border-b border-white/[0.05] hover:text-[#C9A227] transition-colors"
+                          >
+                            <span>{item.name}</span>
+                          </Link>
                         ))}
 
                         <Link
@@ -274,17 +221,17 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                           onClick={handleLinkClick}
                           className="block mt-6 py-3 text-sm font-sans font-semibold uppercase tracking-[0.2em] text-[#C9A227] hover:text-white transition-colors"
                         >
-                          View All Treatments →
+                          View All Treatments &rarr;
                         </Link>
                       </div>
                     </div>
                   </motion.div>
                 )}
 
-                {menuLevel === "concerns" && (
+                {menuLevel === "about" && (
                   <motion.div
-                    key="concerns"
-                    initial={{ opacity: 0, x: 30 }}
+                    key="about"
+                    initial={{ x: 30 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 30 }}
                     transition={{ duration: 0.2 }}
@@ -293,38 +240,31 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     <div className="px-6 py-6">
                       <button
                         onClick={() => setMenuLevel("main")}
+                        aria-label="Back to main menu"
                         className="flex items-center gap-2 mb-6 text-xs uppercase tracking-[0.2em] text-[#C9A227] hover:text-white transition-colors"
                       >
-                        <ChevronLeft className="w-4 h-4" />
+                        <ChevronLeft className="w-4 h-4" aria-hidden="true" />
                         Back
                       </button>
 
                       <div className="flex items-center gap-3 mb-4">
                         <div className="h-px w-8 bg-[#C9A227]/60" />
                         <span className="font-sans text-[10px] uppercase tracking-[0.25em] text-white/40">
-                          Concerns
+                          About
                         </span>
                       </div>
 
                       <div className="space-y-1">
-                        {concernCategories.map((concern) => (
+                        {aboutItems.map((item) => (
                           <Link
-                            key={concern.href}
-                            href={concern.href}
+                            key={item.href}
+                            href={item.href}
                             onClick={handleLinkClick}
                             className="block py-4 font-serif text-lg text-white/90 border-b border-white/[0.05] hover:text-[#C9A227] transition-colors"
                           >
-                            {concern.name}
+                            {item.name}
                           </Link>
                         ))}
-
-                        <Link
-                          href="/concerns"
-                          onClick={handleLinkClick}
-                          className="block mt-6 py-3 text-sm font-sans font-semibold uppercase tracking-[0.2em] text-[#C9A227] hover:text-white transition-colors"
-                        >
-                          View All Concerns →
-                        </Link>
                       </div>
                     </div>
                   </motion.div>

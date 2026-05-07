@@ -205,3 +205,68 @@ For Dr. Azi's awareness, here is a summary of the major fixes and improvements m
 ---
 
 *Please review and respond to each numbered item. Items marked for the dev team (Section 5) can be discussed separately.*
+
+---
+
+## Section 6: Additional Items Surfaced in Session 17 Audit
+
+34. **Homepage Social Proof Bar — specific claims** — The homepage displays a "Social Proof Bar" with four credibility points. Please confirm each is accurate and publishable:
+
+    - **Top 100 Physicians** — San Diego Magazine 2023
+    - **Sharp Healthcare CORE Award (3x)**
+    - **Chair, Urgent Care** — 2022–2025
+    - **Guest Speaker** — SRS & Sharp Healthcare
+
+    If any of these are outdated, inaccurate, or should be replaced/reworded, please advise.
+
+35. **Testimonial disclosure consistency** — The homepage testimonial block currently says "Patient names changed for privacy. Results may vary; individual results are not guaranteed." The `/reviews` page says the testimonials are "illustrative" (i.e., not from real patients). These two disclosures should match. Until real patient reviews with signed consent replace the placeholders, we'll align the homepage disclosure with the `/reviews` page to say the testimonials are illustrative. Please confirm this is acceptable — OR provide real patient testimonials ASAP so we can drop the "illustrative" language.
+
+36. **Homepage hero line about providers** — Hero slide 1 says: "Treatments are performed by Dr. Shirazi or one of her highly trained nurse practitioners or physician assistants." Please confirm:
+    - Do you currently have NPs or PAs on staff who perform treatments?
+    - If not yet, should we soften the line to "performed by Dr. Shirazi" only, and update it later when staff are onboarded?
+
+37. **Services Grid — "five things"** — The homepage Services Grid says "Focused expertise, not a menu of everything. We do these five things exceptionally well." The five listed are: Botox & Neuromodulators, Dermal Fillers, Chemical Peels, Microneedling + Skin Boosters, Scalp Microneedling + Growth Factor Boost. Is this the correct short list, or should any of these be swapped for a different signature service (e.g., PRP Facial, Laser Resurfacing)?
+
+38. **Men's Clinic staffing** — Men's Clinic page says "Dr. Shirazi personally performs injectable and advanced treatments. Not delegated to a nurse or aesthetician you've never met." If you plan to eventually train NPs/PAs for Friday Men's Clinic, we may want softer wording (e.g., "led by Dr. Shirazi" rather than "personally performs") to allow for future staff changes without a copy rewrite.
+
+39. **Footer newsletter copy** — Footer newsletter description reads: "Notes from Dr. Shirazi on aesthetics and longevity. No spam — unsubscribe anytime." Confirm:
+    - Will you actually write a newsletter, or is this aspirational?
+    - If aspirational, should we soften to "Updates from Healinque" (brand voice) instead of implying Dr. Azi personally writes?
+
+40. **Homepage FAQ specifics** — The homepage FAQ claims the consultation fee is "$100" and is "credited toward any treatment you choose." Confirm the exact fee and whether it's consistently credited across all treatments (some clinics exclude memberships, packages, or small first treatments).
+
+41. **Cancellation policy specifics** — FAQ says: "48 hours' notice for cancellations or rescheduling. Late cancellations or no-shows may incur a $50 fee." Confirm the fee amount and notice window.
+
+42. **Treatment performed by whom** — The Services Grid section notes: "All treatments are performed by Dr. Shirazi or one of her highly trained nurse practitioners or physician assistants." Same question as #36 — confirm provider model.
+
+43. **Photo of Dr. Shirazi** — The website uses `/public/images/dr-azi-shirazi.jpg`. We'd like to confirm this is your preferred professional headshot. If you have higher-resolution or more recent photos (clinical setting, consultation room, etc.), we can add a photo gallery on the About page.
+
+44. **Clinic interior/exterior photos** — Currently all photos on the site (except Dr. Azi's headshot) are professional stock from Pexels. Before go-live, we recommend swapping in:
+    - Exterior shot of the Pomerado Road clinic
+    - Waiting area / reception
+    - A treatment room (curated to show a clean, clinical-luxury aesthetic)
+    - Consultation room
+
+    Do you have any professional clinic photography scheduled? If not, we can recommend a local commercial photographer.
+
+45. **Blog voice & frequency** — The blog page currently has 6 placeholder article titles written in Dr. Shirazi's voice ("Botox: What I Recommend (and What I Don't)", "When Filler Is a Mistake", "How I Think About Natural Results"). Confirm:
+    - Is this the voice you want (first-person, Dr. Shirazi)?
+    - Target publication cadence (monthly? quarterly?)
+    - Will you write, or shall we draft for your review?
+
+46. **Instagram handle in footer + contact page** — We link out to `instagram.com/ThrivewithDr.Azi` in multiple places. Please confirm final IG handle (see also question #5). If you want to add Facebook, TikTok, or YouTube links, please provide handles.
+
+47. **Privacy policy / HIPAA / Terms legal review** — These were drafted to be CA-compliant (CCPA/CPRA, SB 313 auto-renewal, HIPAA NPP format) but have NOT been reviewed by a healthcare attorney. Strongly recommend attorney review before launch. Do you have a legal advisor for this, or should we recommend a healthcare-law firm?
+
+48. **Emergency contact / after-hours protocol** — Should the contact page or FAQ include an emergency / after-hours number or protocol (e.g., for patients experiencing post-treatment complications like vascular occlusion signs)? Many physician-led med spas publish an emergency line.
+
+49. **Injector-finder claim** — Concern pages and some FAQ copy reference "advanced training with leading physician injectors in the U.S. and Europe." Can you list these trainings or mentors by name? Specific credentials (e.g., "Galderma Master Injector training under Dr. X") add credibility and are harder to dispute.
+
+50. **Pricing disclosure philosophy** — Current treatment pages list "From $X" pricing. Confirm whether you want:
+    - Per-treatment floor prices shown publicly (current approach — transparent)
+    - Pricing hidden behind consultation only ("Pricing discussed during your consultation")
+    - Hybrid (core treatments priced, advanced/custom treatments consultation-only)
+
+---
+
+*Last updated: April 16, 2026 — Session 17*

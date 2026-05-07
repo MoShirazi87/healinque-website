@@ -23,7 +23,7 @@ export const concerns: Concern[] = [
     name: "Fine Lines & Wrinkles",
     tagline: "Smooth, prevent, and reverse signs of aging",
     description:
-      "Fine lines and wrinkles are among the most common concerns I see at Healinque, and many patients tell me they feel disappointed when they catch themselves in harsh lighting. The truth is that wrinkles develop from a mix of unavoidable factors: repetitive facial movements (the lines from smiling, frowning, squinting), cumulative sun exposure, and the natural decline in collagen and elastin that happens over decades. Genetics and lifestyle factors like smoking or dehydration add to the picture. Here's how I think about treating them: dynamic wrinkles (those that appear with expression) respond beautifully to neuromodulators like Botox or Dysport. Static lines (visible at rest) often need fillers, skin resurfacing, or RF-based collagen stimulation. Most patients benefit from a combination approach. Results typically take 2–3 weeks to become fully apparent, and maintenance every 3–4 months is the realistic timeline for neuromodulators.",
+      "Fine lines and wrinkles are among the most common concerns I see at Healinque, and many patients tell me they feel disappointed when they catch themselves in harsh lighting. The truth is that wrinkles develop from a mix of unavoidable factors: repetitive facial movements (the lines from smiling, frowning, squinting), cumulative sun exposure, and the natural decline in collagen and elastin that happens over decades. Genetics and lifestyle factors like smoking or dehydration add to the picture. Here's how I think about treating them: dynamic wrinkles (those that appear with expression) respond beautifully to neuromodulators like Botox or Dysport. Static lines (visible at rest) often need fillers, skin resurfacing, or collagen stimulation. Most patients benefit from a combination approach. Results typically take 2–3 weeks to become fully apparent, and maintenance every 3–4 months is the realistic timeline for neuromodulators.",
     causes: [
       "Repetitive facial expressions (smiling, frowning, squinting)",
       "Sun exposure and cumulative UV damage",
@@ -47,10 +47,10 @@ export const concerns: Concern[] = [
           "Fills static lines and restores volume loss that contributes to wrinkle formation.",
       },
       {
-        name: "Morpheus8",
-        slug: "morpheus8",
+        name: "Microneedling",
+        slug: "microneedling",
         description:
-          "RF microneedling that stimulates collagen production for overall skin tightening and texture improvement.",
+          "Stimulates collagen production for overall skin tightening and texture improvement.",
         recommended: true,
       },
       {
@@ -58,12 +58,6 @@ export const concerns: Concern[] = [
         slug: "chemical-peels",
         description:
           "Resurface the skin to reduce superficial lines and improve overall texture and tone.",
-      },
-      {
-        name: "Laser Resurfacing",
-        slug: "laser-resurfacing",
-        description:
-          "Targets deeper wrinkles and stimulates collagen remodeling for longer-lasting improvement.",
       },
     ],
     tips: [
@@ -74,10 +68,11 @@ export const concerns: Concern[] = [
       "Get adequate sleep; skin repairs itself most actively at night",
       "Don't smoke—it accelerates collagen breakdown and aging",
     ],
-    image: "https://images.pexels.com/photos/30684790/pexels-photo-30684790.jpeg?auto=compress&cs=tinysrgb&w=800",
+    // Session 20: mature-skin editorial (Keep pile) + skincare close-up
+    image: "https://images.pexels.com/photos/3985330/pexels-photo-3985330.jpeg?auto=compress&cs=tinysrgb&w=800",
     imageAlts: [
-      "https://images.pexels.com/photos/29811340/pexels-photo-29811340.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/3764007/pexels-photo-3764007.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/3985333/pexels-photo-3985333.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/3985325/pexels-photo-3985325.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
   {
@@ -86,7 +81,7 @@ export const concerns: Concern[] = [
     name: "Volume Loss & Sagging",
     tagline: "Restore youthful fullness and contours",
     description:
-      "Many patients tell me they notice their face looks different after turning 40 or 50—cheeks flatten, temples hollow out, the jawline softens, and skin begins to sag. This isn't vanity; it's anatomy. As we age, we experience three overlapping changes: collagen production declines, fat pads descend from their original position, and bone resorbs (especially in the jaw and temples). The result is lost structure and sagging. I approach volume restoration strategically, placing fillers along the structural bones (cheekbones, temples, jawline) to restore the face's natural architecture. This lifts and rejuvenates without creating the overfilled look. Filler results are visible immediately but continue to improve over two weeks as swelling settles. Most fillers last 9–18 months depending on placement and metabolism. For more significant sagging, combining threads or RF microneedling produces better results than filler alone.",
+      "Many patients tell me they notice their face looks different after turning 40 or 50—cheeks flatten, temples hollow out, the jawline softens, and skin begins to sag. This isn't vanity; it's anatomy. As we age, three overlapping changes take place: collagen production declines, fat pads descend from their original position, and bone resorbs (especially in the jaw and temples). The result is lost structure and sagging. I approach volume restoration strategically, placing fillers along the structural bones (cheekbones, temples, jawline) to restore the face's natural architecture. This lifts and rejuvenates without creating the overfilled look. Filler results are visible immediately but continue to improve over two weeks as swelling settles. Most fillers last 9–18 months depending on placement and metabolism. For more significant sagging, combining fillers with microneedling produces better results than either alone.",
     causes: [
       "Natural aging and collagen decline",
       "Fat pad descent and gravitational effects",
@@ -104,23 +99,11 @@ export const concerns: Concern[] = [
         recommended: true,
       },
       {
-        name: "PDO Thread Lift",
-        slug: "pdo-thread-lift",
+        name: "Microneedling",
+        slug: "microneedling",
         description:
-          "Non-surgical lifting and tightening for sagging skin, particularly effective for jowls and lower face.",
+          "Stimulates collagen production and skin tightening for improved skin quality and firmness.",
         recommended: true,
-      },
-      {
-        name: "Morpheus8",
-        slug: "morpheus8",
-        description:
-          "RF microneedling to tighten skin and stimulate collagen for improved skin quality and firmness.",
-      },
-      {
-        name: "PRF Therapy",
-        slug: "prf-therapy",
-        description:
-          "Stimulates natural collagen production for gradual improvement in skin quality and volume.",
       },
     ],
     tips: [
@@ -131,10 +114,11 @@ export const concerns: Concern[] = [
       "Sleep on your back when possible to minimize gravitational stress",
       "Maintain good posture—it actually affects how the face appears",
     ],
-    image: "https://images.pexels.com/photos/3764578/pexels-photo-3764578.jpeg?auto=compress&cs=tinysrgb&w=800",
+    // Session 20: volume/filler territory — warm beauty Keep pile + practitioner servicing
+    image: "https://images.pexels.com/photos/3985329/pexels-photo-3985329.jpeg?auto=compress&cs=tinysrgb&w=800",
     imageAlts: [
-      "https://images.pexels.com/photos/5327584/pexels-photo-5327584.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/8955914/pexels-photo-8955914.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/3985311/pexels-photo-3985311.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/7581577/pexels-photo-7581577.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
   {
@@ -143,7 +127,7 @@ export const concerns: Concern[] = [
     name: "Acne Scarring",
     tagline: "Reduce the appearance of acne scars with medical-grade treatments",
     description:
-      "Many patients who struggled with acne tell me that even after their skin cleared, the scars remained as a painful reminder. Acne scars come in distinct types—icepick (deep, narrow pits), boxcar (wider, flat-bottomed depressions), and rolling (undulating texture)—and each type responds differently to treatment. There's no single fix; your plan depends on your scar morphology, skin tone, and skin quality. Icepick scars often need laser resurfacing or advanced microneedling. Boxcar scars benefit from combination approaches. Rolling scars respond to RF microneedling and subcision. The realistic timeline is 6–12 months of progressive improvement with multiple sessions, and results are about 50–70% improvement, not complete resolution. Earlier treatment (within a year of scar formation) typically yields better outcomes.",
+      "Many patients who struggled with acne tell me that even after their skin cleared, the scars remained as a painful reminder. Acne scars come in distinct types—icepick (deep, narrow pits), boxcar (wider, flat-bottomed depressions), and rolling (undulating texture)—and each type responds differently to treatment. There's no single fix; your plan depends on your scar morphology, skin tone, and skin quality. Icepick scars often need advanced microneedling. Boxcar scars benefit from combination approaches. Rolling scars respond well to microneedling and chemical peels. The realistic timeline is 6–12 months of progressive improvement with multiple sessions, and results are about 50–70% improvement, not complete resolution. Earlier treatment (within a year of scar formation) typically yields better outcomes.",
     causes: [
       "Inflammatory acne, especially cystic or nodular",
       "Picking or squeezing breakouts (a major culprit)",
@@ -160,19 +144,6 @@ export const concerns: Concern[] = [
         recommended: true,
       },
       {
-        name: "Laser Resurfacing",
-        slug: "laser-resurfacing",
-        description:
-          "Fractional laser energy targets scar tissue and stimulates deep collagen production.",
-        recommended: true,
-      },
-      {
-        name: "PRP Therapy",
-        slug: "prp-therapy",
-        description:
-          "Growth factors from your own blood support healing and enhance microneedling results.",
-      },
-      {
         name: "Chemical Peels",
         slug: "chemical-peels",
         description:
@@ -187,10 +158,11 @@ export const concerns: Concern[] = [
       "Expect redness and mild swelling for 24–48 hours after microneedling or laser",
       "Combination treatments (laser + PRP, or microneedling + peels) often outperform single modalities",
     ],
-    image: "https://images.pexels.com/photos/3762879/pexels-photo-3762879.jpeg?auto=compress&cs=tinysrgb&w=800",
+    // Session 20: skin texture close-ups (v2 #2) + Keep editorial face
+    image: "https://images.pexels.com/photos/3985325/pexels-photo-3985325.jpeg?auto=compress&cs=tinysrgb&w=800",
     imageAlts: [
-      "https://images.pexels.com/photos/8990463/pexels-photo-8990463.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/5240623/pexels-photo-5240623.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/3985331/pexels-photo-3985331.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/3985311/pexels-photo-3985311.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
   {
@@ -199,7 +171,7 @@ export const concerns: Concern[] = [
     name: "Dark Circles & Under-Eye Hollows",
     tagline: "Brighten tired-looking eyes with targeted treatments",
     description:
-      "Dark circles are one of the most frustrating cosmetic complaints I see, because patients often assume one treatment will fix them—but the truth is more nuanced. Dark circles aren't just about sleep. The under-eye area can look dark for fundamentally different reasons. Some circles are pigmentary (melanin deposits or post-inflammatory hyperpigmentation). Others are vascular (you're seeing dark blood vessels through thin skin). Still others are structural (hollowing from fat loss or volume loss). And many patients have a combination. Here's how I evaluate: I look at your genetics, assess skin thickness, check for hollowing, and evaluate whether pigment or vascularity dominates. My refined PRF under-eye protocol works beautifully for pigmentary and vascular circles. Tear trough filler is an option for structural hollowing, but candidacy depends on anatomy—not everyone benefits. Realistic improvement is typically 30–50% with PRF, and results develop over 4–6 weeks.",
+      "Dark circles are one of the most frustrating cosmetic complaints I see, because patients often assume one treatment will fix them—but the truth is more nuanced. Dark circles aren't just about sleep. The under-eye area can look dark for fundamentally different reasons. Some circles are pigmentary (melanin deposits or post-inflammatory hyperpigmentation). Others are vascular (you're seeing dark blood vessels through thin skin). Still others are structural (hollowing from fat loss or volume loss). And many patients have a combination. Here's how I evaluate: I look at your genetics, assess skin thickness, check for hollowing, and evaluate whether pigment or vascularity dominates. Microneedling and gentle chemical peels work well for pigmentary and vascular circles. Tear trough filler is an option for structural hollowing, but candidacy depends on anatomy—not everyone benefits. Realistic improvement develops over 4–6 weeks with consistent treatment.",
     causes: [
       "Thin, translucent under-eye skin (genetic)",
       "Volume loss and tear trough hollowing",
@@ -210,10 +182,10 @@ export const concerns: Concern[] = [
     ],
     treatments: [
       {
-        name: "PRF Therapy",
-        slug: "prf-therapy",
+        name: "Microneedling",
+        slug: "microneedling",
         description:
-          "Platelet-rich fibrin therapy improves skin quality and reduces under-eye darkness naturally; particularly effective for pigmentary and vascular circles.",
+          "Stimulates collagen remodeling and improves skin quality around the under-eye area; particularly effective for pigmentary and vascular circles.",
         recommended: true,
       },
       {
@@ -228,12 +200,6 @@ export const concerns: Concern[] = [
         description:
           "Gentle, specialized peels for the under-eye can reduce hyperpigmentation-driven darkness.",
       },
-      {
-        name: "PRP Therapy",
-        slug: "prp-therapy",
-        description:
-          "Growth factor therapy supports skin rejuvenation and can reduce the appearance of darkness.",
-      },
     ],
     tips: [
       "Wear SPF 30+ around the eyes daily—sun exposure darkens under-eye pigmentation",
@@ -244,10 +210,11 @@ export const concerns: Concern[] = [
       "Cold compresses in the morning constrict blood vessels and reduce puffiness temporarily",
       "Understand that not all dark circles respond to filler—a proper evaluation determines your best path",
     ],
-    image: "https://images.pexels.com/photos/3764013/pexels-photo-3764013.jpeg?auto=compress&cs=tinysrgb&w=800",
+    // Session 20: close-up editorial faces (Keep pile)
+    image: "https://images.pexels.com/photos/3762879/pexels-photo-3762879.jpeg?auto=compress&cs=tinysrgb&w=800",
     imageAlts: [
-      "https://images.pexels.com/photos/3764568/pexels-photo-3764568.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/7019698/pexels-photo-7019698.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/3762875/pexels-photo-3762875.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/4586741/pexels-photo-4586741.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
   {
@@ -256,7 +223,7 @@ export const concerns: Concern[] = [
     name: "Hyperpigmentation & Melasma",
     tagline: "Even out stubborn discoloration with customized treatment plans",
     description:
-      "Hyperpigmentation is an umbrella term covering sun spots, age spots, post-inflammatory marks, and the chronic condition melasma. Melasma deserves special attention because it's fundamentally different from sun damage. Melasma is a hormonally driven pigment disorder (triggered by pregnancy, birth control, or hormonal therapy) that affects the deeper layers of skin. The critical caveat: melasma is manageable, not curable. Aggressive treatments can paradoxically worsen it. Patients with skin of color need especially careful provider selection—overly aggressive laser or peeling can trigger post-inflammatory hyperpigmentation. In San Diego's sunny climate, pigmentation concerns are extremely common, and I take a conservative, step-by-step approach. I start with gentle exfoliation and medical-grade skincare, progress to modest chemical peels, and use targeted IPL only in specific cases. For melasma, I emphasize strict sun protection and may add oral medications like tranexamic acid. Expect 3–6 months for noticeable improvement, and maintenance is ongoing.",
+      "Hyperpigmentation is an umbrella term covering sun spots, age spots, post-inflammatory marks, and the chronic condition melasma. Melasma deserves special attention because it's fundamentally different from sun damage. Melasma is a hormonally driven pigment disorder (triggered by pregnancy, birth control, or hormonal therapy) that affects the deeper layers of skin. The critical caveat: melasma is manageable, not curable. Aggressive treatments can paradoxically worsen it. Patients with skin of color need especially careful provider selection—overly aggressive treatment can trigger post-inflammatory hyperpigmentation. In San Diego's sunny climate, pigmentation concerns are extremely common, and I take a conservative, step-by-step approach. I start with gentle exfoliation and medical-grade skincare, progress to modest chemical peels, and add microneedling in specific cases. For melasma, I emphasize strict sun protection and may add oral medications like tranexamic acid. Expect 3–6 months for noticeable improvement, and maintenance is ongoing.",
     causes: [
       "Sun exposure and cumulative UV damage (sun spots, age spots)",
       "Hormonal changes (pregnancy, birth control, menopause)",
@@ -278,12 +245,6 @@ export const concerns: Concern[] = [
         description:
           "Stimulates collagen remodeling and can improve pigmentation safely; particularly suitable for skin of color.",
       },
-      {
-        name: "Medical-Grade Skincare",
-        slug: "medical-grade-skincare",
-        description:
-          "Prescription-strength retinoids and hydroquinone/kojic acid are the foundation of long-term pigment management.",
-      },
     ],
     tips: [
       "SPF 30+ every single day, reapplied every 2 hours—non-negotiable for melasma prevention",
@@ -294,10 +255,11 @@ export const concerns: Concern[] = [
       "Vitamin C serum and hydroquinone support long-term control",
       "Choose a provider experienced with your skin tone—treatment protocols vary by Fitzpatrick type",
     ],
-    image: "https://images.pexels.com/photos/3985329/pexels-photo-3985329.jpeg?auto=compress&cs=tinysrgb&w=800",
+    // Session 20: skin-of-color representation (v2 #5 diversity) + Keep warmth
+    image: "https://images.pexels.com/photos/6543617/pexels-photo-6543617.jpeg?auto=compress&cs=tinysrgb&w=800",
     imageAlts: [
-      "https://images.pexels.com/photos/4156292/pexels-photo-4156292.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/3985329/pexels-photo-3985329.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/3985311/pexels-photo-3985311.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
   {
@@ -306,7 +268,7 @@ export const concerns: Concern[] = [
     name: "Skin Laxity & Sagging",
     tagline: "Tighten and firm loose skin without surgery",
     description:
-      "Skin laxity—that softening and sagging along the jawline, neck, and cheeks—results from the cumulative breakdown of collagen and elastin fibers that keep skin firm. Sun damage accelerates this process dramatically. The good news is that mild to moderate laxity responds well to non-surgical options. The realistic timeline is important: there's no overnight fix. PDO threads provide immediate lifting (from the physical support of the sutures) but take 3–4 months to show full results as they stimulate new collagen. RF microneedling like Morpheus8 requires a series of 3–4 treatments spaced 4–6 weeks apart for optimal tightening. I evaluate the severity of your laxity to determine whether threads, RF, combination approaches, or—in cases of significant descent—whether a surgical consultation makes sense.",
+      "Skin laxity—that softening and sagging along the jawline, neck, and cheeks—results from the cumulative breakdown of collagen and elastin fibers that keep skin firm. Sun damage accelerates this process dramatically. The good news is that mild to moderate laxity responds well to non-surgical options. The realistic timeline is important: there's no overnight fix. Microneedling requires a series of 3–4 treatments spaced 4–6 weeks apart for optimal tightening and collagen stimulation. Dermal fillers can provide structural support along the jawline and cheeks. I evaluate the severity of your laxity to determine whether microneedling, fillers, combination approaches, or—in cases of significant descent—whether a surgical consultation makes sense.",
     causes: [
       "Natural collagen and elastin decline with age",
       "Sun damage and UV-induced elastin breakdown",
@@ -316,24 +278,18 @@ export const concerns: Concern[] = [
     ],
     treatments: [
       {
-        name: "PDO Thread Lift",
-        slug: "pdo-thread-lift",
+        name: "Microneedling",
+        slug: "microneedling",
         description:
-          "Dissolvable sutures physically lift and reposition mild to moderate laxity while stimulating collagen over months.",
-        recommended: true,
-      },
-      {
-        name: "Morpheus8",
-        slug: "morpheus8",
-        description:
-          "RF microneedling delivers heat-based collagen stimulation and skin tightening; requires series of 3–4 sessions.",
+          "Stimulates collagen production and skin tightening; requires a series of 3–4 sessions for optimal results.",
         recommended: true,
       },
       {
         name: "Dermal Fillers",
         slug: "dermal-fillers",
         description:
-          "Structural fillers like Sculptra provide support and stimulate long-term collagen production.",
+          "Structural fillers provide support along the jawline, cheeks, and temples to counteract sagging.",
+        recommended: true,
       },
     ],
     tips: [
@@ -345,10 +301,11 @@ export const concerns: Concern[] = [
       "Combination treatments often outperform single modalities; threads + RF or threads + fillers may be optimal",
       "Significant laxity may benefit from surgical consultation; non-surgical approaches have limits",
     ],
-    image: "https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=800",
+    // Session 20: mature beauty (Keep) + practitioner servicing (v3 A)
+    image: "https://images.pexels.com/photos/3985338/pexels-photo-3985338.jpeg?auto=compress&cs=tinysrgb&w=800",
     imageAlts: [
-      "https://images.pexels.com/photos/3822621/pexels-photo-3822621.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/695644/pexels-photo-695644.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/3985329/pexels-photo-3985329.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/7582568/pexels-photo-7582568.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
   {
@@ -357,7 +314,7 @@ export const concerns: Concern[] = [
     name: "Double Chin",
     tagline: "Reduce submental fullness for a cleaner jawline",
     description:
-      "Submental fullness—that pocket of fat beneath the chin—is one of the most frustrating cosmetic concerns because it's often genetic and stubbornly resistant to diet and exercise. Many patients tell me that slimming their body barely touches their double chin, while others gain a little weight and suddenly notice fullness they never had before. Kybella is the only FDA-approved injectable that permanently destroys fat cells in this area. But candidacy is critical: Kybella works brilliantly for fat, but poorly for loose or sagging skin. If your double chin is primarily skin laxity (from aging or significant weight loss), PDO threads or skin tightening treatments are better options. I evaluate your anatomy carefully to determine which approach serves you. Kybella requires 2–4 treatments spaced 4–6 weeks apart, with significant swelling for 3–5 days after each session.",
+      "Submental fullness—that pocket of fat beneath the chin—is one of the most frustrating cosmetic concerns because it's often genetic and stubbornly resistant to diet and exercise. Many patients tell me that slimming their body barely touches their double chin, while others gain a little weight and suddenly notice fullness they never had before. I approach the double chin area with a combination strategy: neuromodulators can refine the jawline and platysmal bands, while dermal fillers can sculpt and define chin projection. If your concern is primarily skin laxity (from aging or significant weight loss), microneedling and collagen-stimulating treatments are better options. I evaluate your anatomy carefully to determine which approach serves you best.",
     causes: [
       "Genetics and inherited fat distribution patterns",
       "Weight gain concentrating in the submental area",
@@ -366,23 +323,23 @@ export const concerns: Concern[] = [
     ],
     treatments: [
       {
-        name: "Kybella",
-        slug: "kybella",
+        name: "Botox & Dysport",
+        slug: "botox-dysport",
         description:
-          "FDA-approved injectable that permanently destroys fat cells beneath the chin; works for fat, not skin laxity.",
+          "Neuromodulators can refine the jawline by relaxing platysmal bands and slimming the lower face.",
         recommended: true,
       },
       {
-        name: "PDO Thread Lift",
-        slug: "pdo-thread-lift",
+        name: "Dermal Fillers",
+        slug: "dermal-fillers",
         description:
-          "For patients whose concern is predominantly loose skin rather than fat.",
+          "Chin and jawline filler sculpts definition and improves the profile for a more contoured appearance.",
       },
       {
-        name: "Morpheus8",
-        slug: "morpheus8",
+        name: "Microneedling",
+        slug: "microneedling",
         description:
-          "RF microneedling can tighten submental skin and provide subtle contouring.",
+          "Stimulates collagen production to tighten submental skin and improve overall skin quality.",
       },
     ],
     tips: [
@@ -393,10 +350,11 @@ export const concerns: Concern[] = [
       "A detailed in-person evaluation is essential—your anatomy determines the best approach",
       "Results develop progressively over 12 weeks as swelling resolves and collagen reorganizes",
     ],
-    image: "https://images.pexels.com/photos/6551070/pexels-photo-6551070.jpeg?auto=compress&cs=tinysrgb&w=800",
+    // Session 20: jaw/neck territory — male editorial (v2 #4) + servicing + Keep beauty
+    image: "https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=800",
     imageAlts: [
+      "https://images.pexels.com/photos/7582568/pexels-photo-7582568.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/6975466/pexels-photo-6975466.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/8670203/pexels-photo-8670203.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
   {
@@ -405,7 +363,7 @@ export const concerns: Concern[] = [
     name: "Hair Thinning",
     tagline: "Restore density and thickness with regenerative scalp treatments",
     description:
-      "Hair thinning is deeply personal—many patients tell me it affects their confidence and sense of identity. The causes are diverse: genetics (androgenetic alopecia), hormonal changes from thyroid disease or menopause, stress-related shedding, nutritional deficiencies, and underlying medical conditions. PRP scalp therapy has a growing clinical evidence base for improving hair density and slowing loss, particularly in genetic pattern alopecia. But PRP alone isn't a cure-all; I evaluate your specific hair loss pattern and determine whether PRP, pharmaceutical therapies (minoxidil, finasteride), scalp microneedling, or a combination makes the most sense. The realistic timeline is important: hair growth is slow. Expect 3–6 months before visible improvement, and you'll need maintenance sessions. Early intervention (within the first 2–3 years of loss) typically yields better outcomes than waiting.",
+      "Hair thinning is deeply personal—many patients tell me it affects their confidence and sense of identity. The causes are diverse: genetics (androgenetic alopecia), hormonal changes from thyroid disease or menopause, stress-related shedding, nutritional deficiencies, and underlying medical conditions. Scalp microneedling has a growing clinical evidence base for improving hair density and slowing loss, particularly in genetic pattern alopecia. But microneedling alone isn't a cure-all; I evaluate your specific hair loss pattern and determine whether scalp microneedling, pharmaceutical therapies (minoxidil, finasteride), or a combination makes the most sense. The realistic timeline is important: hair growth is slow. Expect 3–6 months before visible improvement, and you'll need maintenance sessions. Early intervention (within the first 2–3 years of loss) typically yields better outcomes than waiting.",
     causes: [
       "Androgenetic alopecia (male- or female-pattern genetic loss)",
       "Hormonal changes (thyroid dysfunction, postpartum, menopause)",
@@ -415,23 +373,17 @@ export const concerns: Concern[] = [
     ],
     treatments: [
       {
-        name: "PRP Therapy",
-        slug: "prp-therapy",
+        name: "Scalp Microneedling",
+        slug: "scalp-microneedling",
         description:
-          "Concentrated growth factors injected into the scalp to support hair follicle health and density.",
+          "Targeted scalp microneedling stimulates dormant follicles, enhances growth factor penetration, and supports hair density.",
         recommended: true,
       },
       {
         name: "Microneedling",
         slug: "microneedling",
         description:
-          "Scalp microneedling enhances growth factor penetration and stimulates dormant follicles.",
-      },
-      {
-        name: "Regenerative Consultation",
-        slug: "regenerative-consultation",
-        description:
-          "Comprehensive evaluation of your hair loss pattern, underlying causes, and customized treatment options.",
+          "General microneedling improves scalp health and can complement targeted scalp treatments.",
       },
     ],
     tips: [
@@ -443,10 +395,12 @@ export const concerns: Concern[] = [
       "Manage stress through exercise, sleep, and meditation; chronic stress worsens hair loss",
       "Maintenance treatments (PRP boosters every 6–12 months) are typically needed to sustain results",
     ],
-    image: "https://images.pexels.com/photos/3993453/pexels-photo-3993453.jpeg?auto=compress&cs=tinysrgb&w=800",
+    // Session 20: no hair-specific IDs survived triage. Unisex pairing:
+    // Keep-pile beauty + Keep editorial + male editorial (hair thinning affects both).
+    image: "https://images.pexels.com/photos/3985333/pexels-photo-3985333.jpeg?auto=compress&cs=tinysrgb&w=800",
     imageAlts: [
-      "https://images.pexels.com/photos/3993311/pexels-photo-3993311.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/20387720/pexels-photo-20387720.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/3762879/pexels-photo-3762879.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/6763625/pexels-photo-6763625.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
   {
@@ -455,7 +409,7 @@ export const concerns: Concern[] = [
     name: "Sun Damage",
     tagline: "Repair accumulated UV damage and protect your skin going forward",
     description:
-      "Living in San Diego or Southern California means years—often decades—of sun exposure. The cumulative effects show up as brown spots (solar lentigines), rough texture, visible redness (from broken capillaries), and accelerated wrinkling. Sun damage is the primary driver of premature skin aging. The reality is sobering: most of the visible aging you see in your 50s was set in motion in your teens and 20s. The good news: we can repair some of this damage and absolutely prevent further deterioration. My approach combines treatment to address existing damage with aggressive prevention going forward. Chemical peels remove damaged surface layers. Laser and microneedling stimulate collagen remodeling and target pigmented spots. Results develop over 4–12 weeks, and a series of treatments typically yields better outcomes than single sessions. Prevention after treatment is non-negotiable—without rigorous sun protection, damage recurs.",
+      "Living in San Diego or Southern California means years—often decades—of sun exposure. The cumulative effects show up as brown spots (solar lentigines), rough texture, visible redness (from broken capillaries), and accelerated wrinkling. Sun damage is the primary driver of premature skin aging. The reality is sobering: most of the visible aging you see in your 50s was set in motion in your teens and 20s. The good news: I can repair some of this damage and absolutely prevent further deterioration. My approach combines treatment to address existing damage with aggressive prevention going forward. Chemical peels remove damaged surface layers. Microneedling stimulates collagen remodeling and improves overall skin quality. Results develop over 4–12 weeks, and a series of treatments typically yields better outcomes than single sessions. Prevention after treatment is non-negotiable—without rigorous sun protection, damage recurs.",
     causes: [
       "Cumulative UV exposure over decades",
       "Inadequate or inconsistent sunscreen use",
@@ -472,23 +426,11 @@ export const concerns: Concern[] = [
         recommended: true,
       },
       {
-        name: "Laser Resurfacing",
-        slug: "laser-resurfacing",
-        description:
-          "Targets brown spots, rough texture, and deeper sun damage while stimulating collagen production.",
-        recommended: true,
-      },
-      {
-        name: "IPL Photo Facial",
-        slug: "ipl-photo-facial",
-        description:
-          "Intense pulsed light targets brown spots and improves overall skin tone and texture.",
-      },
-      {
         name: "Microneedling",
         slug: "microneedling",
         description:
           "Collagen stimulation improves texture and overall skin quality affected by sun damage.",
+        recommended: true,
       },
     ],
     tips: [
@@ -500,10 +442,11 @@ export const concerns: Concern[] = [
       "Avoid tanning beds completely; they cause accelerated skin damage and skin cancer risk",
       "Start treatment early; prevention is far easier (and cheaper) than repair",
     ],
-    image: "https://images.pexels.com/photos/3760607/pexels-photo-3760607.jpeg?auto=compress&cs=tinysrgb&w=800",
+    // Session 20: sun damage — skincare close-ups (v2 #2 bucket)
+    image: "https://images.pexels.com/photos/3985331/pexels-photo-3985331.jpeg?auto=compress&cs=tinysrgb&w=800",
     imageAlts: [
-      "https://images.pexels.com/photos/7580836/pexels-photo-7580836.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/11554445/pexels-photo-11554445.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/6543481/pexels-photo-6543481.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/3985325/pexels-photo-3985325.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
   {
@@ -512,7 +455,7 @@ export const concerns: Concern[] = [
     name: "Skin Texture & Tone",
     tagline: "Improve rough texture, uneven tone, and dull appearance",
     description:
-      "Many patients tell me their skin looks tired, lackluster, and not as vibrant as it used to be. Dull skin doesn't stem from one cause—it's usually a combination of dead cell buildup on the surface, dehydration, poor circulation, environmental damage, and internal factors like sleep deprivation, stress, and nutritional deficiencies. The good news is that even chronically dull skin responds well to a multi-pronged approach. I combine surface exfoliation (peels, microneedling) to remove the dull layer with treatments that stimulate renewal from within (PRP, PRF). Results are often visible within one to two weeks of a peel, while regenerative treatments take 4–6 weeks to show their full effect. Treating dull skin also requires addressing the lifestyle factors—sleep, stress, hydration, nutrition—that drive it.",
+      "Many patients tell me their skin looks tired, lackluster, and not as vibrant as it used to be. Dull skin doesn't stem from one cause—it's usually a combination of dead cell buildup on the surface, dehydration, poor circulation, environmental damage, and internal factors like sleep deprivation, stress, and nutritional deficiencies. The good news is that even chronically dull skin responds well to a multi-pronged approach. I combine surface exfoliation (peels, microneedling) to remove the dull layer with treatments that stimulate renewal from within. Results are often visible within one to two weeks of a peel, while microneedling takes 4–6 weeks to show its full effect. Treating dull skin also requires addressing the lifestyle factors—sleep, stress, hydration, nutrition—that drive it.",
     causes: [
       "Dead skin cell buildup and impaired cell turnover",
       "Chronic dehydration",
@@ -537,18 +480,6 @@ export const concerns: Concern[] = [
         description:
           "Stimulates collagen production and improves skin texture and tone; can be combined with serums for enhanced results.",
       },
-      {
-        name: "PRF Therapy",
-        slug: "prf-therapy",
-        description:
-          "Your own growth factors stimulate cellular renewal and restore radiance from within through natural regeneration.",
-      },
-      {
-        name: "IV Therapy",
-        slug: "iv-therapy",
-        description:
-          "Address internal nutritional deficiencies that contribute to dull skin with custom nutrient infusions.",
-      },
     ],
     tips: [
       "Exfoliate regularly—2–3 times weekly with a gentle chemical or physical exfoliant",
@@ -560,10 +491,11 @@ export const concerns: Concern[] = [
       "Avoid smoking and limit alcohol; both dehydrate skin and accelerate aging",
       "Use a hydrating moisturizer appropriate for your skin type",
     ],
-    image: "https://images.pexels.com/photos/3997989/pexels-photo-3997989.jpeg?auto=compress&cs=tinysrgb&w=800",
+    // Session 20: skincare close-ups (v2 #2 bucket) — pore/texture territory
+    image: "https://images.pexels.com/photos/7321494/pexels-photo-7321494.jpeg?auto=compress&cs=tinysrgb&w=800",
     imageAlts: [
-      "https://images.pexels.com/photos/11935638/pexels-photo-11935638.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/17545641/pexels-photo-17545641.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/7321547/pexels-photo-7321547.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/6948184/pexels-photo-6948184.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
   {
@@ -572,7 +504,7 @@ export const concerns: Concern[] = [
     name: "Weight Management",
     tagline: "Physician-supervised medical weight loss with FDA-approved medications",
     description:
-      "Weight management is complex. Many patients tell me they've tried every diet and exercise program, yet their weight plateaus or creeps back up. That's often not a lack of willpower—it's metabolic and hormonal resistance. My medical weight loss program uses FDA-approved GLP-1 medications (semaglutide, tirzepatide) alongside comprehensive evaluation, lab work, nutrition guidance, and lifestyle coaching. GLP-1s suppress appetite and improve satiety by working on your brain's hunger centers. But here's what matters: they only work if combined with real dietary and activity changes. I also address something other weight loss programs ignore—the aesthetic changes that come with rapid weight loss. Dropping 30+ pounds can hollow out the face, creating the need for strategic volume restoration. Realistic expectations: most patients lose 10–20% of body weight over 6–12 months. Weight regain is common after stopping medications, so we focus on building sustainable habits, not quick fixes.",
+      "Weight management is complex. Many patients tell me they've tried every diet and exercise program, yet their weight plateaus or creeps back up. That's often not a lack of willpower—it's metabolic and hormonal resistance. I also address something other weight loss programs ignore—the aesthetic changes that come with rapid weight loss. Dropping 30+ pounds can hollow out the face, creating the need for strategic volume restoration with dermal fillers. Microneedling and chemical peels help address skin texture changes that often accompany significant weight loss. I focus on building sustainable habits and supporting your skin through the transformation.",
     causes: [
       "Metabolic resistance and decreased metabolic rate",
       "Hormonal imbalances (thyroid, cortisol, insulin, estrogen/testosterone)",
@@ -582,23 +514,23 @@ export const concerns: Concern[] = [
     ],
     treatments: [
       {
-        name: "GLP-1 Weight Loss",
-        slug: "glp1-weight-loss",
+        name: "Dermal Fillers",
+        slug: "dermal-fillers",
         description:
-          "FDA-approved semaglutide (Wegovy) and tirzepatide (Zepbound) with physician supervision, lab work, and nutrition coaching.",
+          "Strategic volume restoration for facial hollowing that often accompanies significant weight loss.",
         recommended: true,
       },
       {
-        name: "Hormone Optimization",
-        slug: "hormone-optimization",
+        name: "Microneedling",
+        slug: "microneedling",
         description:
-          "Hormonal imbalances (thyroid, cortisol, sex hormones) can drive weight resistance and must be addressed for success.",
+          "Stimulates collagen production to improve skin texture and firmness during and after weight loss.",
       },
       {
-        name: "IV Therapy",
-        slug: "iv-therapy",
+        name: "Chemical Peels",
+        slug: "chemical-peels",
         description:
-          "Nutritional support for metabolic health during weight loss.",
+          "Resurface and rejuvenate skin that may appear dull or uneven after significant weight changes.",
       },
     ],
     tips: [
@@ -612,10 +544,11 @@ export const concerns: Concern[] = [
       "Exercise and strength training support metabolism and preserve muscle during weight loss",
       "Sleep 7–9 hours nightly; poor sleep drives weight gain through hormonal disruption",
     ],
-    image: "https://images.pexels.com/photos/6975471/pexels-photo-6975471.jpeg?auto=compress&cs=tinysrgb&w=800",
+    // Session 20: wellness lifestyle (v2 #7) — morning-light, on-brand for GLP-1 + longevity
+    image: "https://images.pexels.com/photos/30809945/pexels-photo-30809945.jpeg?auto=compress&cs=tinysrgb&w=800",
     imageAlts: [
-      "https://images.pexels.com/photos/7492985/pexels-photo-7492985.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/20177876/pexels-photo-20177876.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/30809946/pexels-photo-30809946.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/30809949/pexels-photo-30809949.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
   {
@@ -624,7 +557,7 @@ export const concerns: Concern[] = [
     name: "Low Energy & Fatigue",
     tagline: "Restore your vitality from the inside out",
     description:
-      "Chronic fatigue and persistent low energy infiltrate every part of your life—work performance, relationships, exercise motivation, even your appearance. Many patients dismiss it as normal aging or stress, but persistent fatigue often has identifiable underlying causes. With comprehensive clinical training, I investigate root causes rather than just treating symptoms. Fatigue typically stems from hormonal imbalances (thyroid, testosterone, estrogen, cortisol), nutritional deficiencies (B12, iron, folate, vitamin D, magnesium), poor sleep quality, chronic inflammation, or mitochondrial dysfunction. My approach is systematic: comprehensive lab work to identify deficiencies, optimization of hormones that support energy, nutritional IV therapy to correct deficiencies rapidly, and peptide therapies that enhance energy at the cellular level. Results are gradual, typically improving over 4–8 weeks as baseline levels normalize and mitochondrial function improves.",
+      "Chronic fatigue and persistent low energy infiltrate every part of your life—work performance, relationships, exercise motivation, even your appearance. Many patients dismiss it as normal aging or stress, but persistent fatigue often has identifiable underlying causes. With comprehensive clinical training, I investigate root causes rather than just treating symptoms. Fatigue typically stems from hormonal imbalances (thyroid, testosterone, estrogen, cortisol), nutritional deficiencies (B12, iron, folate, vitamin D, magnesium), poor sleep quality, chronic inflammation, or mitochondrial dysfunction. My approach is systematic: comprehensive lab work to identify deficiencies, lifestyle optimization, and aesthetic treatments that help you look and feel revitalized. Microneedling and skin rejuvenation can restore a vibrant appearance even when energy levels are recovering. Results are gradual, typically improving over 4–8 weeks as baseline levels normalize.",
     causes: [
       "Hormonal imbalances (thyroid, testosterone, estrogen, cortisol, growth hormone)",
       "Nutritional deficiencies (B12, folate, iron, ferritin, vitamin D, magnesium, coenzyme Q10)",
@@ -636,24 +569,17 @@ export const concerns: Concern[] = [
     ],
     treatments: [
       {
-        name: "Hormone Optimization",
-        slug: "hormone-optimization",
+        name: "Microneedling",
+        slug: "microneedling",
         description:
-          "Optimizing hormones—especially thyroid, testosterone, estrogen, and cortisol—can dramatically improve energy and vitality.",
+          "Rejuvenates skin appearance and stimulates collagen production, helping you look as revitalized as you feel.",
         recommended: true,
       },
       {
-        name: "IV Therapy",
-        slug: "iv-therapy",
+        name: "Chemical Peels",
+        slug: "chemical-peels",
         description:
-          "Direct nutrient delivery (B vitamins, vitamin C, magnesium) and NAD+ infusions support cellular energy production.",
-        recommended: true,
-      },
-      {
-        name: "Peptide Therapy",
-        slug: "peptide-therapy",
-        description:
-          "Specific peptides support energy production, improve sleep quality, and enhance recovery at the cellular level.",
+          "Refreshes dull, tired-looking skin by removing dead cell buildup and revealing a brighter complexion.",
       },
     ],
     tips: [
@@ -666,10 +592,11 @@ export const concerns: Concern[] = [
       "Limit alcohol and caffeine dependence; they disrupt sleep and hormone balance",
       "If energy doesn't improve with lifestyle changes, see a physician who orders comprehensive labs",
     ],
-    image: "https://images.pexels.com/photos/6870416/pexels-photo-6870416.jpeg?auto=compress&cs=tinysrgb&w=800",
+    // Session 20: wellness lifestyle (v2 #7) + post-treatment relaxed (v3 E)
+    image: "https://images.pexels.com/photos/30809947/pexels-photo-30809947.jpeg?auto=compress&cs=tinysrgb&w=800",
     imageAlts: [
-      "https://images.pexels.com/photos/6293251/pexels-photo-6293251.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/4467687/pexels-photo-4467687.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/30809945/pexels-photo-30809945.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/19666215/pexels-photo-19666215.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
   {
@@ -678,7 +605,7 @@ export const concerns: Concern[] = [
     name: "Hormone Imbalance",
     tagline: "Balance your hormones, transform your life",
     description:
-      "Hormones regulate nearly every process in your body—metabolism, mood, sleep quality, libido, skin radiance, energy, and more. When they're out of balance, you feel it everywhere. Many patients tell me they were dismissed by conventional medicine because their labs fell within 'normal ranges,' yet they felt terrible. The problem is that 'normal' is a wide range designed for population statistics, not for optimal wellness. I evaluate your hormones in the context of how you feel and function. Whether you're experiencing perimenopause or menopause (women), andropause or low testosterone (men), thyroid dysfunction, or chronic stress-driven cortisol dysregulation, I have comprehensive training to properly evaluate and treat these imbalances. Bioidentical hormone therapy, when appropriate, uses hormones molecularly identical to what your body produces naturally. My approach is physiologic dosing, not blanket high-dose protocols. Realistic timeline: most patients feel measurable improvement within 4–6 weeks of starting treatment.",
+      "Hormones regulate nearly every process in your body—metabolism, mood, sleep quality, libido, skin radiance, energy, and more. When they're out of balance, you feel it everywhere. Many patients tell me they were dismissed by conventional medicine because their labs fell within 'normal ranges,' yet they felt terrible. The problem is that 'normal' is a wide range designed for population statistics, not for optimal wellness. I evaluate your hormones in the context of how you feel and function. Whether you're experiencing perimenopause or menopause (women), andropause or low testosterone (men), thyroid dysfunction, or chronic stress-driven cortisol dysregulation, I have comprehensive training to properly evaluate and treat these imbalances. While I address hormonal concerns holistically, my aesthetic treatments can help manage the visible effects of hormonal changes—from skin quality to facial volume shifts.",
     causes: [
       "Menopause and perimenopause (women); declining estrogen and progesterone",
       "Andropause and age-related low testosterone (men)",
@@ -690,23 +617,23 @@ export const concerns: Concern[] = [
     ],
     treatments: [
       {
-        name: "Hormone Optimization",
-        slug: "hormone-optimization",
+        name: "Microneedling",
+        slug: "microneedling",
         description:
-          "Bioidentical hormone therapy using molecules identical to your body's natural hormones; custom dosing based on labs and symptoms.",
+          "Addresses hormone-related skin changes by stimulating collagen production and improving skin quality and radiance.",
         recommended: true,
       },
       {
-        name: "Peptide Therapy",
-        slug: "peptide-therapy",
+        name: "Botox & Dysport",
+        slug: "botox-dysport",
         description:
-          "Specific peptides support natural hormone production and regulation, especially for growth hormone and DHEA optimization.",
+          "Manages stress-related expression lines and tension that often accompany hormonal imbalances.",
       },
       {
-        name: "IV Therapy",
-        slug: "iv-therapy",
+        name: "Dermal Fillers",
+        slug: "dermal-fillers",
         description:
-          "Nutritional support for hormone metabolism and conversion (e.g., B vitamins for methylation).",
+          "Restores facial volume lost due to hormonal changes, particularly during menopause or andropause.",
       },
     ],
     tips: [
@@ -719,10 +646,11 @@ export const concerns: Concern[] = [
       "Support hormone metabolism with adequate protein, healthy fats, and micronutrients (zinc, selenium, iodine)",
       "Re-test hormones every 3–6 months after starting treatment to adjust dosing as needed",
     ],
-    image: "https://images.pexels.com/photos/5327585/pexels-photo-5327585.jpeg?auto=compress&cs=tinysrgb&w=800",
+    // Session 20: wellness (v2 #7) + Keep-pile portrait — on-brand for hormone/longevity
+    image: "https://images.pexels.com/photos/30809946/pexels-photo-30809946.jpeg?auto=compress&cs=tinysrgb&w=800",
     imageAlts: [
-      "https://images.pexels.com/photos/3985338/pexels-photo-3985338.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "https://images.pexels.com/photos/4173250/pexels-photo-4173250.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/30809945/pexels-photo-30809945.jpeg?auto=compress&cs=tinysrgb&w=800",
+      "https://images.pexels.com/photos/3985333/pexels-photo-3985333.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
 ];

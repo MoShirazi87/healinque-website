@@ -5,7 +5,6 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, MapPin, Star, ArrowDown } from "lucide-react";
 import { useState, useEffect, useCallback, useRef } from "react";
-import { useMediaQuery } from "@/hooks/use-media-query";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { pexelsUrl, pageImages, pickImage, videos } from "@/lib/data/images";
 
@@ -17,9 +16,25 @@ interface CarouselSlide {
   description: string;
   imageId: string;
   imageAlts: string[];
+  /**
+   * Session 20 fix: CSS object-position for the hero Image. Portraits (Session 20
+   * approved 66-pool is heavy on chest-up editorial shots) get cropped at the face
+   * when using the default `center center`. Default to `"center top"` so faces
+   * stay visible; override per-slide if a specific image needs different framing.
+   */
+  objectPosition?: string;
+  /**
+   * Session 24: Optional compressed HD video URL (Pexels, ~1280x720). When set,
+   * the hero renders this as the PRIMARY visual on desktop (autoplay muted loop)
+   * with the still image as poster + mobile/reduced-motion fallback. If omitted,
+   * the slide uses the still image as it did pre-Session-24.
+   */
+  videoSrc?: string;
   cta1: { label: string; href: string };
   cta2: { label: string; href: string };
 }
+
+const DEFAULT_HERO_OBJECT_POSITION = "center 25%";
 
 const SLIDES: CarouselSlide[] = [
   {
@@ -27,13 +42,16 @@ const SLIDES: CarouselSlide[] = [
     titleHighlight: "medically delivered.",
     subtitle: "Physician-Led Aesthetic Medicine",
     description:
-      "Healinque is a physician-led aesthetic and longevity practice in Poway, founded by Dr. Azi Shirazi, MD. Internal medicine background, 10+ years of aesthetic medicine — and I personally perform every treatment.",
+      "Healinque is a physician-led aesthetic and longevity practice in Poway, founded by Dr. Azi Shirazi, MD. Treatments are performed by Dr. Shirazi or one of her highly trained nurse practitioners or physician assistants.",
     imageId: pageImages.heroSlide1.primary,
     imageAlts: pageImages.heroSlide1.alts,
+    objectPosition: "center 20%", // v2 #1 hero bucket — editorial portraits, face in upper third
+    videoSrc: videos.heroSlide1, // Session 24: aesthetic/wellness ambient
     cta1: { label: "Book a Consultation", href: "/book" },
     cta2: { label: "Meet Dr. Shirazi", href: "/about/dr-azi-shirazi" },
   },
   {
+    // Session 22: First-person voice throughout — Dr. Shirazi speaks directly.
     title: "I don't overfill. I don't chase",
     titleHighlight: "trends.",
     subtitle: "How I Practice",
@@ -41,6 +59,8 @@ const SLIDES: CarouselSlide[] = [
       "I treat the face medically — conservative, layered plans that age with you. Most of my patients choose me because they want to look like themselves, only refreshed.",
     imageId: pageImages.heroSlide2.primary,
     imageAlts: pageImages.heroSlide2.alts,
+    objectPosition: "center 25%", // Diverse-smiling / women's portraits
+    videoSrc: videos.heroSlide2, // Session 24: editorial skincare close-up
     cta1: { label: "The Healinque Method", href: "/about/healinque-method" },
     cta2: { label: "View Treatments", href: "/treatments" },
   },
@@ -52,6 +72,8 @@ const SLIDES: CarouselSlide[] = [
       "Botox, fillers, hair restoration, and performance-based treatments — delivered in a focused, physician-led environment one day a week.",
     imageId: pageImages.heroSlide3.primary,
     imageAlts: pageImages.heroSlide3.alts,
+    objectPosition: "center 20%", // Male editorial — bearded men chest-up
+    videoSrc: videos.heroSlide3, // Session 24: men's grooming / clinic b-roll
     cta1: { label: "Men's Clinic", href: "/mens-clinic" },
     cta2: { label: "Schedule Friday", href: "/book" },
   },
@@ -59,6 +81,56 @@ const SLIDES: CarouselSlide[] = [
 
 const AUTOPLAY_INTERVAL = 7000;
 const TRANSITION_DURATION = 1.0;
+
+/* ───────────────────────────────────────────────────
+   HeroVideo — Session 25 hardened video overlay
+   ───────────────────────────────────────────────────
+   Mobile-hidden via `hidden lg:block` (display:none below 1024px means most
+   browsers skip the video fetch entirely). Explicit .play() on mount defends
+   against autoplay policy edge cases where muted autoplay is throttled in
+   low-power states or when tab was background-loaded. key prop on the parent
+   forces unmount/remount between slides so each video loads fresh.            */
+function HeroVideo({
+  src,
+  poster,
+  objectPosition,
+}: {
+  src: string;
+  poster: string;
+  objectPosition: string;
+}) {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    // Nudge autoplay — muted + playsInline should satisfy every modern browser's
+    // autoplay policy, but some browsers still need an explicit .play() call.
+    const p = v.play();
+    if (p !== undefined) {
+      p.catch(() => {
+        // Autoplay was blocked; poster stays visible. Silent — nothing user can do.
+      });
+    }
+  }, [src]);
+
+  return (
+    <video
+      ref={ref}
+      autoPlay
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      poster={poster}
+      className="hidden lg:block absolute inset-0 w-full h-full object-cover"
+      style={{ objectPosition }}
+      aria-hidden="true"
+    >
+      <source src={src} type="video/mp4" />
+    </video>
+  );
+}
 
 /* ═══════════════════════════════════════════════════
    HOME HERO V2 — Full-bleed slides with video accent
@@ -68,7 +140,6 @@ export function HomeHero() {
   const [isHovering, setIsHovering] = useState(false);
   const [autoplayEnabled] = useState(true);
   const [slideImages, setSlideImages] = useState<string[]>([]);
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
   const prefersReducedMotion = useReducedMotion();
 
   // Pick random images on mount (client-side only)
@@ -79,17 +150,44 @@ export function HomeHero() {
     setSlideImages(picked);
   }, []);
 
-  // Autoplay
+  // Autoplay — respects prefers-reduced-motion (Session 19, Track C).
+  // Users with vestibular disorders get a static hero; the slide indicator
+  // buttons still work as manual controls.
   useEffect(() => {
-    if (!autoplayEnabled || isHovering) return;
+    if (!autoplayEnabled || isHovering || prefersReducedMotion) return;
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
     }, AUTOPLAY_INTERVAL);
     return () => clearInterval(interval);
-  }, [autoplayEnabled, isHovering]);
+  }, [autoplayEnabled, isHovering, prefersReducedMotion]);
 
   const goToSlide = useCallback((index: number) => {
-    setCurrentSlide(index % SLIDES.length);
+    setCurrentSlide(((index % SLIDES.length) + SLIDES.length) % SLIDES.length);
+  }, []);
+
+  // Keyboard navigation — ArrowLeft / ArrowRight / Home / End (Session 19, Track C).
+  // Only fires when the section has focus within, to avoid intercepting
+  // arrow keys used by other page widgets.
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target?.closest?.("[data-hero-carousel]")) return;
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        setCurrentSlide((prev) => (prev + 1) % SLIDES.length);
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        setCurrentSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
+      } else if (e.key === "Home") {
+        e.preventDefault();
+        setCurrentSlide(0);
+      } else if (e.key === "End") {
+        e.preventDefault();
+        setCurrentSlide(SLIDES.length - 1);
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
   }, []);
 
   // Fallback until client-side images are picked
@@ -98,32 +196,27 @@ export function HomeHero() {
 
   return (
     <section
+      data-hero-carousel=""
+      aria-roledescription="carousel"
+      aria-label="Healinque hero slideshow"
       className="relative w-full h-screen max-h-[900px] lg:max-h-[1000px] flex items-center overflow-hidden bg-navy-deep"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      {/* ── Video Layer (Desktop, subtle ambient) ── */}
-      {isDesktop && !prefersReducedMotion && (
-        <div className="absolute inset-0 z-0 opacity-30">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="none"
-            className="absolute inset-0 w-full h-full object-cover"
-            poster={pexelsUrl(SLIDES[0].imageId, 1920)}
-          >
-            <source src={videos.heroHome} type="video/mp4" />
-          </video>
-        </div>
-      )}
+      {/* ── Primary Visual Layer (Session 24, hardened Session 25) ─────────
+          Architecture: ALWAYS render the Image (SSR-safe, no hydration race).
+          Then conditionally mount the <video> as an overlay on top — gated by
+          slide having a videoSrc + not reduced-motion. The video is hidden on
+          mobile via CSS (`hidden lg:block`) so it never paints below 1024px.
 
-      {/* ── Image Slides — These are the PRIMARY visual ── */}
+          This bypasses the prior useMediaQuery SSR→client hydration race where
+          `isDesktop` started false, rendered Image, and the post-hydration
+          re-render to <video> sometimes failed silently (stale dev bundle,
+          autoplay policy edge cases, etc).                                   */}
       <AnimatePresence mode="sync">
         <motion.div
-          key={`img-${currentSlide}`}
-          initial={{ opacity: 0, scale: 1.05 }}
+          key={`visual-${currentSlide}`}
+          initial={{ scale: 1.05 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
           transition={{
@@ -132,15 +225,34 @@ export function HomeHero() {
           }}
           className="absolute inset-0 z-[1]"
         >
+          {/* Base layer: Image. Always in DOM, serves as mobile-default +
+              reduced-motion fallback + poster-visible-while-video-loads. */}
           <Image
             src={currentImage}
             alt={`${SLIDES[currentSlide].title} ${SLIDES[currentSlide].titleHighlight}`}
             fill
             className="object-cover"
+            style={{
+              objectPosition:
+                SLIDES[currentSlide].objectPosition || DEFAULT_HERO_OBJECT_POSITION,
+            }}
             priority={currentSlide === 0}
             sizes="100vw"
             quality={85}
           />
+
+          {/* Overlay layer: Video. Desktop-only via CSS; gated on reduced-motion via JS.
+              Sits above the Image with same inset-0. Uses later DOM order to win z-stack tie. */}
+          {SLIDES[currentSlide].videoSrc && !prefersReducedMotion && (
+            <HeroVideo
+              key={`video-${currentSlide}`}
+              src={SLIDES[currentSlide].videoSrc!}
+              poster={currentImage}
+              objectPosition={
+                SLIDES[currentSlide].objectPosition || DEFAULT_HERO_OBJECT_POSITION
+              }
+            />
+          )}
         </motion.div>
       </AnimatePresence>
 
@@ -154,14 +266,14 @@ export function HomeHero() {
           <AnimatePresence mode="wait">
             <motion.div
               key={`content-${currentSlide}`}
-              initial={{ opacity: 0 }}
+              initial={{}}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.6 }}
             >
               {/* Location Pill */}
               <motion.div
-                initial={{ opacity: 0, y: -10 }}
+                initial={{ y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1, duration: 0.4 }}
                 className="mb-6 lg:mb-8"
@@ -176,7 +288,7 @@ export function HomeHero() {
 
               {/* Subtitle */}
               <motion.p
-                initial={{ opacity: 0, y: 15 }}
+                initial={{ y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15, duration: 0.5 }}
                 className="text-xs sm:text-sm font-sans uppercase tracking-[0.25em] text-gold/80 mb-3 lg:mb-4"
@@ -184,47 +296,47 @@ export function HomeHero() {
                 {SLIDES[currentSlide].subtitle}
               </motion.p>
 
-              {/* Headline */}
+              {/* Headline — Session 23: dialed down to luxury clamp (2.5/5vw/4.25) */}
               <motion.h1
-                initial={{ opacity: 0, y: 25 }}
+                initial={{ y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
                 className="font-serif font-bold text-white leading-[1.05] mb-5 lg:mb-6"
                 style={{
-                  fontSize: "clamp(2.5rem, 6vw, 5.5rem)",
+                  fontSize: "clamp(2.5rem, 5vw, 4.25rem)",
                 }}
               >
                 {SLIDES[currentSlide].title}{" "}
-                <span className="text-gold italic font-medium" data-letter-reveal key={`hl-${currentSlide}`}>
+                <span className="text-gold italic font-medium" key={`hl-${currentSlide}`}>
                   {SLIDES[currentSlide].titleHighlight}
                 </span>
               </motion.h1>
 
-              {/* Description */}
+              {/* Description — Session 23: body min 16px, opacity bumped /70 → /80 */}
               <motion.p
-                initial={{ opacity: 0, y: 15 }}
+                initial={{ y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
-                className="text-base sm:text-lg lg:text-xl text-white/70 leading-relaxed max-w-2xl mb-8 lg:mb-10"
+                className="text-base sm:text-lg lg:text-xl text-white/80 leading-relaxed max-w-2xl mb-8 lg:mb-10"
               >
                 {SLIDES[currentSlide].description}
               </motion.p>
 
               {/* CTA Buttons */}
               <motion.div
-                initial={{ opacity: 0, y: 15 }}
+                initial={{ y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
                 className="flex flex-col sm:flex-row gap-3 sm:gap-4"
               >
                 <Link href={SLIDES[currentSlide].cta1.href}>
-                  <button className="group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-lg font-medium text-navy-deep bg-gradient-to-r from-gold to-[#DEB84A] hover:shadow-lg hover:shadow-gold/25 transition-all duration-300">
+                  <button className="group inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-lg font-medium text-navy-deep bg-gradient-to-r from-gold to-[#DEB84A] hover:shadow-lg hover:shadow-gold/25 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
                     {SLIDES[currentSlide].cta1.label}
-                    <ChevronRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+                    <ChevronRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
                   </button>
                 </Link>
                 <Link href={SLIDES[currentSlide].cta2.href}>
-                  <button className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-lg font-medium text-white border border-white/20 hover:border-white/40 hover:bg-white/5 backdrop-blur-sm transition-all duration-300">
+                  <button className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-lg font-medium text-white border border-white/20 hover:border-white/40 hover:bg-white/5 backdrop-blur-sm transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold">
                     {SLIDES[currentSlide].cta2.label}
                   </button>
                 </Link>
@@ -235,36 +347,46 @@ export function HomeHero() {
       </div>
 
       {/* ── Slide Indicators (bottom-left, editorial style) ── */}
-      <div className="absolute bottom-8 left-6 md:left-12 lg:left-20 z-20 flex items-center gap-4">
+      <div
+        className="absolute bottom-8 left-6 md:left-12 lg:left-20 z-20 flex items-center gap-4"
+        role="group"
+        aria-label="Slide selection"
+      >
         {SLIDES.map((_, idx) => (
           <button
             key={idx}
             onClick={() => goToSlide(idx)}
-            className={`relative h-0.5 rounded-full transition-all duration-700 ${
+            className={`relative h-0.5 rounded-full transition-all duration-700 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold ${
               idx === currentSlide
                 ? "bg-gold w-16"
-                : "bg-white/20 w-8 hover:bg-white/40"
+                : "bg-white/30 w-8 hover:bg-white/50"
             }`}
-            aria-label={`Go to slide ${idx + 1}`}
+            aria-label={`Go to slide ${idx + 1} of ${SLIDES.length}`}
+            aria-current={idx === currentSlide ? "true" : undefined}
           />
         ))}
-        <span className="text-xs text-white/40 ml-2 font-mono">
+        <span
+          className="text-xs text-white/60 ml-2 font-mono"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <span className="sr-only">Showing slide </span>
           {String(currentSlide + 1).padStart(2, "0")} / {String(SLIDES.length).padStart(2, "0")}
         </span>
       </div>
 
       {/* ── Trust Bar (bottom-right, minimal) ── */}
       <div className="absolute bottom-8 right-6 md:right-12 lg:right-20 z-20 hidden lg:flex items-center gap-6 text-sm">
-        <span className="text-white/50">MD, Internal Medicine</span>
-        <div className="w-px h-4 bg-white/15" />
-        <span className="text-white/50">20+ Years Clinical</span>
-        <div className="w-px h-4 bg-white/15" />
-        <span className="text-white/50">10+ Years Aesthetic</span>
+        <span className="text-white/65">MD, Internal Medicine</span>
+        <div className="w-px h-4 bg-white/15" aria-hidden="true" />
+        <span className="text-white/65">20+ Years Clinical</span>
+        <div className="w-px h-4 bg-white/15" aria-hidden="true" />
+        <span className="text-white/65">10+ Years Aesthetic</span>
       </div>
 
       {/* ── Scroll Indicator ── */}
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={{}}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.6 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 hidden md:flex lg:hidden flex-col items-center"
@@ -292,6 +414,12 @@ interface PageHeroProps {
   video?: string;
   overlay?: boolean | string;
   sizes?: string;
+  /**
+   * Session 20 fix: CSS object-position for the hero background image.
+   * Defaults to `"center 25%"` so portrait subjects (face in upper third)
+   * don't get clipped. Pass a custom value per-page if needed.
+   */
+  objectPosition?: string;
 }
 
 /* Overlay className resolver — supports true/false, or named strings */
@@ -323,6 +451,7 @@ export function PageHero({
   video,
   overlay = true,
   sizes = "100vw",
+  objectPosition = "center 25%",
 }: PageHeroProps) {
   const isCentered = variant === "centered" || variant === "page";
   const overlayClass = resolveOverlay(overlay, !!video);
@@ -399,6 +528,7 @@ export function PageHero({
             alt={title}
             fill
             className="object-cover"
+            style={{ objectPosition }}
             sizes={sizes}
             quality={80}
             priority
@@ -420,8 +550,8 @@ export function PageHero({
       >
         {subtitle && (
           <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 8 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className={`flex items-center gap-4 mb-6 ${
@@ -436,29 +566,30 @@ export function PageHero({
           </motion.div>
         )}
 
+        {/* Headline — Session 23: inner-page hero slightly calmer than HomeHero */}
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className={`font-serif font-bold text-white leading-[1.05] mb-6 ${
             isCentered ? "mx-auto" : ""
           }`}
           style={{
-            fontSize: "clamp(2.5rem, 6vw, 5rem)",
+            fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)",
             maxWidth: isCentered ? "56rem" : undefined,
           }}
         >
-          <span data-letter-reveal>{title}</span>
+          <span>{title}</span>
         </motion.h1>
 
         {description && (
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ y: 12 }}
+            whileInView={{ y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className={`text-lg lg:text-xl text-white/75 leading-relaxed ${
+            className={`text-base md:text-lg lg:text-xl text-white/80 leading-relaxed ${
               isCentered ? "max-w-2xl mx-auto" : "max-w-2xl"
             }`}
           >

@@ -1,23 +1,10 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { PageHero as Hero } from "@/components/sections/hero";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
 import { BreadcrumbSchema } from "@/components/seo/schema";
 import { pexelsUrl, pageImages } from "@/lib/data/images";
 import { siteConfig } from "@/lib/config/site";
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
-};
 
 // Package-specific details (not in siteConfig, curated copy)
 const packageDetails = {
@@ -87,12 +74,8 @@ export default function PackagesPage() {
       {/* Intro Section — CREAM */}
       <section className="section-padding bg-cream">
         <div className="container-healinque">
-          <motion.div
+          <div
             className="max-w-3xl mx-auto text-center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={containerVariants}
           >
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="h-[1px] w-8 bg-[#C9A227]" />
@@ -107,19 +90,15 @@ export default function PackagesPage() {
             <p className="text-lg text-navy-deep/75 leading-relaxed">
               These packages pair complementary treatments — Botox with peel, microneedling with PRP, P-Shot with optional add-ons. When treatments work together, results compound. Pricing reflects the bundle and delivers value compared to booking treatments individually.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Packages Grid — DARK */}
-      <section className="section-padding bg-[#0a1628] orb-bg has-particles relative overflow-hidden" data-wipe>
+      <section className="section-padding bg-[#0a1628] relative overflow-hidden">
         <div className="container-healinque">
-          <motion.div
+          <div
             className="mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={containerVariants}
           >
             <div className="flex justify-center mb-6">
               <div className="h-px w-12 bg-[#C9A227]" />
@@ -130,22 +109,17 @@ export default function PackagesPage() {
             <h2 className="font-serif text-5xl text-center text-white">
               Choose Your <span className="italic text-[#C9A227]">Package</span>
             </h2>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+          <div
             className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"
           >
             {siteConfig.packages.map((pkg) => {
               const details = packageDetails[pkg.slug as keyof typeof packageDetails];
               return (
-                <motion.div
+                <div
                   key={pkg.slug}
-                  variants={itemVariants}
-                  className="bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl p-10 hover:border-[#C9A227]/50 transition-all group flex flex-col h-full"
+                  className="relative bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl p-10 hover:border-[#C9A227]/40 transition-colors duration-300 group flex flex-col h-full"
                 >
                   <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#C9A227]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   <div className="relative z-10 flex flex-col h-full">
@@ -200,22 +174,18 @@ export default function PackagesPage() {
                       </Button>
                     </Link>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* How Packages Work Section — CREAM */}
       <section className="section-padding bg-cream">
         <div className="container-healinque">
-          <motion.div
+          <div
             className="max-w-3xl mx-auto text-center mb-16"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={containerVariants}
           >
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="h-[1px] w-8 bg-[#C9A227]" />
@@ -230,20 +200,16 @@ export default function PackagesPage() {
             <p className="text-lg text-navy-deep/75 leading-relaxed">
               Prices shown are for the complete package. Multi-session packages are paced based on your skin recovery — typically 3–6 weeks between sessions. You can book your full schedule upfront or plan as you go.
             </p>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+          <div
             className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto"
           >
             {[
               {
                 num: "1",
                 title: "Consultation",
-                copy: "We'll assess your skin, goals, and timeline. I may recommend adjusting the package based on your individual needs.",
+                copy: "I'll assess your skin, goals, and timeline. I may recommend adjusting the package based on your individual needs.",
                 image: "3764568",
               },
               {
@@ -259,48 +225,26 @@ export default function PackagesPage() {
                 image: "3985329",
               },
             ].map((step) => (
-              <motion.div
+              <div
                 key={step.num}
-                variants={itemVariants}
-                className="flip-to-image relative min-h-[260px] bg-white border border-taupe/10 rounded-2xl overflow-hidden"
+                className="relative bg-white border border-taupe/10 rounded-2xl p-10"
               >
-                <div className="flip-front p-10 h-full">
-                  <div className="w-12 h-12 rounded-full bg-[#C9A227]/10 flex items-center justify-center mb-6">
-                    <span className="text-xl font-bold text-[#C9A227]">{step.num}</span>
-                  </div>
-                  <h3 className="text-xl font-serif text-navy-deep mb-4">{step.title}</h3>
-                  <p className="text-navy-deep/70 text-sm leading-relaxed">{step.copy}</p>
+                <div className="w-12 h-12 rounded-full bg-[#C9A227]/10 flex items-center justify-center mb-6">
+                  <span className="text-xl font-bold text-[#C9A227]">{step.num}</span>
                 </div>
-                <div className="flip-back">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={pexelsUrl(step.image, 800)}
-                    alt={step.title}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-deep via-navy-deep/60 to-transparent" />
-                  <div className="absolute inset-0 p-10 flex flex-col justify-end">
-                    <div className="w-10 h-10 rounded-full bg-[#C9A227] flex items-center justify-center mb-3">
-                      <span className="text-lg font-bold text-navy-deep">{step.num}</span>
-                    </div>
-                    <h3 className="text-2xl font-serif text-white">{step.title}</h3>
-                  </div>
-                </div>
-              </motion.div>
+                <h3 className="text-xl font-serif text-navy-deep mb-4">{step.title}</h3>
+                <p className="text-navy-deep/70 text-base leading-relaxed">{step.copy}</p>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Member Advantage Section — DARK */}
-      <section className="section-padding bg-[#0a1628] orb-bg has-particles relative overflow-hidden" data-wipe>
+      <section className="section-padding bg-[#0a1628] relative overflow-hidden">
         <div className="container-healinque">
-          <motion.div
+          <div
             className="max-w-3xl mx-auto text-center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={containerVariants}
           >
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="h-[1px] w-8 bg-[#C9A227]" />
@@ -323,19 +267,15 @@ export default function PackagesPage() {
                 Explore Membership
               </Button>
             </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="section-padding bg-cream">
         <div className="container-healinque">
-          <motion.div
+          <div
             className="max-w-3xl mx-auto text-center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={containerVariants}
           >
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="h-[1px] w-8 bg-[#C9A227]" />
@@ -348,7 +288,7 @@ export default function PackagesPage() {
               Not Sure Which <span className="text-[#C9A227] italic">Is Right?</span>
             </h2>
             <p className="text-lg text-navy-deep/75 leading-relaxed mb-10">
-              Book a consultation. We&apos;ll assess your skin, discuss your goals, and recommend the package (or custom combination) that will get you results.
+              Book a consultation. I&apos;ll assess your skin, discuss your goals, and recommend the package (or custom combination) that will get you results.
             </p>
             <Link href="/book">
               <Button
@@ -358,24 +298,20 @@ export default function PackagesPage() {
                 Schedule Consultation
               </Button>
             </Link>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Disclaimer Section */}
       <section className="section-padding bg-white border-t border-taupe/10">
         <div className="container-healinque">
-          <motion.div
+          <div
             className="max-w-3xl mx-auto text-center"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={containerVariants}
           >
             <p className="text-xs text-navy-deep/60 leading-relaxed">
               <span className="font-semibold">Disclaimer:</span> {siteConfig.policies.disclaimer} Package pricing reflects bundled services and may differ from individual treatment pricing. Actual package cost and timeline will be confirmed during your consultation.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
     </>

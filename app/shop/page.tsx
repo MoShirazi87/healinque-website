@@ -1,265 +1,82 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { PageHero as Hero } from "@/components/sections/hero";
-import { getProducts, mockCollections } from "@/lib/shopify/client";
-import { formatPrice } from "@/lib/utils";
-import { ArrowRight, Shield, Truck, Award } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Phone } from "lucide-react";
 import { pexelsUrl, pageImages } from "@/lib/data/images";
+import { siteConfig, getPhoneLink } from "@/lib/config/site";
 
 export const metadata: Metadata = {
   title: "Shop | Medical-Grade Skincare & Supplements",
-  description: "Shop physician-curated skincare, supplements, and wellness products. Medical-grade formulas recommended by Dr. Azi Shirazi.",
+  description:
+    "Shop physician-curated skincare, supplements, and wellness products. Medical-grade formulas recommended by Dr. Azi Shirazi.",
 };
 
-const benefits = [
-  {
-    icon: Shield,
-    title: "Physician-Curated",
-    description: "Every product hand-selected by Dr. Azi",
-  },
-  {
-    icon: Award,
-    title: "Medical-Grade",
-    description: "Professional formulas for real results",
-  },
-  {
-    icon: Truck,
-    title: "Free Shipping",
-    description: "On orders over $75",
-  },
-];
-
-export default async function ShopPage() {
-  const products = await getProducts(12);
-  const collections = mockCollections;
-
+export default function ShopPage() {
   return (
-    <>
+    <main className="bg-[#0a1628]">
       <Hero
         variant="page"
-        title="Shop Healinque"
-        subtitle="Medical-Grade Products"
+        title="Medical-Grade Products"
+        subtitle="Shop Healinque"
         description="Physician-curated skincare, supplements, and wellness products to enhance your treatment results at home."
         image={pexelsUrl(pageImages.shopHero.primary, 1920)}
         overlay="dark"
       />
 
-      {/* Benefits Bar */}
-      <section className="py-8 bg-gold">
+      {/* Coming Soon */}
+      <section className="relative py-24 bg-[#0a1628]">
         <div className="container-healinque">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {benefits.map((benefit) => (
-              <div key={benefit.title} className="flex items-center justify-center gap-3 text-white">
-                <benefit.icon className="h-6 w-6" />
-                <div>
-                  <p className="font-medium">{benefit.title}</p>
-                  <p className="text-sm text-white/80">{benefit.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+          <div className="max-w-2xl mx-auto text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#C9A227]/10 border border-[#C9A227]/30 text-[#C9A227] text-xs font-medium mb-8 uppercase tracking-[0.2em]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C9A227] animate-pulse" />
+              Launching Soon
+            </div>
 
-      {/* Shop by Category */}
-      <section className="section-padding bg-navy-deep">
-        <div className="container-healinque">
-          <div className="text-center mb-12">
-            <p className="text-gold font-medium tracking-wide uppercase text-sm mb-3">
-              Browse
-            </p>
-            <h2 className="text-display font-serif text-white">
-              Shop by Category
+            <h2 className="font-serif text-4xl lg:text-5xl text-white mb-6 leading-tight">
+              My Curated Selection Is{" "}
+              <span className="text-[#C9A227] italic">Almost Here</span>
             </h2>
-          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {collections.map((collection) => (
-              <Link
-                key={collection.id}
-                href={`/shop/collections/${collection.handle}`}
-                className="group block"
-              >
-                <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4">
-                  {collection.image && (
-                    <Image
-                      src={collection.image.url}
-                      alt={collection.image.altText || collection.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-xl font-serif font-semibold text-white group-hover:text-gold transition-colors">
-                      {collection.title}
-                    </h3>
-                  </div>
-                </div>
-                <p className="text-white/60 text-sm mb-2">{collection.description}</p>
-                <span className="inline-flex items-center text-sm text-gold group-hover:translate-x-1 transition-transform">
-                  Shop {collection.title} <ArrowRight className="ml-1 h-4 w-4" />
-                </span>
+            <p className="text-white/70 text-lg leading-relaxed mb-10">
+              My curated selection of physician-recommended skincare is
+              launching soon. Every product will be hand-selected by me
+              for safety, efficacy, and real results.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link href="/contact">
+                <Button
+                  size="lg"
+                  className="bg-[#C9A227] hover:bg-[#b8921f] text-[#0a1628] px-8 py-6 font-sans font-semibold rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300"
+                >
+                  <Phone className="mr-2 h-5 w-5" />
+                  Ask About Products
+                </Button>
               </Link>
-            ))}
-
-            {/* Gift Cards - Coming Soon */}
-            <div className="group block">
-              <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-gold to-gold-dark flex items-center justify-center">
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm">
-                  <div className="text-center">
-                    <p className="text-5xl mb-2">🎁</p>
-                    <h3 className="text-xl font-serif font-semibold text-white mb-3">Gift Cards</h3>
-                    <span className="inline-block px-3 py-1 rounded-full bg-white/20 text-white text-xs font-semibold uppercase tracking-wider">
-                      Coming Soon
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <p className="text-white/60 text-sm mb-2">
-                Give the gift of beauty and wellness
-              </p>
-              <span className="inline-flex items-center text-sm text-white/40">
-                Shop Gift Cards
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Products */}
-      <section className="section-padding bg-surface-card/50">
-        <div className="container-healinque">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <p className="text-gold font-medium tracking-wide uppercase text-sm mb-2">
-                Best Sellers
-              </p>
-              <h2 className="text-display-sm font-serif text-white">
-                Featured Products
-              </h2>
-            </div>
-            <Link
-              href="/shop/products"
-              className="hidden md:inline-flex items-center text-gold hover:text-gold-dark transition-colors"
-            >
-              View All <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {products.slice(0, 8).map((product) => (
-              <Link
-                key={product.id}
-                href={`/shop/products/${product.handle}`}
-                className="group block"
-              >
-                <div className="relative aspect-square rounded-xl overflow-hidden mb-3 bg-white/5">
-                  {product.featuredImage && (
-                    <Image
-                      src={product.featuredImage.url}
-                      alt={product.featuredImage.altText || product.title}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  )}
-                </div>
-                <p className="text-xs text-white/60 uppercase mb-1">{product.vendor}</p>
-                <h3 className="font-medium text-white group-hover:text-gold transition-colors line-clamp-2">
-                  {product.title}
-                </h3>
-                <p className="text-gold font-medium mt-1">
-                  {formatPrice(parseFloat(product.priceRange.minVariantPrice.amount))}
-                </p>
-              </Link>
-            ))}
-          </div>
-
-          <div className="text-center mt-8 md:hidden">
-            <Link
-              href="/shop/products"
-              className="inline-flex items-center text-gold hover:text-gold-dark transition-colors"
-            >
-              View All Products <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Dr. Azi's Picks */}
-      <section className="section-padding bg-navy-deep">
-        <div className="container-healinque">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-white">
-              <p className="text-gold font-medium tracking-wide uppercase text-sm mb-3">
-                Expert Recommendations
-              </p>
-              <h2 className="text-display font-serif mb-6">
-                Dr. Azi&apos;s Skincare Essentials
-              </h2>
-              <p className="text-cream/80 mb-6">
-                &ldquo;These are the products I recommend to every patient. They form the 
-                foundation of any good skincare routine and will enhance your treatment 
-                results at home.&rdquo;
-              </p>
-              <ul className="space-y-3 text-cream/90 mb-8">
-                <li className="flex items-center gap-2">
-                  <span className="text-gold">1.</span> A good cleanser
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-gold">2.</span> Vitamin C in the morning
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-gold">3.</span> Retinol at night
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="text-gold">4.</span> SPF 30+ every single day
-                </li>
-              </ul>
-              <Link
-                href="/shop/collections/dr-azi-picks"
-                className="inline-flex items-center text-gold hover:text-gold-light transition-colors font-medium"
-              >
-                Shop Dr. Azi&apos;s Picks <ArrowRight className="ml-2 h-4 w-4" />
+              <Link href="/treatments">
+                <Button size="lg" variant="outline" className="px-8 py-6 rounded-lg">
+                  Browse Treatments
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
               </Link>
             </div>
-            <div className="relative">
-              <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
-                <Image
-                  src="/images/dr-azi-products.jpg"
-                  alt="Dr. Azi with skincare products"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Membership Promo */}
-      <section className="py-16 bg-gold">
-        <div className="container-healinque">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="text-white text-center md:text-left">
-              <h2 className="text-2xl font-serif mb-2">
-                Members Save 15% on All Products
-              </h2>
-              <p className="text-white/80">
-                Plus exclusive access to new products and member-only sales.
+            <div className="mt-12 pt-8 border-t border-white/10">
+              <p className="text-white/40 text-sm mb-3">
+                In the meantime, ask about product recommendations during your consultation.
               </p>
+              <a
+                href={getPhoneLink()}
+                className="inline-flex items-center gap-2 text-[#C9A227] hover:text-[#b8921f] transition-colors text-sm font-medium"
+              >
+                Call or text {siteConfig.phone}
+                <ArrowRight className="h-4 w-4" />
+              </a>
             </div>
-            <Link
-              href="/memberships"
-              className="inline-flex items-center px-6 py-3 bg-navy-deep text-white rounded-lg hover:bg-navy-deep/90 transition-colors font-medium"
-            >
-              Learn About Memberships
-            </Link>
           </div>
         </div>
       </section>
-    </>
+    </main>
   );
 }
-

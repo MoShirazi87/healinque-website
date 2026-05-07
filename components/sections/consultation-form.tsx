@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, AlertCircle } from "lucide-react";
@@ -10,6 +10,14 @@ interface ConsultationFormProps {
   title?: string;
   subtitle?: string;
 }
+
+/**
+ * Anti-spam minimum: real humans take longer than this between page render and
+ * form submit. Bots that auto-fill + submit usually trip this within a few hundred
+ * milliseconds. 2s is the lowest threshold that catches naive bots without
+ * frustrating fast typists who jump straight to the form.
+ */
+const MIN_HUMAN_FILL_MS = 2000;
 
 export function ConsultationForm({
   variant = "default",
@@ -24,7 +32,14 @@ export function ConsultationForm({
     message: "",
     howYouHeard: "other",
     consent: false,
+    // Honeypot field — must remain empty. Bots auto-fill every input they see;
+    // humans never see this field (visually hidden + tabIndex=-1 + autoComplete off).
+    company: "",
   });
+
+  // Form mount time for the submit-time-based anti-spam check. Initialized once
+  // via the lazy-init pattern so it's stable across re-renders without useEffect.
+  const mountTimeRef = useRef<number>(typeof window === "undefined" ? 0 : Date.now());
 
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -93,6 +108,21 @@ export function ConsultationForm({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitError('');
+
+    // Anti-spam guard 1: honeypot. If the hidden `company` field has any value,
+    // it's a bot. Fake-success silently so the bot doesn't learn the field is a trap.
+    if (formData.company.trim() !== '') {
+      setSubmitted(true);
+      return;
+    }
+
+    // Anti-spam guard 2: submit-time-based check. Reject if the form was submitted
+    // less than MIN_HUMAN_FILL_MS after mount — no real user fills this in <2s.
+    if (Date.now() - mountTimeRef.current < MIN_HUMAN_FILL_MS) {
+      setSubmitted(true);
+      return;
+    }
+
     if (!validateForm()) return;
 
     setSubmitting(true);
@@ -126,6 +156,7 @@ export function ConsultationForm({
           message: "",
           howYouHeard: "other",
           consent: false,
+          company: "",
         });
         setSubmitted(false);
       }, 8000);
@@ -133,7 +164,7 @@ export function ConsultationForm({
       setSubmitError(
         err instanceof Error
           ? err.message
-          : 'Something went wrong. Please call us at (858) 337-7999.'
+          : 'Something went wrong. Please call or text (858) 337-7999.'
       );
     } finally {
       setSubmitting(false);
@@ -141,7 +172,7 @@ export function ConsultationForm({
   };
 
   const containerVariants = {
-    hidden: { opacity: 0 },
+    hidden: {},
     visible: {
       opacity: 1,
       transition: {
@@ -152,7 +183,7 @@ export function ConsultationForm({
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { y: 20 },
     visible: {
       opacity: 1,
       y: 0,
@@ -168,9 +199,9 @@ export function ConsultationForm({
 
       <div className="container-healinque relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: -30 }}
+          initial={{ y: -15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
           className="text-center mb-16 md:mb-20 max-w-2xl mx-auto"
         >
@@ -191,7 +222,7 @@ export function ConsultationForm({
           <AnimatePresence mode="wait">
             {submitted ? (
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
@@ -204,7 +235,7 @@ export function ConsultationForm({
                   Thank You!
                 </h3>
                 <p className="text-lg text-white/75 mb-8 leading-relaxed">
-                  Your consultation request has been received. We&apos;ll be in touch
+                  Your consultation request has been received. I&apos;ll be in touch
                   within 24 hours to confirm your appointment.
                 </p>
                 <p className="text-sm text-white/60">
@@ -220,42 +251,85 @@ export function ConsultationForm({
                 viewport={{ once: true }}
                 className="space-y-6"
               >
+                {/*
+                  Honeypot field — visually hidden from humans, visible to bots
+                  that scrape the DOM. If `company` is non-empty at submit time,
+                  the request is silently fake-succeeded. Do NOT add a label,
+                  do NOT use `display: none` (some bots skip those), and DO set
+                  tabIndex=-1 + autoComplete="off" so a screen-reader user
+                  tabbing through the form skips it cleanly.
+                */}
+                <div
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    left: "-9999px",
+                    width: "1px",
+                    height: "1px",
+                    overflow: "hidden",
+                  }}
+                >
+                  <label htmlFor="company-website" aria-hidden="true">
+                    Company (leave blank)
+                  </label>
+                  <input
+                    id="company-website"
+                    type="text"
+                    name="company"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    value={formData.company}
+                    onChange={handleChange}
+                  />
+                </div>
+
                 {/* Name & Email Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <motion.div variants={itemVariants} className="space-y-2">
-                    <label className="block text-white font-medium text-sm">
+                    <label htmlFor="consult-fullName" className="block text-white font-medium text-sm">
                       Full Name *
                     </label>
                     <input
+                      id="consult-fullName"
                       type="text"
                       name="fullName"
                       value={formData.fullName}
                       onChange={handleChange}
                       placeholder="Your name"
+                      required
+                      aria-required="true"
+                      aria-invalid={Boolean(errors.fullName)}
+                      aria-describedby={errors.fullName ? "consult-error-fullName" : undefined}
                       className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/5 text-white placeholder:text-white/40 focus:border-[#C9A227]/60 focus:outline-none transition-all duration-300"
                     />
                     {errors.fullName && (
-                      <p className="text-red-400 text-xs flex items-center gap-1">
-                        <AlertCircle className="w-3 h-3" /> {errors.fullName}
+                      <p id="consult-error-fullName" role="alert" className="text-red-400 text-xs flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" aria-hidden="true" /> {errors.fullName}
                       </p>
                     )}
                   </motion.div>
 
                   <motion.div variants={itemVariants} className="space-y-2">
-                    <label className="block text-white font-medium text-sm">
+                    <label htmlFor="consult-email" className="block text-white font-medium text-sm">
                       Email *
                     </label>
                     <input
+                      id="consult-email"
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="your@email.com"
+                      required
+                      aria-required="true"
+                      aria-invalid={Boolean(errors.email)}
+                      aria-describedby={errors.email ? "consult-error-email" : undefined}
                       className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/5 text-white placeholder:text-white/40 focus:border-[#C9A227]/60 focus:outline-none transition-all duration-300"
                     />
                     {errors.email && (
-                      <p className="text-red-400 text-xs flex items-center gap-1">
-                        <AlertCircle className="w-3 h-3" /> {errors.email}
+                      <p id="consult-error-email" role="alert" className="text-red-400 text-xs flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" aria-hidden="true" /> {errors.email}
                       </p>
                     )}
                   </motion.div>
@@ -264,29 +338,35 @@ export function ConsultationForm({
                 {/* Phone & Concern Row */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <motion.div variants={itemVariants} className="space-y-2">
-                    <label className="block text-white font-medium text-sm">
+                    <label htmlFor="consult-phone" className="block text-white font-medium text-sm">
                       Phone *
                     </label>
                     <input
+                      id="consult-phone"
                       type="tel"
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="(858) 000-0000"
+                      required
+                      aria-required="true"
+                      aria-invalid={Boolean(errors.phone)}
+                      aria-describedby={errors.phone ? "consult-error-phone" : undefined}
                       className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/5 text-white placeholder:text-white/40 focus:border-[#C9A227]/60 focus:outline-none transition-all duration-300"
                     />
                     {errors.phone && (
-                      <p className="text-red-400 text-xs flex items-center gap-1">
-                        <AlertCircle className="w-3 h-3" /> {errors.phone}
+                      <p id="consult-error-phone" role="alert" className="text-red-400 text-xs flex items-center gap-1">
+                        <AlertCircle className="w-3 h-3" aria-hidden="true" /> {errors.phone}
                       </p>
                     )}
                   </motion.div>
 
                   <motion.div variants={itemVariants} className="space-y-2">
-                    <label className="block text-white font-medium text-sm">
+                    <label htmlFor="consult-concern" className="block text-white font-medium text-sm">
                       What brings you in?
                     </label>
                     <select
+                      id="consult-concern"
                       name="concern"
                       value={formData.concern}
                       onChange={handleChange}
@@ -301,12 +381,13 @@ export function ConsultationForm({
                   </motion.div>
                 </div>
 
-                {/* Tell us more */}
+                {/* Tell me more */}
                 <motion.div variants={itemVariants} className="space-y-2">
-                  <label className="block text-white font-medium text-sm">
-                    Tell us more (optional)
+                  <label htmlFor="consult-message" className="block text-white font-medium text-sm">
+                    Tell me more (optional)
                   </label>
                   <textarea
+                    id="consult-message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
@@ -318,10 +399,11 @@ export function ConsultationForm({
 
                 {/* How did you hear */}
                 <motion.div variants={itemVariants} className="space-y-2">
-                  <label className="block text-white font-medium text-sm">
-                    How did you hear about us?
+                  <label htmlFor="consult-howYouHeard" className="block text-white font-medium text-sm">
+                    How did you hear about me?
                   </label>
                   <select
+                    id="consult-howYouHeard"
                     name="howYouHeard"
                     value={formData.howYouHeard}
                     onChange={handleChange}
@@ -340,22 +422,27 @@ export function ConsultationForm({
                   variants={itemVariants}
                   className="space-y-3 p-6 rounded-xl bg-white/[0.02] border border-white/5"
                 >
-                  <label className="flex items-start gap-3 cursor-pointer">
+                  <label htmlFor="consult-consent" className="flex items-start gap-3 cursor-pointer">
                     <input
+                      id="consult-consent"
                       type="checkbox"
                       name="consent"
                       checked={formData.consent}
                       onChange={handleChange}
+                      required
+                      aria-required="true"
+                      aria-invalid={Boolean(errors.consent)}
+                      aria-describedby={errors.consent ? "consult-error-consent" : undefined}
                       className="mt-1 w-5 h-5 rounded border border-[#C9A227]/40 bg-white/[0.03] accent-[#C9A227] cursor-pointer"
                     />
-                    <span className="text-sm text-white/80 leading-relaxed">
+                    <span className="text-sm text-white/85 leading-relaxed">
                       I understand the $100 consultation fee is credited toward my
                       first treatment.
                     </span>
                   </label>
                   {errors.consent && (
-                    <p className="text-red-400 text-xs flex items-center gap-1 ml-8">
-                      <AlertCircle className="w-3 h-3" /> {errors.consent}
+                    <p id="consult-error-consent" role="alert" className="text-red-400 text-xs flex items-center gap-1 ml-8">
+                      <AlertCircle className="w-3 h-3" aria-hidden="true" /> {errors.consent}
                     </p>
                   )}
                 </motion.div>
@@ -363,7 +450,7 @@ export function ConsultationForm({
                 {/* Error Message */}
                 {submitError && (
                   <motion.div
-                    initial={{ opacity: 0, y: -10 }}
+                    initial={{ y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="p-4 bg-red-500/20 border border-red-500/50 rounded-xl text-red-300 text-sm"
                   >

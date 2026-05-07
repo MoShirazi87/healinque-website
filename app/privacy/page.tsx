@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { PageHero as Hero } from "@/components/sections/hero";
-import { siteConfig } from "@/lib/config/site";
+import { siteConfig, getPhoneLink } from "@/lib/config/site";
 import { pexelsUrl, pageImages } from "@/lib/data/images";
 
 export const metadata: Metadata = {
@@ -216,7 +216,7 @@ export default function PrivacyPage() {
                     {siteConfig.name}<br />
                     {siteConfig.address.full}<br />
                     Email: <a href="mailto:privacy@healinque.com" className="text-gold hover:text-gold/80 transition-colors">privacy@healinque.com</a><br />
-                    Phone: <a href="tel:+18583377999" className="text-gold hover:text-gold/80 transition-colors">{siteConfig.phone}</a>
+                    Phone: <a href={getPhoneLink()} className="text-gold hover:text-gold/80 transition-colors">{siteConfig.phone}</a>
                   </p>
                 </div>
                 <p className="mt-4 text-white/60 text-sm">

@@ -2,300 +2,302 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { treatmentCategories } from "@/lib/data/treatments";
 import { pexelsUrl, pageImages, pickImage } from "@/lib/data/images";
 
-interface TreatmentCategory {
+interface Service {
   id: string;
-  number: string;
   name: string;
-  tagline: string;
   description: string;
-  treatments: string[];
   image: string;
   link: string;
 }
 
-const categories: TreatmentCategory[] = [
+// Session 22: Restructured from 5 cards → 6 cards per client directive.
+// Order: the 4 regenerative protocols first (client's primary focus), then Botox + Fillers as the
+// foundational injectables. Copy is deliberately short — declutter directive from client.
+const services: Service[] = [
   {
-    id: "aesthetics",
-    number: "01",
-    name: treatmentCategories.aesthetics.name,
-    tagline: "Conservative, Layered",
+    id: "microneedling",
+    name: "Microneedling + Exosomes",
     description:
-      "Injectables, threads, and refining treatments performed by me for results that look like you, only refreshed. I typically recommend layering smaller amounts over time.",
-    treatments: [
-      "Botox & Dysport",
-      "Dermal Fillers",
-      "Kybella",
-      "PDO Thread Lift",
-    ],
-    image: pexelsUrl(pickImage(pageImages.servicesAesthetics.primary, pageImages.servicesAesthetics.alts), 800),
-    link: "/treatments?category=aesthetics",
+      "Collagen induction paired with exosome support to improve texture, acne scarring, and skin renewal.",
+    image: pexelsUrl(
+      pickImage(
+        pageImages.servicesMensHealth.primary,
+        pageImages.servicesMensHealth.alts
+      ),
+      800
+    ),
+    link: "/treatments/microneedling",
   },
   {
-    id: "skin",
-    number: "02",
-    name: treatmentCategories["skin-rejuvenation"].name,
-    tagline: "Cellular Renewal",
+    id: "peels",
+    name: "Chemical Peels",
     description:
-      "Peels, microneedling, and laser work that may improve skin texture, tone, and clarity by stimulating your skin's natural healing response.",
-    treatments: [
-      "Chemical Peels",
-      "Microneedling",
-      "PRP Facial",
-      "Laser Resurfacing",
-    ],
-    image: pexelsUrl(pickImage(pageImages.servicesSkinRejuv.primary, pageImages.servicesSkinRejuv.alts), 800),
-    link: "/treatments?category=skin-rejuvenation",
+      "Targeted resurfacing for clarity, even tone, and healthy skin turnover.",
+    image: pexelsUrl(
+      pickImage(
+        pageImages.servicesRegenerative.primary,
+        pageImages.servicesRegenerative.alts
+      ),
+      800
+    ),
+    link: "/treatments/chemical-peels",
   },
   {
-    id: "regenerative",
-    number: "03",
-    name: treatmentCategories.regenerative.name,
-    tagline: "Growth Factor Therapy",
+    id: "hair-restoration",
+    name: "Hair Restoration",
     description:
-      "PRP and PRF harness your own growth factors to support tissue repair and collagen remodeling. Results typically develop over weeks to months.",
-    treatments: ["PRP Therapy", "Regenerative Consultation", "PRF Therapy"],
-    image: pexelsUrl(pickImage(pageImages.servicesRegenerative.primary, pageImages.servicesRegenerative.alts), 800),
-    link: "/treatments?category=regenerative",
+      "Scalp-focused regenerative protocols for stronger, more resilient hair growth.",
+    image: pexelsUrl(
+      pickImage(
+        pageImages.servicesWellness.primary,
+        pageImages.servicesWellness.alts
+      ),
+      800
+    ),
+    link: "/treatments/scalp-microneedling",
   },
   {
-    id: "mens",
-    number: "04",
-    name: treatmentCategories["mens-health"].name,
-    tagline: "Men's-Focused Care",
+    id: "custom-regenerative-plans",
+    name: "Custom Regenerative Plans",
     description:
-      "Discreet treatments for men — from aesthetic refinement to performance optimization, delivered in a focused environment one day a week.",
-    treatments: [
-      "P-Shot",
-      "Testosterone Optimization",
-      "Hair Restoration",
-    ],
-    image: pexelsUrl(pickImage(pageImages.servicesMensHealth.primary, pageImages.servicesMensHealth.alts), 800),
-    link: "/treatments?category=mens-health",
+      "Strategically layered skin and scalp regeneration, paced to your goals over time.",
+    image: pexelsUrl(
+      pickImage(
+        pageImages.servicesSkinRejuv.primary,
+        pageImages.servicesSkinRejuv.alts
+      ),
+      800
+    ),
+    link: "/treatments/custom-regenerative-plans",
   },
   {
-    id: "wellness",
-    number: "05",
-    name: treatmentCategories.wellness.name,
-    tagline: "Longevity & Vitality",
+    id: "botox",
+    name: "Botox & Neuromodulators",
     description:
-      "IV therapy, peptides, and metabolic optimization designed to support your long-term health and how you feel, not just how you look.",
-    treatments: [
-      "IV Therapy",
-      "Peptide Therapy",
-      "Hormone Optimization (Coming Soon)",
-      "GLP-1 Weight Loss (Coming Soon)",
-    ],
-    image: pexelsUrl(pickImage(pageImages.servicesWellness.primary, pageImages.servicesWellness.alts), 800),
-    link: "/treatments?category=wellness",
+      "Conservative, precise dosing for natural movement — not frozen, not overdone.",
+    image: pexelsUrl(
+      pickImage(
+        pageImages.servicesAesthetics.primary,
+        pageImages.servicesAesthetics.alts
+      ),
+      800
+    ),
+    link: "/treatments/botox-dysport",
+  },
+  {
+    id: "fillers",
+    name: "Dermal Fillers",
+    description:
+      "Subtle structural volume — lips, cheeks, jawline, and under-eyes — placed with restraint.",
+    image: pexelsUrl(
+      pickImage(
+        pageImages.servicesSkinRejuv.primary,
+        pageImages.servicesSkinRejuv.alts
+      ),
+      800
+    ),
+    link: "/treatments/dermal-fillers",
   },
 ];
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.12 },
+  },
+};
+
+const cardVariants = {
+  hidden: { y: 20 },
+  visible: {
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
 export function ServicesGrid() {
-  const [activeCategory, setActiveCategory] = useState<string>(categories[0].id);
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
-  const activeData = categories.find((cat) => cat.id === activeCategory);
-
-  const tabVariants = {
-    inactive: {
-      opacity: 0.4,
-      transition: { duration: 0.3 },
-    },
-    active: {
-      opacity: 1,
-      transition: { duration: 0.3 },
-    },
-  };
-
-  const contentVariants = {
-    enter: {
-      opacity: 0,
-      transition: { duration: 0.2 },
-    },
-    center: {
-      opacity: 1,
-      transition: { duration: 0.4, delay: 0.1 },
-    },
-    exit: {
-      opacity: 0,
-      transition: { duration: 0.2 },
-    },
-  };
-
-  const imageVariants = {
-    enter: {
-      opacity: 0,
-      scale: 0.98,
-    },
-    center: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.5, delay: 0.15 },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.98,
-    },
+  const handleExpansionSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: wire to email service
+    setSubmitted(true);
   };
 
   return (
-    <section className="relative py-20 md:py-32 bg-navy-deep overflow-hidden orb-bg has-particles" data-wipe>
+    <section className="relative py-20 md:py-32 bg-navy-deep overflow-hidden">
       <div className="container-healinque relative z-10">
-        {/* Section Header — V2 style */}
+        {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 15 }}
+          whileInView={{ y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="mb-14 md:mb-20"
+          className="mb-6 md:mb-8"
         >
+          {/* Session 22: Client-provided copy replaces prior "Our Core Treatments" framing. */}
           <p className="text-xs font-sans uppercase tracking-[0.25em] text-gold/80 mb-3">
-            What We Offer
+            What I Offer
           </p>
           <h2
             className="font-serif font-bold text-white leading-tight mb-4"
             style={{ fontSize: "clamp(1.75rem, 3.5vw, 3rem)" }}
           >
-            Treatments, paced and combined the way I&apos;d <span className="text-gold italic">recommend</span>
+            Personalized treatment plans, designed with{" "}
+            <span className="text-gold italic">
+              intention and balance.
+            </span>
           </h2>
-          <p className="text-base text-white/50 leading-relaxed max-w-xl">
-            Every plan is layered, personal, and built for your goals.
+          <p className="text-base md:text-lg text-white/75 leading-relaxed max-w-2xl">
+            Each protocol is carefully layered and timed to align with your
+            goals and your skin&apos;s needs.
           </p>
         </motion.div>
 
-        {/* Treatment Showcase Accordion */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
+        {/* Provider Model Note — Session 23: bumped to readable body copy (base/75 was sm/50). */}
+        <motion.p
+          initial={{ y: 10 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 lg:grid-cols-[40%_60%] gap-8 lg:gap-12 items-start"
+          className="text-base text-white/75 italic mb-14 md:mb-20 max-w-2xl leading-relaxed"
         >
-          {/* Left Side - Tab List */}
-          <div className="flex lg:flex-col gap-4 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0">
-            {categories.map((category) => (
-              <motion.button
-                key={category.id}
-                onClick={() => setActiveCategory(category.id)}
-                variants={tabVariants}
-                animate={
-                  activeCategory === category.id ? "active" : "inactive"
-                }
-                data-interactive=""
-                data-magnetic=""
-                className={`relative flex-shrink-0 lg:flex-shrink text-left p-4 lg:p-6 rounded-lg lg:rounded-xl transition-all duration-500 group ${
-                  activeCategory === category.id
-                    ? "bg-white/5 border-l-2 border-[#C9A227]"
-                    : "border-l-2 border-white/10 hover:bg-white/[0.02]"
-                }`}
-              >
-                <div className="flex lg:flex-col gap-2 lg:gap-1">
-                  <div className="text-[#C9A227] font-serif text-xl lg:text-2xl font-bold min-w-fit lg:min-w-0">
-                    {category.number}
-                  </div>
-                  <div>
-                    <h3 className="text-white font-serif text-lg lg:text-xl font-bold leading-tight">
-                      {category.name}
-                    </h3>
-                    <p className="text-white/40 text-xs lg:text-sm italic mt-1 lg:mt-2">
-                      {category.tagline}
-                    </p>
-                  </div>
-                </div>
-              </motion.button>
-            ))}
-          </div>
+          Every treatment is performed by me, or by a nurse practitioner or
+          physician assistant I&apos;ve personally trained.
+        </motion.p>
 
-          {/* Right Side - Content Area */}
-          <AnimatePresence mode="wait">
-            {activeData && (
-              <motion.div
-                key={activeData.id}
-                variants={contentVariants}
-                initial="enter"
-                animate="center"
-                exit="exit"
-                className="space-y-6"
+        {/* Services Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+        >
+          {services.map((service) => (
+            <motion.div key={service.id} variants={cardVariants}>
+              <Link
+                href={service.link}
+                className="group block h-full rounded-2xl overflow-hidden bg-white/[0.03] border border-white/[0.06] backdrop-blur-sm transition-colors duration-500 hover:border-[#C9A227]/30 hover:bg-white/[0.05]"
               >
-                {/* Image */}
-                <motion.div
-                  variants={imageVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl card-interactive"
-                  data-parallax=""
-                >
+                {/* Card Image */}
+                <div className="relative w-full aspect-[16/10] overflow-hidden">
                   <Image
-                    src={activeData.image}
-                    alt={activeData.name}
+                    src={service.image}
+                    alt={service.name}
                     fill
-                    className="object-cover"
-                    priority
-                    data-parallax-img=""
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
-                </motion.div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628]/80 via-[#0a1628]/20 to-transparent" />
+                </div>
 
-                {/* Tagline */}
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-[#C9A227] italic font-serif text-lg"
-                >
-                  {activeData.tagline}
-                </motion.p>
-
-                {/* Description */}
-                <motion.p
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.25 }}
-                  className="text-white/70 leading-relaxed text-base lg:text-lg"
-                >
-                  {activeData.description}
-                </motion.p>
-
-                {/* Treatments List */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  className="flex flex-wrap gap-3"
-                >
-                  {activeData.treatments.map((treatment) => (
-                    <span
-                      key={treatment}
-                      className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/80 text-sm font-medium"
-                    >
-                      {treatment}
+                {/* Card Content */}
+                <div className="p-6 lg:p-7">
+                  <h3 className="font-serif text-lg lg:text-xl font-bold text-white mb-3 group-hover:text-[#C9A227] transition-colors duration-300">
+                    {service.name}
+                  </h3>
+                  <p className="text-white/75 text-base leading-relaxed mb-5">
+                    {service.description}
+                  </p>
+                  {/* Session 22 CTA: stronger outcome verb than "Learn More". */}
+                  <span className="inline-flex items-center gap-2 text-[#C9A227] text-sm font-medium group-hover:gap-3 transition-all duration-300">
+                    See the Protocol
+                    <span className="transition-transform duration-300 group-hover:translate-x-1">
+                      &rarr;
                     </span>
-                  ))}
-                </motion.div>
+                  </span>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
 
-                {/* Explore Link */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.35 }}
+        {/* Session 22: CTA pair below the grid — primary Book, secondary See all. */}
+        <motion.div
+          initial={{ y: 15 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          viewport={{ once: true }}
+          className="mt-12 md:mt-16 flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+          <Link
+            href="/book"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-[#0a1628] font-semibold text-base bg-[#C9A227] hover:bg-[#D4AF37] transition-colors duration-300"
+          >
+            Book a Consultation
+            <span aria-hidden>→</span>
+          </Link>
+          <Link
+            href="/treatments"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-white font-medium text-base border border-white/20 hover:border-[#C9A227]/50 hover:text-[#C9A227] transition-all duration-300"
+          >
+            See All Treatments
+          </Link>
+        </motion.div>
+
+        {/* Expanding Soon */}
+        <motion.div
+          initial={{ y: 20 }}
+          whileInView={{ y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="mt-20 md:mt-28 pt-12 border-t border-white/[0.06]"
+        >
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="text-xs font-sans uppercase tracking-[0.25em] text-gold/60 mb-3">
+              On the Horizon
+            </p>
+            <h3
+              className="font-serif font-bold text-white mb-4"
+              style={{ fontSize: "clamp(1.25rem, 2.5vw, 1.75rem)" }}
+            >
+              Additional services are{" "}
+              <span className="text-gold italic">expanding soon</span>
+            </h3>
+            <p className="text-white/75 text-base md:text-lg leading-relaxed mb-8 max-w-lg mx-auto">
+              Medical weight loss, regenerative medicine, and longevity protocols
+              are in development. I&apos;m building these programs the right
+              way — with proper credentialing, safety infrastructure, and the
+              same standard of care you expect from me.
+            </p>
+
+            {/* Email Capture */}
+            {submitted ? (
+              <motion.p
+                initial={{ scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="text-[#C9A227] font-medium text-sm"
+              >
+                You&apos;re on the list. I&apos;ll be in touch.
+              </motion.p>
+            ) : (
+              <form
+                onSubmit={handleExpansionSubmit}
+                className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+              >
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Your email address"
+                  className="flex-1 px-4 py-3 rounded-lg bg-white/[0.05] border border-white/[0.1] text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#C9A227]/50 focus:ring-1 focus:ring-[#C9A227]/30 transition-all duration-300"
+                />
+                <button
+                  type="submit"
+                  className="px-6 py-3 rounded-lg bg-[#C9A227] text-[#0a1628] text-sm font-semibold hover:bg-[#D4AF37] transition-colors duration-300 whitespace-nowrap"
                 >
-                  <Link
-                    href={activeData.link}
-                    className="inline-flex items-center gap-2 text-[#C9A227] hover:text-[#D4AF37] transition-all duration-300 font-medium group/link"
-                  >
-                    <span>Explore {activeData.name}</span>
-                    <span className="group-hover/link:translate-x-1 transition-transform duration-300">
-                      →
-                    </span>
-                  </Link>
-                </motion.div>
-              </motion.div>
+                  Notify Me
+                </button>
+              </form>
             )}
-          </AnimatePresence>
+          </div>
         </motion.div>
       </div>
     </section>

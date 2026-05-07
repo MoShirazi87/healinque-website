@@ -20,7 +20,7 @@ import { siteConfig } from "@/lib/config/site";
  */
 export function LocationCTA() {
   return (
-    <section className="relative overflow-hidden has-particles" data-wipe>
+    <section className="relative overflow-hidden">
       {/* Split background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-navy-deep" />
@@ -31,35 +31,35 @@ export function LocationCTA() {
         <div className="grid gap-8 lg:grid-cols-2 lg:gap-20 items-center">
           {/* Left: Location Info */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ x: -20 }}
+            whileInView={{ x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
             <p className="text-xs font-sans uppercase tracking-[0.25em] text-gold/80 mb-3">
-              Visit Us
+              Visit
             </p>
             <h2
               className="font-serif font-bold text-white leading-tight mb-8"
               style={{ fontSize: "clamp(1.75rem, 3.5vw, 2.75rem)" }}
             >
-              Visit Us in
+              Come See Me in
               <br />
-              <span className="text-gold italic heading-shimmer">Poway</span>
+              <span className="text-gold italic">Poway</span>
             </h2>
 
             <div className="space-y-5">
               {/* Address */}
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0 icon-pulse" data-magnetic="">
+                <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0">
                   <MapPin className="h-5 w-5 text-gold" />
                 </div>
                 <div>
                   <p className="font-medium text-white">{siteConfig.address.street}</p>
-                  <p className="text-white/60 text-sm">
+                  <p className="text-white/75 text-base">
                     {siteConfig.address.city}, {siteConfig.address.state} {siteConfig.address.zip}
                   </p>
-                  <p className="text-white/50 text-xs mt-1">
+                  <p className="text-white/65 text-sm mt-1">
                     Serving Rancho Bernardo, Scripps Ranch, Escondido, San Marcos, and Del Mar.
                   </p>
                 </div>
@@ -67,7 +67,7 @@ export function LocationCTA() {
 
               {/* Phone */}
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0 icon-pulse" data-magnetic="">
+                <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0">
                   <Phone className="h-5 w-5 text-gold" />
                 </div>
                 <div>
@@ -77,13 +77,13 @@ export function LocationCTA() {
                   >
                     {siteConfig.phone}
                   </a>
-                  <p className="text-white/60 text-sm">Call or text</p>
+                  <p className="text-white/70 text-sm">Call or text</p>
                 </div>
               </div>
 
               {/* Email */}
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0 icon-pulse" data-magnetic="">
+                <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0">
                   <Mail className="h-5 w-5 text-gold" />
                 </div>
                 <div>
@@ -98,7 +98,7 @@ export function LocationCTA() {
 
               {/* Hours */}
               <div className="flex items-start gap-4">
-                <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0 icon-pulse" data-magnetic="">
+                <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center flex-shrink-0">
                   <Clock className="h-5 w-5 text-gold" />
                 </div>
                 <div className="text-sm">
@@ -116,8 +116,8 @@ export function LocationCTA() {
 
           {/* Right: CTA Block */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ x: 20 }}
+            whileInView={{ x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative"
@@ -134,7 +134,7 @@ export function LocationCTA() {
                 <span className="text-gold italic">What&apos;s Right for You?</span>
               </h3>
 
-              <p className="text-white/60 leading-relaxed mb-8">
+              <p className="text-base text-white/80 leading-relaxed mb-8">
                 Book a $100 consultation with Dr. Shirazi — 45–60 minutes to assess your concerns, discuss your goals, and create a personalized treatment plan. Credited toward your first treatment.
               </p>
 
@@ -146,20 +146,20 @@ export function LocationCTA() {
                   </button>
                 </Link>
 
-                <div className="text-center text-xs text-white/40">
+                <div className="text-center text-xs text-white/65">
                   $100 consultation, credited toward your first treatment
                 </div>
 
                 <div className="flex items-center justify-center gap-6 pt-2">
                   <a
                     href={`tel:${siteConfig.phone}`}
-                    className="text-sm text-white/50 hover:text-gold transition-colors underline underline-offset-4 decoration-white/20"
+                    className="text-sm text-white/75 hover:text-gold transition-colors underline underline-offset-4 decoration-white/25"
                   >
                     Prefer to call?
                   </a>
                   <Link
                     href="/contact"
-                    className="text-sm text-white/50 hover:text-gold transition-colors underline underline-offset-4 decoration-white/20"
+                    className="text-sm text-white/75 hover:text-gold transition-colors underline underline-offset-4 decoration-white/25"
                   >
                     Send a message
                   </Link>

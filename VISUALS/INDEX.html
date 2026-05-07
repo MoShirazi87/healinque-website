@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Healinque — Visual Inventory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --ink: #0a1628;
+    --cream: #FAF8F5;
+    --gold: #C9A227;
+    --taupe: #8b7355;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--cream); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+  header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 48px 32px 32px;
+    border-bottom: 3px solid var(--gold);
+  }
+  header h1 { margin: 0 0 8px; font-size: 32px; font-weight: 600; letter-spacing: -0.02em; }
+  header h1 span { color: var(--gold); font-style: italic; }
+  header p { margin: 0; opacity: 0.8; max-width: 720px; line-height: 1.55; font-size: 15px; }
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(10, 22, 40, 0.97);
+    backdrop-filter: blur(8px);
+    padding: 12px 32px;
+    border-bottom: 1px solid rgba(201, 162, 39, 0.25);
+    font-size: 13px;
+  }
+  nav a {
+    color: #E8DCC4;
+    text-decoration: none;
+    margin-right: 16px;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 120ms;
+  }
+  nav a:hover { border-bottom-color: var(--gold); }
+  main { padding: 40px 32px 80px; max-width: 1600px; margin: 0 auto; }
+  section { margin-bottom: 64px; }
+  section h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 4px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  section h2 .count {
+    font-size: 13px;
+    color: var(--taupe);
+    font-weight: 400;
+  }
+  section .note {
+    margin: 0 0 20px;
+    max-width: 780px;
+    color: #4a5568;
+    line-height: 1.55;
+    font-size: 14px;
+  }
+  section .note strong { color: var(--ink); }
+  .gold-line {
+    height: 2px;
+    width: 48px;
+    background: var(--gold);
+    margin-bottom: 16px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.04);
+  }
+  .card .img-wrap {
+    aspect-ratio: 4 / 5;
+    background: #eee;
+    overflow: hidden;
+  }
+  .card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .card .meta {
+    padding: 10px 12px 12px;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+  .card .filename {
+    font-family: 'SF Mono', Monaco, Consolas, monospace;
+    font-size: 11px;
+    color: var(--taupe);
+    word-break: break-all;
+    margin-bottom: 4px;
+  }
+  .card .where {
+    color: #4a5568;
+  }
+  .card .where strong { color: var(--ink); font-weight: 600; }
+  footer { padding: 32px; text-align: center; color: var(--taupe); font-size: 13px; }
+  a.download {
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 11px;
+    font-family: 'SF Mono', Monaco, Consolas, monospace;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Healinque — <span>Visual Inventory</span></h1>
+  <p>Every image currently used on the Healinque website, organized by category. 82 images total: 8 brand assets + 74 stock/editorial images. Click any thumbnail to open at full size. Replace, delete, or flag anything that doesn't belong and we'll sync changes back into <code>lib/data/images.ts</code>, <code>treatments.ts</code>, and <code>concerns.ts</code>.</p>
+</header>
+
+<nav>
+  <a href="#brand">00 Brand</a>
+  <a href="#women">01 Women</a>
+  <a href="#men">02 Men</a>
+  <a href="#smiling">03 Smiling</a>
+  <a href="#happy">04 Happy</a>
+  <a href="#practitioner">05 Practitioner</a>
+  <a href="#skincare">06 Skincare</a>
+  <a href="#medspa">07 Medspa</a>
+  <a href="#wellness">08 Wellness</a>
+  <a href="#consultation">09 Consultation</a>
+  <a href="#products">10 Products</a>
+  <a href="#locations">11 Locations</a>
+  <a href="#concerns">12 Concerns</a>
+  <a href="#extras">99 Extras</a>
+</nav>
+
+<main>
+
+  <section id="brand">
+    <h2>00 · Brand <span class="count">8 files</span></h2>
+    <div class="gold-line"></div>
+    <p class="note">Logos, favicons, OG share image, Dr. Azi portrait, clinic exterior. These live in <strong>public/images/</strong>.</p>
+    <div class="grid">
+      <div class="card"><a href="00-brand/logo-header-clean.png"><div class="img-wrap"><img src="00-brand/logo-header-clean.png"></div></a><div class="meta"><div class="filename">logo-header-clean.png</div><div class="where"><strong>Header logo</strong> — sitewide nav</div></div></div>
+      <div class="card"><a href="00-brand/logo-medium.png"><div class="img-wrap"><img src="00-brand/logo-medium.png"></div></a><div class="meta"><div class="filename">logo-medium.png</div><div class="where"><strong>Schema logo</strong> — SEO / structured data</div></div></div>
+      <div class="card"><a href="00-brand/favicon-32.png"><div class="img-wrap"><img src="00-brand/favicon-32.png"></div></a><div class="meta"><div class="filename">favicon-32.png</div><div class="where">Browser tab icon</div></div></div>
+      <div class="card"><a href="00-brand/favicon-512.png"><div class="img-wrap"><img src="00-brand/favicon-512.png"></div></a><div class="meta"><div class="filename">favicon-512.png</div><div class="where">PWA manifest icon</div></div></div>
+      <div class="card"><a href="00-brand/apple-touch-icon.png"><div class="img-wrap"><img src="00-brand/apple-touch-icon.png"></div></a><div class="meta"><div class="filename">apple-touch-icon.png</div><div class="where">iOS home-screen icon</div></div></div>
+      <div class="card"><a href="00-brand/og-image-social-share.jpg"><div class="img-wrap"><img src="00-brand/og-image-social-share.jpg"></div></a><div class="meta"><div class="filename">og-image-social-share.jpg</div><div class="where"><strong>Social-share card</strong> — every page's OG image</div></div></div>
+      <div class="card"><a href="00-brand/dr-azi-shirazi.jpg"><div class="img-wrap"><img src="00-brand/dr-azi-shirazi.jpg"></div></a><div class="meta"><div class="filename">dr-azi-shirazi.jpg</div><div class="where"><strong>Dr. Azi portrait</strong> — DoctorIntro + /about/dr-azi-shirazi</div></div></div>
+      <div class="card"><a href="00-brand/clinic-exterior.jpg"><div class="img-wrap"><img src="00-brand/clinic-exterior.jpg"></div></a><div class="meta"><div class="filename">clinic-exterior.jpg</div><div class="where">Clinic exterior — legacy / schema</div></div></div>
+    </div>
+  </section>
+
+  <section id="women">
+    <h2>01 · Women — Warm Beauty Editorial <span class="count">13 files</span></h2>
+    <div class="gold-line"></div>
+    <p class="note">Female-facing editorial portraits from the "Keep pile." <strong>Used on:</strong> About intro, Hero Slide 1 alts, Reviews hero, Gallery hero, FAQ hero, CTA banner, Memberships + Packages heroes, aboutApproach/reflective slots, concerns/fine-lines + hyperpigmentation alts.</p>
+    <div class="grid">
+      <div class="card"><a href="01-women-portraits/3985329_warm-beauty-editorial.jpg" target="_blank"><div class="img-wrap"><img src="01-women-portraits/3985329_warm-beauty-editorial.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">3985329 · 3985329_warm-beauty-editorial.jpg</div><div class="where">Homepage Slide 1 alt · Reviews hero · Gallery hero alt · FAQ hero · CTA banner · concerns/fine-lines alt · concerns/hyperpigmentation alt</div></div></div>
+      <div class="card"><a href="01-women-portraits/3985338_warm-beauty-close.jpg" target="_blank"><div class="img-wrap"><img src="01-women-portraits/3985338_warm-beauty-close.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">3985338 · 3985338_warm-beauty-close.jpg</div><div class="where">Homepage Slide 2 alt · Gallery hero primary · FAQ hero alt · concerns/hyperpigmentation-melasma</div></div></div>
+      <div class="card"><a href="01-women-portraits/3985311_warm-beauty-portrait.jpg" target="_blank"><div class="img-wrap"><img src="01-women-portraits/3985311_warm-beauty-portrait.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">3985311 · 3985311_warm-beauty-portrait.jpg</div><div class="where">About intro primary · Services/Aesthetics alt · concerns/dark-circles alt · concerns/fine-lines alt</div></div></div>
+      <div class="card"><a href="01-women-portraits/3985330_mature-beauty.jpg" target="_blank"><div class="img-wrap"><img src="01-women-portraits/3985330_mature-beauty.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">3985330 · 3985330_mature-beauty.jpg</div><div class="where">About intro alt · concerns/fine-lines-wrinkles PRIMARY</div></div></div>
+      <div class="card"><a href="01-women-portraits/3985333_beauty-close.jpg" target="_blank"><div class="img-wrap"><img src="01-women-portraits/3985333_beauty-close.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">3985333 · 3985333_beauty-close.jpg</div><div class="where">About intro alt · Wellness concerns (hormone-imbalance) alt · concerns/hair-thinning PRIMARY</div></div></div>
+      <div class="card"><a href="01-women-portraits/3762879_editorial-face-1.jpg" target="_blank"><div class="img-wrap"><img src="01-women-portraits/3762879_editorial-face-1.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">3762879 · 3762879_editorial-face-1.jpg</div><div class="where">Homepage Slide 1 alt · Blog hero · Concerns hero · About approach primary · Locations hero alt</div></div></div>
+      <div class="card"><a href="01-women-portraits/3762875_editorial-face-2.jpg" target="_blank"><div class="img-wrap"><img src="01-women-portraits/3762875_editorial-face-2.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">3762875 · 3762875_editorial-face-2.jpg</div><div class="where">About intro alt · About approach alt · FAQ hero alt · Blog hero alt</div></div></div>
+      <div class="card"><a href="01-women-portraits/3762870_reflective-portrait.jpg" target="_blank"><div class="img-wrap"><img src="01-women-portraits/3762870_reflective-portrait.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">3762870 · 3762870_reflective-portrait.jpg</div><div class="where">About approach alt · Blog hero alt · Concerns hero alt · Privacy/Terms hero alt · About story alt</div></div></div>
+      <div class="card"><a href="01-women-portraits/4586713_editorial-soft-1.jpg" target="_blank"><div class="img-wrap"><img src="01-women-portraits/4586713_editorial-soft-1.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">4586713 · 4586713_editorial-soft-1.jpg</div><div class="where">About intro alt · About approach alt · Privacy/Terms hero · CTA banner alt · Blog hero alt · concerns/fine-lines alt</div></div></div>
+      <div class="card"><a href="01-women-portraits/4586741_editorial-soft-2.jpg" target="_blank"><div class="img-wrap"><img src="01-women-portraits/4586741_editorial-soft-2.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">4586741 · 4586741_editorial-soft-2.jpg</div><div class="where">About intro alt · FAQ hero alt · Blog hero alt · Privacy/Terms alt · concerns/dark-circles alt</div></div></div>
+      <div class="card"><a href="01-women-portraits/4586727_editorial-soft-3.jpg" target="_blank"><div class="img-wrap"><img src="01-women-portraits/4586727_editorial-soft-3.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">4586727 · 4586727_editorial-soft-3.jpg</div><div class="where">About story alt · About approach alt · Privacy/Terms alt</div></div></div>
+      <div class="card"><a href="01-women-portraits/5069508_warm-beauty-alt.jpg" target="_blank"><div class="img-wrap"><img src="01-women-portraits/5069508_warm-beauty-alt.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">5069508 · 5069508_warm-beauty-alt.jpg</div><div class="where">Homepage Slide 2 alt · Gallery hero alt</div></div></div>
+      <div class="card"><a href="01-women-portraits/36930338_reflective-editorial.jpg" target="_blank"><div class="img-wrap"><img src="01-women-portraits/36930338_reflective-editorial.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">36930338 · 36930338_reflective-editorial.jpg</div><div class="where">About approach alt</div></div></div>
+    </div>
+  </section>
+
+  <section id="men">
+    <h2>02 · Men — Male Editorial <span class="count">5 files</span></h2>
+    <div class="gold-line"></div>
+    <p class="note"><strong>Strictly confined</strong> to Hero Slide 3, Men's Clinic hero, Services/Men's Health, and the Brotox service card. Per Session 20 classification rules, these IDs never appear on female-facing slots.</p>
+    <div class="grid">
+      <div class="card"><a href="02-men-portraits/6763625_male-editorial-1.jpg" target="_blank"><div class="img-wrap"><img src="02-men-portraits/6763625_male-editorial-1.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">6763625 · 6763625_male-editorial-1.jpg</div><div class="where"><strong>Hero Slide 3 PRIMARY</strong> · Men's Clinic hero PRIMARY · Services/Men's Health alt · concerns/hair-thinning alt</div></div></div>
+      <div class="card"><a href="02-men-portraits/8159665_male-editorial-2.jpg" target="_blank"><div class="img-wrap"><img src="02-men-portraits/8159665_male-editorial-2.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">8159665 · 8159665_male-editorial-2.jpg</div><div class="where">Hero Slide 3 alt · Men's Clinic hero alt · Services/Men's Health alt</div></div></div>
+      <div class="card"><a href="02-men-portraits/2379005_male-confident.jpg" target="_blank"><div class="img-wrap"><img src="02-men-portraits/2379005_male-confident.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">2379005 · 2379005_male-confident.jpg</div><div class="where">Hero Slide 3 alt · Men's Clinic alt · Services/Men's Health alt</div></div></div>
+      <div class="card"><a href="02-men-portraits/3785079_male-editorial-3.jpg" target="_blank"><div class="img-wrap"><img src="02-men-portraits/3785079_male-editorial-3.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">3785079 · 3785079_male-editorial-3.jpg</div><div class="where">Hero Slide 3 alt · <strong>Services/Men's Health PRIMARY</strong> · concerns/double-chin PRIMARY</div></div></div>
+      <div class="card"><a href="02-men-portraits/5069432_male-brotox.jpg" target="_blank"><div class="img-wrap"><img src="02-men-portraits/5069432_male-brotox.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">5069432 · 5069432_male-brotox.jpg</div><div class="where">Men's Clinic — <strong>Brotox</strong> service card</div></div></div>
+    </div>
+  </section>
+
+  <section id="smiling">
+    <h2>03 · Smiling — Diverse Portraits <span class="count">9 files</span></h2>
+    <div class="gold-line"></div>
+    <p class="note">Diverse, smiling, warm faces. <strong>Used on:</strong> Hero Slide 1 primary + alts, Testimonials (homepage + /reviews), About intro alts, concerns/hyperpigmentation-melasma. These carry the brand's representation story — review carefully for authenticity and audience fit.</p>
+    <div class="grid">
+      <div class="card"><a href="03-smiling-diverse/29540830_diverse-smiling-1.jpg" target="_blank"><div class="img-wrap"><img src="03-smiling-diverse/29540830_diverse-smiling-1.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">29540830 · 29540830_diverse-smiling-1.jpg</div><div class="where"><strong>Hero Slide 1 PRIMARY</strong> · Reviews hero alt · About intro alt · Testimonial avatar #1</div></div></div>
+      <div class="card"><a href="03-smiling-diverse/5938650_diverse-smiling-2.jpg" target="_blank"><div class="img-wrap"><img src="03-smiling-diverse/5938650_diverse-smiling-2.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">5938650 · 5938650_diverse-smiling-2.jpg</div><div class="where">Hero Slide 1 alt · About intro alt · Reviews hero alt · Testimonial avatar #2</div></div></div>
+      <div class="card"><a href="03-smiling-diverse/12437056_diverse-smiling-3.jpg" target="_blank"><div class="img-wrap"><img src="03-smiling-diverse/12437056_diverse-smiling-3.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">12437056 · 12437056_diverse-smiling-3.jpg</div><div class="where">Hero Slide 1 alt · Testimonial avatar #3</div></div></div>
+      <div class="card"><a href="03-smiling-diverse/30767572_diverse-smiling-4.jpg" target="_blank"><div class="img-wrap"><img src="03-smiling-diverse/30767572_diverse-smiling-4.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">30767572 · 30767572_diverse-smiling-4.jpg</div><div class="where">Hero Slide 1 alt · Testimonial avatar #4</div></div></div>
+      <div class="card"><a href="03-smiling-diverse/4584638_diverse-smiling-5.jpg" target="_blank"><div class="img-wrap"><img src="03-smiling-diverse/4584638_diverse-smiling-5.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">4584638 · 4584638_diverse-smiling-5.jpg</div><div class="where">Hero Slide 1 alt · Testimonial avatar #5</div></div></div>
+      <div class="card"><a href="03-smiling-diverse/19456424_diverse-smiling-6.jpg" target="_blank"><div class="img-wrap"><img src="03-smiling-diverse/19456424_diverse-smiling-6.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">19456424 · 19456424_diverse-smiling-6.jpg</div><div class="where">Hero Slide 1 alt · Testimonial avatar #6</div></div></div>
+      <div class="card"><a href="03-smiling-diverse/6670986_diverse-smiling-7.jpg" target="_blank"><div class="img-wrap"><img src="03-smiling-diverse/6670986_diverse-smiling-7.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">6670986 · 6670986_diverse-smiling-7.jpg</div><div class="where">Hero Slide 1 alt · Reviews hero alt · Testimonial avatar #7</div></div></div>
+      <div class="card"><a href="03-smiling-diverse/9774560_diverse-smiling-testimonial.jpg" target="_blank"><div class="img-wrap"><img src="03-smiling-diverse/9774560_diverse-smiling-testimonial.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">9774560 · 9774560_diverse-smiling-testimonial.jpg</div><div class="where">Testimonial avatar #8</div></div></div>
+      <div class="card"><a href="03-smiling-diverse/6543617_skin-of-color-smile.jpg" target="_blank"><div class="img-wrap"><img src="03-smiling-diverse/6543617_skin-of-color-smile.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">6543617 · 6543617_skin-of-color-smile.jpg</div><div class="where"><strong>concerns/hyperpigmentation-melasma PRIMARY</strong></div></div></div>
+    </div>
+  </section>
+
+  <section id="happy">
+    <h2>04 · Happy — Post-Treatment Clients <span class="count">4 files</span></h2>
+    <div class="gold-line"></div>
+    <p class="note">Post-treatment, relaxed, content. <strong>Used on:</strong> Hero Slide 2 (wellness/longevity), Reviews hero alts, Contact hero alts, hormone-imbalance concern alts.</p>
+    <div class="grid">
+      <div class="card"><a href="04-happy-post-treatment/19666215_happy-client-1.jpg" target="_blank"><div class="img-wrap"><img src="04-happy-post-treatment/19666215_happy-client-1.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">19666215 · 19666215_happy-client-1.jpg</div><div class="where"><strong>Hero Slide 2 PRIMARY</strong> · Reviews hero PRIMARY · Contact hero alt · concerns/hormone-imbalance alt · Memberships/Packages hero alt</div></div></div>
+      <div class="card"><a href="04-happy-post-treatment/19641836_lying-smiling.jpg" target="_blank"><div class="img-wrap"><img src="04-happy-post-treatment/19641836_lying-smiling.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">19641836 · 19641836_lying-smiling.jpg</div><div class="where">Hero Slide 2 alt · Reviews hero alt · Testimonial avatar #9</div></div></div>
+      <div class="card"><a href="04-happy-post-treatment/15023478_happy-client-2.jpg" target="_blank"><div class="img-wrap"><img src="04-happy-post-treatment/15023478_happy-client-2.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">15023478 · 15023478_happy-client-2.jpg</div><div class="where">Hero Slide 2 alt · Reviews hero alt</div></div></div>
+      <div class="card"><a href="04-happy-post-treatment/3768581_relaxed-post-service.jpg" target="_blank"><div class="img-wrap"><img src="04-happy-post-treatment/3768581_relaxed-post-service.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">3768581 · 3768581_relaxed-post-service.jpg</div><div class="where">Hero Slide 2 alt · Reviews hero alt · Services/Wellness alt</div></div></div>
+    </div>
+  </section>
+
+  <section id="practitioner">
+    <h2>05 · Practitioner — Performing a Service <span class="count">6 files</span></h2>
+    <div class="gold-line"></div>
+    <p class="note">Practitioner servicing a client (never self-application). <strong>Used on:</strong> Services / Aesthetics category, Treatments index hero, Botox, Dermal Fillers, Chemical Peels, Microneedling, Scalp Microneedling image + alts.</p>
+    <div class="grid">
+      <div class="card"><a href="05-practitioner-servicing/7582568_injecting-1.jpg" target="_blank"><div class="img-wrap"><img src="05-practitioner-servicing/7582568_injecting-1.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">7582568 · 7582568_injecting-1.jpg</div><div class="where"><strong>Services/Aesthetics PRIMARY</strong> · <strong>Botox image PRIMARY</strong> · Treatments hero alt · concerns/double-chin alt · concerns/hyperpigmentation-melasma alt</div></div></div>
+      <div class="card"><a href="05-practitioner-servicing/7581577_injecting-2.jpg" target="_blank"><div class="img-wrap"><img src="05-practitioner-servicing/7581577_injecting-2.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">7581577 · 7581577_injecting-2.jpg</div><div class="where">Services/Aesthetics alt · <strong>Dermal Fillers PRIMARY</strong> · Botox alt · concerns/volume-loss alt</div></div></div>
+      <div class="card"><a href="05-practitioner-servicing/7581584_injecting-3.jpg" target="_blank"><div class="img-wrap"><img src="05-practitioner-servicing/7581584_injecting-3.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">7581584 · 7581584_injecting-3.jpg</div><div class="where">Services/Aesthetics alt</div></div></div>
+      <div class="card"><a href="05-practitioner-servicing/9157201_treatment-1.jpg" target="_blank"><div class="img-wrap"><img src="05-practitioner-servicing/9157201_treatment-1.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">9157201 · 9157201_treatment-1.jpg</div><div class="where">Services/Aesthetics alt · Dermal Fillers alt · Microneedling alt</div></div></div>
+      <div class="card"><a href="05-practitioner-servicing/5069494_treatment-2.jpg" target="_blank"><div class="img-wrap"><img src="05-practitioner-servicing/5069494_treatment-2.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">5069494 · 5069494_treatment-2.jpg</div><div class="where">Services/Aesthetics alt · <strong>Scalp Microneedling PRIMARY</strong> · Dermal Fillers alt · Microneedling alt · Chemical Peels alt</div></div></div>
+      <div class="card"><a href="05-practitioner-servicing/7446671_microneedling.jpg" target="_blank"><div class="img-wrap"><img src="05-practitioner-servicing/7446671_microneedling.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">7446671 · 7446671_microneedling.jpg</div><div class="where">Services/Aesthetics alt · <strong>Microneedling PRIMARY</strong> · Scalp Microneedling alt · Chemical Peels alt</div></div></div>
+    </div>
+  </section>
+
+  <section id="skincare">
+    <h2>06 · Skincare — Close-Ups <span class="count">9 files</span></h2>
+    <div class="gold-line"></div>
+    <p class="note">Professional skincare application close-ups. <strong>Used on:</strong> Services / Skin Rejuvenation category, Chemical Peels, Microneedling alts, concerns for fine-lines, acne-scarring, sun-damage, skin-texture-tone, FAQ hero alts, concerns/double-chin alt.</p>
+    <div class="grid">
+      <div class="card"><a href="06-skincare-closeups/3985325_skincare-1.jpg" target="_blank"><div class="img-wrap"><img src="06-skincare-closeups/3985325_skincare-1.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">3985325 · 3985325_skincare-1.jpg</div><div class="where"><strong>Services/Skin Rejuvenation PRIMARY</strong> · <strong>Chemical Peels PRIMARY</strong> · concerns/sun-damage PRIMARY · concerns/fine-lines alt</div></div></div>
+      <div class="card"><a href="06-skincare-closeups/3985331_skincare-2.jpg" target="_blank"><div class="img-wrap"><img src="06-skincare-closeups/3985331_skincare-2.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">3985331 · 3985331_skincare-2.jpg</div><div class="where">Services/Skin Rejuvenation alt · Chemical Peels alt · concerns/acne-scarring PRIMARY · concerns/sun-damage alt</div></div></div>
+      <div class="card"><a href="06-skincare-closeups/6948184_skincare-application-1.jpg" target="_blank"><div class="img-wrap"><img src="06-skincare-closeups/6948184_skincare-application-1.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">6948184 · 6948184_skincare-application-1.jpg</div><div class="where">Services/Skin Rejuvenation alt · concerns/acne-scarring alt · concerns/skin-texture-tone alt</div></div></div>
+      <div class="card"><a href="06-skincare-closeups/6543355_skincare-application-2.jpg" target="_blank"><div class="img-wrap"><img src="06-skincare-closeups/6543355_skincare-application-2.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">6543355 · 6543355_skincare-application-2.jpg</div><div class="where">Services/Skin Rejuvenation alt · Chemical Peels alt</div></div></div>
+      <div class="card"><a href="06-skincare-closeups/6543481_skincare-application-3.jpg" target="_blank"><div class="img-wrap"><img src="06-skincare-closeups/6543481_skincare-application-3.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">6543481 · 6543481_skincare-application-3.jpg</div><div class="where">Services/Skin Rejuvenation alt · concerns/acne-scarring alt</div></div></div>
+      <div class="card"><a href="06-skincare-closeups/7321494_skincare-product-1.jpg" target="_blank"><div class="img-wrap"><img src="06-skincare-closeups/7321494_skincare-product-1.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">7321494 · 7321494_skincare-product-1.jpg</div><div class="where">Services/Skin Rejuvenation alt · <strong>concerns/skin-texture-tone PRIMARY</strong> · Microneedling alt</div></div></div>
+      <div class="card"><a href="06-skincare-closeups/7321547_skincare-product-2.jpg" target="_blank"><div class="img-wrap"><img src="06-skincare-closeups/7321547_skincare-product-2.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">7321547 · 7321547_skincare-product-2.jpg</div><div class="where">Services/Skin Rejuvenation alt · concerns/skin-texture-tone alt</div></div></div>
+      <div class="card"><a href="06-skincare-closeups/7321714_skincare-product-3.jpg" target="_blank"><div class="img-wrap"><img src="06-skincare-closeups/7321714_skincare-product-3.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">7321714 · 7321714_skincare-product-3.jpg</div><div class="where">Services/Skin Rejuvenation alt</div></div></div>
+      <div class="card"><a href="06-skincare-closeups/6975466_skincare-jawline-neck.jpg" target="_blank"><div class="img-wrap"><img src="06-skincare-closeups/6975466_skincare-jawline-neck.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">6975466 · 6975466_skincare-jawline-neck.jpg</div><div class="where">FAQ hero alt · concerns/double-chin alt · Services/Men's Health decorative</div></div></div>
+    </div>
+  </section>
+
+  <section id="medspa">
+    <h2>07 · Medspa — Clinic Environment <span class="count">6 files</span></h2>
+    <div class="gold-line"></div>
+    <p class="note">Medspa treatment rooms and in-treatment editorial moments. <strong>Used on:</strong> Services / Regenerative category, Treatments index hero alts.</p>
+    <div class="grid">
+      <div class="card"><a href="07-medspa-clinic/4889036_medspa-room-1.jpg" target="_blank"><div class="img-wrap"><img src="07-medspa-clinic/4889036_medspa-room-1.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">4889036 · 4889036_medspa-room-1.jpg</div><div class="where"><strong>Services/Regenerative PRIMARY</strong> · <strong>Treatments index hero PRIMARY</strong></div></div></div>
+      <div class="card"><a href="07-medspa-clinic/8101520_medspa-room-2.jpg" target="_blank"><div class="img-wrap"><img src="07-medspa-clinic/8101520_medspa-room-2.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">8101520 · 8101520_medspa-room-2.jpg</div><div class="where">Services/Regenerative alt · Treatments hero alt</div></div></div>
+      <div class="card"><a href="07-medspa-clinic/6925527_medspa-in-treatment-1.jpg" target="_blank"><div class="img-wrap"><img src="07-medspa-clinic/6925527_medspa-in-treatment-1.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">6925527 · 6925527_medspa-in-treatment-1.jpg</div><div class="where">Services/Regenerative alt · Treatments hero alt</div></div></div>
+      <div class="card"><a href="07-medspa-clinic/6925487_medspa-in-treatment-2.jpg" target="_blank"><div class="img-wrap"><img src="07-medspa-clinic/6925487_medspa-in-treatment-2.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">6925487 · 6925487_medspa-in-treatment-2.jpg</div><div class="where">Services/Regenerative alt · Treatments hero alt</div></div></div>
+      <div class="card"><a href="07-medspa-clinic/6925539_medspa-in-treatment-3.jpg" target="_blank"><div class="img-wrap"><img src="07-medspa-clinic/6925539_medspa-in-treatment-3.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">6925539 · 6925539_medspa-in-treatment-3.jpg</div><div class="where">Services/Regenerative alt · Treatments hero alt</div></div></div>
+      <div class="card"><a href="07-medspa-clinic/7010961_medspa-in-treatment-4.jpg" target="_blank"><div class="img-wrap"><img src="07-medspa-clinic/7010961_medspa-in-treatment-4.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">7010961 · 7010961_medspa-in-treatment-4.jpg</div><div class="where">Services/Regenerative alt · Treatments hero alt</div></div></div>
+    </div>
+  </section>
+
+  <section id="wellness">
+    <h2>08 · Wellness — Lifestyle <span class="count">5 files</span></h2>
+    <div class="gold-line"></div>
+    <p class="note">Morning-light wellness and lifestyle. <strong>Used on:</strong> About Philosophy, Services / Wellness category, concerns for weight-management, low-energy, hormone-imbalance. The <code>3865676</code> image also appears on Men's Clinic (Testosterone + GLP-1) and membership/book heroes.</p>
+    <div class="grid">
+      <div class="card"><a href="08-wellness-lifestyle/30809945_wellness-morning-1.jpg" target="_blank"><div class="img-wrap"><img src="08-wellness-lifestyle/30809945_wellness-morning-1.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">30809945 · 30809945_wellness-morning-1.jpg</div><div class="where"><strong>About Philosophy PRIMARY</strong> · Services/Wellness alt · concerns/weight-management PRIMARY · concerns/low-energy alt · concerns/hormone-imbalance alt</div></div></div>
+      <div class="card"><a href="08-wellness-lifestyle/30809946_wellness-morning-2.jpg" target="_blank"><div class="img-wrap"><img src="08-wellness-lifestyle/30809946_wellness-morning-2.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">30809946 · 30809946_wellness-morning-2.jpg</div><div class="where">About Philosophy alt · Services/Wellness alt · concerns/weight-management alt · <strong>concerns/hormone-imbalance PRIMARY</strong></div></div></div>
+      <div class="card"><a href="08-wellness-lifestyle/30809947_wellness-morning-3.jpg" target="_blank"><div class="img-wrap"><img src="08-wellness-lifestyle/30809947_wellness-morning-3.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">30809947 · 30809947_wellness-morning-3.jpg</div><div class="where"><strong>Services/Wellness PRIMARY</strong> · About Philosophy alt · Hero Slide 2 alt · concerns/weight-management alt · <strong>concerns/low-energy PRIMARY</strong></div></div></div>
+      <div class="card"><a href="08-wellness-lifestyle/30809949_wellness-morning-4.jpg" target="_blank"><div class="img-wrap"><img src="08-wellness-lifestyle/30809949_wellness-morning-4.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">30809949 · 30809949_wellness-morning-4.jpg</div><div class="where">About Philosophy alt · Services/Wellness alt · concerns/weight-management alt · concerns/low-energy alt · concerns/hormone-imbalance alt</div></div></div>
+      <div class="card"><a href="08-wellness-lifestyle/3865676_mens-wellness-lifestyle.jpg" target="_blank"><div class="img-wrap"><img src="08-wellness-lifestyle/3865676_mens-wellness-lifestyle.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">3865676 · 3865676_mens-wellness-lifestyle.jpg</div><div class="where">Men's Clinic — <strong>Testosterone Optimization</strong> &amp; <strong>GLP-1</strong> · Memberships banner · /book lifestyle card</div></div></div>
+    </div>
+  </section>
+
+  <section id="consultation">
+    <h2>09 · Consultation — Doctor &amp; Patient <span class="count">4 files</span></h2>
+    <div class="gold-line"></div>
+    <p class="note">Warm doctor-patient consultation shots. <strong>Used on:</strong> DoctorIntro accents, Contact hero, consultation-form accents. <code>3764568</code> also appears on Men's Clinic (Fillers), memberships, packages, and the /book page.</p>
+    <div class="grid">
+      <div class="card"><a href="09-consultation/5128228_doctor-patient-warm-1.jpg" target="_blank"><div class="img-wrap"><img src="09-consultation/5128228_doctor-patient-warm-1.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">5128228 · 5128228_doctor-patient-warm-1.jpg</div><div class="where"><strong>DoctorIntro PRIMARY (accent)</strong> · <strong>Contact hero PRIMARY</strong></div></div></div>
+      <div class="card"><a href="09-consultation/7579831_doctor-patient-warm-2.jpg" target="_blank"><div class="img-wrap"><img src="09-consultation/7579831_doctor-patient-warm-2.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">7579831 · 7579831_doctor-patient-warm-2.jpg</div><div class="where">DoctorIntro alt · Contact hero alt</div></div></div>
+      <div class="card"><a href="09-consultation/7659873_doctor-patient-warm-3.jpg" target="_blank"><div class="img-wrap"><img src="09-consultation/7659873_doctor-patient-warm-3.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">7659873 · 7659873_doctor-patient-warm-3.jpg</div><div class="where">DoctorIntro alt · Contact hero alt</div></div></div>
+      <div class="card"><a href="09-consultation/3764568_fillers-consultation.jpg" target="_blank"><div class="img-wrap"><img src="09-consultation/3764568_fillers-consultation.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">3764568 · 3764568_fillers-consultation.jpg</div><div class="where">Men's Clinic — <strong>Fillers</strong> card · Memberships · Packages · /book</div></div></div>
+    </div>
+  </section>
+
+  <section id="products">
+    <h2>10 · Products — Flat-Lays <span class="count">3 files</span></h2>
+    <div class="gold-line"></div>
+    <p class="note">Skincare product flat-lays. <strong>Used on:</strong> Blog thumbnails (1/2/3), Shop hero, dermal-fillers alt.</p>
+    <div class="grid">
+      <div class="card"><a href="10-products-flatlay/34220525_product-flatlay-1.jpg" target="_blank"><div class="img-wrap"><img src="10-products-flatlay/34220525_product-flatlay-1.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">34220525 · 34220525_product-flatlay-1.jpg</div><div class="where"><strong>Blog thumbnail #1</strong> · Shop hero PRIMARY</div></div></div>
+      <div class="card"><a href="10-products-flatlay/34220532_product-flatlay-2.jpg" target="_blank"><div class="img-wrap"><img src="10-products-flatlay/34220532_product-flatlay-2.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">34220532 · 34220532_product-flatlay-2.jpg</div><div class="where"><strong>Blog thumbnail #2</strong> · Shop hero alt</div></div></div>
+      <div class="card"><a href="10-products-flatlay/34220536_product-flatlay-3.jpg" target="_blank"><div class="img-wrap"><img src="10-products-flatlay/34220536_product-flatlay-3.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">34220536 · 34220536_product-flatlay-3.jpg</div><div class="where"><strong>Blog thumbnail #3</strong> · Shop hero alt · Dermal Fillers alt</div></div></div>
+    </div>
+  </section>
+
+  <section id="locations">
+    <h2>11 · Locations — Clinic Environment <span class="count">2 files</span></h2>
+    <div class="gold-line"></div>
+    <p class="note"><strong>Gap flagged for real photography.</strong> Only 2 location-environment IDs survived triage. These currently fill Locations hero, Locations showcase, About Story, and the locations-image slot. Real clinic interior photography is the path forward (see CLAUDE.md Session 20 follow-up).</p>
+    <div class="grid">
+      <div class="card"><a href="11-locations/4974567_clinic-environment-1.jpg" target="_blank"><div class="img-wrap"><img src="11-locations/4974567_clinic-environment-1.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">4974567 · 4974567_clinic-environment-1.jpg</div><div class="where"><strong>Locations hero PRIMARY</strong> · <strong>Locations image PRIMARY</strong> · Location showcase PRIMARY · About story PRIMARY</div></div></div>
+      <div class="card"><a href="11-locations/433626_clinic-environment-2.jpg" target="_blank"><div class="img-wrap"><img src="11-locations/433626_clinic-environment-2.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">433626 · 433626_clinic-environment-2.jpg</div><div class="where">Locations hero alt · Locations image alt · Location showcase alt · About story alt</div></div></div>
+    </div>
+  </section>
+
+  <section id="concerns">
+    <h2>12 · Concerns — Specialty Images <span class="count">5 files</span></h2>
+    <div class="gold-line"></div>
+    <p class="note">Topic-specific imagery for the <code>ConcernCards</code> component on the homepage and various concern pages: volume-loss/sagging, skin laxity, dark circles, men's jawline / skin-texture, hair restoration.</p>
+    <div class="grid">
+      <div class="card"><a href="12-concerns-specialty/2661255_volume-loss-sagging.jpg" target="_blank"><div class="img-wrap"><img src="12-concerns-specialty/2661255_volume-loss-sagging.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">2661255 · 2661255_volume-loss-sagging.jpg</div><div class="where"><strong>concerns/volume-loss-sagging (homepage concern card)</strong></div></div></div>
+      <div class="card"><a href="12-concerns-specialty/3985339_skin-laxity.jpg" target="_blank"><div class="img-wrap"><img src="12-concerns-specialty/3985339_skin-laxity.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">3985339 · 3985339_skin-laxity.jpg</div><div class="where"><strong>concerns/skin-laxity-sagging (homepage concern card)</strong></div></div></div>
+      <div class="card"><a href="12-concerns-specialty/3822864_dark-circles.jpg" target="_blank"><div class="img-wrap"><img src="12-concerns-specialty/3822864_dark-circles.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">3822864 · 3822864_dark-circles.jpg</div><div class="where"><strong>concerns/dark-circles-under-eye (homepage concern card)</strong></div></div></div>
+      <div class="card"><a href="12-concerns-specialty/3738355_skin-texture-mens-jawline.jpg" target="_blank"><div class="img-wrap"><img src="12-concerns-specialty/3738355_skin-texture-mens-jawline.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">3738355 · 3738355_skin-texture-mens-jawline.jpg</div><div class="where"><strong>Men's Clinic — Jawline Contouring</strong> · concerns/skin-texture-tone fallback</div></div></div>
+      <div class="card"><a href="12-concerns-specialty/4041392_hair-thinning-restoration.jpg" target="_blank"><div class="img-wrap"><img src="12-concerns-specialty/4041392_hair-thinning-restoration.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">4041392 · 4041392_hair-thinning-restoration.jpg</div><div class="where"><strong>Men's Clinic — Hair Restoration</strong> · concerns/hair-thinning (homepage concern card)</div></div></div>
+    </div>
+  </section>
+
+  <section id="extras">
+    <h2>99 · Extras — Legacy / Unused <span class="count">2 files</span></h2>
+    <div class="gold-line"></div>
+    <p class="note">In <code>public/images/stock/</code> but not referenced anywhere in the current codebase. Safe to delete once confirmed.</p>
+    <div class="grid">
+      <div class="card"><a href="99-extras-unused/30793291_legacy-1.jpg" target="_blank"><div class="img-wrap"><img src="99-extras-unused/30793291_legacy-1.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">30793291 · 30793291_legacy-1.jpg</div><div class="where">Not referenced in code — safe to delete</div></div></div>
+      <div class="card"><a href="99-extras-unused/9774653_legacy-2.jpg" target="_blank"><div class="img-wrap"><img src="99-extras-unused/9774653_legacy-2.jpg" loading="lazy"></div></a><div class="meta"><div class="filename">9774653 · 9774653_legacy-2.jpg</div><div class="where">Not referenced in code — safe to delete</div></div></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Healinque Visual Inventory · Generated <span id="d"></span> · 82 images across 14 categories
+  <script>document.getElementById('d').textContent = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});</script>
+</footer>
+</body>
+</html>

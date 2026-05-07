@@ -9,13 +9,13 @@ import { BreadcrumbSchema } from "@/components/seo/schema";
 import { pexelsUrl, pageImages } from "@/lib/data/images";
 
 const containerVariants = {
-  hidden: { opacity: 0 },
+  hidden: {},
   visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
+  hidden: { y: 15 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
 const financingOptions = [
@@ -47,7 +47,7 @@ const financingOptions = [
     icon: Wallet,
     title: "In-House Payment Plans",
     description:
-      "For select treatments and packages, we offer in-house payment arrangements. During your consultation, we can discuss a plan that fits your budget and treatment goals.",
+      "For select treatments and packages, I offer in-house payment arrangements. During your consultation, we can discuss a plan that fits your budget and treatment goals.",
     features: [
       "Customized to your treatment plan",
       "No third-party applications",
@@ -76,7 +76,7 @@ const faqs = [
   {
     question: "How do I apply for CareCredit or Cherry?",
     answer:
-      "You can apply online before your visit or in our office. Both applications take just a few minutes. Our team is happy to walk you through the process during your consultation.",
+      "You can apply online before your visit or in my office. Both applications take just a few minutes. I'm happy to walk you through the process during your consultation.",
   },
 ];
 
@@ -93,7 +93,7 @@ export default function FinancingPage() {
         variant="page"
         title="Financing Options"
         subtitle="INVEST IN YOURSELF"
-        description="Quality aesthetic care should be accessible. We offer flexible financing through CareCredit, Cherry, and in-house payment plans so you can prioritize your goals on your terms."
+        description="Quality aesthetic care should be accessible. I offer flexible financing through CareCredit, Cherry, and in-house payment plans so you can prioritize your goals on your terms."
         image={pexelsUrl(pageImages.contactHero.primary, 1920)}
         overlay="dark"
       />
@@ -123,8 +123,8 @@ export default function FinancingPage() {
               <span className="text-[#C9A227] italic">Pay</span>
             </motion.h2>
             <motion.p variants={itemVariants} className="text-navy-deep/70 leading-relaxed">
-              We believe your treatment plan should be guided by your goals, not your budget.
-              That&apos;s why we partner with trusted financing providers and offer in-house
+              I believe your treatment plan should be guided by your goals, not your budget.
+              That&apos;s why I partner with trusted financing providers and offer in-house
               arrangements to make care more accessible.
             </motion.p>
           </motion.div>
@@ -166,7 +166,7 @@ export default function FinancingPage() {
       </section>
 
       {/* Consultation Credit — DARK */}
-      <section className="section-padding bg-navy-deep orb-bg has-particles" data-wipe>
+      <section className="section-padding bg-navy-deep">
         <div className="container-healinque">
           <motion.div
             className="max-w-3xl mx-auto text-center"
@@ -195,7 +195,7 @@ export default function FinancingPage() {
             >
               Every new patient consultation is $100. When you decide to move forward with
               treatment, that fee is applied directly as a credit toward your total cost.
-              It&apos;s our way of ensuring your consultation investment goes toward your care.
+              It&apos;s my way of ensuring your consultation investment goes toward your care.
             </motion.p>
             <motion.div variants={itemVariants}>
               <Button asChild size="lg">
@@ -276,7 +276,7 @@ export default function FinancingPage() {
               Ready to Get <span className="text-[#C9A227] italic">Started?</span>
             </motion.h2>
             <motion.p variants={itemVariants} className="text-white/60 leading-relaxed mb-8">
-              Schedule a consultation to discuss your goals. We&apos;ll walk you through
+              Schedule a consultation to discuss your goals. I&apos;ll walk you through
               treatment options and help you find a financing plan that works.
             </motion.p>
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -284,7 +284,7 @@ export default function FinancingPage() {
                 <Link href="/book">Book a Consultation</Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="/contact">Contact Us</Link>
+                <Link href="/contact">Get in Touch</Link>
               </Button>
             </motion.div>
           </motion.div>

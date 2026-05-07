@@ -47,7 +47,7 @@ const locations: Location[] = [
     name: "Rancho Bernardo",
     region: "San Diego County",
     description:
-      "Rancho Bernardo residents can reach Healinque in about 10 minutes. Our physician-led practice offers personalized aesthetic medicine and wellness treatments in a refined setting. Every treatment performed or supervised by Dr. Shirazi.",
+      "Rancho Bernardo residents can reach Healinque in about 10 minutes. My physician-led practice offers personalized aesthetic medicine and wellness treatments in a refined setting. Every treatment performed or supervised by me.",
     distance: "10 minutes from Rancho Bernardo",
     driveTime: "10 minutes",
     neighborhoods: ["Rancho Bernardo", "4S Ranch", "Bernardo Heights", "Scripps Miramar", "Carmel Mountain"],
@@ -60,7 +60,7 @@ const locations: Location[] = [
     name: "Scripps Ranch",
     region: "San Diego County",
     description:
-      "Scripps Ranch residents can reach Healinque in about 12 minutes via Scripps Poway Parkway. Our boutique clinic offers refined, physician-led aesthetic care with personalized treatment plans designed for natural results.",
+      "Scripps Ranch residents can reach Healinque in about 12 minutes via Scripps Poway Parkway. My boutique clinic offers refined, physician-led aesthetic care with personalized treatment plans designed for natural results.",
     distance: "12 minutes from Scripps Ranch",
     driveTime: "12 minutes",
     neighborhoods: ["Scripps Ranch", "Miramar", "Miramar Ranch North", "Scripps Miramar", "Spring Canyon"],
@@ -86,7 +86,7 @@ const locations: Location[] = [
     name: "San Marcos",
     region: "San Diego County",
     description:
-      "San Marcos residents can reach Healinque in approximately 20 minutes. Our focus on natural results and medically sound treatments makes us a trusted choice for North County patients.",
+      "San Marcos residents can reach Healinque in approximately 20 minutes. My focus on natural results and medically sound treatments makes me a trusted choice for North County patients.",
     distance: "20 minutes from San Marcos",
     driveTime: "20 minutes",
     neighborhoods: ["San Marcos", "Escondido", "Vista", "Woodland Park", "Rancho Santa Fe"],
@@ -99,7 +99,7 @@ const locations: Location[] = [
     name: "Del Mar",
     region: "San Diego County",
     description:
-      "Del Mar residents appreciate Healinque for refined, physician-led aesthetic care. Located 20-25 minutes away in Poway, our practice offers personalized treatment plans with a focus on natural, sophisticated results.",
+      "Del Mar residents appreciate Healinque for refined, physician-led aesthetic care. Located 20-25 minutes away in Poway, the practice offers personalized treatment plans with a focus on natural, sophisticated results.",
     distance: "20-25 minutes from Del Mar",
     driveTime: "20-25 minutes",
     neighborhoods: ["Del Mar", "Solana Beach", "Carmel Valley", "Torrey Pines", "La Jolla"],
@@ -221,7 +221,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
               </p>
 
               <h3 className="font-serif text-lg text-white mb-4">
-                Neighborhoods We Serve
+                Neighborhoods I Serve
               </h3>
               <div className="flex flex-wrap gap-2 mb-6">
                 {location.neighborhoods.map((neighborhood) => (
@@ -253,7 +253,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
       <section className="section-padding bg-surface-card">
         <div className="container-healinque">
           <div className="text-center mb-12">
-            <p className="section-subtitle text-gold">Our Services</p>
+            <p className="section-subtitle text-gold">My Services</p>
             <h2 className="section-title font-serif text-white">
               Treatments Available to {location.name} Patients
             </h2>
@@ -283,7 +283,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
         limit={3}
       />
 
-      {/* Why Choose Us */}
+      {/* Why Choose Me */}
       <section className="section-padding bg-navy-deep text-white">
         <div className="container-healinque">
           <div className="text-center mb-12">
@@ -291,7 +291,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
               The Healinque Difference
             </p>
             <h2 className="font-serif text-display text-white">
-              Why {location.name} Patients Choose Us
+              Why {location.name} Patients Choose Me
             </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
@@ -334,7 +334,7 @@ export default async function LocationPage({ params }: LocationPageProps) {
         <div className="container-healinque">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="section-subtitle text-gold">Visit Us</p>
+              <p className="section-subtitle text-gold">Visit Me</p>
               <h2 className="section-title font-serif text-white mb-6">
                 Easy Access from {location.name}
               </h2>

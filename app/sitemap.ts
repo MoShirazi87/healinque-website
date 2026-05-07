@@ -81,17 +81,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     },
-    {
-      url: `${baseUrl}/shop`,
-      lastModified: new Date(),
-      changeFrequency: "weekly" as const,
-      priority: 0.7,
-    },
+    // Session 21: /shop removed from sitemap — page exists as "Launching Soon"
+    // placeholder but is not linked from any navigation. Re-add when products ship.
     {
       url: `${baseUrl}/blog`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,
       priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/financing`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
     },
     {
       url: `${baseUrl}/about/healinque-method`,

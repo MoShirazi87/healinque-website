@@ -6,7 +6,8 @@ import { Phone, Calendar, Menu } from "lucide-react";
 import { getPhoneLink } from "@/lib/config/site";
 
 // Hide on pages where the bar would be redundant or in the way
-const hiddenOnPaths = ["/book", "/login", "/signup", "/account", "/shop/cart"];
+// Session 21: trimmed deleted routes (/login, /signup, /account, /shop/cart removed in cleanup).
+const hiddenOnPaths = ["/book"];
 
 export function MobileCtaBar() {
   const pathname = usePathname();

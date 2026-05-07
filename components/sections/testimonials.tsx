@@ -60,19 +60,18 @@ export function Testimonials({ variant = "dark", limit }: TestimonialsProps) {
 
   return (
     <section
-      className={`relative py-20 md:py-32 overflow-hidden has-particles ${
-        isLight ? "bg-cream" : "bg-navy-deep orb-bg"
+      className={`relative py-16 md:py-24 overflow-hidden ${
+        isLight ? "bg-cream" : "bg-navy-deep"
       }`}
-      data-wipe
     >
       <div className="container-healinque relative z-10">
-        {/* Section Header */}
+        {/* Section Header — Session 23: tightened header margins for the smaller, quieter testimonials band */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 15 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-14 md:mb-20"
+          className="text-center mb-12"
         >
           <p
             className={`text-xs font-sans uppercase tracking-[0.25em] mb-3 ${
@@ -88,15 +87,15 @@ export function Testimonials({ variant = "dark", limit }: TestimonialsProps) {
             style={{ fontSize: "clamp(1.75rem, 3.5vw, 3rem)" }}
           >
             What Patients Say About Working With{" "}
-            <span className="text-gold italic heading-shimmer">Dr. Shirazi</span>
+            <span className="text-gold italic">Dr. Shirazi</span>
           </h2>
         </motion.div>
 
         {/* Featured Large Quote (only in featured mode) */}
         {isFeatured && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ scale: 0.98 }}
+            whileInView={{ scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="max-w-3xl mx-auto mb-16 text-center"
@@ -126,15 +125,13 @@ export function Testimonials({ variant = "dark", limit }: TestimonialsProps) {
           {displayed.map((t, idx) => (
             <motion.div
               key={t.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ y: 20 }}
+              whileInView={{ y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.08, duration: 0.5 }}
-              data-interactive=""
-              data-tilt=""
-              className={`group p-6 rounded-xl transition-all duration-300 card-interactive ${
+              className={`group p-5 md:p-6 rounded-xl transition-colors duration-300 ${
                 isLight
-                  ? "bg-white border border-taupe/10 hover:border-gold/30 hover:shadow-lg hover:shadow-gold/5"
+                  ? "bg-white border border-taupe/10 hover:border-gold/30"
                   : "bg-white/[0.03] border border-white/5 hover:border-gold/20 hover:bg-white/[0.05]"
               }`}
             >
@@ -145,10 +142,10 @@ export function Testimonials({ variant = "dark", limit }: TestimonialsProps) {
                 ))}
               </div>
 
-              {/* Quote */}
+              {/* Quote — Session 23: bumped to 17px (readable luxury body), opacity /70 → /80 */}
               <p
-                className={`text-sm leading-relaxed mb-5 ${
-                  isLight ? "text-navy-deep/70" : "text-white/75"
+                className={`text-[17px] leading-relaxed mb-5 ${
+                  isLight ? "text-navy-deep/80" : "text-white/80"
                 }`}
               >
                 &ldquo;{t.text}&rdquo;
@@ -175,8 +172,8 @@ export function Testimonials({ variant = "dark", limit }: TestimonialsProps) {
 
         {/* Bottom CTA + Disclaimer */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ y: 10 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
           className="text-center mt-10"
@@ -185,18 +182,18 @@ export function Testimonials({ variant = "dark", limit }: TestimonialsProps) {
             href="/reviews"
             className={`text-sm font-medium transition-colors underline underline-offset-4 ${
               isLight
-                ? "text-navy-deep/50 hover:text-gold decoration-navy-deep/20"
-                : "text-white/40 hover:text-gold decoration-white/20"
+                ? "text-navy-deep/75 hover:text-gold decoration-navy-deep/25"
+                : "text-white/75 hover:text-gold decoration-white/25"
             }`}
           >
             Read All Patient Reviews →
           </Link>
           <p
-            className={`text-xs mt-4 ${
-              isLight ? "text-navy-deep/40" : "text-white/40"
+            className={`text-xs mt-4 max-w-2xl mx-auto ${
+              isLight ? "text-navy-deep/55" : "text-white/55"
             }`}
           >
-            Patient names changed for privacy. Results may vary; individual results are not guaranteed.
+            Illustrative testimonials — real patient reviews with signed consent will replace these before launch. Results may vary; individual results are not guaranteed.
           </p>
         </motion.div>
       </div>

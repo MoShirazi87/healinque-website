@@ -55,7 +55,7 @@ export function FAQSection({
   const accordion = (
     <div className={columns === 2 ? "grid md:grid-cols-2 gap-8" : ""}>
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ delay: 0.1 }}
@@ -80,7 +80,7 @@ export function FAQSection({
 
       {columns === 2 && column2.length > 0 && (
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.2 }}
@@ -117,7 +117,7 @@ export function FAQSection({
     >
       <div className="container-healinque">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-12"
